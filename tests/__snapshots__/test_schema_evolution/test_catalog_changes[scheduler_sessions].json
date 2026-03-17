@@ -819,6 +819,15 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "linearNavigationEnabled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -1191,6 +1200,13 @@
         "format": "int64",
         "type": [
           "integer",
+          "null"
+        ]
+      },
+      "linearNavigationEnabled": {
+        "description": "Linear Navigation Enabled",
+        "type": [
+          "boolean",
           "null"
         ]
       },

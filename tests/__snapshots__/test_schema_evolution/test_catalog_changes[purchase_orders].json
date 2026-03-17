@@ -288,6 +288,15 @@
     {
       "breadcrumb": [
         "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "summary"
       ],
       "metadata": {
@@ -350,6 +359,14 @@
       },
       "businessUnitId": {
         "description": "Id of business unit for this PO",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "createdById": {
+        "description": "User who created the PO",
         "format": "int64",
         "type": [
           "integer",
