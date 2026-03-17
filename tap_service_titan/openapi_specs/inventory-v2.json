@@ -773,6 +773,7 @@
                                             "total": 0,
                                             "tax": 0,
                                             "shipping": 0,
+                                            "createdById": 0,
                                             "summary": "string",
                                             "items": [
                                                 {
@@ -1702,6 +1703,7 @@
                                             "total": 0,
                                             "tax": 0,
                                             "shipping": 0,
+                                            "createdById": 0,
                                             "summary": "string",
                                             "items": [
                                                 {
@@ -2124,6 +2126,7 @@
                                     "total": 0,
                                     "tax": 0,
                                     "shipping": 0,
+                                    "createdById": 0,
                                     "summary": "string",
                                     "items": [
                                         {
@@ -3120,6 +3123,7 @@
                                 "allowTechniciansToSendPo": true,
                                 "defaultRequiredDateDaysOffset": 0,
                                 "skipWeekends": true,
+                                "requireJobBeforeReceipt": true,
                                 "includeInSalesTax": true,
                                 "isDefault": true,
                                 "copyPurchaseOrderItemsToInvoiceWhenReceived": true,
@@ -3379,6 +3383,7 @@
                                 "allowTechniciansToSendPo": true,
                                 "defaultRequiredDateDaysOffset": 0,
                                 "skipWeekends": true,
+                                "requireJobBeforeReceipt": true,
                                 "includeInSalesTax": true,
                                 "isDefault": true,
                                 "copyPurchaseOrderItemsToInvoiceWhenReceived": true,
@@ -3852,6 +3857,7 @@
                             },
                             "example": {
                                 "purchaseOrderId": 0,
+                                "jobId": 0,
                                 "dateReceived": "string",
                                 "vendorDocumentNumber": "string",
                                 "memo": "string",
@@ -8395,6 +8401,12 @@
                         "description": "PO shipping cost",
                         "format": "decimal"
                     },
+                    "createdById": {
+                        "type": "integer",
+                        "description": "User who created the PO",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "summary": {
                         "type": "string",
                         "description": "PO summary/memo",
@@ -9980,6 +9992,12 @@
                         "description": "PO shipping cost",
                         "format": "decimal"
                     },
+                    "createdById": {
+                        "type": "integer",
+                        "description": "User who created the PO",
+                        "format": "int64",
+                        "nullable": true
+                    },
                     "summary": {
                         "type": "string",
                         "description": "PO summary/memo",
@@ -10588,6 +10606,7 @@
                     "allowTechniciansToSendPo",
                     "defaultRequiredDateDaysOffset",
                     "skipWeekends",
+                    "requireJobBeforeReceipt",
                     "includeInSalesTax",
                     "isDefault",
                     "copyPurchaseOrderItemsToInvoiceWhenReceived",
@@ -10636,6 +10655,10 @@
                     "skipWeekends": {
                         "type": "boolean",
                         "description": "Skip weekends"
+                    },
+                    "requireJobBeforeReceipt": {
+                        "type": "boolean",
+                        "description": "Require job before receipt"
                     },
                     "includeInSalesTax": {
                         "type": "boolean",
@@ -10850,6 +10873,10 @@
                     "skipWeekends": {
                         "type": "boolean",
                         "description": "Skip weekends"
+                    },
+                    "requireJobBeforeReceipt": {
+                        "type": "boolean",
+                        "description": "Require job before receipt"
                     },
                     "includeInSalesTax": {
                         "type": "boolean",
@@ -11191,6 +11218,12 @@
                         "type": "integer",
                         "description": "Id of the purchase order for this receipt",
                         "format": "int64"
+                    },
+                    "jobId": {
+                        "type": "integer",
+                        "description": "Id of the job to associate with this receipt",
+                        "format": "int64",
+                        "nullable": true
                     },
                     "dateReceived": {
                         "type": "string",

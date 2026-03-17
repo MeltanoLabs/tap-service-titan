@@ -7483,6 +7483,7 @@
                                             "dueDate": "string",
                                             "description": "string",
                                             "templateId": "string",
+                                            "reason": "string",
                                             "relations": [
                                                 {
                                                     "type": "string",
@@ -16129,6 +16130,10 @@
                         "type": "string",
                         "nullable": true
                     },
+                    "reason": {
+                        "type": "string",
+                        "nullable": true
+                    },
                     "relations": {
                         "type": "array",
                         "items": {
@@ -18898,7 +18903,8 @@
             },
             "Accounting.V2.Webhook.InvoiceTaskEventTaskModel": {
                 "required": [
-                    "id"
+                    "id",
+                    "changes"
                 ],
                 "type": "object",
                 "properties": {
@@ -18906,9 +18912,43 @@
                         "type": "string",
                         "description": "The ID of the task associated with the Invoice Task Event.",
                         "format": "guid"
+                    },
+                    "changes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.Webhook.InvoiceTaskFieldChange"
+                        },
+                        "description": "The list of field changes that occurred in this task update event.\nEach change includes the field ID, field type, and the old and new values.\nThis property is populated for \"updated\" events. For \"created\" events, this collection may be empty."
                     }
                 },
                 "additionalProperties": false
+            },
+            "Accounting.V2.Webhook.InvoiceTaskFieldChange": {
+                "required": [
+                    "fieldId",
+                    "fieldType"
+                ],
+                "type": "object",
+                "properties": {
+                    "fieldId": {
+                        "type": "string",
+                        "description": "The unique identifier for the field that changed.\nExamples: \"core.status\", \"core.assignee\", \"acc.invoice\", \"core.name\""
+                    },
+                    "fieldType": {
+                        "type": "string",
+                        "description": "The type of the field that changed.\nExamples: \"status\", \"user\", \"text\", \"date\", \"number\", \"dropdown\""
+                    },
+                    "oldValue": {
+                        "description": "The previous value of the field before the change.\nNull for newly created fields or when the field had no previous value.\nThe structure varies based on FieldType - see TaskHub documentation for field value schemas.",
+                        "nullable": true
+                    },
+                    "newValue": {
+                        "description": "The new value of the field after the change.\nNull when a field is cleared.\nThe structure varies based on FieldType - see TaskHub documentation for field value schemas.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents a field change in a task update event.\nContains information about which field changed and its old and new values."
             },
             "CloudEvent_Of_Accounting.V2.Webhook.InvoiceTaskUpdatedEventPayload": {
                 "required": [

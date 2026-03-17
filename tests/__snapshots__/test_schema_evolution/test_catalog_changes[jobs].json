@@ -352,6 +352,15 @@
     {
       "breadcrumb": [
         "properties",
+        "isAutoDispatched"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "active"
       ],
       "metadata": {
@@ -570,6 +579,13 @@
         "format": "int64",
         "type": [
           "integer",
+          "null"
+        ]
+      },
+      "isAutoDispatched": {
+        "description": "Indicates whether Dispatch Pro is enabled for this job",
+        "type": [
+          "boolean",
           "null"
         ]
       },

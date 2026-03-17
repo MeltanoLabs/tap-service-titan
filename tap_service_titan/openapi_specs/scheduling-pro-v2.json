@@ -205,7 +205,8 @@
                                             "paymentInfoCaptured": true,
                                             "externalId": "string",
                                             "recurringServiceId": 0,
-                                            "campaignName": "string"
+                                            "campaignName": "string",
+                                            "linearNavigationEnabled": true
                                         }
                                     ]
                                 }
@@ -712,7 +713,8 @@
                                             "paymentInfoCaptured": true,
                                             "externalId": "string",
                                             "recurringServiceId": 0,
-                                            "campaignName": "string"
+                                            "campaignName": "string",
+                                            "linearNavigationEnabled": true
                                         }
                                     ]
                                 }
@@ -1168,6 +1170,11 @@
                     "campaignName": {
                         "type": "string",
                         "description": "Campaign Name",
+                        "nullable": true
+                    },
+                    "linearNavigationEnabled": {
+                        "type": "boolean",
+                        "description": "Linear Navigation Enabled",
                         "nullable": true
                     }
                 },
@@ -1828,6 +1835,11 @@
                     "campaignName": {
                         "type": "string",
                         "description": "Campaign Name",
+                        "nullable": true
+                    },
+                    "linearNavigationEnabled": {
+                        "type": "boolean",
+                        "description": "Linear Navigation Enabled",
                         "nullable": true
                     }
                 },
