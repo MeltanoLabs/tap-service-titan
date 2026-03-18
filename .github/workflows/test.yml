@@ -35,7 +35,7 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Set up uv
-      uses: astral-sh/setup-uv@6ee6290f1cbc4156c0bdd66691b2c144ef8df19a # v7.4.0
+      uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
     - name: Test with pytest
       run: |
         uv run --no-dev --group=test pytest
@@ -50,7 +50,7 @@ jobs:
       with:
         python-version-file: '.python-version'
     - name: Set up uv
-      uses: astral-sh/setup-uv@6ee6290f1cbc4156c0bdd66691b2c144ef8df19a # v7.4.0
+      uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
     - name: Check types with ty
       run: |
         uv run --no-dev --group=typing ty check
@@ -60,4 +60,4 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - uses: j178/prek-action@0bb87d7f00b0c99306c8bcb8b8beba1eb581c037 # v1.1.1
+      - uses: j178/prek-action@79f765515bd648eb4d6bb1b17277b7cb22cb6468 # v2.0.0
