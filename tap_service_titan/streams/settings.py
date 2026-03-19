@@ -87,3 +87,20 @@ class UserRolesStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/settings/v2/tenant/{self.tenant_id}/user-roles"
+
+
+class IntacctBusinessUnitMappingsStream(ServiceTitanStream):
+    """Define Intacct business unit mappings stream."""
+
+    name = "intacct_business_unit_mappings"
+    primary_keys = ("id",)
+    schema = ServiceTitanSchema(
+        SETTINGS,
+        key="Accounting.V2.Integrations.Intacct.IntacctBusinessUnitMappingResponse",
+    )
+
+    @override
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/settings/v2/tenant/{self.tenant_id}/business-units/intacct"
