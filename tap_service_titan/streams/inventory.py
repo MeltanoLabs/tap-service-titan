@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import sys
 from functools import cached_property
-from typing import TYPE_CHECKING, Any, cast
+from typing import TYPE_CHECKING, Any
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 from tap_service_titan.openapi_specs import INVENTORY, ServiceTitanSchema
@@ -128,7 +128,7 @@ class ReturnTypesStream(ServiceTitanStream):
         context: Context | None,
         next_page_token: Any | None,
     ) -> dict[str, Any]:
-        params = cast("dict[str, Any]", super().get_url_params(context, next_page_token))
+        params = super().get_url_params(context, next_page_token)
         # This endpoint has an undocumented max page size of 500
         params["activeOnly"] = False
         return params

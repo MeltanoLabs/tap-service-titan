@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import sys
 from functools import cached_property
-from typing import Any, cast
+from typing import Any
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 from tap_service_titan.openapi_specs import PRICEBOOK, ServiceTitanSchema
@@ -143,7 +143,7 @@ class ServicesStream(ServiceTitanStream, active_any=True):
 
     @override
     def get_url_params(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
-        params = cast("dict[str, Any]", super().get_url_params(*args, **kwargs))
+        params = super().get_url_params(*args, **kwargs)
 
         # If true, the prices will be calculated based on the current dynamic pricing rules.
         params["calculatePrices"] = True

@@ -239,7 +239,7 @@ class ServiceTitanStream(ServiceTitanBaseStream[_TToken]):
         self,
         context: Context | None,
         next_page_token: _TToken | None,
-    ) -> dict[str, Any] | str:
+    ) -> dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization.
 
         Args:
