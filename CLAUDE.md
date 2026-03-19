@@ -7,6 +7,9 @@ A Meltano Singer tap for the ServiceTitan API, built with the Singer SDK.
 ```bash
 uv run tap-service-titan --help
 uv run pytest
+
+# After adding/changing a stream schema, update snapshots:
+uv run pytest --snapshot-update tests/test_schema_evolution.py
 ```
 
 ## Adding a Stream
