@@ -3,10 +3,11 @@
 from __future__ import annotations
 
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from functools import cached_property
 from typing import TYPE_CHECKING, Any, cast
 
+from tap_service_titan._common import now
 from tap_service_titan.client import DateRange, DateRangePaginator, ServiceTitanStream
 from tap_service_titan.openapi_specs import MARKETING_ADS, ServiceTitanSchema
 
@@ -45,7 +46,7 @@ class AttributedLeadsStream(ServiceTitanStream):
     ) -> dict[str, Any]:
         params = cast("dict[str, Any]", super().get_url_params(context, next_page_token))
         params["fromUtc"] = params.pop("modifiedOnOrAfter")
-        params["toUtc"] = datetime.now(timezone.utc).isoformat()
+        params["toUtc"] = now().isoformat()
         return params
 
 
@@ -84,7 +85,7 @@ class _PerformanceStream(ServiceTitanStream[DateRange]):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Add report end time for consistency."""
         super().__init__(*args, **kwargs)
-        self.end_time = datetime.now(timezone.utc)
+        self.end_time = now()
         self.interval = timedelta(days=1)
         self._paginator: DateRangePaginator | None = None
 
@@ -98,7 +99,7 @@ class _PerformanceStream(ServiceTitanStream[DateRange]):
 
     def _get_default_start_date(self) -> datetime:
         """Get default start date when none is provided."""
-        return datetime.now(timezone.utc) - timedelta(days=30)
+        return now() - timedelta(days=30)
 
     def _get_effective_start_date(self, context: types.Context | None = None) -> datetime:
         """Get the effective start date for the current context."""

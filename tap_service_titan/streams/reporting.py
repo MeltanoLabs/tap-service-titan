@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import math
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from functools import cached_property
 from typing import TYPE_CHECKING, Any, cast
 
@@ -16,6 +16,7 @@ from singer_sdk.helpers import types  # noqa: TC002
 from singer_sdk.helpers.types import Context  # noqa: TC002
 from singer_sdk.streams.core import REPLICATION_FULL_TABLE, REPLICATION_INCREMENTAL
 
+from tap_service_titan._common import now
 from tap_service_titan.client import ServiceTitanStream
 
 if sys.version_info >= (3, 11):
@@ -265,11 +266,12 @@ class CustomReports(ServiceTitanStream):
         Yields:
             One item per (possibly processed) record in the API.
         """
+        today = now().date()
         if self.curr_backfill_date_param is None:
             # No backfill date parameter, just get the records
             yield from super().get_records(context)
         else:
-            while datetime.now(timezone.utc).date() >= self.curr_backfill_date_param:  # ty: ignore[unsupported-operator]
+            while today >= self.curr_backfill_date_param:  # ty: ignore[unsupported-operator]
                 yield from super().get_records(context)
                 # Increment date for next iteration
                 self.curr_backfill_date_param = self.curr_backfill_date_param + timedelta(days=1)  # ty: ignore[unsupported-operator]

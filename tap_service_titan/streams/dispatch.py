@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from functools import cached_property
 from typing import TYPE_CHECKING, Any
 
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.pagination import BaseAPIPaginator
 
+from tap_service_titan._common import now
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 from tap_service_titan.openapi_specs import DISPATCH, ServiceTitanSchema
 
@@ -51,7 +52,7 @@ class CapacitiesPaginator(BaseAPIPaginator[datetime]):
         super().__init__(start_value=start_value, **kwargs)
 
         self.lookahead_days = lookahead_days
-        self.end_value = datetime.now(timezone.utc) + timedelta(days=self.lookahead_days)
+        self.end_value = now() + timedelta(days=self.lookahead_days)
 
     @override
     def has_more(self, response: requests.Response) -> bool:
@@ -98,6 +99,7 @@ class CapacitiesStream(ServiceTitanStream[datetime]):
     def get_new_paginator(self) -> CapacitiesPaginator | None:
         """Get the paginator."""
         if start_date := self.get_starting_timestamp(self.context):
+            start_date = min(start_date, now())
             # Set the time to the start of the day to capture late updates
             return CapacitiesPaginator(
                 start_date.replace(
