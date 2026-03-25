@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import math
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from functools import cached_property
 from typing import TYPE_CHECKING, Any, cast
 
@@ -46,18 +46,30 @@ class CustomReports(ServiceTitanStream):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize the stream."""
         self._report = kwargs.pop("report")
-        self._backfill_params = [
-            obj["value"]
-            for obj in self._report["parameters"]
-            if obj["name"] == self._report.get("backfill_date_parameter", "")
-        ]
         kwargs["name"] = f"custom_report_{self._report['report_name']}"
         super().__init__(*args, **kwargs)
-        self._curr_backfill_date_param: date | None = None
+
+        # If the report config names a date parameter for day-by-day backfill,
+        # find its configured start value and switch to incremental replication.
+        backfill_param_name = self._report.get("backfill_date_parameter", "")
+        self._backfill_start_value: str | None = next(
+            (
+                obj["value"]
+                for obj in self._report["parameters"]
+                if obj["name"] == backfill_param_name
+            ),
+            None,
+        )
+        if self._backfill_start_value:
+            self.replication_method = REPLICATION_INCREMENTAL
+            self.replication_key = backfill_param_name
+
+        # Initialized lazily in get_records, after stream_state is available.
+        self._curr_backfill_date: date | None = None
 
     # This data is sorted but we use a lookback window to get overlapping historical
     # data. This causes the sort check to fail because the bookmark gets updated to
-    # and older value than previously saved.
+    # an older value than previously saved.
     @override
     @property
     def check_sorted(self) -> bool:
@@ -71,39 +83,23 @@ class CustomReports(ServiceTitanStream):
         """
         return False
 
-    @property
-    def curr_backfill_date_param(self) -> date | None:
-        """Get current backfill date parameter."""
-        # This is the first iteration.
-        # Retrieve the backfill date parameter value for iterating.
-        # We cant do this in the init due to timing with the state file.
-        if len(self._backfill_params) == 1 and self._curr_backfill_date_param is None:
-            self.replication_method = REPLICATION_INCREMENTAL
-            self.replication_key = self._report["backfill_date_parameter"]
-            self._curr_backfill_date_param = self._get_initial_date_param()
-        return self._curr_backfill_date_param
+    def _get_initial_backfill_date(self, backfill_start_value: str) -> date:
+        """Compute the starting date for the backfill loop.
 
-    @curr_backfill_date_param.setter
-    def curr_backfill_date_param(self, value: date) -> None:
-        """Set  the current backfill date parameter."""
-        self._curr_backfill_date_param = value
-
-    def _get_initial_date_param(self) -> date | None:
-        configured_date_param = datetime.strptime(  # noqa: DTZ007
-            self._backfill_params[0],
-            "%Y-%m-%d",
-        ).date()
+        Uses the configured start date from the report parameters, but advances
+        it to the bookmarked date (minus the lookback window) on subsequent runs.
+        """
+        configured = (
+            datetime.strptime(backfill_start_value, "%Y-%m-%d")  # e.g 2026-02-10
+            .replace(tzinfo=timezone.utc)
+            .date()
+        )
         bookmark = self.stream_state.get("replication_key_value")
         if bookmark:
-            # Parse to a date and subtract the lookback window days if configured
-            bookmark_dt = datetime.strptime(bookmark, "%Y-%m-%dT%H:%M:%S%z").date() - timedelta(
-                days=self._report["lookback_window_days"]
-            )
-            return max(
-                configured_date_param,
-                bookmark_dt,
-            )
-        return configured_date_param
+            bookmark_date = datetime.strptime(bookmark, "%Y-%m-%dT%H:%M:%S%z").date()
+            bookmark_date -= timedelta(days=self._report["lookback_window_days"])
+            return max(configured, bookmark_date)
+        return configured
 
     @staticmethod
     def _get_datatype(string_type: str) -> th.JSONTypeHelper:  # noqa: ARG004
@@ -214,20 +210,16 @@ class CustomReports(ServiceTitanStream):
                 next page of data.
         """
         params = self._report["parameters"]
-        if self.curr_backfill_date_param:
-            params = [
-                param
-                for param in self._report["parameters"]
-                if param["name"] != self._report["backfill_date_parameter"]
-            ]
+        if self._curr_backfill_date:
+            backfill_param_name = self._report["backfill_date_parameter"]
+            params = [p for p in params if p["name"] != backfill_param_name]
             params.append(
                 {
-                    "name": self._report["backfill_date_parameter"],
-                    "value": self.curr_backfill_date_param.strftime("%Y-%m-%d"),
+                    "name": backfill_param_name,
+                    "value": self._curr_backfill_date.strftime("%Y-%m-%d"),
                 }
             )
-            msg = f"Custom report request parameters {params}"
-            self.logger.info(msg)
+            self.logger.info("Custom report request parameters %s", params)
         return {"parameters": params}
 
     @override
@@ -247,13 +239,9 @@ class CustomReports(ServiceTitanStream):
             string_record = [str(val) if val is not None else "" for val in record]
             data = dict(zip(field_names, string_record, strict=False))
             # Add the backfill date to the record if configured
-            if (
-                "backfill_date_parameter" in self._report
-                and self.curr_backfill_date_param is not None
-            ):
+            if self._curr_backfill_date is not None:
                 data[self._report["backfill_date_parameter"]] = (
-                    self.curr_backfill_date_param.strftime("%Y-%m-%d")  # type: ignore[union-attr]
-                    + "T00:00:00-00:00"
+                    self._curr_backfill_date.strftime("%Y-%m-%d") + "T00:00:00-00:00"
                 )
             yield data
 
@@ -269,15 +257,18 @@ class CustomReports(ServiceTitanStream):
         Yields:
             One item per (possibly processed) record in the API.
         """
-        today = now().date()
-        if self.curr_backfill_date_param is None:
-            # No backfill date parameter, just get the records
+        if not self._backfill_start_value:
             yield from super().get_records(context)
-        else:
-            while today >= self.curr_backfill_date_param:  # ty: ignore[unsupported-operator]
-                yield from super().get_records(context)
-                # Increment date for next iteration
-                self.curr_backfill_date_param = self.curr_backfill_date_param + timedelta(days=1)  # ty: ignore[unsupported-operator]
+            return
+
+        # stream_state is available here (not in __init__), so initialize lazily.
+        if self._curr_backfill_date is None:
+            self._curr_backfill_date = self._get_initial_backfill_date(self._backfill_start_value)
+
+        today = now().date()
+        while self._curr_backfill_date <= today:
+            yield from super().get_records(context)
+            self._curr_backfill_date += timedelta(days=1)
 
     @override
     def backoff_wait_generator(self) -> Generator[float, None, None]:
