@@ -247,7 +247,10 @@ class CustomReports(ServiceTitanStream):
             string_record = [str(val) if val is not None else "" for val in record]
             data = dict(zip(field_names, string_record, strict=False))
             # Add the backfill date to the record if configured
-            if "backfill_date_parameter" in self._report:
+            if (
+                "backfill_date_parameter" in self._report
+                and self.curr_backfill_date_param is not None
+            ):
                 data[self._report["backfill_date_parameter"]] = (
                     self.curr_backfill_date_param.strftime("%Y-%m-%d")  # type: ignore[union-attr]
                     + "T00:00:00-00:00"
