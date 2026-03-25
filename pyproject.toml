@@ -87,7 +87,9 @@ addopts = [ "-vv" ]
 
 [tool.ruff]
 line-length = 100
-src = [ "tap_service_titan" ]
+
+[tool.ruff.format]
+preview = true
 
 [tool.ruff.lint]
 ignore = [

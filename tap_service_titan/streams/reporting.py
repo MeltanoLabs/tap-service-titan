@@ -90,7 +90,8 @@ class CustomReports(ServiceTitanStream):
         it to the bookmarked date (minus the lookback window) on subsequent runs.
         """
         configured = (
-            datetime.strptime(backfill_start_value, "%Y-%m-%d")  # e.g 2026-02-10
+            datetime
+            .strptime(backfill_start_value, "%Y-%m-%d")  # e.g 2026-02-10
             .replace(tzinfo=timezone.utc)
             .date()
         )
@@ -213,12 +214,10 @@ class CustomReports(ServiceTitanStream):
         if self._curr_backfill_date:
             backfill_param_name = self._report["backfill_date_parameter"]
             params = [p for p in params if p["name"] != backfill_param_name]
-            params.append(
-                {
-                    "name": backfill_param_name,
-                    "value": self._curr_backfill_date.strftime("%Y-%m-%d"),
-                }
-            )
+            params.append({
+                "name": backfill_param_name,
+                "value": self._curr_backfill_date.strftime("%Y-%m-%d"),
+            })
             self.logger.info("Custom report request parameters %s", params)
         return {"parameters": params}
 
