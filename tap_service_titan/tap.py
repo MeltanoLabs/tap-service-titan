@@ -256,6 +256,7 @@ class TapServiceTitan(Tap):
             streams.scheduling_pro.SchedulersStream(self),
             streams.settings.BusinessUnitsStream(self),
             streams.settings.EmployeesStream(self),
+            streams.settings.IntacctBusinessUnitMappingsStream(self),
             streams.settings.TechniciansStream(self),
             streams.settings.TagTypesStream(self),
             streams.settings.UserRolesStream(self),
