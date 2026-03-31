@@ -180,6 +180,7 @@ class TapServiceTitan(Tap):
             streams.dispatch.NonJobAppointmentsStream(self),
             streams.dispatch.TeamsStream(self),
             streams.dispatch.TechnicianShiftsStream(self),
+            streams.dispatch.TechnicianSkillsStream(self),
             streams.dispatch.ZonesStream(self),
             streams.equipment_systems.InstalledEquipmentStream(self),
             streams.equipment_systems.EquipmentTypesStream(self),

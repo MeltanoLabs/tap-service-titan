@@ -262,3 +262,21 @@ class BusinessHoursStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/dispatch/v2/tenant/{self.tenant_id}/business-hours"
+
+
+class TechnicianSkillsStream(ServiceTitanStream, active_any=True):
+    """Define technician skills stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-dispatch-v2&operation=TechnicianSkills_GetList
+    """
+
+    name = "technician_skills"
+    primary_keys = ("id",)
+    replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.TechnicianSkillResponse")
+
+    @override
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/dispatch/v2/tenant/{self.tenant_id}/technician-skills"
