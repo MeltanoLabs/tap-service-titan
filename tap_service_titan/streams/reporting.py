@@ -6,7 +6,7 @@ import math
 import sys
 from datetime import datetime, timedelta, timezone
 from functools import cached_property
-from typing import TYPE_CHECKING, Any, cast
+from typing import TYPE_CHECKING, Any
 
 import requests
 import requests.exceptions
@@ -178,7 +178,7 @@ class CustomReports(ServiceTitanStream):
         Returns:
             A dictionary of URL query parameters.
         """
-        params = cast("dict[str, Any]", super().get_url_params(context, next_page_token))
+        params = super().get_url_params(context, next_page_token)
         params.pop("modifiedOnOrAfter", "")
         params["pageSize"] = 25000
         return params

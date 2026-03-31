@@ -5,7 +5,7 @@ from __future__ import annotations
 import sys
 from datetime import datetime, timedelta
 from functools import cached_property
-from typing import TYPE_CHECKING, Any, cast
+from typing import TYPE_CHECKING, Any
 
 from tap_service_titan._common import now
 from tap_service_titan.client import DateRange, DateRangePaginator, ServiceTitanStream
@@ -44,7 +44,7 @@ class AttributedLeadsStream(ServiceTitanStream):
         context: types.Context | None,
         next_page_token: Any | None,
     ) -> dict[str, Any]:
-        params = cast("dict[str, Any]", super().get_url_params(context, next_page_token))
+        params = super().get_url_params(context, next_page_token)
         params["fromUtc"] = params.pop("modifiedOnOrAfter")
         params["toUtc"] = now().isoformat()
         return params
