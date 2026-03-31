@@ -229,6 +229,7 @@ class TapServiceTitan(Tap):
             streams.marketing.SuppressionsStream(self),
             streams.marketing_reputation.ReviewsStream(self),
             streams.memberships.InvoiceTemplatesStream(self),
+            streams.memberships.MembershipCustomFieldsStream(self),
             streams.memberships.MembershipStatusChangesStream(self),
             streams.memberships.MembershipTypesStream(self),
             streams.memberships.MembershipsStream(self),
