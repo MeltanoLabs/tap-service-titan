@@ -1,4 +1,4 @@
-send_anonymous_usage_stats: true
+send_anonymous_usage_stats: false
 requires_meltano: '>=4.0'
 project_id: tap-service-titan
 default_environment: test
