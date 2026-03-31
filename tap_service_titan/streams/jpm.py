@@ -269,3 +269,73 @@ class JobCanceledLogStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/jpm/v2/tenant/{self.tenant_id}/jobs/{{job_id}}/canceled-log"
+
+
+class JobCustomFieldsStream(ServiceTitanStream):
+    """Define job custom field types stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-jpm-v2&operation=Jobs_GetCustomFieldTypes
+    """
+
+    name = "job_custom_fields"
+    primary_keys = ("id",)
+    replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(JPM, key="Jpm.V2.CustomFieldTypeResponse")
+
+    @override
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/jpm/v2/tenant/{self.tenant_id}/jobs/custom-fields"
+
+
+class ProjectCustomFieldsStream(ServiceTitanStream):
+    """Define project custom field types stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-jpm-v2&operation=Projects_GetCustomFieldTypes
+    """
+
+    name = "project_custom_fields"
+    primary_keys = ("id",)
+    replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(JPM, key="Jpm.V2.CustomFieldTypeResponse")
+
+    @override
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/jpm/v2/tenant/{self.tenant_id}/projects/custom-fields"
+
+
+class WBSBudgetCodesStream(ServiceTitanStream):
+    """Define work breakdown structure budget codes stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-jpm-v2&operation=BudgetCodes_ListCompanyBudgetCodes
+    """
+
+    name = "wbs_budget_codes"
+    primary_keys = ("id",)
+    schema = ServiceTitanSchema(JPM, key="Jpm.BudgetCodes.BudgetCodeModel")
+
+    @override
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/jpm/v2/tenant/{self.tenant_id}/work-breakdown-structure/budget-codes"
+
+
+class WBSSegmentsStream(ServiceTitanStream):
+    """Define work breakdown structure segments stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-jpm-v2&operation=BudgetCodes_ListCompanySegments
+    """
+
+    name = "wbs_segments"
+    primary_keys = ("id",)
+    schema = ServiceTitanSchema(JPM, key="Jpm.BudgetCodes.SegmentModel")
+
+    @override
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/jpm/v2/tenant/{self.tenant_id}/work-breakdown-structure/segments"
