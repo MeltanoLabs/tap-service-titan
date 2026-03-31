@@ -182,6 +182,7 @@ class TapServiceTitan(Tap):
             streams.dispatch.TechnicianShiftsStream(self),
             streams.dispatch.ZonesStream(self),
             streams.equipment_systems.InstalledEquipmentStream(self),
+            streams.equipment_systems.EquipmentTypesStream(self),
             streams.forms.FormsStream(self),
             streams.forms.JobAttachmentsStream(self),
             streams.forms.SubmissionsStream(self),

@@ -1,0 +1,119 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "active"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "description": "Represents an equipment type in the API responses.\nEquipment types categorize and classify equipment items within the system.",
+    "properties": {
+      "active": {
+        "description": "Indicates if this equipment type is active",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "Date/time (on UTC) when the equipment type was created",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "The unique identifier for the equipment type record",
+        "format": "int64",
+        "type": "integer"
+      },
+      "modifiedOn": {
+        "description": "Date/time (on UTC) when the equipment type was modified",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "description": "Name of the equipment type",
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "active",
+      "createdOn",
+      "modifiedOn"
+    ],
+    "type": "object"
+  },
+  "stream": "equipment_types",
+  "tap_stream_id": "equipment_types"
+}

@@ -30,3 +30,24 @@ class InstalledEquipmentStream(ServiceTitanStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/equipmentsystems/v2/tenant/{self.tenant_id}/installed-equipment"
+
+
+class EquipmentTypesStream(ServiceTitanStream, active_any=True):
+    """Define equipment types stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-equipment-systems-v2&operation=EquipmentTypes_GetList
+    """
+
+    name = "equipment_types"
+    primary_keys = ("id",)
+    replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(
+        EQUIPMENT_SYSTEMS,
+        key="EquipmentSystems.V2.EquipmentTypeResponse",
+    )
+
+    @override
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/equipmentsystems/v2/tenant/{self.tenant_id}/equipment-types"
