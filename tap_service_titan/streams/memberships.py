@@ -6,7 +6,7 @@ import sys
 from functools import cached_property
 from typing import TYPE_CHECKING
 
-from tap_service_titan.client import ServiceTitanExportStream
+from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 from tap_service_titan.openapi_specs import MEMBERSHIPS, ServiceTitanSchema
 
 if sys.version_info >= (3, 12):
@@ -152,3 +152,24 @@ class MembershipStatusChangesStream(ServiceTitanExportStream):
     def path(self) -> str:
         """Return the API path for the stream."""
         return f"/memberships/v2/tenant/{self.tenant_id}/export/membership-status-changes"
+
+
+class MembershipCustomFieldsStream(ServiceTitanStream):
+    """Define memberships custom field types stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-memberships-v2&operation=CustomerMemberships_GetCustomFields
+    """
+
+    name = "membership_custom_fields"
+    primary_keys = ("id",)
+    replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(
+        MEMBERSHIPS,
+        key="Memberships.V2.CustomFieldTypeResponse",
+    )
+
+    @override
+    @cached_property
+    def path(self) -> str:
+        """Return the API path for the stream."""
+        return f"/memberships/v2/tenant/{self.tenant_id}/memberships/custom-fields"
