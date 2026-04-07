@@ -15,8 +15,8 @@ uv run pytest --snapshot-update tests/test_schema_evolution.py
 ## Adding a Stream
 
 1. Find the endpoint in `tap_service_titan/openapi_specs/<api>-v2.json`
-2. Add the stream class to the appropriate `tap_service_titan/streams/<api>.py`
-3. Register it in `tap.py` → `discover_streams()`
+1. Add the stream class to the appropriate `tap_service_titan/streams/<api>.py`
+1. Register it in `tap.py` → `discover_streams()`
 
 ### Choosing the base class
 

@@ -6,48 +6,48 @@ Built with the [Meltano Singer SDK](https://sdk.meltano.com).
 
 ## Capabilities
 
-* `catalog`
-* `state`
-* `discover`
-* `about`
-* `stream-maps`
-* `schema-flattening`
-* `batch`
+- `catalog`
+- `state`
+- `discover`
+- `about`
+- `stream-maps`
+- `schema-flattening`
+- `batch`
 
 ## Supported Python Versions
 
-* 3.10
-* 3.11
-* 3.12
-* 3.13
-* 3.14
+- 3.10
+- 3.11
+- 3.12
+- 3.13
+- 3.14
 
 ## Settings
 
 | Setting | Required | Default | Description |
 |:--------|:--------:|:-------:|:------------|
-| client_id | True     | None    | The client ID to use in authenticating. |
-| client_secret | True     | None    | The client secret to use in authenticating. |
-| st_app_key | True     | None    | The app key for the Service Titan app used to authenticate. |
-| tenant_id | True     | None    | Tenant ID to pull records for. |
-| api_url | False    | https://api-integration.servicetitan.io | The url for the ServiceTitan API |
-| auth_url | False    | https://auth-integration.servicetitan.io/connect/token | The url for the ServiceTitan OAuth API |
-| start_date | False    | 2024-01-01T00:00:00Z | The start date for the records to pull. |
-| custom_reports | False    | None    | Custom reports to extract. |
-| stream_maps | False    | None    | Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html). |
-| stream_map_config | False    | None    | User-defined config values to be used within map expressions. |
-| faker_config | False    | None    | Config for the [`Faker`](https://faker.readthedocs.io/en/master/) instance variable `fake` used within map expressions. Only applicable if the plugin specifies `faker` as an addtional dependency (through the `singer-sdk` `faker` extra or directly). |
-| faker_config.seed | False    | None    | Value to seed the Faker generator for deterministic output: https://faker.readthedocs.io/en/master/#seeding-the-generator |
-| faker_config.locale | False    | None    | One or more LCID locale strings to produce localized output for: https://faker.readthedocs.io/en/master/#localization |
-| flattening_enabled | False    | None    | 'True' to enable schema flattening and automatically expand nested properties. |
-| flattening_max_depth | False    | None    | The max depth to flatten schemas. |
-| batch_config | False    | None    |             |
-| batch_config.encoding | False    | None    | Specifies the format and compression of the batch files. |
-| batch_config.encoding.format | False    | None    | Format to use for batch files. |
-| batch_config.encoding.compression | False    | None    | Compression format to use for batch files. |
-| batch_config.storage | False    | None    | Defines the storage layer to use when writing batch files |
-| batch_config.storage.root | False    | None    | Root path to use when writing batch files. |
-| batch_config.storage.prefix | False    | None    | Prefix to use when writing batch files. |
+| client_id | True | None | The client ID to use in authenticating. |
+| client_secret | True | None | The client secret to use in authenticating. |
+| st_app_key | True | None | The app key for the Service Titan app used to authenticate. |
+| tenant_id | True | None | Tenant ID to pull records for. |
+| api_url | False | https://api-integration.servicetitan.io | The url for the ServiceTitan API |
+| auth_url | False | https://auth-integration.servicetitan.io/connect/token | The url for the ServiceTitan OAuth API |
+| start_date | False | 2024-01-01T00:00:00Z | The start date for the records to pull. |
+| custom_reports | False | None | Custom reports to extract. |
+| stream_maps | False | None | Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html). |
+| stream_map_config | False | None | User-defined config values to be used within map expressions. |
+| faker_config | False | None | Config for the [`Faker`](https://faker.readthedocs.io/en/master/) instance variable `fake` used within map expressions. Only applicable if the plugin specifies `faker` as an addtional dependency (through the `singer-sdk` `faker` extra or directly). |
+| faker_config.seed | False | None | Value to seed the Faker generator for deterministic output: https://faker.readthedocs.io/en/master/#seeding-the-generator |
+| faker_config.locale | False | None | One or more LCID locale strings to produce localized output for: https://faker.readthedocs.io/en/master/#localization |
+| flattening_enabled | False | None | 'True' to enable schema flattening and automatically expand nested properties. |
+| flattening_max_depth | False | None | The max depth to flatten schemas. |
+| batch_config | False | None | |
+| batch_config.encoding | False | None | Specifies the format and compression of the batch files. |
+| batch_config.encoding.format | False | None | Format to use for batch files. |
+| batch_config.encoding.compression | False | None | Compression format to use for batch files. |
+| batch_config.storage | False | None | Defines the storage layer to use when writing batch files |
+| batch_config.storage.root | False | None | Root path to use when writing batch files. |
+| batch_config.storage.prefix | False | None | Prefix to use when writing batch files. |
 
 A full list of supported settings and capabilities is available by running: `tap-service-titan --about`
 
@@ -113,6 +113,7 @@ This is used to handled retroactively updated data in previously synced reports.
       }
   ]
 ```
+
 ### Configure using environment variables
 
 This Singer tap will automatically import any environment variables within the working directory's
@@ -146,7 +147,7 @@ uv sync
 ### Create and Run Tests
 
 Create tests within the `tests` subfolder and
-  then run:
+then run:
 
 ```bash
 uv run pytest
