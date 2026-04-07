@@ -6,11 +6,16 @@ import sys
 from functools import cached_property
 from typing import TYPE_CHECKING, Any
 
-from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
+from tap_service_titan.client import (
+    ServiceTitanExportStream,
+    ServiceTitanPaginator,
+    ServiceTitanStream,
+)
 from tap_service_titan.openapi_specs import SETTINGS, ServiceTitanSchema
 
 if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
+    from singer_sdk.pagination import BaseAPIPaginator
 
 if sys.version_info >= (3, 12):
     from typing import override
@@ -117,5 +122,10 @@ class IntacctBusinessUnitMappingsStream(ServiceTitanStream):
     ) -> dict[str, Any]:
         params = super().get_url_params(context, next_page_token)
         params["pageSize"] = 500  # endpoint max is 500
-        params["includeTotal"] = False  # required by this endpoint
+        params["includeTotal"] = True  # required by this endpoint
         return params
+
+    @override
+    def get_new_paginator(self) -> BaseAPIPaginator | None:
+        """Create a new pagination helper instance."""
+        return ServiceTitanPaginator(start_value=0)  # UNDOCUMENTED: Pagination starts at page 0
