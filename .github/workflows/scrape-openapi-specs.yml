@@ -8,8 +8,14 @@ on:
     - cron: '0 12 * * *'
   workflow_dispatch: # Allow manual triggers
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
 env:
   FORCE_COLOR: "1"
+
+permissions: {}
 
 jobs:
   scrape:
@@ -20,6 +26,8 @@ jobs:
       pull-requests: write  # Permission to create and update pull requests
     steps:
     - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        persist-credentials: false
 
     - name: Set up uv
       uses: astral-sh/setup-uv@cec208311dfd045dd5311c1add060b2062131d57 # v8.0.0
