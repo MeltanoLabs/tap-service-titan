@@ -18,6 +18,8 @@ updates:
         dependency-type: "development"
     allow:
       - dependency-type: "all"
+    cooldown:
+      default-days: 7
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
@@ -28,3 +30,5 @@ updates:
       ci:
         patterns:
           - "*"
+    cooldown:
+      default-days: 7
