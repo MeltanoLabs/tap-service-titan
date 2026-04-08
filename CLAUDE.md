@@ -20,31 +20,47 @@ uv run pytest --snapshot-update tests/test_schema_evolution.py
 
 ### Choosing the base class
 
-- **`ServiceTitanExportStream`** — export endpoints (`/export/...`), supports `continueFrom` pagination and `from` query param for incremental extraction
-- **`ServiceTitanStream`** — all other paginated endpoints; uses page-number pagination and `modifiedOnOrAfter` for incremental
+Each API module defines per-API base classes that already embed the API prefix and the correct stream type. Inherit from one of those — **do not inherit from two parents**.
+
+- **`_BaseXxxExportStream`** — for export endpoints (`/export/...`); wraps `ServiceTitanExportStream`; uses `continueFrom` pagination and `from` query param for incremental extraction
+- **`_BaseXxxStream`** — for all other paginated endpoints; wraps `ServiceTitanStream`; uses page-number pagination and `modifiedOnOrAfter` for incremental
+
+If the target API module doesn't have a matching base class yet, add one:
+
+```python
+class _BaseMyApiStream(ServiceTitanStream, api_prefix="/myapi/v2"):
+    pass
+
+class _BaseMyApiExportStream(ServiceTitanExportStream, api_prefix="/myapi/v2"):
+    pass
+```
 
 ### Schema
 
 Prefer `ServiceTitanSchema(SPEC_CONSTANT, key="Component.Schema.Name")` over manually defining schemas with `th.PropertiesList`. The schema key comes from `components/schemas` in the OpenAPI spec.
 
 ```python
-class MyStream(ServiceTitanStream):
+class MyStream(_BaseMyApiStream):
     name = "my_stream"
+    path = "/my-endpoint"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"  # omit if no date field
-    schema = ServiceTitanSchema(SETTINGS, key="Namespace.V2.MyResponse")
-
-    @override
-    @cached_property
-    def path(self) -> str:
-        return f"/settings/v2/tenant/{self.tenant_id}/my-endpoint"
+    schema = ServiceTitanSchema(MYAPI, key="MyApi.V2.MyResponse")
 ```
-
-### Path construction
-
-The `url_base` is `config["api_url"]` (e.g. `https://api-integration.servicetitan.io`). The OpenAPI spec `servers[0].url` tells you the API prefix (e.g. `/settings/v2`). Combine them: `/settings/v2/tenant/{self.tenant_id}/...`.
 
 ### Class kwargs
 
+Pass these as keyword arguments on the class definition line:
+
 - `active_any=True` — adds `active=Any` query param to include inactive records
 - `sort_by="fieldName"` — adds `sort=+fieldName` and marks stream as sorted
+- `page_size=500` — overrides the default page size of 5000 (use when the endpoint has a lower cap)
+- `include_total=True` — adds `includeTotal=True` query param (required by some endpoints)
+- `first_page=0` — overrides the default first page number of 1 (use when pagination starts at 0)
+
+Example combining several:
+
+```python
+class MyStream(_BaseMyApiStream, active_any=True, sort_by="ModifiedOn", page_size=500):
+    ...
+```

@@ -29,6 +29,9 @@ if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
 
 
+DEFAULT_PAGE_SIZE = 5000
+
+
 @dataclass
 class DateRange:
     """Represents a date range for pagination."""
@@ -82,7 +85,7 @@ class DateRangePaginator(BaseAPIPaginator[DateRange]):
             Next DateRange or None if no more pages
         """
         if not isinstance(self.current_value, DateRange):
-            return None
+            return None  # type: ignore[unreachable]
 
         new_range = self.current_value.increase()
         return new_range if new_range.is_valid() else None
@@ -102,26 +105,41 @@ class ServiceTitanBaseStream(RESTStream[_TToken]):
 
     _active_any: bool = False
     _sort_by: str | None = None
+    _api_prefix: str = ""
 
-    def __init_subclass__(cls, *, active_any: bool = False, sort_by: str | None = None) -> None:
+    def __init_subclass__(
+        cls,
+        *,
+        active_any: bool = False,
+        sort_by: str | None = None,
+        api_prefix: str | None = None,
+    ) -> None:
         """Initialize the stream subclass.
 
         Args:
             active_any: Whether to include active and inactive records in the stream.
             sort_by: The field to sort the stream by.
+            api_prefix: API path prefix inserted between the base URL and tenant ID,
+                e.g. ``"/accounting/v2"``. When set, ``url_base`` becomes
+                ``{api_url}{api_prefix}/tenant/{tenant_id}``.
         """
         cls._active_any = active_any
         cls._sort_by = sort_by
+        if api_prefix is not None:
+            cls._api_prefix = api_prefix
         return super().__init_subclass__()
 
-    @override
     @property
+    @override
     def url_base(self) -> str:
         """Return the API URL root, configurable via tap settings."""
-        return self.config["api_url"]
+        base: str = self.config["api_url"]
+        if self._api_prefix:
+            return f"{base}{self._api_prefix}/tenant/{self.tenant_id}"
+        return base
 
-    @override
     @cached_property
+    @override
     def authenticator(self) -> ServiceTitanAuthenticator:
         """Get an authenticator for Service Titan."""
         return ServiceTitanAuthenticator(
@@ -131,9 +149,9 @@ class ServiceTitanBaseStream(RESTStream[_TToken]):
             oauth_scopes="",
         )
 
-    @override
     @property
-    def http_headers(self) -> dict:
+    @override
+    def http_headers(self) -> dict[str, str]:
         """HTTP headers for each request."""
         headers = super().http_headers
         headers["ST-App-Key"] = self.config["st_app_key"]
@@ -142,7 +160,7 @@ class ServiceTitanBaseStream(RESTStream[_TToken]):
     @property
     def tenant_id(self) -> str:
         """The ServiceTitan tenant ID."""
-        return self.config["tenant_id"]
+        return self.config["tenant_id"]  # type: ignore[no-any-return]
 
     @override
     def backoff_max_tries(self) -> int:
@@ -202,7 +220,7 @@ class ServiceTitanExportStream(ServiceTitanBaseStream):
         Returns:
             A dictionary of URL query parameters.
         """
-        params: dict = {}
+        params: dict[str, Any] = {}
         starting_date = self.get_starting_timestamp(context)
 
         if next_page_token:
@@ -228,11 +246,38 @@ class ServiceTitanPaginator(BasePageNumberPaginator):
     @override
     def has_more(self, response: requests.Response) -> bool:
         """Return True if there are more pages available."""
-        return response.json().get("hasMore", False)
+        return response.json().get("hasMore", False)  # type: ignore[no-any-return]
 
 
 class ServiceTitanStream(ServiceTitanBaseStream[_TToken]):
     """ServiceTitan stream class for endpoints without export support."""
+
+    _page_size: int
+    _include_total: bool | None
+    _first_page: int
+
+    def __init_subclass__(
+        cls,
+        *,
+        page_size: int = DEFAULT_PAGE_SIZE,
+        include_total: bool | None = None,
+        first_page: int = 1,
+        **kwargs: Any,
+    ) -> None:
+        """Initialize the stream subclass.
+
+        Args:
+            page_size: Number of items to include in each page. Different endpoints support
+                different limits. Defaults to 5000.
+            include_total: Value to pass as URL parameter `includeTotal`. Defauls to omitting the
+                parameter.
+            first_page: First page number in paginated endpoints. Defaults to 1.
+            **kwargs: Parameters for ``ServiceTitanBaseStream``.
+        """
+        cls._page_size = page_size
+        cls._include_total = include_total
+        cls._first_page = first_page
+        super().__init_subclass__(**kwargs)
 
     @override
     def get_url_params(
@@ -249,7 +294,7 @@ class ServiceTitanStream(ServiceTitanBaseStream[_TToken]):
         Returns:
             A dictionary of URL query parameters.
         """
-        params: dict = {}
+        params: dict[str, Any] = {}
         if self.replication_key and (starting_date := self.get_starting_timestamp(context)):
             # Some endpoints use the "modifiedOnOrAfter" param for incremental extraction.
             # This is usually paired with a `modifiedOn` field in the response.
@@ -262,18 +307,21 @@ class ServiceTitanStream(ServiceTitanBaseStream[_TToken]):
         if self._sort_by:
             params["sort"] = f"+{self._sort_by}"
 
-        params["pageSize"] = 5000
+        if self._include_total is not None:
+            params["includeTotal"] = self._include_total
+
+        params["pageSize"] = self._page_size
         params["page"] = next_page_token
 
         return params
 
-    @override
     @cached_property
+    @override
     def is_sorted(self) -> bool:
         """Check if the stream is sorted."""
         return self._sort_by is not None
 
     @override
-    def get_new_paginator(self) -> BaseAPIPaginator | None:
+    def get_new_paginator(self) -> BaseAPIPaginator[Any] | None:
         """Create a new pagination helper instance."""
-        return ServiceTitanPaginator(start_value=1)
+        return ServiceTitanPaginator(start_value=self._first_page)

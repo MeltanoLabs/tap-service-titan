@@ -12,8 +12,6 @@ import requests
 import requests.exceptions
 from singer_sdk import typing as th
 from singer_sdk.exceptions import RetriableAPIError
-from singer_sdk.helpers import types  # noqa: TC002
-from singer_sdk.helpers.types import Context  # noqa: TC002
 from singer_sdk.streams.core import REPLICATION_FULL_TABLE, REPLICATION_INCREMENTAL
 
 from tap_service_titan._common import now
@@ -32,6 +30,8 @@ else:
 if TYPE_CHECKING:
     from collections.abc import Generator, Iterable, Mapping
     from datetime import date
+
+    from singer_sdk.helpers.types import Context, Record
 
 
 class CustomReports(ServiceTitanStream):
@@ -103,7 +103,7 @@ class CustomReports(ServiceTitanStream):
         return configured
 
     @staticmethod
-    def _get_datatype(string_type: str) -> th.JSONTypeHelper:  # noqa: ARG004
+    def _get_datatype(string_type: str) -> th.JSONTypeHelper[Any]:  # noqa: ARG004
         # TODO(maintainers): Use proper types once the API is fixed https://github.com/archdotdev/tap-service-titan/issues/67
         return th.StringType()
         # mapping = {
@@ -116,7 +116,7 @@ class CustomReports(ServiceTitanStream):
         # }
         # return mapping.get(string_type, th.StringType())
 
-    def _get_report_metadata(self) -> dict:
+    def _get_report_metadata(self) -> dict[str, Any]:
         report_category = self._report["report_category"]
         report_id = self._report["report_id"]
         self.requests_session.auth = self.authenticator
@@ -126,11 +126,11 @@ class CustomReports(ServiceTitanStream):
             timeout=self.timeout,
         )
         resp.raise_for_status()
-        return resp.json()
+        return resp.json()  # type: ignore[no-any-return]
 
     @override
     @cached_property
-    def schema(self) -> dict:
+    def schema(self) -> dict[str, Any]:
         """Get schema.
 
         Returns:
@@ -139,7 +139,7 @@ class CustomReports(ServiceTitanStream):
         metadata = self._get_report_metadata()
         msg = f"Available parameters for custom report `{self._report['report_name']}`: {metadata['parameters']}"  # noqa: E501
         self.logger.info(msg)
-        properties: list[th.Property] = [
+        properties: list[th.Property[Any]] = [
             th.Property(field["name"], self._get_datatype(field["dataType"]))
             for field in metadata["fields"]
         ]
@@ -153,14 +153,13 @@ class CustomReports(ServiceTitanStream):
         return th.PropertiesList(*properties).to_dict()
 
     @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
+    def get_url(self, context: Context | None) -> str:
+        """Return the reporting URL."""
         report_category = self._report["report_category"]
         report_id = self._report["report_id"]
         return (
-            f"/reporting/v2/tenant/{self.tenant_id}/report-category"
-            f"/{report_category}/reports/{report_id}/data"
+            f"{self.url_base}/reporting/v2/tenant/{self.tenant_id}"
+            f"/report-category/{report_category}/reports/{report_id}/data"
         )
 
     @override
@@ -186,7 +185,7 @@ class CustomReports(ServiceTitanStream):
     @override
     def prepare_request_payload(
         self,
-        context: types.Context | None,
+        context: Context | None,
         next_page_token: int | None,
     ) -> (
         Iterable[bytes]
@@ -222,7 +221,7 @@ class CustomReports(ServiceTitanStream):
         return {"parameters": params}
 
     @override
-    def parse_response(self, response: requests.Response) -> Iterable[dict]:
+    def parse_response(self, response: requests.Response) -> Iterable[Record]:
         """Parse the response and return an iterator of result records.
 
         Args:

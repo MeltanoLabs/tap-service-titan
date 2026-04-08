@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import sys
-from functools import cached_property
 from typing import TYPE_CHECKING
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
@@ -18,10 +17,19 @@ if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context, Record
 
 
-class MembershipsStream(ServiceTitanExportStream):
+class _BaseMembershipsStream(ServiceTitanStream, api_prefix="/memberships/v2"):
+    pass
+
+
+class _BaseMembershipsExportStream(ServiceTitanExportStream, api_prefix="/memberships/v2"):
+    pass
+
+
+class MembershipsStream(_BaseMembershipsExportStream):
     """Define memberships export stream."""
 
     name = "memberships_export"
+    path = "/export/memberships"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(
@@ -29,29 +37,18 @@ class MembershipsStream(ServiceTitanExportStream):
         key="Memberships.V2.ExportCustomerMembershipResponse",
     )
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/memberships/v2/tenant/{self.tenant_id}/export/memberships"
 
-
-class MembershipTypesStream(ServiceTitanExportStream):
+class MembershipTypesStream(_BaseMembershipsExportStream):
     """Define membership types stream."""
 
     name = "membership_types"
+    path = "/export/membership-types"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(
         MEMBERSHIPS,
         key="Memberships.V2.ExportMembershipTypeResponse",
     )
-
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/memberships/v2/tenant/{self.tenant_id}/export/membership-types"
 
     @override
     def post_process(
@@ -64,10 +61,11 @@ class MembershipTypesStream(ServiceTitanExportStream):
         return row
 
 
-class RecurringServiceTypesStream(ServiceTitanExportStream):
+class RecurringServiceTypesStream(_BaseMembershipsExportStream):
     """Define recurring service types stream."""
 
     name = "recurring_service_types"
+    path = "/export/recurring-service-types"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(
@@ -75,17 +73,12 @@ class RecurringServiceTypesStream(ServiceTitanExportStream):
         key="Memberships.V2.ExportRecurringServiceTypeResponse",
     )
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/memberships/v2/tenant/{self.tenant_id}/export/recurring-service-types"
 
-
-class InvoiceTemplatesStream(ServiceTitanExportStream):
+class InvoiceTemplatesStream(_BaseMembershipsExportStream):
     """Define invoice templates stream."""
 
     name = "invoice_templates"
+    path = "/export/invoice-templates"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(
@@ -93,17 +86,12 @@ class InvoiceTemplatesStream(ServiceTitanExportStream):
         key="Memberships.V2.ExportInvoiceTemplateResponse",
     )
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/memberships/v2/tenant/{self.tenant_id}/export/invoice-templates"
 
-
-class RecurringServicesStream(ServiceTitanExportStream):
+class RecurringServicesStream(_BaseMembershipsExportStream):
     """Define recurring services stream."""
 
     name = "recurring_services"
+    path = "/export/recurring-services"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(
@@ -111,17 +99,12 @@ class RecurringServicesStream(ServiceTitanExportStream):
         key="Memberships.V2.ExportLocationRecurringServiceResponse",
     )
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/memberships/v2/tenant/{self.tenant_id}/export/recurring-services"
 
-
-class RecurringServiceEventsStream(ServiceTitanExportStream):
+class RecurringServiceEventsStream(_BaseMembershipsExportStream):
     """Define recurring service events stream."""
 
     name = "recurring_service_events"
+    path = "/export/recurring-service-events"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(
@@ -129,17 +112,12 @@ class RecurringServiceEventsStream(ServiceTitanExportStream):
         key="Memberships.V2.ExportLocationRecurringServiceEventResponse",
     )
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/memberships/v2/tenant/{self.tenant_id}/export/recurring-service-events"
 
-
-class MembershipStatusChangesStream(ServiceTitanExportStream):
+class MembershipStatusChangesStream(_BaseMembershipsExportStream):
     """Define membership status changes export stream."""
 
     name = "membership_status_changes"
+    path = "/export/membership-status-changes"
     primary_keys = ("id",)
     replication_key: str = "createdOn"
     schema = ServiceTitanSchema(
@@ -147,29 +125,18 @@ class MembershipStatusChangesStream(ServiceTitanExportStream):
         key="Memberships.V2.ExportCustomerMembershipStatusChangesResponse",
     )
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/memberships/v2/tenant/{self.tenant_id}/export/membership-status-changes"
 
-
-class MembershipCustomFieldsStream(ServiceTitanStream):
+class MembershipCustomFieldsStream(_BaseMembershipsStream):
     """Define memberships custom field types stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-memberships-v2&operation=CustomerMemberships_GetCustomFields
     """
 
     name = "membership_custom_fields"
+    path = "/memberships/custom-fields"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(
         MEMBERSHIPS,
         key="Memberships.V2.CustomFieldTypeResponse",
     )
-
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/memberships/v2/tenant/{self.tenant_id}/memberships/custom-fields"

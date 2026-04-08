@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import sys
 from datetime import datetime, timedelta
-from functools import cached_property
 from typing import TYPE_CHECKING, Any
 
 from tap_service_titan._common import now
@@ -20,10 +19,15 @@ if TYPE_CHECKING:
     from singer_sdk.helpers import types
 
 
-class AttributedLeadsStream(ServiceTitanStream):
+class _BaseMarketingAdsStream(ServiceTitanStream[DateRange], api_prefix="/marketingads/v2"):
+    pass
+
+
+class AttributedLeadsStream(_BaseMarketingAdsStream):
     """Define attributed leads stream."""
 
     name = "attributed_leads"
+    path = "/attributed-leads"
     primary_keys: tuple[str] = ("dateTime",)
     replication_key: str = "dateTime"
     schema = ServiceTitanSchema(
@@ -31,12 +35,6 @@ class AttributedLeadsStream(ServiceTitanStream):
         # https://developer.servicetitan.io/api-details/#api=tenant-marketing-ads-v2&operation=AttributedLeads_Get&definition=Marketing.Ads.Contracts.AttributedLeads.GetAttributedLeadsResponse
         key="Marketing.Ads.Contracts.AttributedLeads.GetAttributedLeadsResponse",
     )
-
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/marketingads/v2/tenant/{self.tenant_id}/attributed-leads"
 
     @override
     def get_url_params(
@@ -50,10 +48,11 @@ class AttributedLeadsStream(ServiceTitanStream):
         return params
 
 
-class CapacityWarningsStream(ServiceTitanStream):
+class CapacityWarningsStream(_BaseMarketingAdsStream):
     """Define capacity warnings stream."""
 
     name = "capacity_warnings"
+    path = "/capacity-warnings"
     primary_keys: tuple[str, str] = ("campaignName", "warningType")
     schema = ServiceTitanSchema(
         MARKETING_ADS,
@@ -61,17 +60,12 @@ class CapacityWarningsStream(ServiceTitanStream):
         key="Marketing.Ads.Client.CapacityAwarenessWarning",
     )
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/marketingads/v2/tenant/{self.tenant_id}/capacity-warnings"
 
-
-class _PerformanceStream(ServiceTitanStream[DateRange]):
+class _PerformanceStream(_BaseMarketingAdsStream):
     """Define marketing performance stream."""
 
     name = "performance"
+    path = "/performance"
     primary_keys: tuple[str, ...] = ()
     replication_key: str = "from_utc"
 
@@ -111,17 +105,11 @@ class _PerformanceStream(ServiceTitanStream[DateRange]):
         return effective_start_date.replace(hour=0, minute=0, second=0, microsecond=0)
 
     @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/marketingads/v2/tenant/{self.tenant_id}/performance"
-
-    @override
     def post_process(
         self,
         row: types.Record,
         context: types.Context | None = None,
-    ) -> dict | None:
+    ) -> types.Record | None:
         """Process the record to add top-level IDs.
 
         Args:
@@ -153,7 +141,7 @@ class _PerformanceStream(ServiceTitanStream[DateRange]):
         context: types.Context | None,
         next_page_token: DateRange | None,
     ) -> dict[str, Any]:
-        params: dict = {}
+        params: dict[str, Any] = {}
 
         if next_page_token is None:
             msg = "Paginator not initialized"
@@ -177,7 +165,7 @@ class CampaignPerformanceStream(_PerformanceStream):
         context: types.Context | None,
         next_page_token: DateRange | None,
     ) -> dict[str, Any]:
-        params: dict = super().get_url_params(context, next_page_token)
+        params = super().get_url_params(context, next_page_token)
         params["performanceSegmentationType"] = "Campaign"
         return params
 
@@ -211,6 +199,6 @@ class AdGroupPerformanceStream(_PerformanceStream):
         context: types.Context | None,
         next_page_token: DateRange | None,
     ) -> dict[str, Any]:
-        params: dict = super().get_url_params(context, next_page_token)
+        params = super().get_url_params(context, next_page_token)
         params["performanceSegmentationType"] = "AdGroup"
         return params

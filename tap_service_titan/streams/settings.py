@@ -2,130 +2,80 @@
 
 from __future__ import annotations
 
-import sys
-from functools import cached_property
-from typing import TYPE_CHECKING, Any
-
-from tap_service_titan.client import (
-    ServiceTitanExportStream,
-    ServiceTitanPaginator,
-    ServiceTitanStream,
-)
+from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 from tap_service_titan.openapi_specs import SETTINGS, ServiceTitanSchema
 
-if TYPE_CHECKING:
-    from singer_sdk.helpers.types import Context
-    from singer_sdk.pagination import BaseAPIPaginator
 
-if sys.version_info >= (3, 12):
-    from typing import override
-else:
-    from typing_extensions import override
+class _BaseSettingsStream(ServiceTitanStream, api_prefix="/settings/v2"):
+    pass
 
 
-class EmployeesStream(ServiceTitanExportStream):
+class _BaseSettingsExportStream(ServiceTitanExportStream, api_prefix="/settings/v2"):
+    pass
+
+
+class EmployeesStream(_BaseSettingsExportStream):
     """Define employees stream."""
 
     name = "employees"
+    path = "/export/employees"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(SETTINGS, key="TenantSettings.V2.ExportEmployeeResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/settings/v2/tenant/{self.tenant_id}/export/employees"
 
-
-class BusinessUnitsStream(ServiceTitanExportStream):
+class BusinessUnitsStream(_BaseSettingsExportStream):
     """Define business units stream."""
 
     name = "business_units"
+    path = "/export/business-units"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(SETTINGS, key="TenantSettings.V2.ExportBusinessUnitResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/settings/v2/tenant/{self.tenant_id}/export/business-units"
 
-
-class TechniciansStream(ServiceTitanExportStream):
+class TechniciansStream(_BaseSettingsExportStream):
     """Define technicians stream."""
 
     name = "technicians"
+    path = "/export/technicians"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(SETTINGS, key="TenantSettings.V2.ExportTechnicianResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/settings/v2/tenant/{self.tenant_id}/export/technicians"
 
-
-class TagTypesStream(ServiceTitanStream):
+class TagTypesStream(_BaseSettingsStream):
     """Define tag types stream."""
 
     name = "tag_types"
+    path = "/tag-types"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(SETTINGS, key="TenantSettings.V2.TagTypeResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/settings/v2/tenant/{self.tenant_id}/tag-types"
 
-
-class UserRolesStream(ServiceTitanStream):
+class UserRolesStream(_BaseSettingsStream):
     """Define user roles stream."""
 
     name = "user_roles"
+    path = "/user-roles"
     primary_keys = ("id",)
     replication_key: str = "createdOn"
     schema = ServiceTitanSchema(SETTINGS, key="TenantSettings.V2.UserRoleResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/settings/v2/tenant/{self.tenant_id}/user-roles"
 
-
-class IntacctBusinessUnitMappingsStream(ServiceTitanStream):
+class IntacctBusinessUnitMappingsStream(
+    _BaseSettingsStream,
+    page_size=500,
+    include_total=True,  # Parameter is required by this endpoint
+    first_page=0,  # UNDOCUMENTED: Pagination starts at page 0
+):
     """Define Intacct business unit mappings stream."""
 
     name = "intacct_business_unit_mappings"
+    path = "/business-units/intacct"
     primary_keys = ("id",)
     schema = ServiceTitanSchema(
         SETTINGS,
         key="Accounting.V2.Integrations.Intacct.IntacctBusinessUnitMappingResponse",
     )
-
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/settings/v2/tenant/{self.tenant_id}/business-units/intacct"
-
-    @override
-    def get_url_params(
-        self,
-        context: Context | None,
-        next_page_token: int | None,
-    ) -> dict[str, Any]:
-        params = super().get_url_params(context, next_page_token)
-        params["pageSize"] = 500  # endpoint max is 500
-        params["includeTotal"] = True  # required by this endpoint
-        return params
-
-    @override
-    def get_new_paginator(self) -> BaseAPIPaginator | None:
-        """Create a new pagination helper instance."""
-        return ServiceTitanPaginator(start_value=0)  # UNDOCUMENTED: Pagination starts at page 0

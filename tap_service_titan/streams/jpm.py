@@ -4,12 +4,8 @@ from __future__ import annotations
 
 import sys
 import typing as t
-from functools import cached_property
 
-from tap_service_titan.client import (
-    ServiceTitanExportStream,
-    ServiceTitanStream,
-)
+from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 from tap_service_titan.openapi_specs import JPM, ServiceTitanSchema
 
 if sys.version_info >= (3, 12):
@@ -22,35 +18,33 @@ if t.TYPE_CHECKING:
     from singer_sdk.helpers.types import Context, Record
 
 
+class _BaseJpmStream(ServiceTitanStream, api_prefix="/jpm/v2"):
+    pass
+
+
+class _BaseJpmExportStream(ServiceTitanExportStream, api_prefix="/jpm/v2"):
+    pass
+
+
 # JPM Streams
-class AppointmentsStream(ServiceTitanExportStream, active_any=True):
+class AppointmentsStream(_BaseJpmExportStream, active_any=True):
     """Define appointments stream."""
 
     name = "appointments"
+    path = "/export/appointments"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.ExportAppointmentsResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/export/appointments"
 
-
-class JobsStream(ServiceTitanExportStream):
+class JobsStream(_BaseJpmExportStream):
     """Define jobs stream."""
 
     name = "jobs"
+    path = "/export/jobs"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.ExportJobsResponse")
-
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/export/jobs"
 
     @override
     def get_child_context(self, record: Record, context: Context | None) -> Context:
@@ -58,25 +52,20 @@ class JobsStream(ServiceTitanExportStream):
         return {"job_id": record["id"]}
 
 
-class JobHistoryStream(ServiceTitanExportStream):
+class JobHistoryStream(_BaseJpmExportStream):
     """Define job history stream."""
 
     name = "job_history"
+    path = "/export/job-history"
     primary_keys = ("id",)
     replication_key = "date"
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.ExportJobHistoryEntry")
-
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/export/job-history"
 
     # Parse the default 'data' path for response records but the real contents are in
     # the nested history array. Keep the jobID from the top level then yield
     # each history item as its own record.
     @override
-    def parse_response(self, response: requests.Response) -> t.Iterable[dict]:
+    def parse_response(self, response: requests.Response) -> t.Iterable[Record]:
         """Parse the response and return an iterator of result records.
 
         Args:
@@ -90,252 +79,172 @@ class JobHistoryStream(ServiceTitanExportStream):
                 yield {"jobId": record.get("jobId"), **hist_record}
 
 
-class ProjectsStream(ServiceTitanExportStream):
+class ProjectsStream(_BaseJpmExportStream):
     """Define projects stream."""
 
     name = "projects"
+    path = "/export/projects"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.ExportProjectsResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/export/projects"
 
-
-class JobCanceledLogsStream(ServiceTitanExportStream):
+class JobCanceledLogsStream(_BaseJpmExportStream):
     """Define cancelled job stream."""
 
     name = "job_canceled_logs"
+    path = "/export/job-canceled-logs"
     primary_keys = ("id",)
     replication_key: str = "createdOn"
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.ExportJobCanceledLogResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/export/job-canceled-logs"
 
-
-class JobCancelReasonsStream(ServiceTitanStream):
+class JobCancelReasonsStream(_BaseJpmStream):
     """Define job cancel reasons stream."""
 
     name = "job_cancel_reasons"
+    path = "/job-cancel-reasons"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.JobCancelReasonResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/job-cancel-reasons"
 
-
-class JobHoldReasonsStream(ServiceTitanStream):
+class JobHoldReasonsStream(_BaseJpmStream):
     """Define job hold reasons stream."""
 
     name = "job_hold_reasons"
+    path = "/job-hold-reasons"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.JobHoldReasonResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/job-hold-reasons"
 
-
-class JobTypesStream(ServiceTitanStream):
+class JobTypesStream(_BaseJpmStream):
     """Define job types stream."""
 
     name = "job_types"
+    path = "/job-types"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.JobTypeResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/job-types"
 
-
-class ProjectStatusesStream(ServiceTitanStream):
+class ProjectStatusesStream(_BaseJpmStream):
     """Define project statuses stream."""
 
     name = "project_statuses"
+    path = "/project-statuses"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.ProjectStatusResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/project-statuses"
 
-
-class ProjectSubStatusesStream(ServiceTitanStream):
+class ProjectSubStatusesStream(_BaseJpmStream):
     """Define project substatuses stream."""
 
     name = "project_sub_statuses"
+    path = "/project-substatuses"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.ProjectSubStatusResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/project-substatuses"
 
-
-class JobNotesStream(ServiceTitanExportStream):
+class JobNotesStream(_BaseJpmExportStream):
     """Define job notes stream."""
 
     name = "job_notes"
+    path = "/export/job-notes"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.ExportJobNotesResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/export/job-notes"
 
-
-class ProjectNotesStream(ServiceTitanExportStream):
+class ProjectNotesStream(_BaseJpmExportStream):
     """Define project notes stream."""
 
     name = "project_notes"
+    path = "/export/project-notes"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.ExportProjectNotesResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/export/project-notes"
 
-
-class ProjectTypesStream(ServiceTitanStream):
+class ProjectTypesStream(_BaseJpmStream):
     """Define project types stream."""
 
     name = "project_types"
+    path = "/project-types"
     primary_keys = ("id",)
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.ProjectTypeResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/project-types"
 
-
-class JobBookedLogStream(ServiceTitanStream):
+class JobBookedLogStream(_BaseJpmStream):
     """Define job booked log stream."""
 
     name = "job_booked_log"
+    path = "/jobs/{job_id}/booked-log"
     primary_keys = ("id",)
     parent_stream_type = JobsStream
     ignore_parent_replication_key = True
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.JobBookedLogResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/jobs/{{job_id}}/booked-log"
 
-
-class JobCanceledLogStream(ServiceTitanStream):
+class JobCanceledLogStream(_BaseJpmStream):
     """Define job canceled log stream."""
 
     name = "job_canceled_log"
+    path = "/jobs/{job_id}/canceled-log"
     primary_keys = ("id",)
     parent_stream_type = JobsStream
     ignore_parent_replication_key = True
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.JobCanceledLogResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/jobs/{{job_id}}/canceled-log"
 
-
-class JobCustomFieldsStream(ServiceTitanStream):
+class JobCustomFieldsStream(_BaseJpmStream):
     """Define job custom field types stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-jpm-v2&operation=Jobs_GetCustomFieldTypes
     """
 
     name = "job_custom_fields"
+    path = "/jobs/custom-fields"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.CustomFieldTypeResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/jobs/custom-fields"
 
-
-class ProjectCustomFieldsStream(ServiceTitanStream):
+class ProjectCustomFieldsStream(_BaseJpmStream):
     """Define project custom field types stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-jpm-v2&operation=Projects_GetCustomFieldTypes
     """
 
     name = "project_custom_fields"
+    path = "/projects/custom-fields"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.CustomFieldTypeResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/projects/custom-fields"
 
-
-class WBSBudgetCodesStream(ServiceTitanStream):
+class WBSBudgetCodesStream(_BaseJpmStream):
     """Define work breakdown structure budget codes stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-jpm-v2&operation=BudgetCodes_ListCompanyBudgetCodes
     """
 
     name = "wbs_budget_codes"
+    path = "/work-breakdown-structure/budget-codes"
     primary_keys = ("id",)
     schema = ServiceTitanSchema(JPM, key="Jpm.BudgetCodes.BudgetCodeModel")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/work-breakdown-structure/budget-codes"
 
-
-class WBSSegmentsStream(ServiceTitanStream):
+class WBSSegmentsStream(_BaseJpmStream):
     """Define work breakdown structure segments stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-jpm-v2&operation=BudgetCodes_ListCompanySegments
     """
 
     name = "wbs_segments"
+    path = "/work-breakdown-structure/segments"
     primary_keys = ("id",)
     schema = ServiceTitanSchema(JPM, key="Jpm.BudgetCodes.SegmentModel")
-
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/jpm/v2/tenant/{self.tenant_id}/work-breakdown-structure/segments"
