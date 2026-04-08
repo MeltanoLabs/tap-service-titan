@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import sys
-from functools import cached_property
 from typing import TYPE_CHECKING
 
 from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
@@ -18,50 +17,43 @@ if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context, Record
 
 
+class _BaseCrmStream(ServiceTitanStream, api_prefix="/crm/v2"):
+    pass
+
+
+class _BaseCrmExportStream(ServiceTitanExportStream, api_prefix="/crm/v2"):
+    pass
+
+
 # CRM Streams
-class BookingProviderTagsStream(ServiceTitanStream):
+class BookingProviderTagsStream(_BaseCrmStream):
     """Define booking provider tags stream."""
 
     name = "booking_provider_tags"
+    path = "/booking-provider-tags"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(CRM, key="Crm.V2.BookingProviderTagResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self.tenant_id}/booking-provider-tags"
 
-
-class BookingsStream(ServiceTitanExportStream):
+class BookingsStream(_BaseCrmExportStream):
     """Define bookings stream."""
 
     name = "bookings"
+    path = "/export/bookings"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(CRM, key="Crm.V2.ExportBookingResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self.tenant_id}/export/bookings"
 
-
-class CustomersStream(ServiceTitanExportStream):
+class CustomersStream(_BaseCrmExportStream):
     """Define customers stream."""
 
     name = "customers"
+    path = "/export/customers"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(CRM, key="Crm.V2.ExportCustomerResponse")
-
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self.tenant_id}/export/customers"
 
     @override
     def get_child_context(self, record: Record, context: Context | None) -> Context:
@@ -69,88 +61,63 @@ class CustomersStream(ServiceTitanExportStream):
         return {"customer_id": record["id"]}
 
 
-class CustomerNotesStream(ServiceTitanStream):
+class CustomerNotesStream(_BaseCrmStream):
     """Define customer notes stream."""
 
     name = "customer_notes"
+    path = "/customers/{customer_id}/notes"
     primary_keys = ("createdById", "createdOn")
     replication_key: str = "modifiedOn"
     parent_stream_type = CustomersStream
     ignore_parent_replication_key = True
     schema = ServiceTitanSchema(CRM, key="Crm.V2.NoteResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self.tenant_id}/customers/{'{customer_id}'}/notes"
 
-
-class CustomerContactsStream(ServiceTitanExportStream):
+class CustomerContactsStream(_BaseCrmExportStream):
     """Define contacts stream."""
 
     name = "customer_contacts"
+    path = "/export/customers/contacts"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(CRM, key="Crm.V2.ExportCustomerContactResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self.tenant_id}/export/customers/contacts"
 
-
-class LeadsStream(ServiceTitanExportStream):
+class LeadsStream(_BaseCrmExportStream):
     """Define leads stream."""
 
     name = "leads"
+    path = "/export/leads"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(CRM, key="Crm.V2.ExportLeadsResponse")
 
     @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self.tenant_id}/export/leads"
-
-    @override
-    def get_child_context(self, record: dict, context: Context | None) -> dict:
+    def get_child_context(self, record: Record, context: Context | None) -> Context:
         """Return a context dictionary for a child stream."""
         return {"lead_id": record["id"]}
 
 
-class LeadNotesStream(ServiceTitanStream):
+class LeadNotesStream(_BaseCrmStream):
     """Define lead notes stream."""
 
     name = "lead_notes"
+    path = "/leads/{lead_id}/notes"
     primary_keys = ("createdById", "createdOn")
     replication_key: str = "modifiedOn"
     parent_stream_type = LeadsStream
     ignore_parent_replication_key = True
     schema = ServiceTitanSchema(CRM, key="Crm.V2.NoteResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self.tenant_id}/leads/{'{lead_id}'}/notes"
 
-
-class LocationsStream(ServiceTitanExportStream):
+class LocationsStream(_BaseCrmExportStream):
     """Define locations stream."""
 
     name = "locations"
+    path = "/export/locations"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(CRM, key="Crm.V2.ExportLocationsResponse")
-
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self.tenant_id}/export/locations"
 
     @override
     def get_child_context(self, record: Record, context: Context | None) -> Context:
@@ -158,63 +125,43 @@ class LocationsStream(ServiceTitanExportStream):
         return {"location_id": record["id"]}
 
 
-class LocationNotesStream(ServiceTitanStream):
+class LocationNotesStream(_BaseCrmStream):
     """Define location notes stream."""
 
     name = "location_notes"
+    path = "/locations/{location_id}/notes"
     primary_keys = ("createdById", "createdOn")
     replication_key: str = "modifiedOn"
     parent_stream_type = LocationsStream
     ignore_parent_replication_key = True
     schema = ServiceTitanSchema(CRM, key="Crm.V2.NoteResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self.tenant_id}/locations/{'{location_id}'}/notes"
 
-
-class LocationContactsStream(ServiceTitanExportStream):
+class LocationContactsStream(_BaseCrmExportStream):
     """Define location contacts stream."""
 
     name = "location_contacts"
+    path = "/export/locations/contacts"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(CRM, key="Crm.V2.ExportLocationContactResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self.tenant_id}/export/locations/contacts"
 
-
-class LocationsCustomFieldsStream(ServiceTitanStream):
+class LocationsCustomFieldsStream(_BaseCrmStream):
     """Define locations custom fields stream."""
 
     name = "locations_custom_fields"
+    path = "/locations/custom-fields"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(CRM, key="Crm.V2.Locations.CustomFieldTypeResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self.tenant_id}/locations/custom-fields"
 
-
-class CustomersCustomFieldsStream(ServiceTitanStream):
+class CustomersCustomFieldsStream(_BaseCrmStream):
     """Define customers custom fields stream."""
 
     name = "customers_custom_fields"
+    path = "/customers/custom-fields"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(CRM, key="Crm.V2.Customers.CustomFieldTypeResponse")
-
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/crm/v2/tenant/{self.tenant_id}/customers/custom-fields"

@@ -4,8 +4,7 @@ from __future__ import annotations
 
 import sys
 from datetime import datetime, timedelta
-from functools import cached_property
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, Generic
 
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.pagination import BaseAPIPaginator
@@ -24,11 +23,26 @@ if sys.version_info >= (3, 12):
 else:
     from typing_extensions import override
 
+if sys.version_info >= (3, 13):
+    from typing import TypeVar
+else:
+    from typing_extensions import TypeVar
+
 if TYPE_CHECKING:
     from collections.abc import Iterable, Mapping
 
     import requests
-    from singer_sdk.helpers.types import Context
+    from singer_sdk.helpers.types import Context, Record
+
+_TToken = TypeVar("_TToken", default=int)
+
+
+class _BaseDispatchStream(ServiceTitanStream, Generic[_TToken], api_prefix="/dispatch/v2"):
+    pass
+
+
+class _BaseDispatchExportStream(ServiceTitanExportStream, api_prefix="/dispatch/v2"):
+    pass
 
 
 class CapacitiesPaginator(BaseAPIPaginator[datetime]):
@@ -65,10 +79,11 @@ class CapacitiesPaginator(BaseAPIPaginator[datetime]):
         return self.current_value + timedelta(days=1)
 
 
-class CapacitiesStream(ServiceTitanStream[datetime]):
+class CapacitiesStream(_BaseDispatchStream[datetime]):
     """Define capacities stream."""
 
     name = "capacities"
+    path = "/capacity"
     primary_keys = (
         "startUtc",
         "businessUnitIds",
@@ -82,7 +97,7 @@ class CapacitiesStream(ServiceTitanStream[datetime]):
     )
 
     @override
-    def parse_response(self, response: requests.Response) -> Iterable[dict]:
+    def parse_response(self, response: requests.Response) -> Iterable[Record]:
         """Parse the response and return an iterator of result records.
 
         Args:
@@ -142,37 +157,27 @@ class CapacitiesStream(ServiceTitanStream[datetime]):
         """
         return {}
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/dispatch/v2/tenant/{self.tenant_id}/capacity"
 
-
-class ArrivalWindowsStream(ServiceTitanStream, active_any=True):
+class ArrivalWindowsStream(_BaseDispatchStream, active_any=True):
     """Define arrival windows stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-dispatch-v2&operation=ArrivalWindows_GetList
     """
 
     name = "arrival_windows"
+    path = "/arrival-windows"
     primary_keys = ("id",)
     schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.ArrivalWindowResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/dispatch/v2/tenant/{self.tenant_id}/arrival-windows"
 
-
-class AppointmentAssignmentsStream(ServiceTitanExportStream, active_any=True):
+class AppointmentAssignmentsStream(_BaseDispatchExportStream, active_any=True):
     """Define appointment assignments stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-dispatch-v2&operation=Export_AppointmentAssignments
     """
 
     name = "appointment_assignments"
+    path = "/export/appointment-assignments"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(
@@ -180,103 +185,67 @@ class AppointmentAssignmentsStream(ServiceTitanExportStream, active_any=True):
         key="Dispatch.V2.ExportAppointmentAssignmentsResponse",
     )
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/dispatch/v2/tenant/{self.tenant_id}/export/appointment-assignments"
 
-
-class NonJobAppointmentsStream(ServiceTitanStream):
+class NonJobAppointmentsStream(_BaseDispatchStream):
     """Define non job appointments stream."""
 
     name = "non_job_appointments"
+    path = "/non-job-appointments"
     primary_keys = ("id",)
     replication_key: str = "createdOn"
     schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.NonJobAppointmentResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/dispatch/v2/tenant/{self.tenant_id}/non-job-appointments"
 
-
-class TeamsStream(ServiceTitanStream):
+class TeamsStream(_BaseDispatchStream):
     """Define teams stream."""
 
     name = "teams"
+    path = "/teams"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.TeamResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/dispatch/v2/tenant/{self.tenant_id}/teams"
 
-
-class TechnicianShiftsStream(ServiceTitanStream, active_any=True):
+class TechnicianShiftsStream(_BaseDispatchStream, active_any=True):
     """Define technician shifts stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-dispatch-v2&operation=TechnicianShifts_GetList
     """
 
     name = "technician_shifts"
+    path = "/technician-shifts"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.TechnicianShiftResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/dispatch/v2/tenant/{self.tenant_id}/technician-shifts"
 
-
-class ZonesStream(ServiceTitanStream):
+class ZonesStream(_BaseDispatchStream):
     """Define zones stream."""
 
     name = "zones"
+    path = "/zones"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.ZoneResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/dispatch/v2/tenant/{self.tenant_id}/zones"
 
-
-class BusinessHoursStream(ServiceTitanStream):
+class BusinessHoursStream(_BaseDispatchStream):
     """Define business hours stream."""
 
     name = "business_hours"
+    path = "/business-hours"
     primary_keys = ()
     schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.BusinessHourModel")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/dispatch/v2/tenant/{self.tenant_id}/business-hours"
 
-
-class TechnicianSkillsStream(ServiceTitanStream, active_any=True):
+class TechnicianSkillsStream(_BaseDispatchStream, active_any=True):
     """Define technician skills stream.
 
     https://developer.servicetitan.io/api-details/#api=tenant-dispatch-v2&operation=TechnicianSkills_GetList
     """
 
     name = "technician_skills"
+    path = "/technician-skills"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.TechnicianSkillResponse")
-
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/dispatch/v2/tenant/{self.tenant_id}/technician-skills"

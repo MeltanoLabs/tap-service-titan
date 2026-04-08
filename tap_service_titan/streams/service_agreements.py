@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import sys
-from functools import cached_property
 from typing import TYPE_CHECKING
 
 from tap_service_titan.client import ServiceTitanExportStream
@@ -18,22 +17,21 @@ if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context, Record
 
 
-class ServiceAgreementsStream(ServiceTitanExportStream):
+class _BaseServiceAgreementsStream(ServiceTitanExportStream, api_prefix="/service-agreements/v2"):
+    pass
+
+
+class ServiceAgreementsStream(_BaseServiceAgreementsStream):
     """Define service agreements stream."""
 
     name = "service_agreements"
+    path = "/export/service-agreements"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(
         SERVICE_AGREEMENTS,
         key="ServiceAgreements.V2.ExportServiceAgreementResponse",
     )
-
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/service-agreements/v2/tenant/{self.tenant_id}/export/service-agreements"
 
     @override
     def post_process(self, row: Record, context: Context | None = None) -> Record | None:

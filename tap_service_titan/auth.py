@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 from singer_sdk.authenticators import OAuthAuthenticator, SingletonMeta
 
 
@@ -11,7 +13,7 @@ class ServiceTitanAuthenticator(OAuthAuthenticator, metaclass=SingletonMeta):
     """Authenticator class for ServiceTitan."""
 
     @property
-    def oauth_request_body(self) -> dict:
+    def oauth_request_body(self) -> dict[str, Any]:
         """Define the OAuth request body for the AutomaticTestTap API.
 
         Returns:

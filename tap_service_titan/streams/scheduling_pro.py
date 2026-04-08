@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import sys
-from functools import cached_property
 from typing import TYPE_CHECKING
 
 from tap_service_titan.client import ServiceTitanStream
@@ -18,30 +17,30 @@ if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context, Record
 
 
-class SchedulersStream(ServiceTitanStream):
+class _BaseSchedulingProStream(ServiceTitanStream, api_prefix="/schedulingpro/v2"):
+    pass
+
+
+class SchedulersStream(_BaseSchedulingProStream):
     """Define schedulers stream."""
 
     name = "schedulers"
+    path = "/schedulers"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(SCHEDULING_PRO, key="SchedulingPro.V2.SchedulerResponse")
 
     @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/schedulingpro/v2/tenant/{self.tenant_id}/schedulers"
-
-    @override
-    def get_child_context(self, record: Record, context: Context | None) -> dict:
+    def get_child_context(self, record: Record, context: Context | None) -> Context:
         """Return a context dictionary for child streams."""
         return {"scheduler_id": record.get("id")}
 
 
-class SchedulerSessionsStream(ServiceTitanStream):
+class SchedulerSessionsStream(_BaseSchedulingProStream):
     """Define scheduler sessions stream."""
 
     name = "scheduler_sessions"
+    path = "/schedulers/{scheduler_id}/sessions"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     parent_stream_type = SchedulersStream
@@ -50,17 +49,12 @@ class SchedulerSessionsStream(ServiceTitanStream):
         key="SchedulingPro.V2.SchedulerSessionResponse",
     )
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/schedulingpro/v2/tenant/{self.tenant_id}/schedulers/{{scheduler_id}}/sessions"
 
-
-class SchedulerPerformanceStream(ServiceTitanStream):
+class SchedulerPerformanceStream(_BaseSchedulingProStream):
     """Define scheduler performance stream."""
 
     name = "scheduler_performance"
+    path = "/schedulers/{scheduler_id}/performance"
     primary_keys = ("id",)
     parent_stream_type = SchedulersStream
     ignore_parent_replication_key = True
@@ -68,9 +62,3 @@ class SchedulerPerformanceStream(ServiceTitanStream):
         SCHEDULING_PRO,
         key="SchedulingPro.V2.SchedulerPerformanceResponse",
     )
-
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/schedulingpro/v2/tenant/{self.tenant_id}/schedulers/{{scheduler_id}}/performance"

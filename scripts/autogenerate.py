@@ -1,11 +1,9 @@
-"""Tools for autogenerating streams."""  # noqa: INP001
+"""Tools for exploring OpenAPI specs."""  # noqa: INP001
 
 import json
-import subprocess
 from pathlib import Path
 from typing import Annotated
 
-import click
 import jsonref
 import typer
 
@@ -87,29 +85,6 @@ def get_response_spec_for_path(
 ):
     """Get the response schema for a path."""
     print(_get_response_spec_for_path(spec_path, url_path))
-
-
-@app.command()
-def get_prompts(
-    spec_path: Annotated[
-        Path, typer.Option(exists=True, file_okay=True, dir_okay=False, readable=True)
-    ],
-):
-    """Get all prompts for a given spec file."""
-    for path in _get_paths_with_get(get_spec_from_path(spec_path)):
-        try:
-            response_spec = _get_response_spec_for_path(spec_path, path)
-            text = f"This is for the {spec_path.stem.replace('-', ' ')} API.\nURL path segment: {path}\nJSON schema:\n{response_spec}"  # noqa: E501
-            process = subprocess.Popen(
-                "pbcopy",  # noqa: S607
-                env={"LANG": "en_US.UTF-8"},
-                stdin=subprocess.PIPE,
-            )
-            process.communicate(text.encode("utf-8"))
-            print(path)
-            click.pause()
-        except KeyError:  # noqa: PERF203
-            pass
 
 
 if __name__ == "__main__":

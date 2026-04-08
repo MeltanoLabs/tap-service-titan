@@ -3,11 +3,9 @@
 from __future__ import annotations
 
 import sys
-from functools import cached_property
 from typing import TYPE_CHECKING, Any
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
-from singer_sdk.helpers.types import Context  # noqa: TC002
 
 from tap_service_titan.client import ServiceTitanStream
 from tap_service_titan.openapi_specs import FORMS, ServiceTitanSchema
@@ -21,26 +19,28 @@ else:
 if TYPE_CHECKING:
     from collections.abc import Iterable
 
+    from singer_sdk.helpers.types import Context
 
-class FormsStream(ServiceTitanStream):
+
+class _BaseFormsStream(ServiceTitanStream, api_prefix="/forms/v2"):
+    pass
+
+
+class FormsStream(_BaseFormsStream):
     """Define forms stream."""
 
     name = "forms"
+    path = "/forms"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(FORMS, key="Forms.V2.FormResponse")
 
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/forms/v2/tenant/{self.tenant_id}/forms"
 
-
-class SubmissionsStream(ServiceTitanStream):
+class SubmissionsStream(_BaseFormsStream):
     """Define submissions stream."""
 
     name = "submissions"
+    path = "/submissions"
     primary_keys = ("id",)
     replication_key: str = "submittedOn"
     is_sorted = False
@@ -106,11 +106,6 @@ class SubmissionsStream(ServiceTitanStream):
         ),
     ).to_dict()
 
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/forms/v2/tenant/{self.tenant_id}/submissions"
-
     @override
     def get_records(self, context: Context | None) -> Iterable[dict[str, Any]]:
         """Return a generator of record-type dictionary objects with coerced values.
@@ -128,9 +123,9 @@ class SubmissionsStream(ServiceTitanStream):
                 return None
             return str(value)
 
-        def process_units(units_data: dict) -> dict:
+        def process_units(units_data: dict[str, Any]) -> dict[str, Any]:
             """Recursively process units dictionary values."""
-            result = {}
+            result: dict[str, Any] = {}
             for key, value in units_data.items():
                 if isinstance(value, dict):
                     result[key] = process_units(value)
@@ -164,7 +159,7 @@ class SubmissionsStream(ServiceTitanStream):
         The `modifiedOnOrAfter` param is not supported by this endpoint, so we're using
         `submittedOnOrAfter` instead.
         """
-        params: dict = {}
+        params: dict[str, Any] = {}
         if self.replication_key and (starting_date := self.get_starting_timestamp(context)):
             # isoformat includes timezone +00:00 etc which is not supported by the API,
             # this format is better
@@ -177,10 +172,11 @@ class SubmissionsStream(ServiceTitanStream):
         return params
 
 
-class JobAttachmentsStream(ServiceTitanStream):
+class JobAttachmentsStream(_BaseFormsStream):
     """Define forms stream."""
 
     name = "job_attachments"
+    path = "/jobs/{job_id}/attachments"
     primary_keys = ("id",)
     replication_key: str = "createdOn"
     parent_stream_type = JobsStream
@@ -192,9 +188,3 @@ class JobAttachmentsStream(ServiceTitanStream):
         th.Property("createdById", th.IntegerType),
         th.Property("createdOn", th.DateTimeType),
     ).to_dict()
-
-    @override
-    @cached_property
-    def path(self) -> str:
-        """Return the API path for the stream."""
-        return f"/forms/v2/tenant/{self.tenant_id}/jobs/{{job_id}}/attachments"
