@@ -6,6 +6,7 @@ import math
 import sys
 from datetime import datetime, timedelta, timezone
 from functools import cached_property
+from http import HTTPStatus
 from typing import TYPE_CHECKING, Any
 
 import requests
@@ -28,7 +29,7 @@ else:
     from typing_extensions import override
 
 if TYPE_CHECKING:
-    from collections.abc import Generator, Iterable, Mapping
+    from collections.abc import Generator, Iterable, Mapping, Sequence
     from datetime import date
 
     from singer_sdk.helpers.types import Context, Record
@@ -41,6 +42,11 @@ class CustomReports(ServiceTitanStream):
     http_method = HTTPMethod.POST
     replication_method = REPLICATION_FULL_TABLE
     is_sorted = True
+
+    extra_retry_statuses: Sequence[int] = [
+        HTTPStatus.CONFLICT,
+        HTTPStatus.TOO_MANY_REQUESTS,
+    ]
 
     @override
     def __init__(self, *args: Any, **kwargs: Any) -> None:
