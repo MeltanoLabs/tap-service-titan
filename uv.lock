@@ -1812,7 +1812,7 @@ requires-dist = [
     { name = "backports-httpmethod", marker = "python_full_version < '3.11'", specifier = "~=0.2.1" },
     { name = "requests", specifier = "~=2.33.0" },
     { name = "s3fs", marker = "extra == 's3'", specifier = "~=2026.3.0" },
-    { name = "singer-sdk", extras = ["faker"], specifier = "~=0.53.0" },
+    { name = "singer-sdk", extras = ["faker"], specifier = "~=0.53.6" },
     { name = "typing-extensions", specifier = "==4.15.0" },
 ]
 provides-extras = ["s3"]
