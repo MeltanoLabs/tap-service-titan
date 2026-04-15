@@ -56,7 +56,7 @@ typing = [
     "backports-httpmethod",
     "mypy>=1.18.2",
     "ty>=0.0.1a24",
-    "types-requests>=2",
+    "types-requests>=2.33.0.20260408",
 ]
 
 [tool.hatch.build.targets.sdist]
