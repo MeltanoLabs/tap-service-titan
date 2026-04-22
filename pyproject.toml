@@ -55,7 +55,7 @@ typing = [
     { include-group = "test" },
     "backports-httpmethod",
     "mypy>=1.20.1",
-    "ty>=0.0.1a24",
+    "ty>=0.0.30",
     "types-requests>=2.33.0.20260408",
 ]
 
