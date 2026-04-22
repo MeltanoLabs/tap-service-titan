@@ -302,6 +302,7 @@
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
+        "replication-key": "modifiedOn",
         "selected": true,
         "selected-by-default": true,
         "table-key-properties": [
@@ -347,7 +348,10 @@
       },
       "id": {
         "format": "int64",
-        "type": "integer"
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "inUse": {
         "type": [

@@ -1,12 +1,18 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "info": {
         "title": "Marketing",
+        "description": "Campaigns, campaign categories, campaign costs, campaign cost summary, email channel cost",
         "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://api-integration.servicetitan.io/marketing/v2"
+            "url": "https://api.servicetitan.io/marketing/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/marketing/v2",
+            "description": "Integration"
         }
     ],
     "paths": {
@@ -35,8 +41,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -45,8 +50,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -54,8 +58,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -64,8 +67,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -74,8 +76,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -84,8 +85,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -94,8 +94,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -103,8 +102,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, CreatedOn, Name",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -153,7 +151,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mrk.categories:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -218,7 +224,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mrk.categories:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/categories/{id}": {
@@ -287,7 +301,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mrk.categories:r"
+                        ]
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -362,7 +384,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mrk.categories:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/costs": {
@@ -390,8 +420,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -400,8 +429,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -409,8 +437,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -419,8 +446,7 @@
                         "description": "Year",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -429,8 +455,7 @@
                         "description": "Month",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -439,8 +464,7 @@
                         "description": "Campaign ID",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -448,8 +472,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, Date (Year + Month)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -497,7 +520,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mrk.costs:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -569,7 +600,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mrk.costs:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/costs/{id}": {
@@ -637,7 +676,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mrk.costs:r"
+                        ]
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -711,7 +758,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mrk.costs:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/campaign-cost-summary": {
@@ -789,7 +844,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mrk.campaigncostsummary:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/campaigns": {
@@ -817,8 +880,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -827,8 +889,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -836,8 +897,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -846,8 +906,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -856,8 +915,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -870,8 +928,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -879,8 +936,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -888,8 +944,7 @@
                         "in": "query",
                         "description": "Filters records by name (case-insensitive \"contains\" operation)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -898,8 +953,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -908,8 +962,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -917,8 +970,7 @@
                         "in": "query",
                         "description": "Filters campaigns by phone number (as string).",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -926,8 +978,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, Name, CreatedOn, ModifiedOn",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -989,7 +1040,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mrk.campaigns:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -1081,7 +1140,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mrk.campaigns:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/campaigns/{id}": {
@@ -1163,7 +1230,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mrk.campaigns:r"
+                        ]
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -1264,7 +1339,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mrk.campaigns:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/campaigns/{id}/costs": {
@@ -1301,8 +1384,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1311,8 +1393,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1320,8 +1401,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -1329,8 +1409,7 @@
                         "in": "query",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1338,8 +1417,7 @@
                         "in": "query",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1347,8 +1425,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, Date (Year + Month)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -1396,7 +1473,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mrk.campaigns:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/email-channel-cost": {
@@ -1468,373 +1553,15 @@
                             }
                         }
                     }
-                }
-            }
-        },
-        "/tenant/{tenant}/suppressions": {
-            "get": {
-                "tags": [
-                    "Suppressions"
-                ],
-                "summary": "Gets a paginated list of suppression",
-                "description": "Gets a paginated list of suppression",
-                "operationId": "Suppressions_GetList",
-                "parameters": [
-                    {
-                        "name": "tenant",
-                        "in": "path",
-                        "description": "Tenant ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "page",
-                        "in": "query",
-                        "description": "The logical number of page to return, starting from 1",
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "description": "How many records to return (50 by default)",
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "includeTotal",
-                        "in": "query",
-                        "description": "Whether total count should be returned",
-                        "schema": {
-                            "type": "boolean",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "active",
-                        "in": "query",
-                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
-                        "schema": {
-                            "type": "string",
-                            "oneOf": [
-                                {
-                                    "$ref": "#/components/schemas/ActiveRequestArg"
-                                }
-                            ],
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "modifiedBefore",
-                        "in": "query",
-                        "description": "Return items modified before certain date/time (in UTC)",
-                        "schema": {
-                            "type": "string",
-                            "format": "date-time",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "modifiedOnOrAfter",
-                        "in": "query",
-                        "description": "Return items modified on or after certain date/time (in UTC)",
-                        "schema": {
-                            "type": "string",
-                            "format": "date-time",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "createdBefore",
-                        "in": "query",
-                        "description": "Return items created before certain date/time (in UTC)",
-                        "schema": {
-                            "type": "string",
-                            "format": "date-time",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "createdOnOrAfter",
-                        "in": "query",
-                        "description": "Return items created on or after certain date/time (in UTC)",
-                        "schema": {
-                            "type": "string",
-                            "format": "date-time",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "ids",
-                        "in": "query",
-                        "description": "Perform lookup by multiple IDs (maximum 50)",
-                        "schema": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "email",
-                        "in": "query",
-                        "description": "Filters suppressions by email.",
-                        "schema": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    {
-                        "name": "sort",
-                        "in": "query",
-                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, Email, CreatedOn, ModifiedOn",
-                        "schema": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Marketing.V2.SuppressionResponse"
-                                },
-                                "example": {
-                                    "page": 0,
-                                    "pageSize": 0,
-                                    "hasMore": true,
-                                    "totalCount": 0,
-                                    "data": [
-                                        {
-                                            "id": 0,
-                                            "email": "string",
-                                            "reason": {},
-                                            "modifiedOn": "string",
-                                            "createdOn": "string",
-                                            "active": true
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/tenant/{tenant}/suppressions/{email}": {
-            "get": {
-                "tags": [
-                    "Suppressions"
-                ],
-                "summary": "Gets suppression specified by an email",
-                "description": "Gets suppression specified by an email",
-                "operationId": "Suppressions_Get",
-                "parameters": [
-                    {
-                        "name": "email",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "email"
-                        }
-                    },
-                    {
-                        "name": "tenant",
-                        "in": "path",
-                        "description": "Tenant ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Marketing.V2.SuppressionResponse"
-                                },
-                                "example": {
-                                    "id": 0,
-                                    "email": "string",
-                                    "reason": {},
-                                    "modifiedOn": "string",
-                                    "createdOn": "string",
-                                    "active": true
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/tenant/{tenant}/suppressions/unsuppress": {
-            "post": {
-                "tags": [
-                    "Suppressions"
-                ],
-                "summary": "Remove emails from a suppression list",
-                "description": "Remove emails from a suppression list",
-                "operationId": "Suppressions_Remove",
-                "parameters": [
-                    {
-                        "name": "tenant",
-                        "in": "path",
-                        "description": "Tenant ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Marketing.V2.RemoveSuppressionsRequest"
-                            },
-                            "example": {
-                                "emails": [
-                                    "string"
-                                ]
-                            }
-                        }
-                    }
                 },
-                "responses": {
-                    "200": {
-                        "description": "The request has succeeded"
-                    },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/tenant/{tenant}/suppressions/suppress": {
-            "post": {
-                "tags": [
-                    "Suppressions"
-                ],
-                "summary": "Add emails to a suppression list",
-                "description": "Add emails to a suppression list",
-                "operationId": "Suppressions_Add",
-                "parameters": [
+                "security": [
                     {
-                        "name": "tenant",
-                        "in": "path",
-                        "description": "Tenant ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mrk.emailchannelcost:r"
+                        ]
                     }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Marketing.V2.AddSuppressionsRequest"
-                            },
-                            "example": {
-                                "emails": [
-                                    "string"
-                                ],
-                                "reason": "Unsubscribe"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "The request has succeeded"
-                    },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    }
-                }
+                ]
             }
         }
     },
@@ -1864,10 +1591,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -1999,8 +1728,10 @@
                         "type": "string"
                     },
                     "active": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -2041,10 +1772,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -2161,9 +1894,11 @@
                         "type": "string"
                     },
                     "totalCost": {
-                        "type": "number",
-                        "format": "decimal",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "decimal"
                     }
                 },
                 "additionalProperties": false
@@ -2192,10 +1927,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -2237,43 +1974,59 @@
                         "type": "boolean"
                     },
                     "isDefaultCampaign": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     },
                     "category": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Marketing.V2.CampaignResponseCategory"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "source": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "otherSource": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "businessUnit": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "medium": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "otherMedium": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "campaignPhoneNumbers": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "string"
-                        },
-                        "nullable": true
+                        }
                     }
                 },
                 "additionalProperties": false
@@ -2330,8 +2083,10 @@
                         "format": "int64"
                     },
                     "dnis": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "categoryId": {
                         "type": "integer",
@@ -2341,24 +2096,34 @@
                         "type": "boolean"
                     },
                     "isDefaultCampaign": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     },
                     "source": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "medium": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "otherSource": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "otherMedium": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -2367,142 +2132,11 @@
                 "type": "object",
                 "properties": {
                     "totalCost": {
-                        "type": "number",
-                        "format": "decimal",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
-            },
-            "PaginatedResponse_Of_Marketing.V2.SuppressionResponse": {
-                "required": [
-                    "page",
-                    "pageSize",
-                    "hasMore",
-                    "data"
-                ],
-                "type": "object",
-                "properties": {
-                    "page": {
-                        "type": "integer",
-                        "description": "From which page this output has started",
-                        "format": "int32"
-                    },
-                    "pageSize": {
-                        "type": "integer",
-                        "description": "Page size for this query (i.e. how many records were requested to return)",
-                        "format": "int32"
-                    },
-                    "hasMore": {
-                        "type": "boolean",
-                        "description": "True if there are more records in the query than returned in this result"
-                    },
-                    "totalCount": {
-                        "type": "integer",
-                        "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
-                    },
-                    "data": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Marketing.V2.SuppressionResponse"
-                        },
-                        "description": "The collection of result items, will never have more than PageSize items"
-                    }
-                },
-                "additionalProperties": false,
-                "description": "Represents paginated API response."
-            },
-            "Marketing.V2.SuppressionResponse": {
-                "required": [
-                    "id",
-                    "email",
-                    "modifiedOn",
-                    "createdOn",
-                    "active"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "reason": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Marketing.V2.SuppressionType"
-                            }
+                        "type": [
+                            "number",
+                            "null"
                         ],
-                        "nullable": true
-                    },
-                    "modifiedOn": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "createdOn": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "active": {
-                        "type": "boolean"
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Marketing.V2.SuppressionType": {
-                "enum": [
-                    "Unsubscribe",
-                    "Bounce",
-                    "SpamReport",
-                    "ManualUnsubscribe",
-                    "NeverEmail"
-                ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "Unsubscribe",
-                    "Bounce",
-                    "SpamReport",
-                    "ManualUnsubscribe",
-                    "NeverEmail"
-                ]
-            },
-            "Marketing.V2.RemoveSuppressionsRequest": {
-                "required": [
-                    "emails"
-                ],
-                "type": "object",
-                "properties": {
-                    "emails": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "description": "Email addresses to remove from the suppression list, max items: 1000 "
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Marketing.V2.AddSuppressionsRequest": {
-                "required": [
-                    "emails",
-                    "reason"
-                ],
-                "type": "object",
-                "properties": {
-                    "emails": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "description": "Email addresses to add to the suppression list, max items: 1000 "
-                    },
-                    "reason": {
-                        "$ref": "#/components/schemas/Marketing.V2.SuppressionType"
+                        "format": "decimal"
                     }
                 },
                 "additionalProperties": false
@@ -2512,21 +2146,28 @@
             "apiKeyHeader": {
                 "type": "apiKey",
                 "name": "ST-App-Key",
-                "in": "header"
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
             },
-            "apiKeyQuery": {
-                "type": "apiKey",
-                "name": "servicetitanapplicationkey",
-                "in": "query"
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.mrk.categories:r": "Marketing \u2192 Campaign Categories (Read)",
+                            "tn.mrk.categories:w": "Marketing \u2192 Campaign Categories (Write)",
+                            "tn.mrk.costs:r": "Marketing \u2192 Campaign Costs (Read)",
+                            "tn.mrk.costs:w": "Marketing \u2192 Campaign Costs (Write)",
+                            "tn.mrk.campaigncostsummary:r": "Marketing \u2192 Campaign Cost Summary (Read)",
+                            "tn.mrk.campaigns:r": "Marketing \u2192 Campaigns (Read)",
+                            "tn.mrk.campaigns:w": "Marketing \u2192 Campaigns (Write)",
+                            "tn.mrk.emailchannelcost:r": "Marketing \u2192 Email Channel Cost (Read)"
+                        }
+                    }
+                }
             }
         }
-    },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ]
+    }
 }

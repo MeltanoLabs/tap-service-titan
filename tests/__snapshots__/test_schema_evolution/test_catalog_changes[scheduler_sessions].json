@@ -828,9 +828,28 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "aiModeEnabled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "previousSessionId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
+        "replication-key": "modifiedOn",
         "selected": true,
         "selected-by-default": true,
         "table-key-properties": [
@@ -847,6 +866,13 @@
   "schema": {
     "additionalProperties": false,
     "properties": {
+      "aiModeEnabled": {
+        "description": "AI Mode Enabled",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
       "blockerToBookAdditionalData": {
         "description": "Additional data for the blocker to book",
         "type": [
@@ -1250,6 +1276,13 @@
         "description": "Indicates whether the payment info was captured",
         "type": [
           "boolean",
+          "null"
+        ]
+      },
+      "previousSessionId": {
+        "description": "Previous Session ID",
+        "type": [
+          "string",
           "null"
         ]
       },

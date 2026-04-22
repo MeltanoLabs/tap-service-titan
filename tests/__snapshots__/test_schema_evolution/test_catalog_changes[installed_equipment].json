@@ -244,6 +244,15 @@
     {
       "breadcrumb": [
         "properties",
+        "manufacturedOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "predictedReplacementMonths"
       ],
       "metadata": {
@@ -263,6 +272,7 @@
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
+        "replication-key": "modifiedOn",
         "selected": true,
         "selected-by-default": true,
         "table-key-properties": [
@@ -348,6 +358,13 @@
         "format": "int64",
         "type": [
           "integer",
+          "null"
+        ]
+      },
+      "manufacturedOn": {
+        "format": "date",
+        "type": [
+          "string",
           "null"
         ]
       },

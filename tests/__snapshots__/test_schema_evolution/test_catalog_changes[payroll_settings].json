@@ -103,9 +103,19 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "customFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
+        "replication-key": "modifiedOn",
         "selected": true,
         "selected-by-default": true,
         "table-key-properties": [
@@ -134,6 +144,47 @@
         "format": "date-time",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "customFields": {
+        "description": "Custom payroll fields and their values (technician only)",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "description": "The custom field name (human-readable label)",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "typeId": {
+              "description": "The custom field type ID (definition ID)",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "value": {
+              "description": "The custom field value",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "typeId"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
           "null"
         ]
       },

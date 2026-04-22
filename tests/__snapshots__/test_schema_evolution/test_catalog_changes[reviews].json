@@ -240,9 +240,28 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
+        "replication-key": "publishDate",
         "selected": true,
         "selected-by-default": true,
         "table-key-properties": [
@@ -262,7 +281,10 @@
     "additionalProperties": false,
     "properties": {
       "address": {
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "authorEmail": {
         "type": [
@@ -284,6 +306,13 @@
         ]
       },
       "completedDate": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "createdOn": {
         "format": "date-time",
         "type": [
           "string",
@@ -349,8 +378,18 @@
           "null"
         ]
       },
+      "modifiedOn": {
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "platform": {
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "publishDate": {
         "format": "date-time",
@@ -374,7 +413,10 @@
         ]
       },
       "review": {
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "reviewResponse": {
         "type": [

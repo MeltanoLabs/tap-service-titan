@@ -33,6 +33,15 @@
     {
       "breadcrumb": [
         "properties",
+        "summaryOfWork"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "id"
       ],
       "metadata": {
@@ -352,6 +361,15 @@
     {
       "breadcrumb": [
         "properties",
+        "equipmentIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "isAutoDispatched"
       ],
       "metadata": {
@@ -371,6 +389,7 @@
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
+        "replication-key": "modifiedOn",
         "selected": true,
         "selected-by-default": true,
         "table-key-properties": [
@@ -513,6 +532,17 @@
         "description": "Customer PO",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "equipmentIds": {
+        "description": "IDs of equipment items attached to this job",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
           "null"
         ]
       },
@@ -738,6 +768,13 @@
           "null"
         ]
       },
+      "summaryOfWork": {
+        "description": "Summary of work completed on the job. Private preview: available for specific accounts only.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "tagTypeIds": {
         "description": "Tags on the job",
         "items": {
@@ -790,6 +827,7 @@
       "customerPo",
       "invoiceId",
       "estimateIds",
+      "equipmentIds",
       "active"
     ],
     "type": "object"

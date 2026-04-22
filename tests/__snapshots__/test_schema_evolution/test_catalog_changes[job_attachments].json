@@ -52,6 +52,7 @@
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
+        "replication-key": "createdOn",
         "selected": true,
         "selected-by-default": true,
         "table-key-properties": [

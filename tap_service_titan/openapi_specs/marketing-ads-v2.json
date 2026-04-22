@@ -1,12 +1,18 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "info": {
         "title": "Marketing Ads",
+        "description": "Attributed leads, capacity warnings, external call attributions, job attributions, performance, web booking attributions, web lead form attributions",
         "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://api-integration.servicetitan.io/marketingads/v2"
+            "url": "https://api.servicetitan.io/marketingads/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/marketingads/v2",
+            "description": "Integration"
         }
     ],
     "paths": {
@@ -59,8 +65,7 @@
                                 {
                                     "$ref": "#/components/schemas/Marketing.Ads.Client.LeadType"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -69,8 +74,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -79,8 +83,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -88,8 +91,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -178,7 +180,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mads.attributedleads:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/capacity-warnings": {
@@ -246,7 +256,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mads.capacitywarnings:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/external-call-attributions": {
@@ -324,7 +342,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mads.externalcallattributions:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/performance": {
@@ -381,8 +407,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -391,8 +416,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -400,8 +424,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -488,7 +511,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mads.performance:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/job-attributions": {
@@ -561,7 +592,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mads.jobattributions:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/web-booking-attributions": {
@@ -634,7 +673,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mads.webbookingattributions:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/web-lead-form-attributions": {
@@ -707,7 +754,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mads.webleadformattributions:w"
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -737,10 +792,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -853,9 +910,11 @@
                         "type": "string"
                     },
                     "stCampaignId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "originalCampaign": {
                         "type": "string"
@@ -864,19 +923,25 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Marketing.Ads.Contracts.AttributedLeads.EntityType"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "attributionOverwriteId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "overwrittenBookingJobId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "adGroupId": {
                         "type": "string"
@@ -914,9 +979,11 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "name": {
                         "type": "string"
@@ -931,9 +998,11 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "name": {
                         "type": "string"
@@ -956,9 +1025,11 @@
                         "type": "string"
                     },
                     "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "type": {
                         "type": "string"
@@ -986,9 +1057,11 @@
                 "type": "object",
                 "properties": {
                     "leadNumber": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "leadStatus": {
                         "type": "string"
@@ -1003,9 +1076,11 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -1177,64 +1252,88 @@
                         "description": "The url of the web page that referred to the website"
                     },
                     "gclid": {
-                        "type": "string",
-                        "description": "Google Click Identifier",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Google Click Identifier"
                     },
                     "gbraid": {
-                        "type": "string",
-                        "description": "Google web to app click Identifier",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Google web to app click Identifier"
                     },
                     "wbraid": {
-                        "type": "string",
-                        "description": "Google app to web click Identifier",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Google app to web click Identifier"
                     },
                     "fbclid": {
-                        "type": "string",
-                        "description": "Facebook Click Identifier",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Facebook Click Identifier"
                     },
                     "msclkid": {
-                        "type": "string",
-                        "description": "Microsoft Click ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Microsoft Click ID"
                     },
                     "utmSource": {
-                        "type": "string",
-                        "description": "UTM source",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "UTM source"
                     },
                     "utmMedium": {
-                        "type": "string",
-                        "description": "UTM medium",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "UTM medium"
                     },
                     "utmCampaign": {
-                        "type": "string",
-                        "description": "UTM campaign",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "UTM campaign"
                     },
                     "utmAdgroup": {
-                        "type": "string",
-                        "description": "UTM ad group",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "UTM ad group"
                     },
                     "utmTerm": {
-                        "type": "string",
-                        "description": "UTM term",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "UTM term"
                     },
                     "utmContent": {
-                        "type": "string",
-                        "description": "UTM content",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "UTM content"
                     },
                     "googleAnalyticsClientId": {
-                        "type": "string",
-                        "description": "An id used by Google Analytics to track unique visitors",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "An id used by Google Analytics to track unique visitors"
                     }
                 },
                 "additionalProperties": false,
@@ -1293,10 +1392,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -1335,9 +1436,11 @@
                         "$ref": "#/components/schemas/Marketing.Ads.Contracts.Performance.LeadStats"
                     },
                     "returnOnInvestment": {
-                        "type": "number",
-                        "format": "decimal",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "decimal"
                     }
                 },
                 "additionalProperties": false
@@ -1352,14 +1455,18 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "externalId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "name": {
                         "type": "string"
@@ -1407,9 +1514,11 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Marketing.Ads.Contracts.Performance.Status"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -1431,9 +1540,11 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Marketing.Ads.Contracts.Performance.Status"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -1449,9 +1560,11 @@
                 "type": "object",
                 "properties": {
                     "impressionShare": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     },
                     "impressions": {
                         "type": "integer",
@@ -1470,28 +1583,36 @@
                         "format": "int64"
                     },
                     "allConversions": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     },
                     "cost": {
                         "type": "number",
                         "format": "decimal"
                     },
                     "clickRate": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     },
                     "costPerConversion": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     },
                     "conversionRate": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     }
                 },
                 "additionalProperties": false
@@ -1547,14 +1668,18 @@
                         "format": "decimal"
                     },
                     "bookingRate": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     },
                     "avgTicket": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     }
                 },
                 "additionalProperties": false
@@ -1647,21 +1772,27 @@
             "apiKeyHeader": {
                 "type": "apiKey",
                 "name": "ST-App-Key",
-                "in": "header"
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
             },
-            "apiKeyQuery": {
-                "type": "apiKey",
-                "name": "servicetitanapplicationkey",
-                "in": "query"
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.mads.attributedleads:r": "Marketing Ads \u2192 Attributed Leads (Read)",
+                            "tn.mads.capacitywarnings:r": "Marketing Ads \u2192 Capacity Warnings (Read)",
+                            "tn.mads.externalcallattributions:w": "Marketing Ads \u2192 External Call Attributions (Write)",
+                            "tn.mads.performance:r": "Marketing Ads \u2192 Performance (Read)",
+                            "tn.mads.jobattributions:w": "Marketing Ads \u2192 Job Attributions (Write)",
+                            "tn.mads.webbookingattributions:w": "Marketing Ads \u2192 Web Booking Attributions (Write)",
+                            "tn.mads.webleadformattributions:w": "Marketing Ads \u2192 Web Lead Form Attributions (Write)"
+                        }
+                    }
+                }
             }
         }
-    },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ]
+    }
 }

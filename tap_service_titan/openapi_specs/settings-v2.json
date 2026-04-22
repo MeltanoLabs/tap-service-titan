@@ -1,12 +1,18 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "info": {
         "title": "Settings",
+        "description": "Business units, employees, tag types, technicians, user roles",
         "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://api-integration.servicetitan.io/settings/v2"
+            "url": "https://api.servicetitan.io/settings/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/settings/v2",
+            "description": "Integration"
         }
     ],
     "paths": {
@@ -34,8 +40,8 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "maximum": 2147483647,
-                            "minimum": 0,
+                            "maximum": 2147483647.0,
+                            "minimum": 0.0,
                             "type": "integer",
                             "format": "int32"
                         }
@@ -45,8 +51,8 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "maximum": 500,
-                            "minimum": 1,
+                            "maximum": 500.0,
+                            "minimum": 1.0,
                             "type": "integer",
                             "format": "int32"
                         }
@@ -67,8 +73,7 @@
                             "items": {
                                 "type": "integer",
                                 "format": "int64"
-                            },
-                            "nullable": true
+                            }
                         }
                     }
                 ],
@@ -119,7 +124,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.businessunits:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/employees": {
@@ -146,8 +159,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -155,8 +167,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple User Ids (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -164,8 +175,7 @@
                         "in": "query",
                         "description": "Filters records by name (case-insensitive \"contains\" operation)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -173,8 +183,7 @@
                         "in": "query",
                         "description": "Filters records by email (exact match).",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -187,8 +196,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -197,8 +205,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -207,8 +214,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -216,8 +222,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -226,8 +231,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -236,8 +240,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -246,8 +249,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -256,8 +258,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     }
                 ],
@@ -345,7 +346,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.employees:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -428,7 +437,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.employees:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/employees/{id}": {
@@ -554,7 +571,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.employees:r"
+                        ]
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -663,7 +688,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.employees:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/employees/{id}/account-actions": {
@@ -739,7 +772,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.employees:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/employees": {
@@ -766,8 +807,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -775,8 +815,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -862,7 +901,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.employees:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/technicians": {
@@ -889,8 +936,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -898,8 +944,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -1021,7 +1066,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.technicians:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/technicians": {
@@ -1048,8 +1101,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1057,8 +1109,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple User Ids (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1066,8 +1117,7 @@
                         "in": "query",
                         "description": "Filters records by name (case-insensitive \"contains\" operation)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1080,8 +1130,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -1090,8 +1139,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1100,8 +1148,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1109,8 +1156,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -1119,8 +1165,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1129,8 +1174,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1139,8 +1183,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1149,8 +1192,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     }
                 ],
@@ -1274,7 +1316,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.technicians:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -1374,7 +1424,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.technicians:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/technicians/{id}": {
@@ -1536,7 +1594,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.technicians:r"
+                        ]
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -1662,7 +1728,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.technicians:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/technicians/{id}/account-actions": {
@@ -1740,7 +1814,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.technicians:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/user-roles": {
@@ -1767,8 +1849,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1776,8 +1857,7 @@
                         "in": "query",
                         "description": "Filters records by name (case-insensitive \"contains\" operation)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1790,8 +1870,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -1800,8 +1879,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1810,8 +1888,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1819,8 +1896,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -1829,8 +1905,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1839,8 +1914,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1853,8 +1927,7 @@
                                 {
                                     "$ref": "#/components/schemas/TenantSettings.V2.RequestedEmployeeTypeArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     }
                 ],
@@ -1902,7 +1975,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.userroles:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/business-units": {
@@ -1929,8 +2010,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1938,8 +2018,7 @@
                         "in": "query",
                         "description": "Filters records by name (case-insensitive \"contains\" operation)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1952,8 +2031,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -1962,8 +2040,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1972,8 +2049,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1981,8 +2057,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -1991,8 +2066,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2001,8 +2075,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2011,8 +2084,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2021,8 +2093,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2031,8 +2102,7 @@
                         "description": "If this guid is provided, external data corresponding to\nthis application guid will be returned.",
                         "schema": {
                             "type": "string",
-                            "format": "guid",
-                            "nullable": true
+                            "format": "guid"
                         }
                     }
                 ],
@@ -2107,7 +2177,8 @@
                                                     "key": "string",
                                                     "value": "string"
                                                 }
-                                            ]
+                                            ],
+                                            "certifiedSentriconSpecialistCode": "string"
                                         }
                                     ]
                                 }
@@ -2132,7 +2203,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.businessunits:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/business-units/{id}": {
@@ -2168,8 +2247,7 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "guid",
-                            "nullable": true
+                            "format": "guid"
                         }
                     }
                 ],
@@ -2238,7 +2316,8 @@
                                             "key": "string",
                                             "value": "string"
                                         }
-                                    ]
+                                    ],
+                                    "certifiedSentriconSpecialistCode": "string"
                                 }
                             }
                         }
@@ -2279,7 +2358,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.businessunits:r"
+                        ]
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -2382,7 +2469,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.businessunits:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/business-units": {
@@ -2409,8 +2504,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -2418,8 +2512,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -2492,7 +2585,8 @@
                                                     "key": "string",
                                                     "value": "string"
                                                 }
-                                            ]
+                                            ],
+                                            "certifiedSentriconSpecialistCode": "string"
                                         }
                                     ]
                                 }
@@ -2517,7 +2611,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.businessunits:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/tag-types": {
@@ -2544,8 +2646,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -2553,8 +2654,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -2606,7 +2706,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.tagtypes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/tag-types": {
@@ -2634,8 +2742,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2644,8 +2751,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2653,8 +2759,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2667,8 +2772,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -2676,8 +2780,7 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2685,8 +2788,7 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2694,8 +2796,7 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2703,16 +2804,14 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
                         "name": "sort",
                         "in": "query",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -2766,7 +2865,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.tagtypes:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -2837,7 +2944,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.tagtypes:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/tag-types/{id}": {
@@ -2937,7 +3052,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.stt.tagtypes:w"
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -2967,10 +3090,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -2995,31 +3120,43 @@
                         "format": "int64"
                     },
                     "name": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "active": {
                         "type": "boolean"
                     },
                     "tradeName": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "intacctLocationName": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "intacctLocationId": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "intacctDepartment": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "intacctClass": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -3095,10 +3232,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -3140,20 +3279,26 @@
                         "description": "Employee's name"
                     },
                     "firstName": {
-                        "type": "string",
-                        "description": "Employee first name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Employee first name"
                     },
                     "lastName": {
-                        "type": "string",
-                        "description": "Employee last name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Employee last name"
                     },
                     "managerId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Employee manager id",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "role": {
                         "oneOf": [
@@ -3164,19 +3309,23 @@
                         "description": "[DEPRECATED] Please, use field RoleIds> instead.\nBuilt in user role. Built in role is a template for creating user role."
                     },
                     "roleIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "IDs of the user roles assigned to the technician.",
-                        "nullable": true
+                        "description": "IDs of the user roles assigned to the technician."
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of business unit employee belongs to",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "createdOn": {
                         "type": "string",
@@ -3189,44 +3338,56 @@
                         "format": "date-time"
                     },
                     "email": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Email address of the employee",
-                        "format": "email",
-                        "nullable": true
+                        "format": "email"
                     },
                     "phoneNumber": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Phone number of the employee",
-                        "format": "phone",
-                        "nullable": true
+                        "format": "phone"
                     },
                     "loginName": {
-                        "type": "string",
-                        "description": "Login name of the employee",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Login name of the employee"
                     },
                     "active": {
                         "type": "boolean",
                         "description": "Whether the employee is active"
                     },
                     "aadUserId": {
-                        "type": "string",
-                        "description": "Azure Active Directory User Id",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Azure Active Directory User Id"
                     },
                     "accountLocked": {
-                        "type": "boolean",
-                        "description": "Account Locked Status",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Account Locked Status"
                     },
                     "home": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.EmployeeAddressResponse"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Employee home address details",
-                        "nullable": true
+                        "description": "Employee home address details"
                     },
                     "agentId": {
                         "type": "integer",
@@ -3234,16 +3395,20 @@
                         "format": "int32"
                     },
                     "startDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Start date",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "terminationDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Termination date",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "hourlyRate": {
                         "type": "number",
@@ -3251,26 +3416,32 @@
                         "format": "decimal"
                     },
                     "overtimeProfileId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Overtime profile id",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "customFields": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.EmployeeCustomFieldResponse"
                         },
-                        "description": "Custom fields",
-                        "nullable": true
+                        "description": "Custom fields"
                     },
                     "permissions": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.EmployeePermissionResponse"
                         },
-                        "description": "List of the all availible permissions for this user.",
-                        "nullable": true
+                        "description": "List of the all availible permissions for this user."
                     }
                 },
                 "additionalProperties": false
@@ -3325,34 +3496,46 @@
                 "type": "object",
                 "properties": {
                     "street": {
-                        "type": "string",
-                        "description": "Street",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Street"
                     },
                     "unit": {
-                        "type": "string",
-                        "description": "Unit",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Unit"
                     },
                     "country": {
-                        "type": "string",
-                        "description": "Country",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Country"
                     },
                     "city": {
-                        "type": "string",
-                        "description": "City",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "City"
                     },
                     "state": {
-                        "type": "string",
-                        "description": "State",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "State"
                     },
                     "zip": {
-                        "type": "string",
-                        "description": "Zip",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Zip"
                     }
                 },
                 "additionalProperties": false
@@ -3368,12 +3551,16 @@
                         "format": "int64"
                     },
                     "name": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "value": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -3389,8 +3576,10 @@
                         "format": "int32"
                     },
                     "value": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -3434,20 +3623,25 @@
                 "type": "object",
                 "properties": {
                     "name": {
+                        "maxLength": 255,
                         "type": "string",
                         "description": "Employee name"
                     },
                     "mobilePhoneNumber": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Mobile phone",
-                        "format": "phone",
-                        "nullable": true
+                        "format": "phone"
                     },
                     "phoneNumber": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Office phone",
-                        "format": "phone",
-                        "nullable": true
+                        "format": "phone"
                     },
                     "email": {
                         "type": "string",
@@ -3455,15 +3649,20 @@
                         "format": "email"
                     },
                     "login": {
-                        "type": "string",
-                        "description": "Login (Username)",
-                        "nullable": true
+                        "maxLength": 100,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Login (Username)"
                     },
                     "password": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Password",
-                        "format": "password",
-                        "nullable": true
+                        "format": "password"
                     },
                     "accountCreationMethod": {
                         "oneOf": [
@@ -3474,10 +3673,12 @@
                         "description": "Account creation method"
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Business unit Id",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "roleId": {
                         "type": "integer",
@@ -3492,17 +3693,21 @@
                         "description": "List of company positions"
                     },
                     "aadUserId": {
-                        "type": "string",
-                        "description": "Azure Active Directory User Id",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Azure Active Directory User Id"
                     },
                     "customFields": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.EmployeeCustomFieldCreateOrUpdateRequest"
                         },
-                        "description": "List of employee's custom fields",
-                        "nullable": true
+                        "description": "List of employee's custom fields"
                     }
                 },
                 "additionalProperties": false
@@ -3578,8 +3783,10 @@
                         "format": "int64"
                     },
                     "value": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -3625,10 +3832,12 @@
                         "description": "Login (Username)"
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Business unit Id",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "roleId": {
                         "type": "integer",
@@ -3762,20 +3971,24 @@
                 "type": "object",
                 "properties": {
                     "customFields": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.EmployeeCustomFieldResponse"
                         },
-                        "description": "Custom fields",
-                        "nullable": true
+                        "description": "Custom fields"
                     },
                     "permissions": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.EmployeePermissionResponse"
                         },
-                        "description": "List of the all availible permissions for this user.",
-                        "nullable": true
+                        "description": "List of the all availible permissions for this user."
                     },
                     "id": {
                         "type": "integer",
@@ -3792,20 +4005,26 @@
                         "description": "Employee's name"
                     },
                     "firstName": {
-                        "type": "string",
-                        "description": "Employee first name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Employee first name"
                     },
                     "lastName": {
-                        "type": "string",
-                        "description": "Employee last name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Employee last name"
                     },
                     "managerId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Employee manager id",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "role": {
                         "oneOf": [
@@ -3816,19 +4035,23 @@
                         "description": "[DEPRECATED] Please, use field RoleIds> instead.\nBuilt in user role. Built in role is a template for creating user role."
                     },
                     "roleIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "IDs of the user roles assigned to the technician.",
-                        "nullable": true
+                        "description": "IDs of the user roles assigned to the technician."
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of business unit employee belongs to",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "createdOn": {
                         "type": "string",
@@ -3841,44 +4064,56 @@
                         "format": "date-time"
                     },
                     "email": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Email address of the employee",
-                        "format": "email",
-                        "nullable": true
+                        "format": "email"
                     },
                     "phoneNumber": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Phone number of the employee",
-                        "format": "phone",
-                        "nullable": true
+                        "format": "phone"
                     },
                     "loginName": {
-                        "type": "string",
-                        "description": "Login name of the employee",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Login name of the employee"
                     },
                     "active": {
                         "type": "boolean",
                         "description": "Whether the employee is active"
                     },
                     "aadUserId": {
-                        "type": "string",
-                        "description": "Azure Active Directory User Id",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Azure Active Directory User Id"
                     },
                     "accountLocked": {
-                        "type": "boolean",
-                        "description": "Account Locked Status",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Account Locked Status"
                     },
                     "home": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.EmployeeAddressResponse"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Employee home address details",
-                        "nullable": true
+                        "description": "Employee home address details"
                     },
                     "agentId": {
                         "type": "integer",
@@ -3886,16 +4121,20 @@
                         "format": "int32"
                     },
                     "startDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Start date",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "terminationDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Termination date",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "hourlyRate": {
                         "type": "number",
@@ -3903,10 +4142,12 @@
                         "format": "decimal"
                     },
                     "overtimeProfileId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Overtime profile id",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -3971,34 +4212,42 @@
                         "description": "Technician's name"
                     },
                     "roleIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "IDs of the user roles assigned to the technician.",
-                        "nullable": true
+                        "description": "IDs of the user roles assigned to the technician."
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of business unit technician belongs to",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "mainZoneId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the main technician's zone",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "zoneIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "IDs of all technician's zones",
-                        "nullable": true
+                        "description": "IDs of all technician's zones"
                     },
                     "createdOn": {
                         "type": "string",
@@ -4011,30 +4260,38 @@
                         "format": "date-time"
                     },
                     "email": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Email address of the technician",
-                        "format": "email",
-                        "nullable": true
+                        "format": "email"
                     },
                     "phoneNumber": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Phone number of the technician",
-                        "format": "phone",
-                        "nullable": true
+                        "format": "phone"
                     },
                     "loginName": {
-                        "type": "string",
-                        "description": "Login name of the technician",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Login name of the technician"
                     },
                     "home": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.TechnicianAddressResponse"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Technician's home address",
-                        "nullable": true
+                        "description": "Technician's home address"
                     },
                     "dailyGoal": {
                         "type": "number",
@@ -4049,27 +4306,33 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.LicenseType"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "License type",
-                        "nullable": true
+                        "description": "License type"
                     },
                     "customFields": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.TechnicianCustomFieldResponse"
                         },
-                        "description": "Custom fields",
-                        "nullable": true
+                        "description": "Custom fields"
                     },
                     "active": {
                         "type": "boolean",
                         "description": "Whether the technician is active"
                     },
                     "aadUserId": {
-                        "type": "string",
-                        "description": "Azure Active Directory User Id",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Azure Active Directory User Id"
                     },
                     "burdenRate": {
                         "type": "number",
@@ -4077,31 +4340,39 @@
                         "format": "decimal"
                     },
                     "team": {
-                        "type": "string",
-                        "description": "Team of the technician",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Team of the technician"
                     },
                     "jobFilter": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.JobFilter"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Job Filter of the technician",
-                        "nullable": true
+                        "description": "Job Filter of the technician"
                     },
                     "permissions": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.TechnicianPermissionResponse"
                         },
-                        "description": "List of the all availible permissions for this user.",
-                        "nullable": true
+                        "description": "List of the all availible permissions for this user."
                     },
                     "accountLocked": {
-                        "type": "boolean",
-                        "description": "Account Locked Status",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Account Locked Status"
                     },
                     "commissionRate": {
                         "type": "number",
@@ -4109,20 +4380,26 @@
                         "format": "decimal"
                     },
                     "currentValue": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Technician today statistic current value",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "firstName": {
-                        "type": "string",
-                        "description": "Technician First name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Technician First name"
                     },
                     "lastName": {
-                        "type": "string",
-                        "description": "Technician Last name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Technician Last name"
                     },
                     "hourlyRate": {
                         "type": "number",
@@ -4130,49 +4407,65 @@
                         "format": "decimal"
                     },
                     "jobId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Technician Job id",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "mobilePhone": {
-                        "type": "string",
-                        "description": "Mobile phone",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Mobile phone"
                     },
                     "outboundCallerId": {
-                        "type": "string",
-                        "description": "OutboundCallerId",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "OutboundCallerId"
                     },
                     "payrollId": {
-                        "type": "string",
-                        "description": "Payroll id",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Payroll id"
                     },
                     "payrollProfileId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Payroll profile id",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "appoitmentId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Id of job appointment on which the technician is currently working.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "shiftStart": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Shift Start",
-                        "format": "duration",
-                        "nullable": true
+                        "format": "duration"
                     },
                     "shiftEnd": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Shift End",
-                        "format": "duration",
-                        "nullable": true
+                        "format": "duration"
                     },
                     "soldByRate": {
                         "type": "number",
@@ -4180,10 +4473,12 @@
                         "format": "decimal"
                     },
                     "startDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Start Date",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "status": {
                         "oneOf": [
@@ -4194,41 +4489,51 @@
                         "description": "Status"
                     },
                     "skills": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.TechnicianSkillResponse"
                         },
-                        "description": "Skills",
-                        "nullable": true
+                        "description": "Skills"
                     },
                     "positions": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.TechnicianPosition"
                         },
-                        "description": "Company positions",
-                        "nullable": true
+                        "description": "Company positions"
                     },
                     "location": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.TechnicianLocationResponse"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Location: Lat, Long, Last update time",
-                        "nullable": true
+                        "description": "Location: Lat, Long, Last update time"
                     },
                     "bio": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Biography",
-                        "format": "html",
-                        "nullable": true
+                        "format": "html"
                     },
                     "memo": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Memo",
-                        "format": "html",
-                        "nullable": true
+                        "format": "html"
                     }
                 },
                 "additionalProperties": false
@@ -4237,42 +4542,60 @@
                 "type": "object",
                 "properties": {
                     "street": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "unit": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "country": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "city": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "state": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "zip": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "streetAddress": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "latitude": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     },
                     "longitude": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     }
                 },
                 "additionalProperties": false
@@ -4302,12 +4625,16 @@
                         "format": "int64"
                     },
                     "name": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "value": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -4349,8 +4676,10 @@
                         "format": "int32"
                     },
                     "value": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -4383,9 +4712,11 @@
                         "format": "int64"
                     },
                     "name": {
-                        "type": "string",
-                        "description": "Skill name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Skill name"
                     }
                 },
                 "additionalProperties": false
@@ -4422,22 +4753,28 @@
                 "type": "object",
                 "properties": {
                     "latitude": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Latitude",
-                        "format": "double",
-                        "nullable": true
+                        "format": "double"
                     },
                     "longitude": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Longitude",
-                        "format": "double",
-                        "nullable": true
+                        "format": "double"
                     },
                     "coordinatesUpdatedOn": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Timestamp when coordinates updated last time",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     }
                 },
                 "additionalProperties": false
@@ -4466,10 +4803,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -4515,34 +4854,42 @@
                         "description": "Technician's name"
                     },
                     "roleIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "IDs of the user roles assigned to the technician.",
-                        "nullable": true
+                        "description": "IDs of the user roles assigned to the technician."
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of business unit technician belongs to",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "mainZoneId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the main technician's zone",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "zoneIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "IDs of all technician's zones",
-                        "nullable": true
+                        "description": "IDs of all technician's zones"
                     },
                     "createdOn": {
                         "type": "string",
@@ -4555,30 +4902,38 @@
                         "format": "date-time"
                     },
                     "email": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Email address of the technician",
-                        "format": "email",
-                        "nullable": true
+                        "format": "email"
                     },
                     "phoneNumber": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Phone number of the technician",
-                        "format": "phone",
-                        "nullable": true
+                        "format": "phone"
                     },
                     "loginName": {
-                        "type": "string",
-                        "description": "Login name of the technician",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Login name of the technician"
                     },
                     "home": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.TechnicianAddressResponse"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Technician's home address",
-                        "nullable": true
+                        "description": "Technician's home address"
                     },
                     "dailyGoal": {
                         "type": "number",
@@ -4593,27 +4948,33 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.LicenseType"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "License type",
-                        "nullable": true
+                        "description": "License type"
                     },
                     "customFields": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.TechnicianCustomFieldResponse"
                         },
-                        "description": "Custom fields",
-                        "nullable": true
+                        "description": "Custom fields"
                     },
                     "active": {
                         "type": "boolean",
                         "description": "Whether the technician is active"
                     },
                     "aadUserId": {
-                        "type": "string",
-                        "description": "Azure Active Directory User Id",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Azure Active Directory User Id"
                     },
                     "burdenRate": {
                         "type": "number",
@@ -4621,31 +4982,39 @@
                         "format": "decimal"
                     },
                     "team": {
-                        "type": "string",
-                        "description": "Team of the technician",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Team of the technician"
                     },
                     "jobFilter": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.JobFilter"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Job Filter of the technician",
-                        "nullable": true
+                        "description": "Job Filter of the technician"
                     },
                     "permissions": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.TechnicianPermissionResponse"
                         },
-                        "description": "List of the all availible permissions for this user.",
-                        "nullable": true
+                        "description": "List of the all availible permissions for this user."
                     },
                     "accountLocked": {
-                        "type": "boolean",
-                        "description": "Account Locked Status",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Account Locked Status"
                     },
                     "commissionRate": {
                         "type": "number",
@@ -4653,20 +5022,26 @@
                         "format": "decimal"
                     },
                     "currentValue": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Technician today statistic current value",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "firstName": {
-                        "type": "string",
-                        "description": "Technician First name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Technician First name"
                     },
                     "lastName": {
-                        "type": "string",
-                        "description": "Technician Last name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Technician Last name"
                     },
                     "hourlyRate": {
                         "type": "number",
@@ -4674,49 +5049,65 @@
                         "format": "decimal"
                     },
                     "jobId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Technician Job id",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "mobilePhone": {
-                        "type": "string",
-                        "description": "Mobile phone",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Mobile phone"
                     },
                     "outboundCallerId": {
-                        "type": "string",
-                        "description": "OutboundCallerId",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "OutboundCallerId"
                     },
                     "payrollId": {
-                        "type": "string",
-                        "description": "Payroll id",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Payroll id"
                     },
                     "payrollProfileId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Payroll profile id",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "appoitmentId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Id of job appointment on which the technician is currently working.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "shiftStart": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Shift Start",
-                        "format": "duration",
-                        "nullable": true
+                        "format": "duration"
                     },
                     "shiftEnd": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Shift End",
-                        "format": "duration",
-                        "nullable": true
+                        "format": "duration"
                     },
                     "soldByRate": {
                         "type": "number",
@@ -4724,10 +5115,12 @@
                         "format": "decimal"
                     },
                     "startDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Start Date",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "status": {
                         "oneOf": [
@@ -4738,41 +5131,51 @@
                         "description": "Status"
                     },
                     "skills": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.TechnicianSkillResponse"
                         },
-                        "description": "Skills",
-                        "nullable": true
+                        "description": "Skills"
                     },
                     "positions": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.TechnicianPosition"
                         },
-                        "description": "Company positions",
-                        "nullable": true
+                        "description": "Company positions"
                     },
                     "location": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.TechnicianLocationResponse"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Location: Lat, Long, Last update time",
-                        "nullable": true
+                        "description": "Location: Lat, Long, Last update time"
                     },
                     "bio": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Biography",
-                        "format": "html",
-                        "nullable": true
+                        "format": "html"
                     },
                     "memo": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Memo",
-                        "format": "html",
-                        "nullable": true
+                        "format": "html"
                     }
                 },
                 "additionalProperties": false
@@ -4802,31 +5205,41 @@
                 "type": "object",
                 "properties": {
                     "name": {
+                        "maxLength": 255,
                         "type": "string",
                         "description": "Technician name"
                     },
                     "phoneNumber": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Technician's phone number",
-                        "format": "phone",
-                        "nullable": true
+                        "format": "phone"
                     },
                     "email": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Email",
-                        "format": "email",
-                        "nullable": true
+                        "format": "email"
                     },
                     "login": {
-                        "type": "string",
-                        "description": "Login (Username)",
-                        "nullable": true
+                        "maxLength": 100,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Login (Username)"
                     },
                     "password": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Password",
-                        "format": "password",
-                        "nullable": true
+                        "format": "password"
                     },
                     "accountCreationMethod": {
                         "oneOf": [
@@ -4837,10 +5250,12 @@
                         "description": "Account creation method"
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Business unit Id",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "roleId": {
                         "type": "integer",
@@ -4855,9 +5270,11 @@
                         "description": "List of company positions"
                     },
                     "aadUserId": {
-                        "type": "string",
-                        "description": "Azure Active Directory User Id",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Azure Active Directory User Id"
                     },
                     "licenseType": {
                         "oneOf": [
@@ -4868,68 +5285,89 @@
                         "description": "License type"
                     },
                     "team": {
-                        "type": "string",
-                        "description": "Team name",
-                        "nullable": true
+                        "maxLength": 500,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Team name"
                     },
                     "dailyGoal": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Daily revenue goal",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "burdenRate": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Burden rate (hourly)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "bio": {
-                        "type": "string",
+                        "maxLength": 4000,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Biography",
-                        "format": "html",
-                        "nullable": true
+                        "format": "html"
                     },
                     "memo": {
-                        "type": "string",
+                        "maxLength": 4000,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Memo",
-                        "format": "html",
-                        "nullable": true
+                        "format": "html"
                     },
                     "jobFilter": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.JobFilter"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Upcoming appointment visibility",
-                        "nullable": true
+                        "description": "Upcoming appointment visibility"
                     },
                     "jobHistoryDateFilter": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.JobHistoryDateFilter"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Appointment history visibility",
-                        "nullable": true
+                        "description": "Appointment history visibility"
                     },
                     "home": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.CreateOrUpdateAddressRequest"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Home address",
-                        "nullable": true
+                        "description": "Home address"
                     },
                     "customFields": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.TechnicianCustomFieldCreateOrUpdateRequest"
                         },
-                        "description": "List of Technician's custom fields",
-                        "nullable": true
+                        "description": "List of Technician's custom fields"
                     }
                 },
                 "additionalProperties": false
@@ -4958,8 +5396,10 @@
                 "type": "object",
                 "properties": {
                     "unit": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "street": {
                         "type": "string"
@@ -4968,26 +5408,36 @@
                         "type": "string"
                     },
                     "state": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "country": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "zip": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "latitude": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     },
                     "longitude": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     }
                 },
                 "additionalProperties": false
@@ -5003,8 +5453,10 @@
                         "format": "int64"
                     },
                     "value": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -5045,10 +5497,12 @@
                         "description": "Login (Username)"
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Business unit Id",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "roleId": {
                         "type": "integer",
@@ -5079,16 +5533,20 @@
                         "description": "Team name"
                     },
                     "dailyGoal": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Daily revenue goal",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "burdenRate": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Burden rate (hourly)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "bio": {
                         "type": "string",
@@ -5104,19 +5562,23 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.JobFilter"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Upcoming appointment visibility",
-                        "nullable": true
+                        "description": "Upcoming appointment visibility"
                     },
                     "jobHistoryDateFilter": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.JobHistoryDateFilter"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Appointment history visibility",
-                        "nullable": true
+                        "description": "Appointment history visibility"
                     },
                     "home": {
                         "oneOf": [
@@ -5158,16 +5620,20 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/IdentityUserManagement.TechnicianLicenseType"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "License type to assign to a technician, it is required for AccountAction = Activate",
-                        "nullable": true
+                        "description": "License type to assign to a technician, it is required for AccountAction = Activate"
                     },
                     "truckId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "(Optional) Truck Id to assign to a technician.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -5210,10 +5676,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -5309,10 +5777,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -5349,131 +5819,171 @@
                         "description": "The internal name of the business unit"
                     },
                     "officialName": {
-                        "type": "string",
-                        "description": "The official name which customers see for the business unit",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The official name which customers see for the business unit"
                     },
                     "email": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The default email address associated with the business unit",
-                        "format": "email",
-                        "nullable": true
+                        "format": "email"
                     },
                     "currency": {
-                        "type": "string",
-                        "description": "The currency code used by the business unit (e.g., USD, CAD)",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The currency code used by the business unit (e.g., USD, CAD)"
                     },
                     "phoneNumber": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The primary phone number for the business unit",
-                        "format": "phone",
-                        "nullable": true
+                        "format": "phone"
                     },
                     "invoiceHeader": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The header text displayed on invoices and estimates with this business unit",
-                        "format": "html",
-                        "nullable": true
+                        "format": "html"
                     },
                     "invoiceMessage": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The message text displayed at the footer of all invoices and estimates with this business unit",
-                        "format": "html",
-                        "nullable": true
+                        "format": "html"
                     },
                     "defaultTaxRate": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The default tax rate applied to taxable pricebook items this business unit",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "authorizationParagraph": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The authorization paragraph for customers to authorize work with this business unit",
-                        "format": "html",
-                        "nullable": true
+                        "format": "html"
                     },
                     "acknowledgementParagraph": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The acknowledgement paragraph for customers to sign for completed work with this business unit",
-                        "format": "html",
-                        "nullable": true
+                        "format": "html"
                     },
                     "address": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.BusinessUnitAddressResponse"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The address information for the business unit",
-                        "nullable": true
+                        "description": "The address information for the business unit"
                     },
                     "materialSku": {
-                        "type": "string",
-                        "description": "The SKU for materials associated with this business unit",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The SKU for materials associated with this business unit"
                     },
                     "quickbooksClass": {
-                        "type": "string",
-                        "description": "The QuickBooks class name for accounting integration",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The QuickBooks class name for accounting integration"
                     },
                     "accountCode": {
-                        "type": "string",
-                        "description": "The account code for the business unit tenant",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The account code for the business unit tenant"
                     },
                     "franchiseId": {
-                        "type": "string",
-                        "description": "The franchise ID for the business unit tenant",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The franchise ID for the business unit tenant"
                     },
                     "conceptCode": {
-                        "type": "string",
-                        "description": "The concept code for the business unit tenant",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The concept code for the business unit tenant"
                     },
                     "corporateContractNumber": {
-                        "type": "string",
-                        "description": "The corporate contract number associated with the business unit",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The corporate contract number associated with the business unit"
                     },
                     "trade": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Services.NamedModel"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The trade associated with the business unit",
-                        "nullable": true
+                        "description": "The trade associated with the business unit"
                     },
                     "division": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Services.NamedModel"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The division within the company to which the business unit belongs",
-                        "nullable": true
+                        "description": "The division within the company to which the business unit belongs"
                     },
                     "tagTypeIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "List of tag type IDs associated with the business unit and automatically associated with jobs",
-                        "nullable": true
+                        "description": "List of tag type IDs associated with the business unit and automatically associated with jobs"
                     },
                     "tenant": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.BusinessUnitTenantResponse"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Tenant to which the business unit belongs",
-                        "nullable": true
+                        "description": "Tenant to which the business unit belongs"
                     },
                     "createdOn": {
                         "type": "string",
@@ -5486,12 +5996,21 @@
                         "format": "date-time"
                     },
                     "externalData": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.ExternalDataModel"
                         },
-                        "description": "Optional list of external data items attached to this business unit",
-                        "nullable": true
+                        "description": "Optional list of external data items attached to this business unit"
+                    },
+                    "certifiedSentriconSpecialistCode": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Certified Sentricon Specialist Code (CSS Code) for this business unit."
                     }
                 },
                 "additionalProperties": false
@@ -5504,38 +6023,54 @@
                 "type": "object",
                 "properties": {
                     "street": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "unit": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "city": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "state": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "zip": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "country": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "latitude": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     },
                     "longitude": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     },
                     "isManualCoordinates": {
                         "type": "boolean"
@@ -5579,16 +6114,22 @@
                         "type": "string"
                     },
                     "accountCode": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "franchiseId": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "conceptCode": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -5655,10 +6196,12 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.ExternalDataPatchMode"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "External data patch mode.\\\n\"Replace\" (default) replaces all existing keys with new values. If job A has custom data with keys X and Y and this field only contains an item\nwith a key X, then custom data with a key Y on job A will be removed.\\\n\"Merge\" will only replace key X in the example above. Keys with null value will be deleted.",
-                        "nullable": true
+                        "description": "External data patch mode.\\\n\"Replace\" (default) replaces all existing keys with new values. If job A has custom data with keys X and Y and this field only contains an item\nwith a key X, then custom data with a key Y on job A will be removed.\\\n\"Merge\" will only replace key X in the example above. Keys with null value will be deleted."
                     },
                     "applicationGuid": {
                         "type": "string",
@@ -5698,9 +6241,11 @@
                         "description": "External data key."
                     },
                     "value": {
-                        "type": "string",
-                        "description": "External data value.",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "External data value."
                     }
                 },
                 "additionalProperties": false
@@ -5756,131 +6301,171 @@
                         "description": "The internal name of the business unit"
                     },
                     "officialName": {
-                        "type": "string",
-                        "description": "The official name which customers see for the business unit",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The official name which customers see for the business unit"
                     },
                     "email": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The default email address associated with the business unit",
-                        "format": "email",
-                        "nullable": true
+                        "format": "email"
                     },
                     "currency": {
-                        "type": "string",
-                        "description": "The currency code used by the business unit (e.g., USD, CAD)",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The currency code used by the business unit (e.g., USD, CAD)"
                     },
                     "phoneNumber": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The primary phone number for the business unit",
-                        "format": "phone",
-                        "nullable": true
+                        "format": "phone"
                     },
                     "invoiceHeader": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The header text displayed on invoices and estimates with this business unit",
-                        "format": "html",
-                        "nullable": true
+                        "format": "html"
                     },
                     "invoiceMessage": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The message text displayed at the footer of all invoices and estimates with this business unit",
-                        "format": "html",
-                        "nullable": true
+                        "format": "html"
                     },
                     "defaultTaxRate": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The default tax rate applied to taxable pricebook items this business unit",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "authorizationParagraph": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The authorization paragraph for customers to authorize work with this business unit",
-                        "format": "html",
-                        "nullable": true
+                        "format": "html"
                     },
                     "acknowledgementParagraph": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The acknowledgement paragraph for customers to sign for completed work with this business unit",
-                        "format": "html",
-                        "nullable": true
+                        "format": "html"
                     },
                     "address": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.BusinessUnitAddressResponse"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The address information for the business unit",
-                        "nullable": true
+                        "description": "The address information for the business unit"
                     },
                     "materialSku": {
-                        "type": "string",
-                        "description": "The SKU for materials associated with this business unit",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The SKU for materials associated with this business unit"
                     },
                     "quickbooksClass": {
-                        "type": "string",
-                        "description": "The QuickBooks class name for accounting integration",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The QuickBooks class name for accounting integration"
                     },
                     "accountCode": {
-                        "type": "string",
-                        "description": "The account code for the business unit tenant",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The account code for the business unit tenant"
                     },
                     "franchiseId": {
-                        "type": "string",
-                        "description": "The franchise ID for the business unit tenant",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The franchise ID for the business unit tenant"
                     },
                     "conceptCode": {
-                        "type": "string",
-                        "description": "The concept code for the business unit tenant",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The concept code for the business unit tenant"
                     },
                     "corporateContractNumber": {
-                        "type": "string",
-                        "description": "The corporate contract number associated with the business unit",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The corporate contract number associated with the business unit"
                     },
                     "trade": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Services.NamedModel"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The trade associated with the business unit",
-                        "nullable": true
+                        "description": "The trade associated with the business unit"
                     },
                     "division": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Services.NamedModel"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The division within the company to which the business unit belongs",
-                        "nullable": true
+                        "description": "The division within the company to which the business unit belongs"
                     },
                     "tagTypeIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "List of tag type IDs associated with the business unit and automatically associated with jobs",
-                        "nullable": true
+                        "description": "List of tag type IDs associated with the business unit and automatically associated with jobs"
                     },
                     "tenant": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.BusinessUnitTenantResponse"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Tenant to which the business unit belongs",
-                        "nullable": true
+                        "description": "Tenant to which the business unit belongs"
                     },
                     "createdOn": {
                         "type": "string",
@@ -5893,12 +6478,21 @@
                         "format": "date-time"
                     },
                     "externalData": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TenantSettings.V2.ExternalDataModel"
                         },
-                        "description": "Optional list of external data items attached to this business unit",
-                        "nullable": true
+                        "description": "Optional list of external data items attached to this business unit"
+                    },
+                    "certifiedSentriconSpecialistCode": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Certified Sentricon Specialist Code (CSS Code) for this business unit."
                     }
                 },
                 "additionalProperties": false
@@ -5966,10 +6560,12 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.TagImportance"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The TagImportance of the tag type",
-                        "nullable": true
+                        "description": "The TagImportance of the tag type"
                     },
                     "isConversionOpportunity": {
                         "type": "boolean",
@@ -6036,10 +6632,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -6088,10 +6686,12 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.TagImportance"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The TagImportance of the tag type",
-                        "nullable": true
+                        "description": "The TagImportance of the tag type"
                     },
                     "isConversionOpportunity": {
                         "type": "boolean",
@@ -6140,33 +6740,43 @@
                     },
                     "code": {
                         "maxLength": 20,
-                        "type": "string",
-                        "description": "Code associated with the tag type",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Code associated with the tag type"
                     },
                     "importance": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.TagImportance"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The TagImportance of the tag type",
-                        "nullable": true
+                        "description": "The TagImportance of the tag type"
                     },
                     "isConversionOpportunity": {
-                        "type": "boolean",
-                        "description": "Indicates whether tags of this type should be considered as an opportunity",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Indicates whether tags of this type should be considered as an opportunity"
                     },
                     "allowToUseOnTimesheetActivity": {
-                        "type": "boolean",
-                        "description": "Gets or sets a value indicating whether tags of this type allowed to be used on timesheet activity",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Gets or sets a value indicating whether tags of this type allowed to be used on timesheet activity"
                     },
                     "isVisibleOnDispatchBoard": {
-                        "type": "boolean",
-                        "description": "Gets or sets a value indicating whether tags of this type are visible on dispatch board.",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Gets or sets a value indicating whether tags of this type are visible on dispatch board."
                     }
                 },
                 "additionalProperties": false
@@ -6192,10 +6802,12 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TenantSettings.V2.TagImportance"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The TagImportance of the tag type",
-                        "nullable": true
+                        "description": "The TagImportance of the tag type"
                     },
                     "isConversionOpportunity": {
                         "type": "boolean",
@@ -6217,21 +6829,29 @@
             "apiKeyHeader": {
                 "type": "apiKey",
                 "name": "ST-App-Key",
-                "in": "header"
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
             },
-            "apiKeyQuery": {
-                "type": "apiKey",
-                "name": "servicetitanapplicationkey",
-                "in": "query"
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.stt.businessunits:r": "Settings \u2192 Business Units (Read)",
+                            "tn.stt.employees:r": "Settings \u2192 Employees (Read)",
+                            "tn.stt.employees:w": "Settings \u2192 Employees (Write)",
+                            "tn.stt.technicians:r": "Settings \u2192 Technicians (Read)",
+                            "tn.stt.technicians:w": "Settings \u2192 Technicians (Write)",
+                            "tn.stt.userroles:r": "Settings \u2192 User Roles (Read)",
+                            "tn.stt.businessunits:w": "Settings \u2192 Business Units (Write)",
+                            "tn.stt.tagtypes:r": "Settings \u2192 Tag Types (Read)",
+                            "tn.stt.tagtypes:w": "Settings \u2192 Tag Types (Write)"
+                        }
+                    }
+                }
             }
         }
-    },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ]
+    }
 }
