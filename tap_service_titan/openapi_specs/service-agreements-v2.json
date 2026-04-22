@@ -1,12 +1,18 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "info": {
         "title": "Service Agreements",
+        "description": "Service agreements",
         "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://api-integration.servicetitan.io/service-agreements/v2"
+            "url": "https://api.servicetitan.io/service-agreements/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/service-agreements/v2",
+            "description": "Integration"
         }
     ],
     "paths": {
@@ -34,8 +40,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -43,8 +48,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -153,7 +157,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sa.serviceagreements:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/service-agreements": {
@@ -180,8 +192,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -189,8 +200,7 @@
                         "in": "query",
                         "description": "Filters by customer IDs",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -198,8 +208,7 @@
                         "in": "query",
                         "description": "Filters by business unit IDs",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -212,8 +221,7 @@
                                 {
                                     "$ref": "#/components/schemas/ServiceAgreements.V2.AgreementStatus"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -222,8 +230,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -232,8 +239,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -242,8 +248,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -252,8 +257,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -262,8 +266,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -272,8 +275,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -281,8 +283,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -290,8 +291,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, Name, CreatedOn, ModifiedOn, StartDate, EndDate",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -401,7 +401,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sa.serviceagreements:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/service-agreements/{id}": {
@@ -550,7 +558,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sa.serviceagreements:r"
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -619,10 +635,12 @@
                         "format": "date-time"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created this agreement",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -630,10 +648,12 @@
                         "format": "date-time"
                     },
                     "modifiedById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that modified this agreement",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "templateFields": {
                         "oneOf": [
@@ -678,14 +698,18 @@
                         "description": "The method used to create the agreement"
                     },
                     "summary": {
-                        "type": "string",
-                        "description": "Optional text summary of the agreement",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Optional text summary of the agreement"
                     },
                     "importId": {
-                        "type": "string",
-                        "description": "Internal import ID label",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Internal import ID label"
                     },
                     "importedDeferredAmount": {
                         "type": "number",
@@ -698,83 +722,107 @@
                         "format": "decimal"
                     },
                     "durationMonths": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Duration of the agreement in months (can be absent when the agreement is still being built)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "autoRenew": {
                         "type": "boolean",
                         "description": "Determines if the agreement automatically renews or expires on its end date"
                     },
                     "renewalAgreementId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Indicates the next agreement ID that renews the current agreement (null means the agreement was not renewed)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "startDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The start date of the agreement (can be absent when the agreement is still being built)",
-                        "format": "date",
-                        "nullable": true
+                        "format": "date"
                     },
                     "endDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The end date of the agreement (can be absent when the agreement is still being built)",
-                        "format": "date",
-                        "nullable": true
+                        "format": "date"
                     },
                     "billingSchedule": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/ServiceAgreements.V2.BillingScheduleType"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The billing schedule of the agreement (can be absent when the agreement is still being built)",
-                        "nullable": true
+                        "description": "The billing schedule of the agreement (can be absent when the agreement is still being built)"
                     },
                     "paymentTermId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the payment terms of the agreement (can be absent when the agreement is still being built)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "paymentMethodId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the payment method of the agreement (can be absent when the agreement is still being built).\nNote there is a special hardcoded value of -1 that means \"Cash or Check\".",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "estimatedTravelCost": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The dollar amount of estimated travel cost for all visits (can be absent when the agreement is still being built)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "estimatedLaborCost": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The dollar amount of estimated labor cost for all visits (can be absent when the agreement is still being built)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "estimatedMaterialCost": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The dollar amount of estimated material cost for all visits (can be absent when the agreement is still being built)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "laborMarkupPercentage": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The markup percentage applied to labor cost of the agreement (can be absent when the agreement is still being built)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "materialMarkupPercentage": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The markup percentage applied to material cost of the agreement (can be absent when the agreement is still being built)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "laborSurcharge": {
                         "type": "number",
@@ -787,49 +835,63 @@
                         "format": "decimal"
                     },
                     "totalAgreementPrice": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The total price of the agreement (can be absent when the agreement is still being built)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "estimatedGrossMarginAmount": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The estimated gross margin in dollars for the agreement (can be absent when the agreement is still being built)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "estimatedGrossMarginPercentage": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The estimated gross margin as a percentage of the Total Agreement Price (can be absent when the agreement is still being built)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "rateSheetId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of a rate sheet (Client-Specific Pricing Rule) assigned to the service agreement",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "accountManagerId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the employee assigned to the agreement",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "soldById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the employee or technician that sold this agreement",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "tagTypeIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "Tag type IDs associated with this service agreement.\nIf this field is null, it means it was not requested to be loaded via the `IncludeTags` flag.",
-                        "nullable": true
+                        "description": "Tag type IDs associated with this service agreement.\nIf this field is null, it means it was not requested to be loaded via the `IncludeTags` flag."
                     },
                     "active": {
                         "type": "boolean",
@@ -860,19 +922,23 @@
                         "description": "Revenue recognition mode to be used for a new service agreement"
                     },
                     "generalLedgerAccountId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "General ledger account that will hold funds until recognition\n(this is only used for the Deferred revenue recognition)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "invoiceCancellationMode": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/ServiceAgreements.V2.CancellationInvoiceMode"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "How to resolve the difference with the customer when service agreement is cancelled\n(this is only used for the Deferred revenue recognition)",
-                        "nullable": true
+                        "description": "How to resolve the difference with the customer when service agreement is cancelled\n(this is only used for the Deferred revenue recognition)"
                     },
                     "billingServiceId": {
                         "type": "integer",
@@ -883,123 +949,161 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/ServiceAgreements.V2.BillingScheduleType"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Defines when the customer is billed for the service agreement.",
-                        "nullable": true
+                        "description": "Defines when the customer is billed for the service agreement."
                     },
                     "negativeLiabilityServiceId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Negative liability services draw money from liability account when services are delivered\n(this is only used for the Deferred revenue recognition)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "positiveIncomeServiceId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Positive income services transfer money into the income account when services are delivered\n(this is only used for the Deferred revenue recognition)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "defaultLaborCostPerHour": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The default labor cost / hour to be used in the UI when adding service agreement visits",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "defaultExtraTravelCostPerHour": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The default extra travel cost / hour to be used in the UI when adding service agreement locations",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "defaultPricingStrategy": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/ServiceAgreements.PricingStrategyType"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The default pricing strategy to be used when creating a service agreement.",
-                        "nullable": true
+                        "description": "The default pricing strategy to be used when creating a service agreement."
                     },
                     "defaultTargetMarginValue": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The default target margin value used in gross margin target strategies when creating a service agreement.",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "defaultTargetMarginValueType": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/ServiceAgreements.TargetMarginValueType"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The default target margin value type used in gross margin target strategies when creating a service agreement.",
-                        "nullable": true
+                        "description": "The default target margin value type used in gross margin target strategies when creating a service agreement."
                     },
                     "defaultFlatPrice": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The default price used in flat pricing strategies when creating a service agreement.",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "defaultMarkupPercentage": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The default percentage value used in markup and surcharge strategies when creating a service agreement",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "defaultSurcharge": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The default surcharge amount used in markup and surcharge strategies when creating a service agreement",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "defaultLaborMarkupPercentage": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The default percentage value of the labor markup to be used in the UI when creating a service agreement",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "defaultMaterialMarkupPercentage": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The default percentage value of the material markup to be used in the UI when creating a service agreement",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "defaultLaborSurcharge": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The default labor surcharge amount to be used in the UI when creating a service agreement",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "defaultMaterialSurcharge": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The default material surcharge amount to be used in the UI when creating a service agreement",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "defaultRateSheetId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The default rate sheet ID (Client-Specific Pricing Rule) to be used in the UI when creating a service agreement",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "defaultCampaignId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The ID of the marketing campaign to be used by default when booking jobs for service agreement visits",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "defaultDocumentTemplateId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The ID of the document template to be used by default when creating service agreements",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "defaultAutoRenew": {
-                        "type": "boolean",
-                        "description": "The default auto-renew setting when creating a service agreement",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "The default auto-renew setting when creating a service agreement"
                     }
                 },
                 "additionalProperties": false
@@ -1040,7 +1144,8 @@
                     "Quarterly",
                     "Biannual",
                     "Annual",
-                    "TimeOfService"
+                    "TimeOfService",
+                    "Custom"
                 ],
                 "type": "string",
                 "description": "",
@@ -1051,7 +1156,8 @@
                     "Quarterly",
                     "Biannual",
                     "Annual",
-                    "TimeOfService"
+                    "TimeOfService",
+                    "Custom"
                 ]
             },
             "ServiceAgreements.PricingStrategyType": {
@@ -1197,10 +1303,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -1248,10 +1356,12 @@
                         "format": "date-time"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created this agreement",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -1259,10 +1369,12 @@
                         "format": "date-time"
                     },
                     "modifiedById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that modified this agreement",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "templateFields": {
                         "oneOf": [
@@ -1307,14 +1419,18 @@
                         "description": "The method used to create the agreement"
                     },
                     "summary": {
-                        "type": "string",
-                        "description": "Optional text summary of the agreement",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Optional text summary of the agreement"
                     },
                     "importId": {
-                        "type": "string",
-                        "description": "Internal import ID label",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Internal import ID label"
                     },
                     "importedDeferredAmount": {
                         "type": "number",
@@ -1327,83 +1443,107 @@
                         "format": "decimal"
                     },
                     "durationMonths": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Duration of the agreement in months (can be absent when the agreement is still being built)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "autoRenew": {
                         "type": "boolean",
                         "description": "Determines if the agreement automatically renews or expires on its end date"
                     },
                     "renewalAgreementId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Indicates the next agreement ID that renews the current agreement (null means the agreement was not renewed)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "startDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The start date of the agreement (can be absent when the agreement is still being built)",
-                        "format": "date",
-                        "nullable": true
+                        "format": "date"
                     },
                     "endDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The end date of the agreement (can be absent when the agreement is still being built)",
-                        "format": "date",
-                        "nullable": true
+                        "format": "date"
                     },
                     "billingSchedule": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/ServiceAgreements.V2.BillingScheduleType"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The billing schedule of the agreement (can be absent when the agreement is still being built)",
-                        "nullable": true
+                        "description": "The billing schedule of the agreement (can be absent when the agreement is still being built)"
                     },
                     "paymentTermId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the payment terms of the agreement (can be absent when the agreement is still being built)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "paymentMethodId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the payment method of the agreement (can be absent when the agreement is still being built).\nNote there is a special hardcoded value of -1 that means \"Cash or Check\".",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "estimatedTravelCost": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The dollar amount of estimated travel cost for all visits (can be absent when the agreement is still being built)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "estimatedLaborCost": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The dollar amount of estimated labor cost for all visits (can be absent when the agreement is still being built)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "estimatedMaterialCost": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The dollar amount of estimated material cost for all visits (can be absent when the agreement is still being built)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "laborMarkupPercentage": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The markup percentage applied to labor cost of the agreement (can be absent when the agreement is still being built)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "materialMarkupPercentage": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The markup percentage applied to material cost of the agreement (can be absent when the agreement is still being built)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "laborSurcharge": {
                         "type": "number",
@@ -1416,49 +1556,63 @@
                         "format": "decimal"
                     },
                     "totalAgreementPrice": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The total price of the agreement (can be absent when the agreement is still being built)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "estimatedGrossMarginAmount": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The estimated gross margin in dollars for the agreement (can be absent when the agreement is still being built)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "estimatedGrossMarginPercentage": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The estimated gross margin as a percentage of the Total Agreement Price (can be absent when the agreement is still being built)",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "rateSheetId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of a rate sheet (Client-Specific Pricing Rule) assigned to the service agreement",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "accountManagerId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the employee assigned to the agreement",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "soldById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the employee or technician that sold this agreement",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "tagTypeIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "Tag type IDs associated with this service agreement.\nIf this field is null, it means it was not requested to be loaded via the `IncludeTags` flag.",
-                        "nullable": true
+                        "description": "Tag type IDs associated with this service agreement.\nIf this field is null, it means it was not requested to be loaded via the `IncludeTags` flag."
                     }
                 },
                 "additionalProperties": false
@@ -1468,21 +1622,21 @@
             "apiKeyHeader": {
                 "type": "apiKey",
                 "name": "ST-App-Key",
-                "in": "header"
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
             },
-            "apiKeyQuery": {
-                "type": "apiKey",
-                "name": "servicetitanapplicationkey",
-                "in": "query"
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.sa.serviceagreements:r": "Service Agreements \u2192 Service Agreements (Read)"
+                        }
+                    }
+                }
             }
         }
-    },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ]
+    }
 }

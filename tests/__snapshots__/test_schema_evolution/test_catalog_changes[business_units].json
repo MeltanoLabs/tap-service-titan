@@ -458,9 +458,19 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "certifiedSentriconSpecialistCode"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
+        "replication-key": "modifiedOn",
         "selected": true,
         "selected-by-default": true,
         "table-key-properties": [
@@ -578,6 +588,13 @@
       "authorizationParagraph": {
         "description": "The authorization paragraph for customers to authorize work with this business unit",
         "format": "html",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "certifiedSentriconSpecialistCode": {
+        "description": "Certified Sentricon Specialist Code (CSS Code) for this business unit.",
         "type": [
           "string",
           "null"

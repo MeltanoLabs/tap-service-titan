@@ -13,7 +13,7 @@ import requests
 import requests.exceptions
 from singer_sdk import typing as th
 from singer_sdk.exceptions import RetriableAPIError
-from singer_sdk.streams.core import REPLICATION_FULL_TABLE, REPLICATION_INCREMENTAL
+from singer_sdk.singerlib.catalog import REPLICATION_FULL_TABLE, REPLICATION_INCREMENTAL
 
 from tap_service_titan._common import now
 from tap_service_titan.client import ServiceTitanStream

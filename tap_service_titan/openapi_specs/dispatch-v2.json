@@ -1,330 +1,21 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "info": {
         "title": "Dispatch",
+        "description": "Appointment assignments, arrival windows, business hours, capacity, non-job appointments, teams, technician shifts, technician skills, technician tracking, zones",
         "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://api-integration.servicetitan.io/dispatch/v2"
+            "url": "https://api.servicetitan.io/dispatch/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/dispatch/v2",
+            "description": "Integration"
         }
     ],
     "paths": {
-        "/tenant/{tenant}/adcap/availability": {
-            "post": {
-                "tags": [
-                    "AdaptiveCapacity"
-                ],
-                "summary": "Generates availability report.",
-                "description": "Request must contain at least:\n1. start date [time] - UTC\n2. end date [time] - UTC\n3. xType - type of dimension used to generate columns/x-axis (e.g., \"BusinessHour\", \"ArrivalWindow\")\n4. JobDurationInMinutes - required, duration of the job in minutes\n5. Optional filters such as TechnicianIds, JobType (required in most cases), Skills, Zones, Business Unit\n6. Optional JobStartUtc - earliest allowable start time (UTC)\n            \nRows are **always technicians** — you cannot configure the Y-axis in this endpoint.\nColumns are defined by `xType`, typically business hours or arrival windows.\nThe endpoint returns one or more 2D grids, each representing a subset of the schedule:\n- `rowHeaders`: technician IDs and names\n- `columnHeaders`: time slots (with availability flags)\n- `table`: 2D array of cell objects indicating capacity and bookability\n            \nEach cell includes:\n- `total`: total minutes available in the time slot (e.g., 120 minutes for a 2-hour slot)\n- `assigned`: total minutes already assigned (can exceed total due to overlaps)\n- `booked`: minutes of unassigned jobs that could be booked\n- `done`: minutes of completed jobs\n- `isBookable`: whether a job of the specified duration can be scheduled to **start** in this slot\n- `jobStartUtc` / `jobEndUtc`: proposed booking window for this job (if bookable)\n            \nNotes:\n- `isBookable = true` means the job *can start* in this slot. It may extend into the next slot(s) if needed.\n- `columnHeader.isBookable = true` means **at least one technician** is available in that slot.\n- Job duration may span multiple slots if there’s enough cumulative time.\n            \nExample request:\n{\n  \"StartUtc\": \"2024-10-29\",\n  \"EndUtc\": \"2024-10-30\",\n  \"xType\": \"BusinessHour\",\n  \"JobDurationInMinutes\": 60,\n  \"Technicians\": [68136905, 21604928],\n  \"JobStartUtc\": \"2024-10-29T08:00:00Z\",\n  \"JobType\": \"Install\",\n  \"Skills\": [\"Plumbing\"],\n  \"Zones\": [\"Zone1\"]\n}\n            \nSimplified output:\n{\n  \"grids\": [{\n    \"rowHeaders\": [{\"id\": 1, \"name\": \"tech1\"}, {\"id\": 2, \"name\": \"tech2\"}],\n    \"columnHeaders\": [{\"id\": 101, \"name\": \"BH1\", \"isBookable\": true}, ...],\n    \"table\": [\n      [\n        {\"total\": 120, \"assigned\": 60, \"booked\": 0, \"done\": 0, \"isBookable\": true, \"jobStartUtc\": \"...\", \"jobEndUtc\": \"...\"},\n        ...\n      ],\n      ...\n    ]\n  }]\n}\n            \nThis format supports booking UIs and APIs that need to visualize tech availability across various dimensions of time.",
-                "operationId": "Availability_GetList",
-                "parameters": [
-                    {
-                        "name": "tenant",
-                        "in": "path",
-                        "description": "Tenant ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Capacity.V2.GetAvailabilityRequestArgs"
-                            },
-                            "example": {
-                                "startUtc": "string",
-                                "endUtc": "string",
-                                "xType": {},
-                                "startMinuteTtz": 0,
-                                "endMinuteTtz": 0,
-                                "arrivalWindows": [
-                                    0
-                                ],
-                                "businessHours": [
-                                    0
-                                ],
-                                "businessUnits": [
-                                    0
-                                ],
-                                "businessUnitGroups": [
-                                    0
-                                ],
-                                "jobPriorities": [
-                                    "Low"
-                                ],
-                                "jobTypes": [
-                                    0
-                                ],
-                                "jobTypeGroups": [
-                                    0
-                                ],
-                                "shiftTypes": [
-                                    "Scheduled"
-                                ],
-                                "skills": [
-                                    0
-                                ],
-                                "tagTypes": [
-                                    0
-                                ],
-                                "teams": [
-                                    0
-                                ],
-                                "technicians": [
-                                    0
-                                ],
-                                "technicianTypes": [
-                                    "Unmanaged"
-                                ],
-                                "trades": [
-                                    0
-                                ],
-                                "zones": [
-                                    0
-                                ],
-                                "weekdays": [
-                                    "Sunday"
-                                ],
-                                "useTenantSettings": true,
-                                "jobDurationInMinutes": 0,
-                                "existingJobAppointmentId": 0
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Capacity.V2.GetAvailabilityResponse"
-                                },
-                                "example": {
-                                    "timeStamp": "string",
-                                    "grids": [
-                                        {
-                                            "rowHeaders": [
-                                                {
-                                                    "index": 0,
-                                                    "id": 0,
-                                                    "name": "string",
-                                                    "total": 0,
-                                                    "assigned": 0,
-                                                    "booked": 0,
-                                                    "done": 0,
-                                                    "startUtc": "string",
-                                                    "endUtc": "string",
-                                                    "isBookable": true,
-                                                    "isAssignable": true,
-                                                    "jobStartUtc": "string",
-                                                    "jobEndUtc": "string"
-                                                }
-                                            ],
-                                            "columnHeaders": [
-                                                {
-                                                    "index": 0,
-                                                    "id": 0,
-                                                    "name": "string",
-                                                    "total": 0,
-                                                    "assigned": 0,
-                                                    "booked": 0,
-                                                    "done": 0,
-                                                    "startUtc": "string",
-                                                    "endUtc": "string",
-                                                    "isBookable": true,
-                                                    "isAssignable": true,
-                                                    "jobStartUtc": "string",
-                                                    "jobEndUtc": "string"
-                                                }
-                                            ],
-                                            "table": [
-                                                [
-                                                    {
-                                                        "index": 0,
-                                                        "id": 0,
-                                                        "name": "string",
-                                                        "total": 0,
-                                                        "assigned": 0,
-                                                        "booked": 0,
-                                                        "done": 0,
-                                                        "startUtc": "string",
-                                                        "endUtc": "string",
-                                                        "isBookable": true,
-                                                        "isAssignable": true,
-                                                        "jobStartUtc": "string",
-                                                        "jobEndUtc": "string"
-                                                    }
-                                                ]
-                                            ]
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid input date range or required conditions are missing.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/tenant/{tenant}/adcap/availability/slots": {
-            "post": {
-                "tags": [
-                    "AdaptiveCapacity"
-                ],
-                "summary": "Returns a flattened list of bookable job slots based on technician availability.",
-                "description": "Request arguments are the same as the availability endpoint:\n1. StartUtc / EndUtc – the date range to search (UTC)\n2. xType – defines the column/time dimension, e.g., \"BusinessHour\" or \"ArrivalWindow\"\n3. JobDurationInMinutes – required; how long the job is (in minutes)\n4. Optional filters such as TechnicianIds, JobType (recommended), Skills, Zones, or Business Unit\n5. Optional JobStartUtc – the earliest UTC time the job may begin\n            \nThis endpoint **does not return a table/grid**. Instead, it returns a **flattened list** of slots, each representing a window of time where the job can be booked and the technicians who are available to take it.\n            \n### Response Format\n            \n```json\n{\n  \"timeStamp\": \"2024-10-29T12:00:00Z\",\n  \"availableSlots\": [\n    {\n      \"slotStart\": \"2024-10-29T08:00:00Z\",\n      \"slotEnd\": \"2024-10-29T09:00:00Z\",\n      \"technicians\": [\n        {\n          \"technicianId\": 123,\n          \"technicianName\": \"John Doe\",\n          \"jobStart\": \"2024-10-29T08:00:00Z\",\n          \"jobEnd\": \"2024-10-29T09:00:00Z\"\n        },\n        ...\n      ]\n    },\n    ...\n  ]\n}\n```\n            \n### Notes:\n- `slotStart` and `slotEnd` represent a discrete scheduling slot (from the time-based xType).\n- Each technician listed within a slot is **individually bookable** for that time window.\n- `jobStart` / `jobEnd` reflect the exact start and end time that would be used when booking the job, which may differ from the slot boundaries (e.g., if the job spills into the next slot).\n- If no technicians are available in a slot, it will be excluded from the response.\n            \nThis output format is ideal for booking workflows, calendar UIs, or Schedule Assistant-type selectors that need a concise, per-slot list of options with assigned techs.",
-                "operationId": "Availability_GetSlots",
-                "parameters": [
-                    {
-                        "name": "tenant",
-                        "in": "path",
-                        "description": "Tenant ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Capacity.V2.GetAvailabilityRequestArgs"
-                            },
-                            "example": {
-                                "startUtc": "string",
-                                "endUtc": "string",
-                                "xType": {},
-                                "startMinuteTtz": 0,
-                                "endMinuteTtz": 0,
-                                "arrivalWindows": [
-                                    0
-                                ],
-                                "businessHours": [
-                                    0
-                                ],
-                                "businessUnits": [
-                                    0
-                                ],
-                                "businessUnitGroups": [
-                                    0
-                                ],
-                                "jobPriorities": [
-                                    "Low"
-                                ],
-                                "jobTypes": [
-                                    0
-                                ],
-                                "jobTypeGroups": [
-                                    0
-                                ],
-                                "shiftTypes": [
-                                    "Scheduled"
-                                ],
-                                "skills": [
-                                    0
-                                ],
-                                "tagTypes": [
-                                    0
-                                ],
-                                "teams": [
-                                    0
-                                ],
-                                "technicians": [
-                                    0
-                                ],
-                                "technicianTypes": [
-                                    "Unmanaged"
-                                ],
-                                "trades": [
-                                    0
-                                ],
-                                "zones": [
-                                    0
-                                ],
-                                "weekdays": [
-                                    "Sunday"
-                                ],
-                                "useTenantSettings": true,
-                                "jobDurationInMinutes": 0,
-                                "existingJobAppointmentId": 0
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Capacity.V2.GetAvailabilitySlotsResponse"
-                                },
-                                "example": {
-                                    "timeStamp": "string",
-                                    "availableSlots": [
-                                        {
-                                            "slotStart": "string",
-                                            "slotEnd": "string",
-                                            "technicians": [
-                                                {
-                                                    "technicianId": 0,
-                                                    "technicianName": "string",
-                                                    "jobStart": "string",
-                                                    "jobEnd": "string"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid input date range or required conditions are missing.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/tenant/{tenant}/gps-provider/{gps_provider}/gps-pings": {
             "post": {
                 "tags": [
@@ -422,7 +113,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.gpspings:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/appointment-assignments": {
@@ -449,8 +148,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -458,8 +156,7 @@
                         "in": "query",
                         "description": "Return appointment assignments for one or more appointments",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -468,8 +165,7 @@
                         "description": "Return appointment assignments for a single job",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -478,8 +174,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -488,8 +183,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -498,8 +192,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -508,8 +201,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -518,8 +210,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -528,8 +219,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -537,8 +227,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -546,8 +235,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, CreatedOn, ModifiedOn.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -560,8 +248,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     }
                 ],
@@ -616,7 +303,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.appointmentassignments:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/appointment-assignments/assign-technicians": {
@@ -714,7 +409,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.appointmentassignments:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/appointment-assignments/unassign-technicians": {
@@ -794,7 +497,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.appointmentassignments:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/arrival-windows": {
@@ -821,8 +532,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -831,8 +541,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -840,8 +549,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -850,8 +558,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -860,8 +567,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -874,8 +580,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     }
                 ],
@@ -925,7 +630,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.arrivalwindows:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -999,7 +712,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.arrivalwindows:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/arrival-windows/{id}": {
@@ -1086,7 +807,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.arrivalwindows:r"
+                        ]
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -1169,7 +898,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.arrivalwindows:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/arrival-windows/{id}/activated": {
@@ -1252,7 +989,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.arrivalwindows:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/arrival-windows/configuration": {
@@ -1306,7 +1051,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.arrivalwindows:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -1370,7 +1123,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.arrivalwindows:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/business-hours": {
@@ -1442,7 +1203,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.businesshours:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -1540,7 +1309,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.businesshours:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/capacity": {
@@ -1635,7 +1412,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.capacity:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/appointment-assignments": {
@@ -1667,8 +1452,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -1676,8 +1460,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1685,8 +1468,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -1739,7 +1521,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.appointmentassignments:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/non-job-appointments/{id}": {
@@ -1816,7 +1606,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.nonjobappointments:r"
+                        ]
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -1939,7 +1737,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.nonjobappointments:w"
+                        ]
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -2020,7 +1826,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.nonjobappointments:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/non-job-appointments": {
@@ -2048,8 +1862,7 @@
                         "description": "Unique id of the technician this non-job appointment applies to",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -2058,8 +1871,7 @@
                         "description": "When the Start of non-job appointment should be at or after",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2068,8 +1880,7 @@
                         "description": "When the Start of non-job appointment should be at or before",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2078,8 +1889,7 @@
                         "description": "Unique Id of timesheet code must apply to",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -2087,8 +1897,7 @@
                         "in": "query",
                         "description": "Whether the result should contains only active non-job appointments",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2096,8 +1905,7 @@
                         "in": "query",
                         "description": "Whether the non-job appointment shows on the technicians schedule even if there is no timesheet",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2106,8 +1914,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2116,8 +1923,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2126,8 +1932,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2136,8 +1941,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2145,8 +1949,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -2155,8 +1958,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2165,8 +1967,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2174,8 +1975,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2183,8 +1983,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, CreatedOn, ModifiedOn.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -2243,7 +2042,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.nonjobappointments:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -2346,7 +2153,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.nonjobappointments:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/teams": {
@@ -2374,8 +2189,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2384,8 +2198,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2393,8 +2206,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2402,8 +2214,7 @@
                         "in": "query",
                         "description": "Whether to include inactive teams",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2412,8 +2223,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2422,8 +2232,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2432,8 +2241,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2442,8 +2250,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2451,8 +2258,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, CreatedOn, ModifiedOn.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -2501,7 +2307,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.teams:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -2573,7 +2387,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.teams:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/teams/{id}": {
@@ -2660,7 +2482,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.teams:r"
+                        ]
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -2730,7 +2560,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.teams:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/technician-shifts": {
@@ -2758,8 +2596,7 @@
                         "description": "When the Start of shift should be at or after",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2768,8 +2605,7 @@
                         "description": "When the End of shift should be at or before",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2782,8 +2618,7 @@
                                 {
                                     "$ref": "#/components/schemas/Dispatch.V2.ShiftType"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -2792,8 +2627,7 @@
                         "description": "Unique Id of technician shift must apply to",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -2801,8 +2635,7 @@
                         "in": "query",
                         "description": "Text that must appear in the Title",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -2810,8 +2643,7 @@
                         "in": "query",
                         "description": "Text that must appear in the Note",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -2820,8 +2652,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2830,8 +2661,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2839,8 +2669,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2853,8 +2682,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -2863,8 +2691,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2873,8 +2700,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2883,8 +2709,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2893,8 +2718,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2902,8 +2726,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, CreatedOn, ModifiedOn.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -2957,7 +2780,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.technicianshifts:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -3049,7 +2880,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.technicianshifts:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/technician-shifts/{id}": {
@@ -3141,7 +2980,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.technicianshifts:r"
+                        ]
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -3252,7 +3099,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.technicianshifts:w"
+                        ]
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -3334,7 +3189,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.technicianshifts:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/technician-shifts/bulk-delete": {
@@ -3406,7 +3269,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.technicianshifts:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/technician-skills": {
@@ -3434,8 +3305,7 @@
                         "description": "Gets or sets the unique Id of the technician the skill must apply to.",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -3444,8 +3314,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -3454,8 +3323,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -3463,8 +3331,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -3477,8 +3344,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -3487,8 +3353,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3497,8 +3362,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3507,8 +3371,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3517,8 +3380,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3526,12 +3388,29 @@
                         "in": "query",
                         "description": "Gets or sets the sorting configuration.\nApplies sorting by the specified field:\n\"?sort=+FieldName\" for ascending order,\n\"?sort=-FieldName\" for descending order.\nAvailable fields are: Id, CreatedOn, ModifiedOn.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
                 "responses": {
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "Paginated list of technician skills",
                         "content": {
@@ -3560,26 +3439,16 @@
                                 }
                             }
                         }
-                    },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.technicianskills:r"
+                        ]
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -3618,6 +3487,24 @@
                     }
                 },
                 "responses": {
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "Update result with all technician skills",
                         "content": {
@@ -3644,24 +3531,6 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "The requested entity was not found",
                         "content": {
@@ -3680,7 +3549,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.technicianskills:w"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -3717,6 +3594,24 @@
                     }
                 },
                 "responses": {
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "The created technician skill",
                         "content": {
@@ -3734,24 +3629,6 @@
                                     ],
                                     "createdOn": "string",
                                     "modifiedOn": "string"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
                                 }
                             }
                         }
@@ -3774,7 +3651,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.technicianskills:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/technician-skills/{id}": {
@@ -3807,6 +3692,24 @@
                     }
                 ],
                 "responses": {
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "The technician skill details",
                         "content": {
@@ -3824,24 +3727,6 @@
                                     ],
                                     "createdOn": "string",
                                     "modifiedOn": "string"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
                                 }
                             }
                         }
@@ -3864,7 +3749,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.technicianskills:r"
+                        ]
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -3895,19 +3788,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Dispatch.Contracts.TechnicianSkill.DeleteTechnicianSkillResult"
-                                },
-                                "example": {
-                                    "id": "string"
-                                }
-                            }
-                        }
-                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -3922,6 +3802,19 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Dispatch.Contracts.TechnicianSkill.DeleteTechnicianSkillResult"
+                                },
+                                "example": {
+                                    "id": "string"
                                 }
                             }
                         }
@@ -3944,7 +3837,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.technicianskills:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/technician-tracking": {
@@ -3987,6 +3888,17 @@
                     }
                 ],
                 "responses": {
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "string"
+                            }
+                        }
+                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -3999,19 +3911,16 @@
                                 }
                             }
                         }
-                    },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "string"
-                                },
-                                "example": "string"
-                            }
-                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.techniciantracking:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/zones": {
@@ -4039,8 +3948,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -4049,8 +3957,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -4058,8 +3965,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -4068,8 +3974,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -4078,8 +3983,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -4088,8 +3992,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -4098,8 +4001,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -4112,8 +4014,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -4121,8 +4022,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, CreatedOn, ModifiedOn.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -4193,7 +4093,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.zones:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -4291,7 +4199,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.zones:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/zones/{id}": {
@@ -4400,7 +4316,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.zones:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/zones/{zoneId}": {
@@ -4509,7 +4433,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.zones:w"
+                        ]
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -4561,150 +4493,20 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.dis.zones:w"
+                        ]
+                    }
+                ]
             }
         }
     },
     "components": {
         "schemas": {
-            "Capacity.V2.GetAvailabilityResponse": {
-                "required": [
-                    "timeStamp"
-                ],
-                "type": "object",
-                "properties": {
-                    "timeStamp": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "grids": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Capacity.V2.GetAvailiabilityGrid"
-                        },
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Capacity.V2.GetAvailiabilityGrid": {
-                "required": [
-                    "rowHeaders",
-                    "columnHeaders",
-                    "table"
-                ],
-                "type": "object",
-                "properties": {
-                    "rowHeaders": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Capacity.V2.GetAvailabilityCell"
-                        },
-                        "description": "Names for each row in grid."
-                    },
-                    "columnHeaders": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Capacity.V2.GetAvailabilityCell"
-                        },
-                        "description": "Names for each column in grid."
-                    },
-                    "table": {
-                        "type": "array",
-                        "items": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/components/schemas/Capacity.V2.GetAvailabilityCell"
-                            }
-                        },
-                        "description": "Grid's data, Table[row][column]."
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Capacity.V2.GetAvailabilityCell": {
-                "required": [
-                    "index",
-                    "total",
-                    "assigned",
-                    "booked",
-                    "done",
-                    "isBookable",
-                    "isAssignable"
-                ],
-                "type": "object",
-                "properties": {
-                    "index": {
-                        "type": "integer",
-                        "description": "Row/Column index",
-                        "format": "int32"
-                    },
-                    "id": {
-                        "type": "integer",
-                        "description": "Optional id of the entity represented by this cell, for example it could be technician Id or business hour Id.",
-                        "format": "int64",
-                        "nullable": true
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "Optional name for the entity, just for internal purposes, should not be presented directly to end-user.",
-                        "nullable": true
-                    },
-                    "total": {
-                        "type": "integer",
-                        "description": "Adjusted capacity, constraints/rules are applied and in case of multiple rules - minimal is picked.\nRepresents total capacity which can be theoretically used (minutes).",
-                        "format": "int64"
-                    },
-                    "assigned": {
-                        "type": "integer",
-                        "description": "Total time consumed by assigned jobs (minutes).",
-                        "format": "int64"
-                    },
-                    "booked": {
-                        "type": "integer",
-                        "description": "Total time consumed by booked, but not yet assigned jobs (minutes).",
-                        "format": "int64"
-                    },
-                    "done": {
-                        "type": "integer",
-                        "description": "Total time consumed by finished/done jobs (minutes).",
-                        "format": "int64"
-                    },
-                    "startUtc": {
-                        "type": "string",
-                        "description": "If present indicates start time of the cell (usually arrival window or business hour).",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "endUtc": {
-                        "type": "string",
-                        "description": "If present indicates end time of the cell (usually arrival window or business hour).",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "isBookable": {
-                        "type": "boolean",
-                        "description": "Indicates that time slot can be used to book new job:\n            \n* For arrival window (column) it means that there is at least one tech with assignable slot and total number of assigned + unassigned jobs is within limits.\n* For technician (table) it means that slot is assignable and arrival window level constraints are not violated.\n            \nAssignable slot for tech means that slot has some continuous unassigned time, i.e. capacity - assigned jobs >= new job duration."
-                    },
-                    "isAssignable": {
-                        "type": "boolean",
-                        "description": "Indicates that slot has some unassigned time, so it can be used to assign/reschedule existing job."
-                    },
-                    "jobStartUtc": {
-                        "type": "string",
-                        "description": "earliest datetime when job can start.",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "jobEndUtc": {
-                        "type": "string",
-                        "description": "JobStartUtc + duration of the job passed in request or default to 2 hours if none is passed.",
-                        "format": "date-time",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
-            },
             "ApiErrorResponse": {
                 "required": [
                     "type",
@@ -4751,354 +4553,6 @@
                 },
                 "additionalProperties": false,
                 "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
-            },
-            "Capacity.V2.GetAvailabilityRequestArgs": {
-                "required": [
-                    "startUtc",
-                    "endUtc",
-                    "xType"
-                ],
-                "type": "object",
-                "properties": {
-                    "startUtc": {
-                        "type": "string",
-                        "description": "Inclusive start date for report, usually should contain only date, ie 2020-01-01, ie get report from the start of the day.",
-                        "format": "date-time"
-                    },
-                    "endUtc": {
-                        "type": "string",
-                        "description": "Exclusive end date for report, usually should contain only date, ie 2020-01-02, if start is 2020-01-01, then report is for 24 hours (from midnight to midnight)",
-                        "format": "date-time"
-                    },
-                    "xType": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Capacity.Contracts.DimensionType"
-                            }
-                        ],
-                        "description": "Type of dimension to be used for X axis (columns)."
-                    },
-                    "startMinuteTtz": {
-                        "type": "integer",
-                        "description": "first minute of custom arrival window, in tenant time zone.\nfor example, 8am is 8*60 = 480",
-                        "format": "int64",
-                        "nullable": true
-                    },
-                    "endMinuteTtz": {
-                        "type": "integer",
-                        "description": "end of custom arrival window (exclusive) in tenant time zone.\nfor example, for arrival window 8am-10am: 8*60 = 480 - 10*60 = 600",
-                        "format": "int64",
-                        "nullable": true
-                    },
-                    "arrivalWindows": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "nullable": true
-                    },
-                    "businessHours": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "nullable": true
-                    },
-                    "businessUnits": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "nullable": true
-                    },
-                    "businessUnitGroups": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "nullable": true
-                    },
-                    "jobPriorities": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Capacity.Contracts.JobPriority"
-                        },
-                        "nullable": true
-                    },
-                    "jobTypes": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "nullable": true
-                    },
-                    "jobTypeGroups": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "nullable": true
-                    },
-                    "shiftTypes": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Capacity.Contracts.ShiftType"
-                        },
-                        "nullable": true
-                    },
-                    "skills": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "nullable": true
-                    },
-                    "tagTypes": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "nullable": true
-                    },
-                    "teams": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "nullable": true
-                    },
-                    "technicians": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "nullable": true
-                    },
-                    "technicianTypes": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Capacity.Contracts.TechnicianType"
-                        },
-                        "nullable": true
-                    },
-                    "trades": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "nullable": true
-                    },
-                    "zones": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "nullable": true
-                    },
-                    "weekdays": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/DayOfWeek"
-                        },
-                        "nullable": true
-                    },
-                    "useTenantSettings": {
-                        "type": "boolean",
-                        "description": "true if server should respect tenant's settings and ignore BU/Zones from request or convert BU to BUG.\ndefault false means that client uses the settings and avoid sending conditions like Zone/BU.",
-                        "nullable": true
-                    },
-                    "jobDurationInMinutes": {
-                        "type": "integer",
-                        "description": "indicates duration of the new job being booked, used to determine whether some time slot can be used for booking.",
-                        "format": "int64",
-                        "nullable": true
-                    },
-                    "existingJobAppointmentId": {
-                        "type": "integer",
-                        "description": "optional field to indicate that we're rescheduling existing job appointment, not new one.",
-                        "format": "int64",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Capacity.Contracts.DimensionType": {
-                "enum": [
-                    "ArrivalWindow",
-                    "BusinessHour",
-                    "BusinessUnit",
-                    "BusinessUnitGroup",
-                    "JobType",
-                    "JobTypeGroup",
-                    "Skill",
-                    "Team",
-                    "Technician",
-                    "TechnicianType",
-                    "Trade",
-                    "Zone"
-                ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "ArrivalWindow",
-                    "BusinessHour",
-                    "BusinessUnit",
-                    "BusinessUnitGroup",
-                    "JobType",
-                    "JobTypeGroup",
-                    "Skill",
-                    "Team",
-                    "Technician",
-                    "TechnicianType",
-                    "Trade",
-                    "Zone"
-                ]
-            },
-            "Capacity.Contracts.JobPriority": {
-                "enum": [
-                    "Low",
-                    "Normal",
-                    "High",
-                    "Urgent"
-                ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "Low",
-                    "Normal",
-                    "High",
-                    "Urgent"
-                ]
-            },
-            "Capacity.Contracts.ShiftType": {
-                "enum": [
-                    "Scheduled",
-                    "OnCall"
-                ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "Scheduled",
-                    "OnCall"
-                ]
-            },
-            "Capacity.Contracts.TechnicianType": {
-                "enum": [
-                    "Unmanaged",
-                    "Managed"
-                ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "Unmanaged",
-                    "Managed"
-                ]
-            },
-            "DayOfWeek": {
-                "enum": [
-                    "Sunday",
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday"
-                ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "Sunday",
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday"
-                ]
-            },
-            "Capacity.V2.GetAvailabilitySlotsResponse": {
-                "required": [
-                    "timeStamp"
-                ],
-                "type": "object",
-                "properties": {
-                    "timeStamp": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "availableSlots": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Capacity.V2.GetAvailabilitySlot"
-                        },
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Capacity.V2.GetAvailabilitySlot": {
-                "required": [
-                    "slotStart",
-                    "slotEnd",
-                    "technicians"
-                ],
-                "type": "object",
-                "properties": {
-                    "slotStart": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "slotEnd": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "technicians": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Capacity.V2.GetAvailabilitySlotTechnician"
-                        }
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Capacity.V2.GetAvailabilitySlotTechnician": {
-                "required": [
-                    "technicianId",
-                    "technicianName",
-                    "jobStart",
-                    "jobEnd"
-                ],
-                "type": "object",
-                "properties": {
-                    "technicianId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "technicianName": {
-                        "type": "string"
-                    },
-                    "jobStart": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "jobEnd": {
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                },
-                "additionalProperties": false
             },
             "Dispatch.V2.GpsPingResponse": {
                 "required": [
@@ -5170,22 +4624,28 @@
                         "format": "date-time"
                     },
                     "latitude": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Gets or sets the latitude coordinate of the unit's location at the time of recording",
-                        "format": "double",
-                        "nullable": true
+                        "format": "double"
                     },
                     "longitude": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Gets or sets the longitude coordinate of the unit's location at the time of recording",
-                        "format": "double",
-                        "nullable": true
+                        "format": "double"
                     },
                     "speed": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Gets or sets the speed of the vehicle at the time of recording",
-                        "format": "double",
-                        "nullable": true
+                        "format": "double"
                     },
                     "street": {
                         "type": "string",
@@ -5247,10 +4707,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -5396,9 +4858,11 @@
                         "format": "int64"
                     },
                     "appointmentNumber": {
-                        "type": "string",
-                        "description": "Appointment number",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Appointment number"
                     },
                     "start": {
                         "type": "string",
@@ -5411,16 +4875,20 @@
                         "format": "date-time"
                     },
                     "arrivalWindowStart": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Arrival window start date/time (in UTC), if configured",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "arrivalWindowEnd": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Arrival window end date/time (in UTC), if configured",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "status": {
                         "oneOf": [
@@ -5431,9 +4899,11 @@
                         "description": "Appointment's status"
                     },
                     "specialInstructions": {
-                        "type": "string",
-                        "description": "Special instructions associated to the appointment",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Special instructions associated to the appointment"
                     },
                     "createdOn": {
                         "type": "string",
@@ -5539,10 +5009,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -5920,9 +5392,11 @@
                         "description": "Whether the technician is available to work during the associated time frame"
                     },
                     "hasRequiredSkills": {
-                        "type": "boolean",
-                        "description": "Whether the technician has all the skills required for the job type",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the technician has all the skills required for the job type"
                     }
                 },
                 "additionalProperties": false
@@ -5958,19 +5432,23 @@
                         "format": "date-time"
                     },
                     "businessUnitIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "Business units to calculate availability for",
-                        "nullable": true
+                        "description": "Business units to calculate availability for"
                     },
                     "jobTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Job type whose duration should be used to calculate availability",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "skillBasedAvailability": {
                         "type": "boolean",
@@ -6185,10 +5663,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -6386,45 +5866,57 @@
                         "format": "int64"
                     },
                     "repeat": {
-                        "type": "boolean",
-                        "description": "Indicate if non-job appointment is repeating",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Indicate if non-job appointment is repeating"
                     },
                     "countOccurrences": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Number of occurrences of the repeating non-job appointment",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "interval": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Interval of the repeating non-job appointment",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "frequency": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Dispatch.Contracts.NonJobAppointment.RepeatFrequency_Int32"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Frequency of the repeating non-job appointment",
-                        "nullable": true
+                        "description": "Frequency of the repeating non-job appointment"
                     },
                     "endType": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Dispatch.Contracts.NonJobAppointment.RepeatEndType_Int32"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "End type of the repeating non-job appointment",
-                        "nullable": true
+                        "description": "End type of the repeating non-job appointment"
                     },
                     "endOn": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "End Date of the repeating non-job appointment",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "daysOfWeek": {
                         "type": "string",
@@ -6518,72 +6010,100 @@
                         "type": "string"
                     },
                     "timesheetCodeId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "summary": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "clearDispatchBoard": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     },
                     "clearTechnicianView": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     },
                     "showOnTechnicianSchedule": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     },
                     "removeTechnicianFromCapacityPlanning": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     },
                     "allDay": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     },
                     "repeat": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     },
                     "countOccurrences": {
-                        "type": "integer",
-                        "format": "int32",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int32"
                     },
                     "interval": {
-                        "type": "integer",
-                        "format": "int32",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int32"
                     },
                     "frequency": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Dispatch.Contracts.NonJobAppointment.RepeatFrequency"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "endType": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Dispatch.Contracts.NonJobAppointment.RepeatEndType"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "endOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "daysOfWeek": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "example": "Monday, Wednesday, Friday"
                     }
                 },
@@ -6614,72 +6134,100 @@
                         "type": "string"
                     },
                     "timesheetCodeId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "summary": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "clearDispatchBoard": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     },
                     "clearTechnicianView": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     },
                     "showOnTechnicianSchedule": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     },
                     "removeTechnicianFromCapacityPlanning": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     },
                     "allDay": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     },
                     "repeat": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     },
                     "countOccurrences": {
-                        "type": "integer",
-                        "format": "int32",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int32"
                     },
                     "interval": {
-                        "type": "integer",
-                        "format": "int32",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int32"
                     },
                     "frequency": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Dispatch.Contracts.NonJobAppointment.RepeatFrequency"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "endType": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Dispatch.Contracts.NonJobAppointment.RepeatEndType"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "endOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "daysOfWeek": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "example": "Monday, Wednesday, Friday"
                     }
                 },
@@ -6726,10 +6274,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -6761,15 +6311,19 @@
                         "description": "Whether the team is enabled"
                     },
                     "name": {
-                        "type": "string",
-                        "description": "Descriptive identifier",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Descriptive identifier"
                     },
                     "createdBy": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Created by User ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "createdOn": {
                         "type": "string",
@@ -6804,15 +6358,19 @@
                         "description": "Whether the team is enabled"
                     },
                     "name": {
-                        "type": "string",
-                        "description": "Descriptive identifier",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Descriptive identifier"
                     },
                     "createdBy": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Created by User ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "createdOn": {
                         "type": "string",
@@ -6842,9 +6400,11 @@
                         "description": "Whether the team is enabled"
                     },
                     "name": {
-                        "type": "string",
-                        "description": "Descriptive identifier",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Descriptive identifier"
                     }
                 },
                 "additionalProperties": false
@@ -6873,10 +6433,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -6921,9 +6483,11 @@
                         "description": "Descriptive identifier"
                     },
                     "note": {
-                        "type": "string",
-                        "description": "Optional detailed explanation of the shift",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Optional detailed explanation of the shift"
                     },
                     "active": {
                         "type": "boolean",
@@ -6945,10 +6509,12 @@
                         "format": "date-time"
                     },
                     "timesheetCodeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Timesheet code ID of shift",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "createdOn": {
                         "type": "string",
@@ -7034,15 +6600,19 @@
                         "format": "date-time"
                     },
                     "note": {
-                        "type": "string",
-                        "description": "Optional detailed explanation of the shift",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Optional detailed explanation of the shift"
                     },
                     "timesheetCodeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Timesheet code ID of shift",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "repeatType": {
                         "oneOf": [
@@ -7054,20 +6624,26 @@
                         "example": "Weekly"
                     },
                     "repeatEndDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Date to stop repeating on",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "repeatInterval": {
-                        "type": "integer",
-                        "format": "int32",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int32"
                     },
                     "shiftDays": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "List of Days to repeat the shift on",
-                        "nullable": true,
                         "example": "Monday, Wednesday, Friday"
                     }
                 },
@@ -7126,10 +6702,12 @@
                         "description": "Optional detailed explanation of the shift"
                     },
                     "timesheetCodeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Timesheet code ID of shift",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -7215,10 +6793,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -7260,13 +6840,15 @@
                         "format": "int64"
                     },
                     "jobTypeIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "Unique ids of job types this technician skill applies to.",
-                        "nullable": true
+                        "description": "Unique ids of job types this technician skill applies to."
                     },
                     "createdOn": {
                         "type": "string",
@@ -7408,10 +6990,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -7445,41 +7029,51 @@
                         "description": "Whether the zone is enabled"
                     },
                     "name": {
-                        "type": "string",
-                        "description": "Descriptive identifier",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Descriptive identifier"
                     },
                     "zips": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "string"
                         },
-                        "description": "A list of assigned zip codes to the zone",
-                        "nullable": true
+                        "description": "A list of assigned zip codes to the zone"
                     },
                     "cities": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "string"
                         },
-                        "description": "A list of assigned cities to the zone",
-                        "nullable": true
+                        "description": "A list of assigned cities to the zone"
                     },
                     "territoryNumbers": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "string"
                         },
-                        "description": "A list of assigned territory numbers to the zone",
-                        "nullable": true
+                        "description": "A list of assigned territory numbers to the zone"
                     },
                     "locnNumbers": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "string"
                         },
-                        "description": "A list of assigned LOCN numbers to the zone",
-                        "nullable": true
+                        "description": "A list of assigned LOCN numbers to the zone"
                     },
                     "createdBy": {
                         "type": "integer",
@@ -7501,30 +7095,36 @@
                         "description": "Whether the service days option is enabled"
                     },
                     "serviceDays": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "string"
                         },
-                        "description": "A list of assigned service days",
-                        "nullable": true
+                        "description": "A list of assigned service days"
                     },
                     "businessUnits": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "A list of assigned business units",
-                        "nullable": true
+                        "description": "A list of assigned business units"
                     },
                     "technicians": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "A list of assigned technicians",
-                        "nullable": true
+                        "description": "A list of assigned technicians"
                     }
                 },
                 "additionalProperties": false
@@ -7612,603 +7212,80 @@
                 "type": "object",
                 "properties": {
                     "name": {
-                        "type": "string",
-                        "description": "Descriptive identifier",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Descriptive identifier"
                     },
                     "zips": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "string"
                         },
-                        "description": "A list of assigned zip codes to the zone",
-                        "nullable": true
+                        "description": "A list of assigned zip codes to the zone"
                     },
                     "cities": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "string"
                         },
-                        "description": "A list of assigned cities to the zone",
-                        "nullable": true
+                        "description": "A list of assigned cities to the zone"
                     },
                     "territoryNumbers": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "string"
                         },
-                        "description": "A list of assigned territory numbers to the zone",
-                        "nullable": true
+                        "description": "A list of assigned territory numbers to the zone"
                     },
                     "locnNumbers": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "string"
                         },
-                        "description": "A list of assigned LOCN numbers to the zone",
-                        "nullable": true
+                        "description": "A list of assigned LOCN numbers to the zone"
                     },
                     "serviceDaysEnabled": {
-                        "type": "boolean",
-                        "description": "Whether the service days option is enabled",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the service days option is enabled"
                     },
                     "serviceDaysIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int32"
                         },
-                        "description": "A list of assigned service days",
-                        "nullable": true
+                        "description": "A list of assigned service days"
                     },
                     "businessUnits": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "A list of assigned business units",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Dispatch.V2.Webhook.Job": {
-                "required": [
-                    "id",
-                    "jobNumber",
-                    "projectId",
-                    "customerId",
-                    "locationId",
-                    "jobStatus",
-                    "businessUnitId",
-                    "jobTypeId",
-                    "priority",
-                    "campaignId",
-                    "firstAppointmentId",
-                    "lastAppointmentId",
-                    "jobGeneratedLeadSource",
-                    "noCharge",
-                    "notificationsEnabled",
-                    "createdById",
-                    "modifiedOn",
-                    "total"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "jobNumber": {
-                        "type": "string"
-                    },
-                    "projectId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "customerId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "locationId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "jobStatus": {
-                        "type": "string"
-                    },
-                    "completedOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "businessUnitId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "jobTypeId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "priority": {
-                        "type": "string"
-                    },
-                    "campaignId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "appointmentCount": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
-                    },
-                    "firstAppointmentId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "lastAppointmentId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "recallForId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
-                    },
-                    "warrantyId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
-                    },
-                    "jobGeneratedLeadSource": {
-                        "$ref": "#/components/schemas/Dispatch.V2.Webhook.JobGeneratedLeadSource"
-                    },
-                    "noCharge": {
-                        "type": "boolean"
-                    },
-                    "notificationsEnabled": {
-                        "type": "boolean"
-                    },
-                    "createdOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "createdById": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "modifiedOn": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "tagTypeIds": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "nullable": true
-                    },
-                    "leadCallId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
-                    },
-                    "bookingId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
-                    },
-                    "soldById": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
-                    },
-                    "customerPo": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "invoiceId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
-                    },
-                    "membershipId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
-                    },
-                    "total": {
-                        "type": "number",
-                        "format": "decimal"
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Dispatch.V2.Webhook.JobGeneratedLeadSource": {
-                "type": "object",
-                "properties": {
-                    "jobId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
-                    },
-                    "employeeId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Dispatch.V2.Webhook.JobAppointment": {
-                "required": [
-                    "id",
-                    "appointmentNumber",
-                    "start",
-                    "end",
-                    "duration"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "appointmentNumber": {
-                        "type": "string"
-                    },
-                    "scheduledOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "start": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "end": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "duration": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "arrivalWindowStart": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "arrivalWindowEnd": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "externalId": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "manageEmployeeEmail": {
-                        "type": "boolean",
-                        "nullable": true
-                    },
-                    "manageFollowUpEmail": {
-                        "type": "boolean",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
-            },
-            "CloudEvent_Of_Dispatch.V2.Webhook.TechnicianDispatchedWebhookEvent": {
-                "required": [
-                    "specversion",
-                    "id",
-                    "type",
-                    "time",
-                    "source",
-                    "userassignedid",
-                    "datacontenttype",
-                    "data"
-                ],
-                "type": "object",
-                "properties": {
-                    "specversion": {
-                        "type": "string",
-                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
-                    },
-                    "id": {
-                        "type": "string",
-                        "description": "A value that identifies the delivery of this event to a particular consumer.\n(Rarely, there may be multiple attempts to deliver the same event to a consumer, each with\nthe same or a different id. Use userassignedid to detect duplicate deliveries.)"
-                    },
-                    "type": {
-                        "type": "string",
-                        "description": "A value that identifies the type of this event (\"tn.dis.technician-dispatched\")."
-                    },
-                    "time": {
-                        "type": "string",
-                        "description": "The date and time when this event occurred.",
-                        "format": "date-time"
-                    },
-                    "source": {
-                        "type": "string",
-                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
-                    },
-                    "userassignedid": {
-                        "type": "string",
-                        "description": "A value that uniquely identifies this occurrence of the event."
-                    },
-                    "datacontenttype": {
-                        "type": "string",
-                        "description": "The content type of the data (\"application/json\")."
-                    },
-                    "data": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Dispatch.V2.Webhook.TechnicianDispatchedWebhookEvent"
-                            }
-                        ],
-                        "description": "The event payload."
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Dispatch.V2.Webhook.TechnicianDispatchedWebhookEvent": {
-                "required": [
-                    "job",
-                    "appointment",
-                    "tenantId",
-                    "tenantName"
-                ],
-                "type": "object",
-                "properties": {
-                    "job": {
-                        "$ref": "#/components/schemas/Dispatch.V2.Webhook.Job"
-                    },
-                    "appointment": {
-                        "$ref": "#/components/schemas/Dispatch.V2.Webhook.JobAppointment"
-                    },
-                    "tenantId": {
-                        "type": "integer",
-                        "description": "The ID of the tenant",
-                        "format": "int64"
-                    },
-                    "tenantName": {
-                        "type": "string",
-                        "description": "The name of the tenant"
-                    }
-                },
-                "additionalProperties": false
-            },
-            "CloudEvent_Of_Dispatch.V2.Webhook.ZoneDeletedWebhookEvent": {
-                "required": [
-                    "specversion",
-                    "id",
-                    "type",
-                    "time",
-                    "source",
-                    "userassignedid",
-                    "datacontenttype",
-                    "data"
-                ],
-                "type": "object",
-                "properties": {
-                    "specversion": {
-                        "type": "string",
-                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
-                    },
-                    "id": {
-                        "type": "string",
-                        "description": "A value that identifies the delivery of this event to a particular consumer.\n(Rarely, there may be multiple attempts to deliver the same event to a consumer, each with\nthe same or a different id. Use userassignedid to detect duplicate deliveries.)"
-                    },
-                    "type": {
-                        "type": "string",
-                        "description": "A value that identifies the type of this event (\"tn.dis.zone-deleted\")."
-                    },
-                    "time": {
-                        "type": "string",
-                        "description": "The date and time when this event occurred.",
-                        "format": "date-time"
-                    },
-                    "source": {
-                        "type": "string",
-                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
-                    },
-                    "userassignedid": {
-                        "type": "string",
-                        "description": "A value that uniquely identifies this occurrence of the event."
-                    },
-                    "datacontenttype": {
-                        "type": "string",
-                        "description": "The content type of the data (\"application/json\")."
-                    },
-                    "data": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Dispatch.V2.Webhook.ZoneDeletedWebhookEvent"
-                            }
-                        ],
-                        "description": "The event payload."
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Dispatch.V2.Webhook.ZoneDeletedWebhookEvent": {
-                "required": [
-                    "zone",
-                    "tenantId",
-                    "tenantName"
-                ],
-                "type": "object",
-                "properties": {
-                    "zone": {
-                        "$ref": "#/components/schemas/Dispatch.V2.Webhook.Zone"
-                    },
-                    "tenantId": {
-                        "type": "integer",
-                        "description": "The ID of the tenant",
-                        "format": "int64"
-                    },
-                    "tenantName": {
-                        "type": "string",
-                        "description": "The name of the tenant"
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Dispatch.V2.Webhook.Zone": {
-                "required": [
-                    "id",
-                    "serviceDaysEnabled",
-                    "active"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "name": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "color": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "zips": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "nullable": true
-                    },
-                    "cities": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "nullable": true
-                    },
-                    "territoryNumbers": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "nullable": true
-                    },
-                    "locnNumbers": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "nullable": true
-                    },
-                    "businessUnits": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "nullable": true
-                    },
-                    "serviceDaysEnabled": {
-                        "type": "boolean"
-                    },
-                    "serviceDaysIds": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "format": "int32"
-                        },
-                        "nullable": true
-                    },
-                    "active": {
-                        "type": "boolean"
-                    },
-                    "maxDriveTimeAdjustment": {
-                        "type": "integer",
-                        "format": "int32",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
-            },
-            "CloudEvent_Of_Dispatch.V2.Webhook.ZoneUpdatedWebhookEvent": {
-                "required": [
-                    "specversion",
-                    "id",
-                    "type",
-                    "time",
-                    "source",
-                    "userassignedid",
-                    "datacontenttype",
-                    "data"
-                ],
-                "type": "object",
-                "properties": {
-                    "specversion": {
-                        "type": "string",
-                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
-                    },
-                    "id": {
-                        "type": "string",
-                        "description": "A value that identifies the delivery of this event to a particular consumer.\n(Rarely, there may be multiple attempts to deliver the same event to a consumer, each with\nthe same or a different id. Use userassignedid to detect duplicate deliveries.)"
-                    },
-                    "type": {
-                        "type": "string",
-                        "description": "A value that identifies the type of this event (\"tn.dis.zone-updated\")."
-                    },
-                    "time": {
-                        "type": "string",
-                        "description": "The date and time when this event occurred.",
-                        "format": "date-time"
-                    },
-                    "source": {
-                        "type": "string",
-                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
-                    },
-                    "userassignedid": {
-                        "type": "string",
-                        "description": "A value that uniquely identifies this occurrence of the event."
-                    },
-                    "datacontenttype": {
-                        "type": "string",
-                        "description": "The content type of the data (\"application/json\")."
-                    },
-                    "data": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Dispatch.V2.Webhook.ZoneUpdatedWebhookEvent"
-                            }
-                        ],
-                        "description": "The event payload."
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Dispatch.V2.Webhook.ZoneUpdatedWebhookEvent": {
-                "required": [
-                    "zone",
-                    "tenantId",
-                    "tenantName"
-                ],
-                "type": "object",
-                "properties": {
-                    "zone": {
-                        "$ref": "#/components/schemas/Dispatch.V2.Webhook.Zone"
-                    },
-                    "tenantId": {
-                        "type": "integer",
-                        "description": "The ID of the tenant",
-                        "format": "int64"
-                    },
-                    "tenantName": {
-                        "type": "string",
-                        "description": "The name of the tenant"
+                        "description": "A list of assigned business units"
                     }
                 },
                 "additionalProperties": false
@@ -8218,23 +7295,41 @@
             "apiKeyHeader": {
                 "type": "apiKey",
                 "name": "ST-App-Key",
-                "in": "header"
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
             },
-            "apiKeyQuery": {
-                "type": "apiKey",
-                "name": "servicetitanapplicationkey",
-                "in": "query"
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.dis.gpspings:w": "Dispatch \u2192 GPS Pings (Write)",
+                            "tn.dis.appointmentassignments:r": "Dispatch \u2192 Appointment Assignments (Read)",
+                            "tn.dis.appointmentassignments:w": "Dispatch \u2192 Appointment Assignments (Write)",
+                            "tn.dis.arrivalwindows:r": "Dispatch \u2192 Arrival Windows (Read)",
+                            "tn.dis.arrivalwindows:w": "Dispatch \u2192 Arrival Windows (Write)",
+                            "tn.dis.businesshours:r": "Dispatch \u2192 Business Hours (Read)",
+                            "tn.dis.businesshours:w": "Dispatch \u2192 Business Hours (Write)",
+                            "tn.dis.capacity:w": "Dispatch \u2192 Capacity (Write)",
+                            "tn.dis.nonjobappointments:r": "Dispatch \u2192 Non-Job Appointments (Read)",
+                            "tn.dis.nonjobappointments:w": "Dispatch \u2192 Non-Job Appointments (Write)",
+                            "tn.dis.teams:r": "Dispatch \u2192 Teams (Read)",
+                            "tn.dis.teams:w": "Dispatch \u2192 Teams (Write)",
+                            "tn.dis.technicianshifts:r": "Dispatch \u2192 Technician Shifts (Read)",
+                            "tn.dis.technicianshifts:w": "Dispatch \u2192 Technician Shifts (Write)",
+                            "tn.dis.technicianskills:r": "Dispatch \u2192 Technician Skills (Read)",
+                            "tn.dis.technicianskills:w": "Dispatch \u2192 Technician Skills (Write)",
+                            "tn.dis.techniciantracking:r": "Dispatch \u2192 Technician Tracking (Read)",
+                            "tn.dis.zones:r": "Dispatch \u2192 Zones (Read)",
+                            "tn.dis.zones:w": "Dispatch \u2192 Zones (Write)"
+                        }
+                    }
+                }
             }
         }
     },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ],
     "tags": [
         {
             "name": "AdaptiveCapacity"

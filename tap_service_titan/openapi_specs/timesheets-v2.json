@@ -1,12 +1,18 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "info": {
         "title": "Timesheets",
+        "description": "Activities, activity categories, activity types",
         "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://api-integration.servicetitan.io/timesheets/v2"
+            "url": "https://api.servicetitan.io/timesheets/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/timesheets/v2",
+            "description": "Integration"
         }
     ],
     "paths": {
@@ -35,8 +41,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -45,8 +50,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -54,8 +58,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -64,8 +67,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -74,8 +76,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -84,8 +85,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -94,8 +94,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -108,8 +107,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -117,8 +115,7 @@
                         "in": "query",
                         "description": "Applies sorting by specified fields",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -207,7 +204,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tms.activities:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -308,7 +313,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tms.activities:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/activities/{id}": {
@@ -418,7 +431,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tms.activities:r"
+                        ]
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -528,7 +549,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tms.activities:w"
+                        ]
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -581,7 +610,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tms.activities:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/activity-categories": {
@@ -609,8 +646,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -619,8 +655,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -628,8 +663,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -638,8 +672,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -648,8 +681,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -658,8 +690,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -668,8 +699,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -682,8 +712,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -691,8 +720,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -761,7 +789,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tms.activitycategories:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/activity-categories/{id}": {
@@ -851,7 +887,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tms.activitycategories:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/activity-types": {
@@ -879,8 +923,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -889,8 +932,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -898,8 +940,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -908,8 +949,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -918,8 +958,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -928,8 +967,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -938,8 +976,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -952,8 +989,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -961,8 +997,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -1055,7 +1090,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tms.activitytypes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/activity-types/{id}": {
@@ -1169,7 +1212,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tms.activitytypes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/activity-categories": {
@@ -1196,8 +1247,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1205,8 +1255,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -1255,7 +1304,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tms.activitycategories:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/activity-types": {
@@ -1282,8 +1339,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1291,8 +1347,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -1365,7 +1420,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tms.activitytypes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/activities": {
@@ -1392,8 +1455,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1401,8 +1463,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -1471,7 +1532,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tms.activities:r"
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -1501,10 +1570,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -1560,50 +1631,66 @@
                         "format": "date-time"
                     },
                     "endTime": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "End time of the activity on UTC.",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "jobId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the job associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "appointmentId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the appointment associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "projectId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the project associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "projectLabel": {
-                        "type": "string",
-                        "description": "Label of the project associated with the activity.",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Label of the project associated with the activity."
                     },
                     "laborTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the labor type associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "budgetCodeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the budget code associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "memo": {
-                        "type": "string",
-                        "description": "Memo or notes related to the activity.",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Memo or notes related to the activity."
                     },
                     "tagTypes": {
                         "type": "array",
@@ -1617,29 +1704,35 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Timesheets.V2.Activities.ActivityEntryCoordinate"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Start Coordinate of the activity.",
-                        "nullable": true
+                        "description": "Start Coordinate of the activity."
                     },
                     "endCoordinate": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Timesheets.V2.Activities.ActivityEntryCoordinate"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "End Coordinate of the activity.",
-                        "nullable": true
+                        "description": "End Coordinate of the activity."
                     },
                     "active": {
                         "type": "boolean",
                         "description": "Indicates whether the activity is active."
                     },
                     "modifiedById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user who last modified the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "createdOn": {
                         "type": "string",
@@ -1670,14 +1763,18 @@
                 "type": "object",
                 "properties": {
                     "latitude": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     },
                     "longitude": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     }
                 },
                 "additionalProperties": false
@@ -1786,50 +1883,66 @@
                         "format": "date-time"
                     },
                     "endTime": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "End time of the activity  on UTC.",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "jobId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the job associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "appointmentId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the appointment associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "projectId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the project associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "projectLabel": {
-                        "type": "string",
-                        "description": "Label of the project associated with the activity.",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Label of the project associated with the activity."
                     },
                     "laborTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the labor type associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "budgetCodeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the budget code associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "memo": {
-                        "type": "string",
-                        "description": "Memo or notes related to the activity.",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Memo or notes related to the activity."
                     },
                     "tagTypes": {
                         "type": "array",
@@ -1843,29 +1956,35 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Timesheets.V2.Activities.ActivityEntryCoordinate"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Start Coordinate of the activity.",
-                        "nullable": true
+                        "description": "Start Coordinate of the activity."
                     },
                     "endCoordinate": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Timesheets.V2.Activities.ActivityEntryCoordinate"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "End Coordinate of the activity.",
-                        "nullable": true
+                        "description": "End Coordinate of the activity."
                     },
                     "active": {
                         "type": "boolean",
                         "description": "Indicates whether the activity is active."
                     },
                     "modifiedById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user who last modified the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "createdOn": {
                         "type": "string",
@@ -1929,67 +2048,89 @@
                         "format": "date-time"
                     },
                     "endTime": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "End time of the activity  on UTC.",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "jobId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the job associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "appointmentId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the appointment associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "projectId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the project associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "projectLabel": {
-                        "type": "string",
-                        "description": "Label of the project associated with the activity.",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Label of the project associated with the activity."
                     },
                     "laborTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the labor type associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "budgetCodeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the budget code associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "budgetCodeName": {
-                        "type": "string",
-                        "description": "Name of the budget code associated with the activity.",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Name of the budget code associated with the activity."
                     },
                     "milesDriven": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Miles driven associated with the activity.",
-                        "format": "double",
-                        "nullable": true
+                        "format": "double"
                     },
                     "nonJobEventAssignmentId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Non-job event assignment associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "memo": {
-                        "type": "string",
-                        "description": "Memo or notes related to the activity.",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Memo or notes related to the activity."
                     },
                     "tagTypes": {
                         "type": "array",
@@ -2022,67 +2163,89 @@
                         "format": "date-time"
                     },
                     "endTime": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "End time of the activity  on UTC.",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "jobId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the job associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "appointmentId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the appointment associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "projectId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the project associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "projectLabel": {
-                        "type": "string",
-                        "description": "Label of the project associated with the activity.",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Label of the project associated with the activity."
                     },
                     "laborTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the labor type associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "budgetCodeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the budget code associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "budgetCodeName": {
-                        "type": "string",
-                        "description": "Name of the budget code associated with the activity.",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Name of the budget code associated with the activity."
                     },
                     "milesDriven": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Miles driven associated with the activity.",
-                        "format": "double",
-                        "nullable": true
+                        "format": "double"
                     },
                     "nonJobEventAssignmentId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Non-job event assignment associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "memo": {
-                        "type": "string",
-                        "description": "Memo or notes related to the activity.",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Memo or notes related to the activity."
                     },
                     "tagTypes": {
                         "type": "array",
@@ -2123,10 +2286,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -2295,10 +2460,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -2355,29 +2522,35 @@
                         "format": "int64"
                     },
                     "description": {
-                        "type": "string",
-                        "description": "Description of the activity type",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Description of the activity type"
                     },
                     "icon": {
                         "type": "string",
                         "description": "Icon of the activity type"
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Business unit ID of the activity type",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "isUsersHomeBusinessUnit": {
                         "type": "boolean",
                         "description": "Indicates if the activity type is the user's home business unit"
                     },
                     "laborTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Labor type ID of the activity type",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "isTechnicianProfileLaborType": {
                         "type": "boolean",
@@ -2456,9 +2629,11 @@
                         "description": "Memo association of the activity type"
                     },
                     "defaultMemo": {
-                        "type": "string",
-                        "description": "Default memo of the activity type",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Default memo of the activity type"
                     },
                     "dontAllowToChangeMemo": {
                         "type": "boolean",
@@ -2559,29 +2734,35 @@
                         "format": "int64"
                     },
                     "description": {
-                        "type": "string",
-                        "description": "Description of the activity type",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Description of the activity type"
                     },
                     "icon": {
                         "type": "string",
                         "description": "Icon of the activity type"
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Business unit ID of the activity type",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "isUsersHomeBusinessUnit": {
                         "type": "boolean",
                         "description": "Indicates if the activity type is the user's home business unit"
                     },
                     "laborTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Labor type ID of the activity type",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "isTechnicianProfileLaborType": {
                         "type": "boolean",
@@ -2660,9 +2841,11 @@
                         "description": "Memo association of the activity type"
                     },
                     "defaultMemo": {
-                        "type": "string",
-                        "description": "Default memo of the activity type",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Default memo of the activity type"
                     },
                     "dontAllowToChangeMemo": {
                         "type": "boolean",
@@ -2858,29 +3041,35 @@
                         "format": "int64"
                     },
                     "description": {
-                        "type": "string",
-                        "description": "Description of the activity type",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Description of the activity type"
                     },
                     "icon": {
                         "type": "string",
                         "description": "Icon of the activity type"
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Business unit ID of the activity type",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "isUsersHomeBusinessUnit": {
                         "type": "boolean",
                         "description": "Indicates if the activity type is the user's home business unit"
                     },
                     "laborTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Labor type ID of the activity type",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "isTechnicianProfileLaborType": {
                         "type": "boolean",
@@ -2959,9 +3148,11 @@
                         "description": "Memo association of the activity type"
                     },
                     "defaultMemo": {
-                        "type": "string",
-                        "description": "Default memo of the activity type",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Default memo of the activity type"
                     },
                     "dontAllowToChangeMemo": {
                         "type": "boolean",
@@ -3074,50 +3265,66 @@
                         "format": "date-time"
                     },
                     "endTime": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "End time of the activity  on UTC.",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "jobId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the job associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "appointmentId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the appointment associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "projectId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the project associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "projectLabel": {
-                        "type": "string",
-                        "description": "Label of the project associated with the activity.",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Label of the project associated with the activity."
                     },
                     "laborTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the labor type associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "budgetCodeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the budget code associated with the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "memo": {
-                        "type": "string",
-                        "description": "Memo or notes related to the activity.",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Memo or notes related to the activity."
                     },
                     "tagTypes": {
                         "type": "array",
@@ -3131,29 +3338,35 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Timesheets.V2.Activities.ActivityEntryCoordinate"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Start Coordinate of the activity.",
-                        "nullable": true
+                        "description": "Start Coordinate of the activity."
                     },
                     "endCoordinate": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Timesheets.V2.Activities.ActivityEntryCoordinate"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "End Coordinate of the activity.",
-                        "nullable": true
+                        "description": "End Coordinate of the activity."
                     },
                     "active": {
                         "type": "boolean",
                         "description": "Indicates whether the activity is active."
                     },
                     "modifiedById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user who last modified the activity.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "createdOn": {
                         "type": "string",
@@ -3173,21 +3386,24 @@
             "apiKeyHeader": {
                 "type": "apiKey",
                 "name": "ST-App-Key",
-                "in": "header"
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
             },
-            "apiKeyQuery": {
-                "type": "apiKey",
-                "name": "servicetitanapplicationkey",
-                "in": "query"
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.tms.activities:r": "Timesheets \u2192 Activities (Read)",
+                            "tn.tms.activities:w": "Timesheets \u2192 Activities (Write)",
+                            "tn.tms.activitycategories:r": "Timesheets \u2192 Activity Categories (Read)",
+                            "tn.tms.activitytypes:r": "Timesheets \u2192 Activity Types (Read)"
+                        }
+                    }
+                }
             }
         }
-    },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ]
+    }
 }

@@ -1,12 +1,18 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "info": {
         "title": "Payroll",
+        "description": "Activity codes, employee payrolls, gross pay items, non-job timesheets, payrolls, payroll adjustments, payroll jobs, payroll locations, payroll settings, technician payrolls, timesheet codes",
         "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://api-integration.servicetitan.io/payroll/v2"
+            "url": "https://api.servicetitan.io/payroll/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/payroll/v2",
+            "description": "Integration"
         }
     ],
     "paths": {
@@ -34,8 +40,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -43,8 +48,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -92,7 +96,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.jobs:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/payroll-adjustments": {
@@ -119,8 +131,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -128,8 +139,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -185,7 +195,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.payrolladjustments:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/jobs/timesheets": {
@@ -212,8 +230,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -221,8 +238,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -274,7 +290,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.jobs:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/activity-codes": {
@@ -301,8 +325,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -310,8 +333,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -359,7 +381,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.activitycodes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/timesheet-codes": {
@@ -386,8 +416,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -395,8 +424,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -450,7 +478,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.timesheetcodes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/gross-pay-items": {
@@ -477,8 +513,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -486,8 +521,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -571,7 +605,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.grosspayitems:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/payroll-settings": {
@@ -598,8 +640,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -607,8 +648,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -635,7 +675,14 @@
                                             "hireDate": "string",
                                             "createdOn": "string",
                                             "modifiedOn": "string",
-                                            "active": true
+                                            "active": true,
+                                            "customFields": [
+                                                {
+                                                    "typeId": 0,
+                                                    "name": "string",
+                                                    "value": "string"
+                                                }
+                                            ]
                                         }
                                     ]
                                 }
@@ -660,7 +707,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.payrollsettings:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/gross-pay-items": {
@@ -752,7 +807,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.grosspayitems:w"
+                        ]
+                    }
+                ]
             },
             "get": {
                 "tags": [
@@ -778,8 +841,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -788,8 +850,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -797,8 +858,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -811,8 +871,7 @@
                                 {
                                     "$ref": "#/components/schemas/Payroll.V2.EmployeeType"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -821,8 +880,7 @@
                         "description": "The Employee ID",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -830,8 +888,7 @@
                         "in": "query",
                         "description": "The payroll ID",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -840,8 +897,7 @@
                         "description": "Return items having date after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -850,8 +906,7 @@
                         "description": "Return items having date before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -860,8 +915,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -870,8 +924,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -880,8 +933,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -890,8 +942,7 @@
                         "description": "Return items modified on or before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -900,8 +951,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -909,8 +959,7 @@
                         "in": "query",
                         "description": "Applies sorting by specified fields",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -995,7 +1044,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.grosspayitems:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/gross-pay-items/{id}": {
@@ -1097,7 +1154,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.grosspayitems:w"
+                        ]
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -1150,7 +1215,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.grosspayitems:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/jobs/{job}/splits": {
@@ -1187,8 +1260,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1197,8 +1269,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1206,8 +1277,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -1216,8 +1286,7 @@
                         "description": "Returns job split created on or after a certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1226,8 +1295,7 @@
                         "description": "Return job splits created before a certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1236,8 +1304,7 @@
                         "description": "Returns job split modified on or after a certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1246,8 +1313,7 @@
                         "description": "Returns job split modified before a certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1260,8 +1326,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -1269,8 +1334,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -1337,7 +1401,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.jobs:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/jobs/splits": {
@@ -1363,8 +1435,7 @@
                         "name": "jobIds",
                         "in": "query",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1373,8 +1444,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1383,8 +1453,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1392,8 +1461,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -1402,8 +1470,7 @@
                         "description": "Returns job split created on or after a certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1412,8 +1479,7 @@
                         "description": "Return job splits created before a certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1422,8 +1488,7 @@
                         "description": "Returns job split modified on or after a certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1432,8 +1497,7 @@
                         "description": "Returns job split modified before a certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1446,8 +1510,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -1455,8 +1518,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -1523,7 +1585,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.jobs:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/locations/rates": {
@@ -1550,8 +1620,7 @@
                         "in": "query",
                         "description": "Returns location rates for the specified location IDs",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1560,8 +1629,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1570,8 +1638,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1580,8 +1647,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1590,8 +1656,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1599,8 +1664,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -1613,8 +1677,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -1622,8 +1685,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Location (sorts by locations Id), CreatedOn.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -1690,7 +1752,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.locations:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/activity-codes": {
@@ -1718,8 +1788,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1728,8 +1797,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1737,8 +1805,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -1747,8 +1814,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1757,8 +1823,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1767,8 +1832,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1777,8 +1841,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1791,8 +1854,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -1800,8 +1862,7 @@
                         "in": "query",
                         "description": "Applies sorting by specified fields",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -1851,7 +1912,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.activitycodes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/activity-codes/{id}": {
@@ -1940,7 +2009,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.activitycodes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/payroll-adjustments": {
@@ -2035,7 +2112,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.payrolladjustments:w"
+                        ]
+                    }
+                ]
             },
             "get": {
                 "tags": [
@@ -2061,8 +2146,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2071,8 +2155,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2080,8 +2163,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2089,8 +2171,7 @@
                         "in": "query",
                         "description": "The comma separated list of employee IDs",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -2099,8 +2180,7 @@
                         "description": "Return payroll adjustments posted on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2109,8 +2189,7 @@
                         "description": "Return payroll adjustments posted on or before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2123,8 +2202,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -2133,8 +2211,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2143,8 +2220,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2153,8 +2229,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2163,8 +2238,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2172,8 +2246,7 @@
                         "in": "query",
                         "description": "Applies sorting by specified fields",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -2231,7 +2304,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.payrolladjustments:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/payroll-adjustments/{id}": {
@@ -2336,7 +2417,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.payrolladjustments:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/payrolls": {
@@ -2368,8 +2457,7 @@
                                 {
                                     "$ref": "#/components/schemas/Payroll.V2.EmployeeType"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -2378,8 +2466,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2388,8 +2475,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2397,8 +2483,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2407,8 +2492,7 @@
                         "description": "Return items having start date after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2417,8 +2501,7 @@
                         "description": "Return items having end date before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2427,8 +2510,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2437,8 +2519,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2447,8 +2528,7 @@
                         "description": "Return items approved on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2461,8 +2541,7 @@
                                 {
                                     "$ref": "#/components/schemas/Payroll.V2.PayrollStatus"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -2475,8 +2554,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -2485,8 +2563,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2495,8 +2572,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2504,8 +2580,7 @@
                         "in": "query",
                         "description": "Applies sorting by specified fields",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -2577,7 +2652,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.payrolls:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/technicians/{technician}/payrolls": {
@@ -2615,8 +2698,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2625,8 +2707,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2634,8 +2715,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2644,8 +2724,7 @@
                         "description": "Return items having start date after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2654,8 +2733,7 @@
                         "description": "Return items having end date before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2664,8 +2742,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2674,8 +2751,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2684,8 +2760,7 @@
                         "description": "Return items approved on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2698,8 +2773,7 @@
                                 {
                                     "$ref": "#/components/schemas/Payroll.V2.PayrollStatus"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -2712,8 +2786,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -2722,8 +2795,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2732,8 +2804,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2741,8 +2812,7 @@
                         "in": "query",
                         "description": "Applies sorting by specified fields",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -2814,7 +2884,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.technicians:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/employees/{employee}/payrolls": {
@@ -2852,8 +2930,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2862,8 +2939,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2871,8 +2947,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2881,8 +2956,7 @@
                         "description": "Return items having start date after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2891,8 +2965,7 @@
                         "description": "Return items having end date before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2901,8 +2974,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2911,8 +2983,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2921,8 +2992,7 @@
                         "description": "Return items approved on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2935,8 +3005,7 @@
                                 {
                                     "$ref": "#/components/schemas/Payroll.V2.PayrollStatus"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -2949,8 +3018,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -2959,8 +3027,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2969,8 +3036,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2978,8 +3044,7 @@
                         "in": "query",
                         "description": "Applies sorting by specified fields",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -3051,7 +3116,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.employees:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/payroll-settings": {
@@ -3083,8 +3156,7 @@
                                 {
                                     "$ref": "#/components/schemas/Payroll.V2.EmployeeType"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -3093,8 +3165,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -3103,8 +3174,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -3112,8 +3182,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -3122,8 +3191,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3132,8 +3200,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3142,8 +3209,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3152,8 +3218,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3166,8 +3231,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     }
                 ],
@@ -3196,7 +3260,14 @@
                                             "hireDate": "string",
                                             "createdOn": "string",
                                             "modifiedOn": "string",
-                                            "active": true
+                                            "active": true,
+                                            "customFields": [
+                                                {
+                                                    "typeId": 0,
+                                                    "name": "string",
+                                                    "value": "string"
+                                                }
+                                            ]
                                         }
                                     ]
                                 }
@@ -3239,7 +3310,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.payrollsettings:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/employees/{employee}/payroll-settings": {
@@ -3291,7 +3370,14 @@
                                     "hireDate": "string",
                                     "createdOn": "string",
                                     "modifiedOn": "string",
-                                    "active": true
+                                    "active": true,
+                                    "customFields": [
+                                        {
+                                            "typeId": 0,
+                                            "name": "string",
+                                            "value": "string"
+                                        }
+                                    ]
                                 }
                             }
                         }
@@ -3332,7 +3418,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.payrollsettings:r"
+                        ]
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -3376,7 +3470,13 @@
                                 "managerId": 0,
                                 "payrollBusinessUnitId": 0,
                                 "hireDate": "string",
-                                "isIncludedInPayroll": true
+                                "isIncludedInPayroll": true,
+                                "customFields": [
+                                    {
+                                        "typeId": 0,
+                                        "value": "string"
+                                    }
+                                ]
                             }
                         }
                     }
@@ -3431,7 +3531,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.payrollsettings:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/technicians/{technician}/payroll-settings": {
@@ -3483,7 +3591,14 @@
                                     "hireDate": "string",
                                     "createdOn": "string",
                                     "modifiedOn": "string",
-                                    "active": true
+                                    "active": true,
+                                    "customFields": [
+                                        {
+                                            "typeId": 0,
+                                            "name": "string",
+                                            "value": "string"
+                                        }
+                                    ]
                                 }
                             }
                         }
@@ -3524,7 +3639,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.payrollsettings:r"
+                        ]
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -3568,7 +3691,13 @@
                                 "managerId": 0,
                                 "payrollBusinessUnitId": 0,
                                 "hireDate": "string",
-                                "isIncludedInPayroll": true
+                                "isIncludedInPayroll": true,
+                                "customFields": [
+                                    {
+                                        "typeId": 0,
+                                        "value": "string"
+                                    }
+                                ]
                             }
                         }
                     }
@@ -3623,7 +3752,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.payrollsettings:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/timesheet-codes": {
@@ -3651,8 +3788,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3661,8 +3797,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3671,8 +3806,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3681,8 +3815,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3691,8 +3824,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -3701,8 +3833,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -3710,8 +3841,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -3724,8 +3854,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -3733,8 +3862,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -3790,7 +3918,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.timesheetcodes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/timesheet-codes/{id}": {
@@ -3885,7 +4021,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.timesheetcodes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/jobs/{job}/timesheets": {
@@ -3922,8 +4066,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -3932,8 +4075,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -3941,8 +4083,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -3951,8 +4092,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3961,8 +4101,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3971,8 +4110,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3981,8 +4119,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3995,8 +4132,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -4005,8 +4141,7 @@
                         "description": "The technician ID",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -4015,8 +4150,7 @@
                         "description": "Return items having dispatch, arrive, cancel or done dates after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -4025,8 +4159,7 @@
                         "description": "Return items having dispatch, arrive, cancel or done dates before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -4034,8 +4167,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -4089,88 +4221,15 @@
                             }
                         }
                     }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Timesheets"
-                ],
-                "summary": "Creates new job timesheet",
-                "description": "Creates new job timesheet",
-                "operationId": "Timesheets_CreateJobTimesheet",
-                "parameters": [
-                    {
-                        "name": "job",
-                        "in": "path",
-                        "description": "The job ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "tenant",
-                        "in": "path",
-                        "description": "Tenant ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "description": "The job timesheet model to create",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Payroll.V2.Timesheets.JobTimesheetCreateRequest"
-                            },
-                            "example": {
-                                "appointmentId": 0,
-                                "technicianId": 0,
-                                "dispatchedOn": "string",
-                                "arrivedOn": "string",
-                                "canceledOn": "string",
-                                "doneOn": "string"
-                            }
-                        }
-                    }
                 },
-                "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ModificationResponse"
-                                },
-                                "example": {
-                                    "id": 0
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.jobs:r"
+                        ]
                     }
-                }
+                ]
             }
         },
         "/tenant/{tenant}/non-job-timesheets": {
@@ -4198,8 +4257,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -4208,8 +4266,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -4217,8 +4274,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -4227,8 +4283,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -4237,8 +4292,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -4247,8 +4301,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -4257,8 +4310,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -4267,8 +4319,7 @@
                         "description": "The employee ID",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -4281,8 +4332,7 @@
                                 {
                                     "$ref": "#/components/schemas/Payroll.V2.EmployeeType"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -4295,8 +4345,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -4304,8 +4353,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -4357,7 +4405,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.nonjobtimesheets:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/jobs/timesheets": {
@@ -4383,8 +4439,7 @@
                         "name": "jobIds",
                         "in": "query",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -4393,8 +4448,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -4403,8 +4457,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -4412,8 +4465,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -4422,8 +4474,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -4432,8 +4483,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -4442,8 +4492,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -4452,8 +4501,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -4466,8 +4514,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -4476,8 +4523,7 @@
                         "description": "The technician ID",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -4486,8 +4532,7 @@
                         "description": "Return items having dispatch, arrive, cancel or done dates after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -4496,8 +4541,7 @@
                         "description": "Return items having dispatch, arrive, cancel or done dates before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -4505,8 +4549,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -4560,100 +4603,15 @@
                             }
                         }
                     }
-                }
-            }
-        },
-        "/tenant/{tenant}/jobs/{job}/timesheets/{id}": {
-            "put": {
-                "tags": [
-                    "Timesheets"
-                ],
-                "summary": "Update specified job timesheet",
-                "description": "Update specified job timesheet",
-                "operationId": "Timesheets_UpdateJobTimesheet",
-                "parameters": [
-                    {
-                        "name": "job",
-                        "in": "path",
-                        "description": "The job ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "The job timesheet ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "tenant",
-                        "in": "path",
-                        "description": "Tenant ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "description": "The job timesheet model to update",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Payroll.V2.Timesheets.JobTimesheetUpdateRequest"
-                            },
-                            "example": {
-                                "appointmentId": 0,
-                                "technicianId": 0,
-                                "dispatchedOn": "string",
-                                "arrivedOn": "string",
-                                "canceledOn": "string",
-                                "doneOn": "string"
-                            }
-                        }
-                    }
                 },
-                "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ModificationResponse"
-                                },
-                                "example": {
-                                    "id": 0
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.jobs:r"
+                        ]
                     }
-                }
+                ]
             }
         }
     },
@@ -4852,39 +4810,51 @@
                         "format": "decimal"
                     },
                     "memo": {
-                        "type": "string",
-                        "description": "Memo of the payroll adjustment",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Memo of the payroll adjustment"
                     },
                     "activityCodeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Activity code ID of the payroll adjustment",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "invoiceId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the payroll adjustment invoice",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "hours": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Hours of the payroll adjustment",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "rate": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Rate of the payroll adjustment",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "quantity": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Quantity of the payroll adjustment",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "type": {
                         "oneOf": [
@@ -5009,28 +4979,36 @@
                         "format": "int64"
                     },
                     "dispatchedOn": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "the dispatch date/time (in UTC)",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "arrivedOn": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The arrive date/time (in UTC)",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "canceledOn": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The cancel date/time (in UTC)",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "doneOn": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The done date/time (in UTC)",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "createdOn": {
                         "type": "string",
@@ -5190,9 +5168,11 @@
                         "description": "Code of the timesheet code"
                     },
                     "description": {
-                        "type": "string",
-                        "description": "Description of the timesheet code",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Description of the timesheet code"
                     },
                     "type": {
                         "oneOf": [
@@ -5281,10 +5261,12 @@
                         "description": "The hourly rate"
                     },
                     "customHourlyRate": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The custom hourly rate",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "rateMultiplier": {
                         "type": "number",
@@ -5347,30 +5329,38 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The gross pay item ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "employeeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The employee/technician ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "employeeType": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Payroll.V2.EmployeeType"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The employee type",
-                        "nullable": true
+                        "description": "The employee type"
                     },
                     "businessUnitName": {
-                        "type": "string",
-                        "description": "The business unit name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The business unit name"
                     },
                     "payrollId": {
                         "type": "integer",
@@ -5378,9 +5368,11 @@
                         "format": "int64"
                     },
                     "employeePayrollId": {
-                        "type": "string",
-                        "description": "Employee/Technician payroll ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Employee/Technician payroll ID"
                     },
                     "date": {
                         "type": "string",
@@ -5388,20 +5380,26 @@
                         "format": "date-time"
                     },
                     "activity": {
-                        "type": "string",
-                        "description": "The activity",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The activity"
                     },
                     "activityCodeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The payroll activity code ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "activityCode": {
-                        "type": "string",
-                        "description": "The payroll activity code name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The payroll activity code name"
                     },
                     "amount": {
                         "type": "number",
@@ -5409,15 +5407,19 @@
                         "format": "decimal"
                     },
                     "amountAdjustment": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The amount adjustment",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "payoutBusinessUnitName": {
-                        "type": "string",
-                        "description": "The payout business unit name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The payout business unit name"
                     },
                     "grossPayItemType": {
                         "oneOf": [
@@ -5428,37 +5430,47 @@
                         "description": "Type of the gross pay item"
                     },
                     "startedOn": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The start time (UTC)",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "endedOn": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The end time (UTC)",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "paidDurationHours": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The paid duration in hours",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "paidTimeType": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Payroll.V2.PaidTimeType"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Type of the paid time",
-                        "nullable": true
+                        "description": "Type of the paid time"
                     },
                     "sourceEntityId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The source entity ID.\nWhen the GrossPayItemType is TimesheetTime, this is the Timesheet Activity ID.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "jobId": {
                         "type": "integer",
@@ -5466,111 +5478,151 @@
                         "format": "int64"
                     },
                     "jobNumber": {
-                        "type": "string",
-                        "description": "The job number",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The job number"
                     },
                     "jobTypeName": {
-                        "type": "string",
-                        "description": "Name of the job type",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Name of the job type"
                     },
                     "projectNumber": {
-                        "type": "string",
-                        "description": "The project number",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The project number"
                     },
                     "projectId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The project ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "invoiceId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The invoice ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "invoiceNumber": {
-                        "type": "string",
-                        "description": "The invoice number",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The invoice number"
                     },
                     "invoiceItemId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The invoice item ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "customerId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The customer ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "customerName": {
-                        "type": "string",
-                        "description": "The customer name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The customer name"
                     },
                     "locationId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The location ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "locationName": {
-                        "type": "string",
-                        "description": "The location name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The location name"
                     },
                     "locationAddress": {
-                        "type": "string",
-                        "description": "The location address",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The location address"
                     },
                     "locationZip": {
-                        "type": "string",
-                        "description": "The location zip",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The location zip"
                     },
                     "zoneName": {
-                        "type": "string",
-                        "description": "The zone name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The zone name"
                     },
                     "taxZoneName": {
-                        "type": "string",
-                        "description": "The tax zone name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The tax zone name"
                     },
                     "laborTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the labor type",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "laborTypeCode": {
-                        "type": "string",
-                        "description": "Code of the labor type",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Code of the labor type"
                     },
                     "budgetCodeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The budget code ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "isPrevailingWageJob": {
-                        "type": "boolean",
-                        "description": "Defines whether it's a prevailing wage job",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Defines whether it's a prevailing wage job"
                     },
                     "memo": {
-                        "type": "string",
-                        "description": "The short message",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The short message"
                     },
                     "createdOn": {
                         "type": "string",
@@ -5676,9 +5728,11 @@
                         "description": "The type of employee"
                     },
                     "externalPayrollId": {
-                        "type": "string",
-                        "description": "The external payroll ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The external payroll ID"
                     },
                     "hourlyRate": {
                         "type": "number",
@@ -5686,26 +5740,32 @@
                         "format": "decimal"
                     },
                     "managerId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The ID of the manager",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "payrollBusinessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The ID of the payroll business unit (employee only)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "isIncludedInPayroll": {
                         "type": "boolean",
                         "description": "Indicates if the employee should be included in payroll processing"
                     },
                     "hireDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The hire date",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "createdOn": {
                         "type": "string",
@@ -5720,6 +5780,44 @@
                     "active": {
                         "type": "boolean",
                         "description": "The active status of the record"
+                    },
+                    "customFields": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/Payroll.V2.PayrollSettings.PayrollCustomFieldResponse"
+                        },
+                        "description": "Custom payroll fields and their values (technician only)"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Payroll.V2.PayrollSettings.PayrollCustomFieldResponse": {
+                "required": [
+                    "typeId"
+                ],
+                "type": "object",
+                "properties": {
+                    "typeId": {
+                        "type": "integer",
+                        "description": "The custom field type ID (definition ID)",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The custom field name (human-readable label)"
+                    },
+                    "value": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The custom field value"
                     }
                 },
                 "additionalProperties": false
@@ -5769,21 +5867,27 @@
                         "format": "date-time"
                     },
                     "invoiceId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The invoice ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "budgetCodeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The budget code ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "memo": {
-                        "type": "string",
-                        "description": "The memo if gross pay item",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The memo if gross pay item"
                     }
                 },
                 "additionalProperties": false
@@ -5818,21 +5922,27 @@
                         "format": "date-time"
                     },
                     "invoiceId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The invoice ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "budgetCodeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The budget code ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "memo": {
-                        "type": "string",
-                        "description": "The memo if gross pay item",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The memo if gross pay item"
                     }
                 },
                 "additionalProperties": false
@@ -5861,10 +5971,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -5890,30 +6002,38 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The gross pay item ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "employeeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The employee/technician ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "employeeType": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Payroll.V2.EmployeeType"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The employee type",
-                        "nullable": true
+                        "description": "The employee type"
                     },
                     "businessUnitName": {
-                        "type": "string",
-                        "description": "The business unit name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The business unit name"
                     },
                     "payrollId": {
                         "type": "integer",
@@ -5921,9 +6041,11 @@
                         "format": "int64"
                     },
                     "employeePayrollId": {
-                        "type": "string",
-                        "description": "Employee/Technician payroll ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Employee/Technician payroll ID"
                     },
                     "date": {
                         "type": "string",
@@ -5931,20 +6053,26 @@
                         "format": "date-time"
                     },
                     "activity": {
-                        "type": "string",
-                        "description": "The activity",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The activity"
                     },
                     "activityCodeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The payroll activity code ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "activityCode": {
-                        "type": "string",
-                        "description": "The payroll activity code name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The payroll activity code name"
                     },
                     "amount": {
                         "type": "number",
@@ -5952,15 +6080,19 @@
                         "format": "decimal"
                     },
                     "amountAdjustment": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The amount adjustment",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "payoutBusinessUnitName": {
-                        "type": "string",
-                        "description": "The payout business unit name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The payout business unit name"
                     },
                     "grossPayItemType": {
                         "oneOf": [
@@ -5971,37 +6103,47 @@
                         "description": "Type of the gross pay item"
                     },
                     "startedOn": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The start time (UTC)",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "endedOn": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The end time (UTC)",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "paidDurationHours": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The paid duration in hours",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "paidTimeType": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Payroll.V2.PaidTimeType"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Type of the paid time",
-                        "nullable": true
+                        "description": "Type of the paid time"
                     },
                     "sourceEntityId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The source entity ID.\nWhen the GrossPayItemType is TimesheetTime, this is the Timesheet Activity ID.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "jobId": {
                         "type": "integer",
@@ -6009,111 +6151,151 @@
                         "format": "int64"
                     },
                     "jobNumber": {
-                        "type": "string",
-                        "description": "The job number",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The job number"
                     },
                     "jobTypeName": {
-                        "type": "string",
-                        "description": "Name of the job type",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Name of the job type"
                     },
                     "projectNumber": {
-                        "type": "string",
-                        "description": "The project number",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The project number"
                     },
                     "projectId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The project ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "invoiceId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The invoice ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "invoiceNumber": {
-                        "type": "string",
-                        "description": "The invoice number",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The invoice number"
                     },
                     "invoiceItemId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The invoice item ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "customerId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The customer ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "customerName": {
-                        "type": "string",
-                        "description": "The customer name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The customer name"
                     },
                     "locationId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The location ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "locationName": {
-                        "type": "string",
-                        "description": "The location name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The location name"
                     },
                     "locationAddress": {
-                        "type": "string",
-                        "description": "The location address",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The location address"
                     },
                     "locationZip": {
-                        "type": "string",
-                        "description": "The location zip",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The location zip"
                     },
                     "zoneName": {
-                        "type": "string",
-                        "description": "The zone name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The zone name"
                     },
                     "taxZoneName": {
-                        "type": "string",
-                        "description": "The tax zone name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The tax zone name"
                     },
                     "laborTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the labor type",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "laborTypeCode": {
-                        "type": "string",
-                        "description": "Code of the labor type",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Code of the labor type"
                     },
                     "budgetCodeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The budget code ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "isPrevailingWageJob": {
-                        "type": "boolean",
-                        "description": "Defines whether it's a prevailing wage job",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Defines whether it's a prevailing wage job"
                     },
                     "memo": {
-                        "type": "string",
-                        "description": "The short message",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The short message"
                     },
                     "createdOn": {
                         "type": "string",
@@ -6152,10 +6334,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -6250,10 +6434,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -6331,10 +6517,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -6424,45 +6612,59 @@
                         "format": "date-time"
                     },
                     "amount": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "The payroll adjustment amount",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "memo": {
-                        "type": "string",
-                        "description": "Memo of the payroll adjustment",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Memo of the payroll adjustment"
                     },
                     "activityCodeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the payroll adjustment activity code",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "invoiceId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the payroll adjustment invoice",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "hours": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Hours of the payroll adjustment",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "rate": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Rate of the payroll adjustment",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "quantity": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Quantity of the payroll adjustment",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     }
                 },
                 "additionalProperties": false
@@ -6491,10 +6693,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -6550,39 +6754,51 @@
                         "format": "decimal"
                     },
                     "memo": {
-                        "type": "string",
-                        "description": "Memo of the payroll adjustment",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Memo of the payroll adjustment"
                     },
                     "activityCodeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Activity code ID of the payroll adjustment",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "invoiceId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the payroll adjustment invoice",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "hours": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Hours of the payroll adjustment",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "rate": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Rate of the payroll adjustment",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "quantity": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Quantity of the payroll adjustment",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "type": {
                         "oneOf": [
@@ -6633,10 +6849,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -6700,16 +6918,20 @@
                         "description": "Status of the payroll"
                     },
                     "burdenRate": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Burden rate of employee",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "managerApprovedOn": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Date/time (on UTC) when the payroll was approved",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "createdOn": {
                         "type": "string",
@@ -6770,10 +6992,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -6812,9 +7036,11 @@
                         "description": "The type of employee"
                     },
                     "externalPayrollId": {
-                        "type": "string",
-                        "description": "The external payroll ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The external payroll ID"
                     },
                     "hourlyRate": {
                         "type": "number",
@@ -6822,26 +7048,32 @@
                         "format": "decimal"
                     },
                     "managerId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The ID of the manager",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "payrollBusinessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The ID of the payroll business unit (employee only)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "isIncludedInPayroll": {
                         "type": "boolean",
                         "description": "Indicates if the employee should be included in payroll processing"
                     },
                     "hireDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The hire date",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "createdOn": {
                         "type": "string",
@@ -6856,6 +7088,16 @@
                     "active": {
                         "type": "boolean",
                         "description": "The active status of the record"
+                    },
+                    "customFields": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/Payroll.V2.PayrollSettings.PayrollCustomFieldResponse"
+                        },
+                        "description": "Custom payroll fields and their values (technician only)"
                     }
                 },
                 "additionalProperties": false
@@ -6886,9 +7128,11 @@
                         "description": "The type of employee"
                     },
                     "externalPayrollId": {
-                        "type": "string",
-                        "description": "The external payroll ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The external payroll ID"
                     },
                     "hourlyRate": {
                         "type": "number",
@@ -6896,26 +7140,32 @@
                         "format": "decimal"
                     },
                     "managerId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The ID of the manager",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "payrollBusinessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The ID of the payroll business unit (employee only)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "isIncludedInPayroll": {
                         "type": "boolean",
                         "description": "Indicates if the employee should be included in payroll processing"
                     },
                     "hireDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The hire date",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "createdOn": {
                         "type": "string",
@@ -6930,6 +7180,16 @@
                     "active": {
                         "type": "boolean",
                         "description": "The active status of the record"
+                    },
+                    "customFields": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/Payroll.V2.PayrollSettings.PayrollCustomFieldResponse"
+                        },
+                        "description": "Custom payroll fields and their values (technician only)"
                     }
                 },
                 "additionalProperties": false
@@ -6955,9 +7215,11 @@
                 "type": "object",
                 "properties": {
                     "externalPayrollId": {
-                        "type": "string",
-                        "description": "The external payroll ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The external payroll ID"
                     },
                     "hourlyRate": {
                         "type": "number",
@@ -6965,27 +7227,66 @@
                         "format": "decimal"
                     },
                     "managerId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The ID of the manager",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "payrollBusinessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The ID of the payroll business unit (employee only)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "hireDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The hire date",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "isIncludedInPayroll": {
-                        "type": "boolean",
-                        "description": "Indicates if the employee should be included in payroll processing",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Indicates if the employee should be included in payroll processing"
+                    },
+                    "customFields": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/Payroll.V2.PayrollSettings.PayrollCustomFieldUpdateRequest"
+                        },
+                        "description": "Custom payroll fields to update (technician only)"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Payroll.V2.PayrollSettings.PayrollCustomFieldUpdateRequest": {
+                "required": [
+                    "typeId"
+                ],
+                "type": "object",
+                "properties": {
+                    "typeId": {
+                        "type": "integer",
+                        "description": "The custom field type ID (definition ID)",
+                        "format": "int64"
+                    },
+                    "value": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The custom field value"
                     }
                 },
                 "additionalProperties": false
@@ -7014,10 +7315,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -7053,9 +7356,11 @@
                         "description": "Code of the timesheet code"
                     },
                     "description": {
-                        "type": "string",
-                        "description": "Description of the timesheet code",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Description of the timesheet code"
                     },
                     "type": {
                         "oneOf": [
@@ -7122,10 +7427,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -7171,28 +7478,36 @@
                         "format": "int64"
                     },
                     "dispatchedOn": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "the dispatch date/time (in UTC)",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "arrivedOn": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The arrive date/time (in UTC)",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "canceledOn": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The cancel date/time (in UTC)",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "doneOn": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The done date/time (in UTC)",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "createdOn": {
                         "type": "string",
@@ -7235,10 +7550,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -7293,10 +7610,12 @@
                         "format": "date-time"
                     },
                     "endedOn": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The end time of the timesheet (in UTC)",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "createdOn": {
                         "type": "string",
@@ -7314,115 +7633,40 @@
                     }
                 },
                 "additionalProperties": false
-            },
-            "Payroll.V2.Timesheets.JobTimesheetCreateRequest": {
-                "required": [
-                    "appointmentId",
-                    "technicianId",
-                    "dispatchedOn",
-                    "arrivedOn"
-                ],
-                "type": "object",
-                "properties": {
-                    "appointmentId": {
-                        "type": "integer",
-                        "description": "The appointment ID",
-                        "format": "int64"
-                    },
-                    "technicianId": {
-                        "type": "integer",
-                        "description": "The technician ID",
-                        "format": "int64"
-                    },
-                    "dispatchedOn": {
-                        "type": "string",
-                        "description": "the dispatch date/time (in UTC)",
-                        "format": "date-time"
-                    },
-                    "arrivedOn": {
-                        "type": "string",
-                        "description": "The arrive date/time (in UTC)",
-                        "format": "date-time"
-                    },
-                    "canceledOn": {
-                        "type": "string",
-                        "description": "The cancel date/time (in UTC)",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "doneOn": {
-                        "type": "string",
-                        "description": "The done date/time (in UTC)",
-                        "format": "date-time",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Payroll.V2.Timesheets.JobTimesheetUpdateRequest": {
-                "required": [
-                    "appointmentId",
-                    "technicianId",
-                    "dispatchedOn",
-                    "arrivedOn"
-                ],
-                "type": "object",
-                "properties": {
-                    "appointmentId": {
-                        "type": "integer",
-                        "description": "The appointment ID",
-                        "format": "int64"
-                    },
-                    "technicianId": {
-                        "type": "integer",
-                        "description": "The technician ID",
-                        "format": "int64"
-                    },
-                    "dispatchedOn": {
-                        "type": "string",
-                        "description": "the dispatch date/time (in UTC)",
-                        "format": "date-time"
-                    },
-                    "arrivedOn": {
-                        "type": "string",
-                        "description": "The arrive date/time (in UTC)",
-                        "format": "date-time"
-                    },
-                    "canceledOn": {
-                        "type": "string",
-                        "description": "The cancel date/time (in UTC)",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "doneOn": {
-                        "type": "string",
-                        "description": "The done date/time (in UTC)",
-                        "format": "date-time",
-                        "nullable": true
-                    }
-                },
-                "additionalProperties": false
             }
         },
         "securitySchemes": {
             "apiKeyHeader": {
                 "type": "apiKey",
                 "name": "ST-App-Key",
-                "in": "header"
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
             },
-            "apiKeyQuery": {
-                "type": "apiKey",
-                "name": "servicetitanapplicationkey",
-                "in": "query"
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.prl.jobs:r": "Payroll \u2192 Payroll Jobs (Read)",
+                            "tn.prl.payrolladjustments:r": "Payroll \u2192 Payroll Adjustments (Read)",
+                            "tn.prl.activitycodes:r": "Payroll \u2192 Activity Codes (Read)",
+                            "tn.prl.timesheetcodes:r": "Payroll \u2192 Timesheet Codes (Read)",
+                            "tn.prl.grosspayitems:r": "Payroll \u2192 Gross Pay Items (Read)",
+                            "tn.prl.payrollsettings:r": "Payroll \u2192 Payroll Settings (Read)",
+                            "tn.prl.grosspayitems:w": "Payroll \u2192 Gross Pay Items (Write)",
+                            "tn.prl.locations:r": "Payroll \u2192 Payroll Locations (Read)",
+                            "tn.prl.payrolladjustments:w": "Payroll \u2192 Payroll Adjustments (Write)",
+                            "tn.prl.payrolls:r": "Payroll \u2192 Payrolls (Read)",
+                            "tn.prl.technicians:r": "Payroll \u2192 Technician Payrolls (Read)",
+                            "tn.prl.employees:r": "Payroll \u2192 Employee Payrolls (Read)",
+                            "tn.prl.payrollsettings:w": "Payroll \u2192 Payroll Settings (Write)",
+                            "tn.prl.nonjobtimesheets:r": "Payroll \u2192 Non Job Timesheets (Read)"
+                        }
+                    }
+                }
             }
         }
-    },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ]
+    }
 }
