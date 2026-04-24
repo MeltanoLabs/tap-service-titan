@@ -1,12 +1,18 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "info": {
         "title": "Marketing Reputation",
+        "description": "Marketing reviews",
         "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://api-integration.servicetitan.io/marketingreputation/v2"
+            "url": "https://api.servicetitan.io/marketingreputation/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/marketingreputation/v2",
+            "description": "Integration"
         }
     ],
     "paths": {
@@ -284,7 +290,9 @@
                                             "technicianFullName": "string",
                                             "technicianId": 0,
                                             "externalId": "string",
-                                            "internalId": 0
+                                            "internalId": 0,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
                                         }
                                     ]
                                 }
@@ -325,14 +333,24 @@
                                             "technicianFullName": "string",
                                             "technicianId": 0,
                                             "externalId": "string",
-                                            "internalId": 0
+                                            "internalId": 0,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
                                         }
                                     ]
                                 }
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mrep.reviews:r"
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -353,16 +371,20 @@
                         "type": "boolean"
                     },
                     "totalCount": {
-                        "type": "integer",
-                        "format": "int32",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int32"
                     },
                     "data": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.ReviewReport"
-                        },
-                        "nullable": true
+                        }
                     }
                 },
                 "additionalProperties": false
@@ -412,40 +434,54 @@
                 "type": "object",
                 "properties": {
                     "address": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "platform": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "authorEmail": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "authorName": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "review": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "reviewType": {
                         "$ref": "#/components/schemas/ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.ReviewUpdatedStatus"
                     },
                     "reviewResponse": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "publishDate": {
                         "type": "string",
                         "format": "date-time"
                     },
                     "rating": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     },
                     "recommendationStatus": {
                         "$ref": "#/components/schemas/ServiceTitan.Marketing.ReviewEngine.Common.Enums.PulledReviewRecommendationStatus"
@@ -454,72 +490,108 @@
                         "type": "boolean"
                     },
                     "jobId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "verifiedByUserId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "verifiedOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "isAutoVerified": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     },
                     "businessUnitId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "completedDate": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "customerName": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "customerId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "dispatchedDate": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "jobStatus": {
                         "$ref": "#/components/schemas/ServiceTitan.Marketing.ReviewEngine.Services.Models.Reviews.JobStatus"
                     },
                     "jobTypeName": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "technicianFullName": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "technicianId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "externalId": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "internalId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
                     }
                 },
                 "additionalProperties": false
@@ -547,21 +619,21 @@
             "apiKeyHeader": {
                 "type": "apiKey",
                 "name": "ST-App-Key",
-                "in": "header"
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
             },
-            "apiKeyQuery": {
-                "type": "apiKey",
-                "name": "servicetitanapplicationkey",
-                "in": "query"
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.mrep.reviews:r": "Marketing Reputation \u2192 Marketing Reviews (Read)"
+                        }
+                    }
+                }
             }
         }
-    },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ]
+    }
 }

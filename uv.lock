@@ -1642,7 +1642,7 @@ wheels = [
 
 [[package]]
 name = "singer-sdk"
-version = "0.53.7"
+version = "0.54.0a13"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "backports-datetime-fromisoformat", marker = "python_full_version < '3.11'" },
@@ -1664,10 +1664,11 @@ dependencies = [
     { name = "sqlalchemy" },
     { name = "typing-extensions", marker = "python_full_version < '3.13'" },
     { name = "universal-pathlib" },
+    { name = "urllib3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/88/dc/42077c99b93b8866094f482e83a708ff0b334c6d336c965038c66eb978e3/singer_sdk-0.53.7.tar.gz", hash = "sha256:4761903bfc7e9daa11bc2a8c5df52af38c3de065291e87c9f875c766b92a74ee", size = 1336031, upload-time = "2026-04-15T21:57:42.434Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/34/94/dc1d3b0968aba8c56d418a64c8c4586baa2fa6602102154543dfa2514f84/singer_sdk-0.54.0a13.tar.gz", hash = "sha256:227318f1c7a1f2c8fbcf42e5d9f9bf24a55ca59fe95f1028c945a400584d0a64", size = 1380349, upload-time = "2026-04-23T03:34:17.839Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/96/ef/08f5367c2ac603eca197ffe3b0da584530c22835c82b6f287ed9d1b1c90d/singer_sdk-0.53.7-py3-none-any.whl", hash = "sha256:0ce05f2900c290d4525f23e9fef79bafa0303610ffea93df81a9eead21e27d46", size = 209246, upload-time = "2026-04-15T21:57:40.866Z" },
+    { url = "https://files.pythonhosted.org/packages/e9/dc/2034c6d700fd861d7ee184617f7c51e288fe270e34314914a1eaac107678/singer_sdk-0.54.0a13-py3-none-any.whl", hash = "sha256:20a6861c6b2c47959138b4af1cee82d7d90ff01ade6d5506488d27df8a7a239e", size = 217298, upload-time = "2026-04-23T03:34:15.521Z" },
 ]
 
 [package.optional-dependencies]
@@ -1836,7 +1837,7 @@ requires-dist = [
     { name = "backports-httpmethod", marker = "python_full_version < '3.11'", specifier = "~=0.2.1" },
     { name = "requests", specifier = "~=2.33.0" },
     { name = "s3fs", marker = "extra == 's3'", specifier = "~=2026.3.0" },
-    { name = "singer-sdk", extras = ["faker"], specifier = "~=0.53.7" },
+    { name = "singer-sdk", extras = ["faker"], specifier = "==0.54.0a13" },
     { name = "typing-extensions", specifier = "==4.15.0" },
 ]
 provides-extras = ["s3"]

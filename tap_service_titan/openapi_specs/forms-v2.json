@@ -1,12 +1,18 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "info": {
         "title": "Forms",
+        "description": "Forms, form submissions, job forms",
         "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://api-integration.servicetitan.io/forms/v2"
+            "url": "https://api.servicetitan.io/forms/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/forms/v2",
+            "description": "Integration"
         }
     ],
     "paths": {
@@ -33,24 +39,21 @@
                         "name": "hasConditionalLogic",
                         "in": "query",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
                         "name": "hasTriggers",
                         "in": "query",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
                         "name": "name",
                         "in": "query",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -63,16 +66,14 @@
                                 {
                                     "$ref": "#/components/schemas/Forms.V2.StatusField"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
                         "name": "ids",
                         "in": "query",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -85,8 +86,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -94,8 +94,7 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -103,8 +102,7 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -112,8 +110,7 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -121,8 +118,7 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -130,8 +126,7 @@
                         "in": "query",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -139,24 +134,21 @@
                         "in": "query",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
                         "name": "includeTotal",
                         "in": "query",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
                         "name": "sort",
                         "in": "query",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -208,7 +200,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.frm.forms:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/submissions": {
@@ -235,8 +235,7 @@
                         "in": "query",
                         "description": "Form Ids (comma separated Ids)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -249,8 +248,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -259,8 +257,7 @@
                         "description": "Creator user Id",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -273,8 +270,7 @@
                                 {
                                     "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.SubmissionStatus"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -283,8 +279,7 @@
                         "description": "Submission modified date on or after",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -293,8 +288,7 @@
                         "description": "Submission modified date before",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -307,8 +301,7 @@
                                 {
                                     "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.FormOwnerType"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -319,8 +312,7 @@
                             "type": "array",
                             "items": {
                                 "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.FormOwner"
-                            },
-                            "nullable": true
+                            }
                         }
                     },
                     {
@@ -329,8 +321,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -339,8 +330,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -348,8 +338,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -357,8 +346,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, SubmittedOn, CreatedBy.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -437,7 +425,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.frm.submissions:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/jobs/{id}/attachments": {
@@ -520,7 +516,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.frm.jobs:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/jobs/{jobId}/attachments": {
@@ -557,8 +561,7 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -566,16 +569,14 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
                         "name": "sort",
                         "in": "query",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -583,8 +584,7 @@
                         "in": "query",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -592,16 +592,14 @@
                         "in": "query",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
                         "name": "includeTotal",
                         "in": "query",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -627,7 +625,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.frm.jobs:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/jobs/attachment/{id}": {
@@ -661,6 +667,9 @@
                     }
                 ],
                 "responses": {
+                    "404": {
+                        "description": "The requested entity was not found"
+                    },
                     "200": {
                         "description": "The request has succeeded"
                     },
@@ -681,11 +690,16 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "The requested entity was not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.frm.jobs:r"
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -715,10 +729,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -752,8 +768,10 @@
                         "type": "boolean"
                     },
                     "name": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "published": {
                         "type": "boolean"
@@ -878,10 +896,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -913,8 +933,10 @@
                         "format": "int64"
                     },
                     "formName": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "submittedOn": {
                         "type": "string",
@@ -928,14 +950,19 @@
                         "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.SubmissionStatus"
                     },
                     "owners": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.FormOwner"
-                        },
-                        "nullable": true
+                        }
                     },
                     "units": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "anyOf": [
                                 {
@@ -975,8 +1002,7 @@
                                     "$ref": "#/components/schemas/Forms.Contracts.FormSubmissions.StoplightFieldApiDto"
                                 }
                             ]
-                        },
-                        "nullable": true
+                        }
                     }
                 },
                 "additionalProperties": false
@@ -1232,9 +1258,11 @@
                         "type": "string"
                     },
                     "value": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     }
                 },
                 "additionalProperties": false
@@ -1345,9 +1373,11 @@
                         "type": "string"
                     },
                     "value": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     }
                 },
                 "additionalProperties": false
@@ -1497,9 +1527,11 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Forms.Client.Contracts.StoplightValue"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -1582,21 +1614,24 @@
             "apiKeyHeader": {
                 "type": "apiKey",
                 "name": "ST-App-Key",
-                "in": "header"
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
             },
-            "apiKeyQuery": {
-                "type": "apiKey",
-                "name": "servicetitanapplicationkey",
-                "in": "query"
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.frm.forms:r": "Forms \u2192 Forms (Read)",
+                            "tn.frm.submissions:r": "Forms \u2192 Form Submissions (Read)",
+                            "tn.frm.jobs:w": "Forms \u2192 Job Forms (Write)",
+                            "tn.frm.jobs:r": "Forms \u2192 Job Forms (Read)"
+                        }
+                    }
+                }
             }
         }
-    },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ]
+    }
 }

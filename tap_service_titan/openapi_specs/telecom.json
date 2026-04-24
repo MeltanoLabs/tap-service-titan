@@ -1,12 +1,18 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "info": {
         "title": "Telecom",
+        "description": "Calls",
         "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://api-integration.servicetitan.io/telecom"
+            "url": "https://api.servicetitan.io/telecom",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/telecom",
+            "description": "Integration"
         }
     ],
     "paths": {
@@ -35,8 +41,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -45,8 +50,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -54,8 +58,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -63,8 +66,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -73,8 +75,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -83,8 +84,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -93,8 +93,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -103,8 +102,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -117,8 +115,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -127,8 +124,7 @@
                         "description": "Return items created after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -137,8 +133,7 @@
                         "description": "Return items modified after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -147,8 +142,7 @@
                         "description": "Campaign ID",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -157,8 +151,7 @@
                         "description": "Agent ID (number)",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -167,8 +160,7 @@
                         "description": "Minimum call duration (number of seconds)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -176,8 +168,7 @@
                         "in": "query",
                         "description": "The phone number that was called (string)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -185,8 +176,7 @@
                         "in": "query",
                         "description": "The caller's phone number (string)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -194,8 +184,7 @@
                         "in": "query",
                         "description": "Agent name (string)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -203,8 +192,7 @@
                         "in": "query",
                         "description": "Is agent external flag (boolean)",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -213,8 +201,7 @@
                         "description": "Agent external ID (number)",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -222,8 +209,7 @@
                         "in": "query",
                         "description": "The Sorting field, possible values: Id, CreatedOn, ModifiedOn.\nThe Sorting is ascending by default, add the '-' character to use descending (for example -Id)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -231,8 +217,7 @@
                         "in": "query",
                         "description": "Sid of the call (string)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -240,8 +225,7 @@
                         "in": "query",
                         "description": "Tag of the call (string)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -340,214 +324,15 @@
                             }
                         }
                     }
-                }
-            }
-        },
-        "/v3/tenant/{tenant}/optinouts/optouts": {
-            "get": {
-                "tags": [
-                    "OptInOut"
-                ],
-                "summary": "Returns all opt-outs for the tenant",
-                "description": "Numbers are returned in E.164 format.",
-                "operationId": "OptInOut_GetAllOptOuts",
-                "parameters": [
-                    {
-                        "name": "tenant",
-                        "in": "path",
-                        "description": "Tenant ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Telecom.V3.OptOutListResponse"
-                                },
-                                "example": {
-                                    "data": [
-                                        {
-                                            "contactNumber": "string",
-                                            "optOutType": {}
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "OptInOut"
-                ],
-                "summary": "Adds opt-outs for the specified phone numbers",
-                "description": "Has to have at least one phone number in the request (use the dedicated endpoint if you need to get all the opt-outs).\nAll numbers in the request must be valid, otherwise the request will fail.\nIf a number is opted-out globally, you can't opt it out for marketing.",
-                "operationId": "OptInOut_CreateOptOutList",
-                "parameters": [
-                    {
-                        "name": "tenant",
-                        "in": "path",
-                        "description": "Tenant ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Telecom.V3.CreateOptOutListRequest"
-                            },
-                            "example": {
-                                "optOutType": {},
-                                "contactNumbers": [
-                                    "string"
-                                ]
-                            }
-                        }
-                    }
                 },
-                "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Telecom.V3.CreateOptOutListResponse"
-                                },
-                                "example": {
-                                    "data": [
-                                        {
-                                            "contactNumber": "string",
-                                            "status": {}
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "At least one number in the request couldn't be parsed, or there were no numbers in the request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/v3/tenant/{tenant}/optinouts/optouts/getlist": {
-            "post": {
-                "tags": [
-                    "OptInOut"
-                ],
-                "summary": "For each phone number in the request, returns the opt-out status, if it exists",
-                "description": "Has to have at least one phone number in the request (use the dedicated endpoint if you need to get all the opt-outs).\nIf there's no opt-out info for a phone number, it won't be included in the response.\nAll numbers in the request must be valid (E.164 format is preferred, but not required), otherwise the request will fail.\nThe numbers in the response will be in E.164 format.",
-                "operationId": "OptInOut_GetOptOutList",
-                "parameters": [
+                "security": [
                     {
-                        "name": "tenant",
-                        "in": "path",
-                        "description": "Tenant ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tlc.calls:r"
+                        ]
                     }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Telecom.V3.GetOptOutListRequest"
-                            },
-                            "example": {
-                                "contactNumbers": [
-                                    "string"
-                                ]
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Telecom.V3.OptOutListResponse"
-                                },
-                                "example": {
-                                    "data": [
-                                        {
-                                            "contactNumber": "string",
-                                            "optOutType": {}
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "At least one number in the request couldn't be parsed, or there were no numbers in the request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    }
-                }
+                ]
             }
         },
         "/v2/tenant/{tenant}/calls/{id}": {
@@ -757,7 +542,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tlc.calls:r"
+                        ]
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -984,7 +777,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tlc.calls:w"
+                        ]
+                    }
+                ]
             }
         },
         "/v2/tenant/{tenant}/calls": {
@@ -1012,8 +813,7 @@
                         "description": "Modified before a certain date/time (as date-time in RFC3339), not inclusive",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1022,8 +822,7 @@
                         "description": "Modified on or after a certain date/time (as date-time in RFC3339), inclusive",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1032,8 +831,7 @@
                         "description": "Created on or after a certain date/time (as date-time in RFC3339), inclusive",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1042,8 +840,7 @@
                         "description": "Modified after a certain date/time (as date-time in RFC3339), not inclusive",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1052,8 +849,7 @@
                         "description": "Minimum call duration (number)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1070,8 +866,7 @@
                         "description": "Campaign ID",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -1080,8 +875,7 @@
                         "description": "Agent ID (number)",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -1097,8 +891,7 @@
                         "in": "query",
                         "description": "Is agent external flag (boolean)",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -1107,8 +900,7 @@
                         "description": "Agent external ID (number)",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -1139,8 +931,7 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1148,8 +939,7 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1168,8 +958,7 @@
                         "in": "query",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -1177,8 +966,7 @@
                         "in": "query",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     }
                 ],
@@ -1369,7 +1157,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tlc.calls:r"
+                        ]
+                    }
+                ]
             }
         },
         "/v2/tenant/{tenant}/calls/{id}/recording": {
@@ -1419,7 +1215,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tlc.calls:r"
+                        ]
+                    }
+                ]
             }
         },
         "/v2/tenant/{tenant}/calls/{id}/voicemail": {
@@ -1469,7 +1273,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tlc.calls:r"
+                        ]
+                    }
+                ]
             }
         },
         "/v2/tenant/{tenant}/export/calls": {
@@ -1496,8 +1308,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1505,8 +1316,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -1592,7 +1402,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tlc.calls:r"
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -1622,10 +1440,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -1768,9 +1588,11 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Telecom.V3.CallType"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "reason": {
                         "$ref": "#/components/schemas/Telecom.V3.CallReasonModel"
@@ -1798,15 +1620,19 @@
                         "$ref": "#/components/schemas/Telecom.V3.CallAgentModel"
                     },
                     "sid": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "tags": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/Module.Telecom.Shared.TagResponseModel"
-                        },
-                        "nullable": true
+                        }
                     }
                 },
                 "additionalProperties": false
@@ -1885,9 +1711,11 @@
                         "description": "The name of the entity"
                     },
                     "externalId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -1969,159 +1797,6 @@
                     "Any",
                     "False"
                 ]
-            },
-            "Telecom.V3.OptOutListResponse": {
-                "required": [
-                    "data"
-                ],
-                "type": "object",
-                "properties": {
-                    "data": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Telecom.V3.OptOutResponse"
-                        },
-                        "description": "The list of opt-out responses."
-                    }
-                },
-                "additionalProperties": false,
-                "description": "List of opt-outs"
-            },
-            "Telecom.V3.OptOutResponse": {
-                "required": [
-                    "contactNumber",
-                    "optOutType"
-                ],
-                "type": "object",
-                "properties": {
-                    "contactNumber": {
-                        "type": "string",
-                        "description": "Contact number in E.164 format"
-                    },
-                    "optOutType": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Telecom.V3.OptOutType"
-                            }
-                        ],
-                        "description": "Opt-out type"
-                    }
-                },
-                "additionalProperties": false,
-                "description": "Single contact number opt-out status"
-            },
-            "Telecom.V3.OptOutType": {
-                "enum": [
-                    "Unknown",
-                    "Global",
-                    "Marketing",
-                    "Other"
-                ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "Unknown",
-                    "Global",
-                    "Marketing",
-                    "Other"
-                ]
-            },
-            "Telecom.V3.GetOptOutListRequest": {
-                "required": [
-                    "contactNumbers"
-                ],
-                "type": "object",
-                "properties": {
-                    "contactNumbers": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "description": "Contact numbers (must be valid parseable phone numbers, E.164 format is recommended)"
-                    }
-                },
-                "additionalProperties": false,
-                "description": "List of phone numbers to get opt-out status for"
-            },
-            "Telecom.V3.CreateOptOutListResponse": {
-                "required": [
-                    "data"
-                ],
-                "type": "object",
-                "properties": {
-                    "data": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Telecom.V3.CreateOptOutResponse"
-                        },
-                        "description": "Individual results for each number"
-                    }
-                },
-                "additionalProperties": false,
-                "description": "Result of creating the opt-outs"
-            },
-            "Telecom.V3.CreateOptOutResponse": {
-                "required": [
-                    "contactNumber",
-                    "status"
-                ],
-                "type": "object",
-                "properties": {
-                    "contactNumber": {
-                        "type": "string",
-                        "description": "Contact number in E.164 format"
-                    },
-                    "status": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Telecom.V3.CreateOptOutStatus"
-                            }
-                        ],
-                        "description": "Result of opt-out creation"
-                    }
-                },
-                "additionalProperties": false,
-                "description": "Result of creating a single opt-out"
-            },
-            "Telecom.V3.CreateOptOutStatus": {
-                "enum": [
-                    "Ok",
-                    "RetryableError",
-                    "LogicalError"
-                ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "Ok",
-                    "RetryableError",
-                    "LogicalError"
-                ]
-            },
-            "Telecom.V3.CreateOptOutListRequest": {
-                "required": [
-                    "optOutType",
-                    "contactNumbers"
-                ],
-                "type": "object",
-                "properties": {
-                    "optOutType": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Telecom.V3.OptOutType"
-                            }
-                        ],
-                        "description": "Type of opt-out to create"
-                    },
-                    "contactNumbers": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "description": "Contact numbers (must be valid parseable phone numbers, E.164 format is recommended)"
-                    }
-                },
-                "additionalProperties": false,
-                "description": "List of phone numbers to create the opt-out status for"
             },
             "Module.Telecom.Shared.DetailedBundleCallModel": {
                 "required": [
@@ -2392,9 +2067,11 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Telecom.CallType"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "reason": {
                         "$ref": "#/components/schemas/Module.Telecom.Shared.CallReasonModel"
@@ -2540,9 +2217,11 @@
                         "type": "string"
                     },
                     "balance": {
-                        "type": "number",
-                        "format": "decimal",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "decimal"
                     },
                     "doNotMail": {
                         "type": "boolean"
@@ -2566,9 +2245,11 @@
                         }
                     },
                     "mergedToId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -2581,8 +2262,10 @@
                         }
                     },
                     "hasActiveMembership": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     },
                     "customFields": {
                         "type": "array",
@@ -2595,9 +2278,11 @@
                         "format": "date-time"
                     },
                     "createdBy": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "phoneSettings": {
                         "type": "array",
@@ -2642,14 +2327,18 @@
                         "type": "string"
                     },
                     "latitude": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     },
                     "longitude": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     }
                 },
                 "additionalProperties": false
@@ -2677,9 +2366,11 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "type": {
                         "type": "string"
@@ -2724,14 +2415,18 @@
                         "type": "string"
                     },
                     "from": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "to": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "locationId": {
                         "type": "integer",
@@ -2831,40 +2526,56 @@
                         "type": "boolean"
                     },
                     "isDefaultCampaign": {
-                        "type": "boolean",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     },
                     "category": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Marketing.Core.CampaignCategoryModel"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "source": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "otherSource": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "businessUnit": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "medium": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "otherMedium": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "dnis": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -2906,9 +2617,11 @@
                         "type": "string"
                     },
                     "externalId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -3029,9 +2742,11 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Telecom.CallType"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "reason": {
                         "$ref": "#/components/schemas/Module.Telecom.Shared.CallReasonModel"
@@ -3088,35 +2803,45 @@
                 "type": "object",
                 "properties": {
                     "callId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "callType": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Telecom.CallType"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "excuseMemo": {
                         "type": "string"
                     },
                     "campaignId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "jobId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "agentId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "reason": {
                         "$ref": "#/components/schemas/Module.Telecom.Shared.ReasonInModel"
@@ -3207,14 +2932,18 @@
                         "type": "string"
                     },
                     "latitude": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     },
                     "longitude": {
-                        "type": "number",
-                        "format": "double",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double"
                     }
                 },
                 "additionalProperties": false
@@ -3228,9 +2957,11 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "type": {
                         "type": "string"
@@ -3353,20 +3084,26 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Telecom.V2.CallType"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The type (classification) of the call. Null if the inbound call was not classified yet or this is\n            an outbound call",
-                        "nullable": true
+                        "description": "The type (classification) of the call. Null if the inbound call was not classified yet or this is\n            an outbound call"
                     },
                     "recordingUrl": {
-                        "type": "string",
-                        "description": "The URL for call recording. Can be null if the call hasn't a recording",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The URL for call recording. Can be null if the call hasn't a recording"
                     },
                     "voiceMailPath": {
-                        "type": "string",
-                        "description": "The URL for call voicemail. Can be null if the call hasn't a voicemail. This field may have value only for\nPhones Pro tenants",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The URL for call voicemail. Can be null if the call hasn't a voicemail. This field may have value only for\nPhones Pro tenants"
                     },
                     "createdOn": {
                         "type": "string",
@@ -3382,64 +3119,78 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The info about the call reason linked to the call",
-                        "nullable": true
+                        "description": "The info about the call reason linked to the call"
                     },
                     "customer": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The info about the customer linked to the call",
-                        "nullable": true
+                        "description": "The info about the customer linked to the call"
                     },
                     "location": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The info about the location linked to the call",
-                        "nullable": true
+                        "description": "The info about the location linked to the call"
                     },
                     "campaign": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The info about the phone advertising campaign linked to the call",
-                        "nullable": true
+                        "description": "The info about the phone advertising campaign linked to the call"
                     },
                     "job": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Telecom.V2.JobModel"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The info about the job linked to the call",
-                        "nullable": true
+                        "description": "The info about the job linked to the call"
                     },
                     "agent": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The info about the user agent who was assigned to the call. For inbound calls this is the user who\n            clicked the call bubble last time, or outbound calls this is a user who initiated the call. For Phones Pro,\n            this may differ to CreatedBy for outbound calls if the outbound call was transferred between users\n            ",
-                        "nullable": true
+                        "description": "The info about the user agent who was assigned to the call. For inbound calls this is the user who\n            clicked the call bubble last time, or outbound calls this is a user who initiated the call. For Phones Pro,\n            this may differ to CreatedBy for outbound calls if the outbound call was transferred between users\n            "
                     },
                     "createdBy": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "The info about the user who created the outbound call",
-                        "nullable": true
+                        "description": "The info about the user who created the outbound call"
                     },
                     "excuseMemo": {
                         "type": "string",
@@ -3457,10 +3208,12 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Telecom.V2.LeadModel"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "CRM Leads created from unbooked calls",
-                        "nullable": true
+                        "description": "CRM Leads created from unbooked calls"
                     }
                 },
                 "additionalProperties": false
@@ -3543,179 +3296,28 @@
                     }
                 },
                 "additionalProperties": false
-            },
-            "CloudEvent_Of_Telecom.V3.Webhooks.CallCompletedWebhookEvent": {
-                "required": [
-                    "specversion",
-                    "id",
-                    "type",
-                    "time",
-                    "source",
-                    "userassignedid",
-                    "datacontenttype",
-                    "data"
-                ],
-                "type": "object",
-                "properties": {
-                    "specversion": {
-                        "type": "string",
-                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
-                    },
-                    "id": {
-                        "type": "string",
-                        "description": "A value that identifies the delivery of this event to a particular consumer.\n(Rarely, there may be multiple attempts to deliver the same event to a consumer, each with\nthe same or a different id. Use userassignedid to detect duplicate deliveries.)"
-                    },
-                    "type": {
-                        "type": "string",
-                        "description": "A value that identifies the type of this event (\"tn.tlc.call-completed\")."
-                    },
-                    "time": {
-                        "type": "string",
-                        "description": "The date and time when this event occurred.",
-                        "format": "date-time"
-                    },
-                    "source": {
-                        "type": "string",
-                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
-                    },
-                    "userassignedid": {
-                        "type": "string",
-                        "description": "A value that uniquely identifies this occurrence of the event."
-                    },
-                    "datacontenttype": {
-                        "type": "string",
-                        "description": "The content type of the data (\"application/json\")."
-                    },
-                    "data": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Telecom.V3.Webhooks.CallCompletedWebhookEvent"
-                            }
-                        ],
-                        "description": "The event payload."
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Telecom.V3.Webhooks.CallCompletedWebhookEvent": {
-                "required": [
-                    "call",
-                    "tenantId",
-                    "tenantName"
-                ],
-                "type": "object",
-                "properties": {
-                    "call": {
-                        "$ref": "#/components/schemas/Telecom.V3.CallResponse"
-                    },
-                    "tenantId": {
-                        "type": "integer",
-                        "description": "The ID of the tenant",
-                        "format": "int64"
-                    },
-                    "tenantName": {
-                        "type": "string",
-                        "description": "The name of the tenant"
-                    }
-                },
-                "additionalProperties": false
-            },
-            "CloudEvent_Of_Telecom.V3.Webhooks.CallUpdatedWebhookEvent": {
-                "required": [
-                    "specversion",
-                    "id",
-                    "type",
-                    "time",
-                    "source",
-                    "userassignedid",
-                    "datacontenttype",
-                    "data"
-                ],
-                "type": "object",
-                "properties": {
-                    "specversion": {
-                        "type": "string",
-                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
-                    },
-                    "id": {
-                        "type": "string",
-                        "description": "A value that identifies the delivery of this event to a particular consumer.\n(Rarely, there may be multiple attempts to deliver the same event to a consumer, each with\nthe same or a different id. Use userassignedid to detect duplicate deliveries.)"
-                    },
-                    "type": {
-                        "type": "string",
-                        "description": "A value that identifies the type of this event (\"tn.tlc.call-updated\")."
-                    },
-                    "time": {
-                        "type": "string",
-                        "description": "The date and time when this event occurred.",
-                        "format": "date-time"
-                    },
-                    "source": {
-                        "type": "string",
-                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
-                    },
-                    "userassignedid": {
-                        "type": "string",
-                        "description": "A value that uniquely identifies this occurrence of the event."
-                    },
-                    "datacontenttype": {
-                        "type": "string",
-                        "description": "The content type of the data (\"application/json\")."
-                    },
-                    "data": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Telecom.V3.Webhooks.CallUpdatedWebhookEvent"
-                            }
-                        ],
-                        "description": "The event payload."
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Telecom.V3.Webhooks.CallUpdatedWebhookEvent": {
-                "required": [
-                    "call",
-                    "tenantId",
-                    "tenantName"
-                ],
-                "type": "object",
-                "properties": {
-                    "call": {
-                        "$ref": "#/components/schemas/Telecom.V3.CallResponse"
-                    },
-                    "tenantId": {
-                        "type": "integer",
-                        "description": "The ID of the tenant",
-                        "format": "int64"
-                    },
-                    "tenantName": {
-                        "type": "string",
-                        "description": "The name of the tenant"
-                    }
-                },
-                "additionalProperties": false
             }
         },
         "securitySchemes": {
             "apiKeyHeader": {
                 "type": "apiKey",
                 "name": "ST-App-Key",
-                "in": "header"
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
             },
-            "apiKeyQuery": {
-                "type": "apiKey",
-                "name": "servicetitanapplicationkey",
-                "in": "query"
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.tlc.calls:r": "Telecom \u2192 Calls (Read)",
+                            "tn.tlc.calls:w": "Telecom \u2192 Calls (Write)"
+                        }
+                    }
+                }
             }
         }
-    },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ]
+    }
 }
