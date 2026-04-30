@@ -1,5 +1,5 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "info": {
         "title": "Findings",
         "description": "Finding assets, location findings",
@@ -7,7 +7,12 @@
     },
     "servers": [
         {
-            "url": "https://api-integration.servicetitan.io/findings/v2"
+            "url": "https://api.servicetitan.io/findings/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/findings/v2",
+            "description": "Integration"
         }
     ],
     "paths": {
@@ -50,19 +55,6 @@
                     }
                 },
                 "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAssetUploadResponse"
-                                },
-                                "example": {
-                                    "path": "string"
-                                }
-                            }
-                        }
-                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -80,8 +72,29 @@
                                 }
                             }
                         }
+                    },
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAssetUploadResponse"
+                                },
+                                "example": {
+                                    "path": "string"
+                                }
+                            }
+                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.fdgs.assets:w"
+                        ]
+                    }
+                ]
             },
             "get": {
                 "tags": [
@@ -110,9 +123,6 @@
                     }
                 ],
                 "responses": {
-                    "302": {
-                        "description": ""
-                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -130,6 +140,9 @@
                                 }
                             }
                         }
+                    },
+                    "302": {
+                        "description": ""
                     },
                     "404": {
                         "description": "The requested entity was not found",
@@ -149,7 +162,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.fdgs.assets:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/location-findings": {
@@ -176,8 +197,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -186,8 +206,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -196,8 +215,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -206,8 +224,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -216,8 +233,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -226,8 +242,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -236,8 +251,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -245,8 +259,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -254,8 +267,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: ID, CreatedOn, ModifiedOn",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -268,8 +280,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -278,8 +289,7 @@
                         "description": "Filters by location ID",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -288,8 +298,7 @@
                         "description": "Filters by source job ID",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -298,12 +307,29 @@
                         "description": "Filters by installed equipment ID",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     }
                 ],
                 "responses": {
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -338,26 +364,16 @@
                                 }
                             }
                         }
-                    },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.fdgs.locationfindings:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -405,6 +421,24 @@
                     }
                 },
                 "responses": {
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -446,26 +480,16 @@
                                 }
                             }
                         }
-                    },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.fdgs.locationfindings:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/location-findings/{id}": {
@@ -498,6 +522,24 @@
                     }
                 ],
                 "responses": {
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -540,24 +582,6 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "The requested entity was not found",
                         "content": {
@@ -576,7 +600,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.fdgs.locationfindings:r"
+                        ]
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -625,6 +657,24 @@
                     }
                 },
                 "responses": {
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -667,24 +717,6 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "The requested entity was not found",
                         "content": {
@@ -703,7 +735,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.fdgs.locationfindings:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/location-findings/{id}/attachments": {
@@ -739,8 +779,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -749,8 +788,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -759,8 +797,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -769,8 +806,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -779,8 +815,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -788,8 +823,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -797,12 +831,29 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: ID",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
                 "responses": {
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -827,24 +878,6 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "The requested entity was not found",
                         "content": {
@@ -863,7 +896,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.fdgs.locationfindings:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -908,22 +949,6 @@
                     }
                 },
                 "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentResponse"
-                                },
-                                "example": {
-                                    "id": 0,
-                                    "fileName": "string",
-                                    "url": "string",
-                                    "type": {}
-                                }
-                            }
-                        }
-                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -938,6 +963,22 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "fileName": "string",
+                                    "url": "string",
+                                    "type": {}
                                 }
                             }
                         }
@@ -978,7 +1019,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.fdgs.locationfindings:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/location-findings/{id}/attachments/{attachmentId}": {
@@ -1020,22 +1069,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentResponse"
-                                },
-                                "example": {
-                                    "id": 0,
-                                    "fileName": "string",
-                                    "url": "string",
-                                    "type": {}
-                                }
-                            }
-                        }
-                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -1050,6 +1083,22 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "fileName": "string",
+                                    "url": "string",
+                                    "type": {}
                                 }
                             }
                         }
@@ -1072,7 +1121,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.fdgs.locationfindings:r"
+                        ]
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -1126,22 +1183,6 @@
                     }
                 },
                 "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentResponse"
-                                },
-                                "example": {
-                                    "id": 0,
-                                    "fileName": "string",
-                                    "url": "string",
-                                    "type": {}
-                                }
-                            }
-                        }
-                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -1156,6 +1197,22 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "fileName": "string",
+                                    "url": "string",
+                                    "type": {}
                                 }
                             }
                         }
@@ -1196,7 +1253,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.fdgs.locationfindings:w"
+                        ]
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -1236,9 +1301,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "The request has succeeded"
-                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -1256,8 +1318,19 @@
                                 }
                             }
                         }
+                    },
+                    "200": {
+                        "description": "The request has succeeded"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.fdgs.locationfindings:w"
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -1348,10 +1421,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -1389,30 +1464,40 @@
                         "format": "int64"
                     },
                     "name": {
-                        "type": "string",
-                        "description": "Title summarizing the issue or observation",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Title summarizing the issue or observation"
                     },
                     "description": {
-                        "type": "string",
-                        "description": "Detailed description of the issue, condition, or observation",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Detailed description of the issue, condition, or observation"
                     },
                     "recommendedSolution": {
-                        "type": "string",
-                        "description": "Suggested action or repair to address the finding",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Suggested action or repair to address the finding"
                     },
                     "internalNotes": {
-                        "type": "string",
-                        "description": "Private notes for internal use, not visible to customers",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Private notes for internal use, not visible to customers"
                     },
                     "installedEquipmentId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the specific equipment where the finding was observed (if applicable)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "urgencyLevel": {
                         "oneOf": [
@@ -1423,10 +1508,12 @@
                         "description": "Priority level indicating how urgently the finding should be addressed"
                     },
                     "sourceJobId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the job during which this finding was discovered (if applicable)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "archived": {
                         "type": "boolean",
@@ -1518,30 +1605,40 @@
                         "format": "int64"
                     },
                     "name": {
-                        "type": "string",
-                        "description": "Title summarizing the issue or observation",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Title summarizing the issue or observation"
                     },
                     "description": {
-                        "type": "string",
-                        "description": "Detailed description of the issue, condition, or observation",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Detailed description of the issue, condition, or observation"
                     },
                     "recommendedSolution": {
-                        "type": "string",
-                        "description": "Suggested action or repair to address the finding",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Suggested action or repair to address the finding"
                     },
                     "internalNotes": {
-                        "type": "string",
-                        "description": "Private notes for internal use, not visible to customers",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Private notes for internal use, not visible to customers"
                     },
                     "installedEquipmentId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the specific equipment where the finding was observed (if applicable)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "urgencyLevel": {
                         "oneOf": [
@@ -1552,10 +1649,12 @@
                         "description": "Priority level indicating how urgently the finding should be addressed"
                     },
                     "sourceJobId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the job during which this finding was discovered (if applicable)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "archived": {
                         "type": "boolean",
@@ -1594,30 +1693,36 @@
                         "description": "Current status in the finding-to-job workflow (e.g., estimate created, job completed)"
                     },
                     "attachments": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentModel"
                         },
-                        "description": "Photos, videos, and documents attached to the finding",
-                        "nullable": true
+                        "description": "Photos, videos, and documents attached to the finding"
                     },
                     "linkedEstimateIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "IDs of estimates created to address this finding",
-                        "nullable": true
+                        "description": "IDs of estimates created to address this finding"
                     },
                     "linkedJobIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "IDs of jobs scheduled to resolve this finding",
-                        "nullable": true
+                        "description": "IDs of jobs scheduled to resolve this finding"
                     }
                 },
                 "additionalProperties": false,
@@ -1711,15 +1816,19 @@
                     },
                     "name": {
                         "maxLength": 4000,
-                        "type": "string",
-                        "description": "Title summarizing the issue or observation (e.g., \"Leaking pipe\", \"Worn brake pads\")",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Title summarizing the issue or observation (e.g., \"Leaking pipe\", \"Worn brake pads\")"
                     },
                     "description": {
                         "maxLength": 4000,
-                        "type": "string",
-                        "description": "Detailed description of the issue, condition, or observation",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Detailed description of the issue, condition, or observation"
                     },
                     "urgencyLevel": {
                         "oneOf": [
@@ -1731,35 +1840,45 @@
                     },
                     "recommendedSolution": {
                         "maxLength": 4000,
-                        "type": "string",
-                        "description": "Suggested action or repair to address the finding",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Suggested action or repair to address the finding"
                     },
                     "internalNotes": {
                         "maxLength": 4000,
-                        "type": "string",
-                        "description": "Private notes for internal use, not visible to customers",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Private notes for internal use, not visible to customers"
                     },
                     "installedEquipmentId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the specific equipment where the finding was observed (optional)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "sourceJobId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the job during which this finding was discovered (optional)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "attachments": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentCreateModel"
                         },
-                        "description": "Photos, videos, or documents supporting the finding",
-                        "nullable": true
+                        "description": "Photos, videos, or documents supporting the finding"
                     }
                 },
                 "additionalProperties": false,
@@ -1862,10 +1981,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -1972,21 +2093,24 @@
             "apiKeyHeader": {
                 "type": "apiKey",
                 "name": "ST-App-Key",
-                "in": "header"
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
             },
-            "apiKeyQuery": {
-                "type": "apiKey",
-                "name": "servicetitanapplicationkey",
-                "in": "query"
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.fdgs.assets:w": "Findings \u2192 Finding Assets (Write)",
+                            "tn.fdgs.assets:r": "Findings \u2192 Finding Assets (Read)",
+                            "tn.fdgs.locationfindings:r": "Findings \u2192 Location Findings (Read)",
+                            "tn.fdgs.locationfindings:w": "Findings \u2192 Location Findings (Write)"
+                        }
+                    }
+                }
             }
         }
-    },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ]
+    }
 }

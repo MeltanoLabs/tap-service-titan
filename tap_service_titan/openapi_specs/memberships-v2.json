@@ -1,12 +1,18 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "info": {
         "title": "Memberships",
+        "description": "Customer memberships, invoice templates, membership types, recurring services, recurring service events, recurring service types",
         "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://api-integration.servicetitan.io/memberships/v2"
+            "url": "https://api.servicetitan.io/memberships/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/memberships/v2",
+            "description": "Integration"
         }
     ],
     "paths": {
@@ -34,8 +40,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -43,8 +48,7 @@
                         "in": "query",
                         "description": "Filters by customer IDs",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -57,8 +61,7 @@
                                 {
                                     "$ref": "#/components/schemas/Memberships.V2.MembershipStatus"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -67,8 +70,7 @@
                         "description": "Filters by membership duration (in months); use null for ongoing memberships",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -81,8 +83,7 @@
                                 {
                                     "$ref": "#/components/schemas/Memberships.V2.MembershipRecurrenceType"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -95,8 +96,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -105,8 +105,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -115,8 +114,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -125,8 +123,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -135,8 +132,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -145,8 +141,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -155,8 +150,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -164,8 +158,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -173,8 +166,7 @@
                         "in": "query",
                         "description": "Applies sorting by specified fields",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -260,7 +252,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.memberships:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/memberships/custom-fields": {
@@ -288,8 +288,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -298,8 +297,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -307,8 +305,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -317,8 +314,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -327,8 +323,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -337,8 +332,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -347,8 +341,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -356,8 +349,7 @@
                         "in": "query",
                         "description": "Applies sorting by specified fields",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -408,7 +400,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.memberships:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/memberships/{id}": {
@@ -533,7 +533,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.memberships:r"
+                        ]
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -643,7 +651,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.memberships:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/memberships/{id}/status-changes": {
@@ -736,7 +752,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.memberships:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/memberships/sale": {
@@ -810,7 +834,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.memberships:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/membership-types": {
@@ -837,8 +869,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -846,8 +877,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -931,7 +961,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.membershiptypes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/recurring-service-types": {
@@ -958,8 +996,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -967,8 +1004,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -1029,7 +1065,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.recurringservicetypes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/memberships": {
@@ -1056,8 +1100,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1065,8 +1108,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -1150,7 +1192,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.memberships:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/invoice-templates": {
@@ -1177,8 +1227,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1186,8 +1235,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -1252,7 +1300,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.invoicetemplates:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/recurring-services": {
@@ -1279,8 +1335,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1288,8 +1343,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -1376,7 +1430,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.recurringservices:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/recurring-service-events": {
@@ -1403,8 +1465,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1412,8 +1473,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -1466,7 +1526,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.recurringserviceevents:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/membership-status-changes": {
@@ -1493,8 +1561,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1502,8 +1569,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -1551,7 +1617,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.memberships:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/invoice-templates": {
@@ -1579,8 +1653,7 @@
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "required": true,
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -1647,7 +1720,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.invoicetemplates:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -1723,7 +1804,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.invoicetemplates:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/invoice-templates/{id}": {
@@ -1829,7 +1918,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.invoicetemplates:r"
+                        ]
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -1938,7 +2035,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.invoicetemplates:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/recurring-service-events": {
@@ -1965,8 +2070,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -1975,8 +2079,7 @@
                         "description": "Location ID ",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -1985,8 +2088,7 @@
                         "description": "Job ID ",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -1999,8 +2101,7 @@
                                 {
                                     "$ref": "#/components/schemas/Memberships.V2.OpportunityStatus"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -2009,8 +2110,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2019,8 +2119,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2029,8 +2128,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2039,8 +2137,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2049,8 +2146,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2059,8 +2155,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2068,8 +2163,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2079,8 +2173,7 @@
                             "type": "array",
                             "items": {
                                 "$ref": "#/components/schemas/OrderByItem_Of_Memberships.V2.DefaultSortingFields"
-                            },
-                            "nullable": true
+                            }
                         }
                     }
                 ],
@@ -2134,7 +2227,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.recurringserviceevents:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/recurring-service-events/{id}/mark-complete": {
@@ -2230,7 +2331,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.recurringserviceevents:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/recurring-service-events/{id}/mark-incomplete": {
@@ -2326,7 +2435,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.recurringserviceevents:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/recurring-services": {
@@ -2353,8 +2470,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -2362,8 +2478,7 @@
                         "in": "query",
                         "description": "Filters by customer membership IDs",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -2371,8 +2486,7 @@
                         "in": "query",
                         "description": "Filters by location IDs",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -2385,8 +2499,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -2395,8 +2508,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2405,8 +2517,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2415,8 +2526,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2425,8 +2535,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2434,8 +2543,7 @@
                         "in": "query",
                         "description": "Whether technician IDs should be included in the result.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2444,8 +2552,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2454,8 +2561,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2463,8 +2569,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2472,8 +2577,7 @@
                         "in": "query",
                         "description": "Applies sorting by specified fields",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -2562,7 +2666,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.recurringservices:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/recurring-services/{id}": {
@@ -2690,7 +2802,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.recurringservices:r"
+                        ]
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -2815,7 +2935,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.recurringservices:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/membership-types": {
@@ -2842,8 +2970,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -2856,8 +2983,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -2866,8 +2992,7 @@
                         "description": "Filters by membership duration (in months); use null for ongoing memberships",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2880,8 +3005,7 @@
                                 {
                                     "$ref": "#/components/schemas/Memberships.V2.MembershipRecurrenceType"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -2889,8 +3013,7 @@
                         "in": "query",
                         "description": "Whether duration/billing should be included in the result",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2898,8 +3021,7 @@
                         "in": "query",
                         "description": "Whether discounts should be included in the result",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2907,8 +3029,7 @@
                         "in": "query",
                         "description": "Whether recurring service types associated with the membership type should be included in the result",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2916,8 +3037,7 @@
                         "in": "query",
                         "description": "Whether tag type IDs associated with the membership type should be included in the result",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2926,8 +3046,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2936,8 +3055,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2946,8 +3064,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2956,8 +3073,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -2966,8 +3082,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2976,8 +3091,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -2985,8 +3099,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2994,8 +3107,7 @@
                         "in": "query",
                         "description": "Applies sorting by specified fields",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -3081,7 +3193,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.membershiptypes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/membership-types/{id}": {
@@ -3206,7 +3326,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.membershiptypes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/membership-types/{id}/recurring-service-items": {
@@ -3302,7 +3430,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.membershiptypes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/membership-types/{id}/discounts": {
@@ -3394,7 +3530,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.membershiptypes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/membership-types/{id}/duration-billing-items": {
@@ -3436,8 +3580,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     }
                 ],
@@ -3505,7 +3648,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.membershiptypes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/recurring-service-types": {
@@ -3532,8 +3683,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -3542,8 +3692,7 @@
                         "description": "Filters by membership type ID",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -3556,8 +3705,7 @@
                                 {
                                     "$ref": "#/components/schemas/Memberships.V2.ServiceRecurrenceType"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -3570,8 +3718,7 @@
                                 {
                                     "$ref": "#/components/schemas/Memberships.V2.ServiceRecurrenceDuration"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -3584,8 +3731,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -3594,8 +3740,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3604,8 +3749,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3614,8 +3758,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3624,8 +3767,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -3634,8 +3776,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -3644,8 +3785,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -3653,8 +3793,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -3662,8 +3801,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, Name, CreatedOn, ModifiedOn.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -3726,7 +3864,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.recurringservicetypes:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/recurring-service-types/{id}": {
@@ -3828,7 +3974,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mem.recurringservicetypes:r"
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -3858,10 +4012,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -3903,10 +4059,12 @@
                         "format": "date-time"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created this membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -3919,28 +4077,36 @@
                         "format": "date-time"
                     },
                     "cancellationDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "When customer membership was or will be cancelled",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "from": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Beginning date of customer membership",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "nextScheduledBillDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Next scheduled billing date",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "to": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "End date of customer membership",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "billingFrequency": {
                         "oneOf": [
@@ -3954,10 +4120,12 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Memberships.V2.MembershipRecurrenceType"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Renewal billing frequency",
-                        "nullable": true
+                        "description": "Renewal billing frequency"
                     },
                     "status": {
                         "oneOf": [
@@ -3985,16 +4153,20 @@
                         "format": "decimal"
                     },
                     "duration": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Duration of customer membership in months",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "renewalDuration": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Renewal duration",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "businessUnitId": {
                         "type": "integer",
@@ -4012,97 +4184,129 @@
                         "format": "int64"
                     },
                     "activatedById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that activated this membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "activatedFromId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the invoice item that is the sale task of this membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "billingTemplateId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the invoice template used for membership billing",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "cancellationBalanceInvoiceId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Cancellation balance invoice ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "cancellationInvoiceId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the invoice that either charged or refunded the deferred revenue balance of the customer membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "followUpCustomStatusId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of custom followup status",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "locationId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of location for this customer membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "paymentMethodId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Preferred payment method ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "paymentTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of payment type",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "recurringLocationId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Recurring Location ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "renewalMembershipTaskId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Task ID that renews this membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "renewedById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the renewal membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "soldById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that was credited for the sale of this membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "customerPo": {
-                        "type": "string",
-                        "description": "Customer Purchase Order",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Customer Purchase Order"
                     },
                     "importId": {
-                        "type": "string",
-                        "description": "Internal import ID label",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Internal import ID label"
                     },
                     "memo": {
-                        "type": "string",
-                        "description": "Memo for customer membership",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Memo for customer membership"
                     },
                     "customFields": {
                         "type": "array",
@@ -4187,9 +4391,11 @@
                         "description": "Custom field name"
                     },
                     "value": {
-                        "type": "string",
-                        "description": "Custom field value",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Custom field value"
                     }
                 },
                 "additionalProperties": false
@@ -4279,10 +4485,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -4323,12 +4531,14 @@
                         "description": "Indicates the data type of the custom field."
                     },
                     "dataTypeOptions": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "string"
                         },
-                        "description": "Indicates the dropdown options if the custom field is a dropdown data type.",
-                        "nullable": true
+                        "description": "Indicates the dropdown options if the custom field is a dropdown data type."
                     },
                     "createdOn": {
                         "type": "string",
@@ -4388,9 +4598,11 @@
                         "description": "New status value"
                     },
                     "note": {
-                        "type": "string",
-                        "description": "Optional note attached to this status change",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Optional note attached to this status change"
                     },
                     "createdOn": {
                         "type": "string",
@@ -4398,10 +4610,12 @@
                         "format": "date-time"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created this status change record",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -4430,10 +4644,12 @@
                         "format": "int64"
                     },
                     "nextScheduledBillDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Next date that this membership will be billed on",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "status": {
                         "oneOf": [
@@ -4453,28 +4669,36 @@
                         "format": "date-time"
                     },
                     "to": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The end date of this membership (null if ongoing)",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "soldById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that was credited for the sale of this membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "billingTemplateId": {
-                        "type": "integer",
-                        "description": "The ID of the invoice template used to bill this membership.\nCan either be a \"settings template\" (when invoice template is shared – in this case new invoice template will be created),\nor be a new invoice template created specifically for this customer membership.",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "The ID of the invoice template used to bill this membership.\nCan either be a \"settings template\" (when invoice template is shared \u2013 in this case new invoice template will be created),\nor be a new invoice template created specifically for this customer membership.",
+                        "format": "int64"
                     },
                     "locationId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Discount location ID of this membership (null if all locations)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "recurringServiceAction": {
                         "oneOf": [
@@ -4485,28 +4709,36 @@
                         "description": "Required if RecurringLocationId is set.\nDetermines how many of the customer's locations that recurring services should be added to: all, single, or none (which deletes existing recurring services)."
                     },
                     "recurringLocationId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The location at which recurring services are scheduled (null if all locations)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "paymentMethodId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The ID of the payment method (credit card or bank account) that should be used for this membership. This\nfield is mutually exclusive with payment type. Only one or the other can be set at a time.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "paymentTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The payment type (cash, check, etc) that should be used for this membership. This field is mutually\nexclusive with payment type. Only one or the other can be set at a time. Setting payment type means we will\nnot automatically use a payment method to bill the membership and payment will have to be collected manually.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "renewalMembershipTaskId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The ID of the service that will be used as the default to renew this membership.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "initialDeferredRevenue": {
                         "type": "number",
@@ -4514,16 +4746,20 @@
                         "format": "decimal"
                     },
                     "cancellationBalanceInvoiceId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The ID of the invoice created upon membership cancellation in order to zero out the deferred revenue balance.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "cancellationInvoiceId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The ID of the invoice optionally created upon membership cancellation in order to charge (or refund) the\ncustomer if deferred revenue balance is not 0.",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -4593,10 +4829,12 @@
                         "format": "int64"
                     },
                     "locationId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Discount location ID of this membership (null if all locations)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "recurringServiceAction": {
                         "oneOf": [
@@ -4607,10 +4845,12 @@
                         "description": "Required if RecurringLocationId is set.\nDetermines how many of the customer's locations that recurring services should be added to: all, single, or none (which deletes existing recurring services)."
                     },
                     "recurringLocationId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The location at which recurring services are scheduled (null if all locations)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -4670,10 +4910,12 @@
                         "format": "date-time"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created this membership type",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -4681,15 +4923,19 @@
                         "format": "date-time"
                     },
                     "importId": {
-                        "type": "string",
-                        "description": "Internal import ID label",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Internal import ID label"
                     },
                     "billingTemplateId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Billing template ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "discount": {
                         "type": "number",
@@ -4697,46 +4943,56 @@
                         "format": "decimal"
                     },
                     "durationBilling": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/Memberships.V2.MembershipTypeDurationBillingEntry"
                         },
-                        "description": "Membership type duration billing options.\nIf this field is null, it means it was not requested to be loaded via the `IncludeDurationBilling` flag.",
-                        "nullable": true
+                        "description": "Membership type duration billing options.\nIf this field is null, it means it was not requested to be loaded via the `IncludeDurationBilling` flag."
                     },
                     "discounts": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/Memberships.V2.MembershipTypeDiscountEntry"
                         },
-                        "description": "Membership type discounts. This includes a list containing the target of a discount (either a business unit ID or a pricebook\ncategory ID) as well as the percentage discount (0 to 100). Note that this list is relevant only when the\nDiscountMode is set to `Categories` or `BusinessUnits`.\nIf this field is null, it means it was not requested to be loaded via the `IncludeDiscounts` flag.",
-                        "nullable": true
+                        "description": "Membership type discounts. This includes a list containing the target of a discount (either a business unit ID or a pricebook\ncategory ID) as well as the percentage discount (0 to 100). Note that this list is relevant only when the\nDiscountMode is set to `Categories` or `BusinessUnits`.\nIf this field is null, it means it was not requested to be loaded via the `IncludeDiscounts` flag."
                     },
                     "recurringServices": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/Memberships.V2.MembershipTypeRecurringServiceEntry"
                         },
-                        "description": "Membership type recurring service items associated with this membership type. Each item includes the recurring service type ID,\noffset, offset type, and allocation percentage.\nIf this field is null, it means it was not requested to be loaded via the `IncludeRecurringServices` flag.",
-                        "nullable": true
+                        "description": "Membership type recurring service items associated with this membership type. Each item includes the recurring service type ID,\noffset, offset type, and allocation percentage.\nIf this field is null, it means it was not requested to be loaded via the `IncludeRecurringServices` flag."
                     },
                     "tagTypeIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "Tag type IDs associated with this membership type.\nIf this field is null, it means it was not requested to be loaded via the `IncludeTagTypeIds` flag.",
-                        "nullable": true
+                        "description": "Tag type IDs associated with this membership type.\nIf this field is null, it means it was not requested to be loaded via the `IncludeTagTypeIds` flag."
                     },
                     "name": {
                         "type": "string",
                         "description": "Membership type name"
                     },
                     "displayName": {
-                        "type": "string",
-                        "description": "Membership type display name. This is used in the Customer Portal and will be null if not set through the Membership Wizard.",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Membership type display name. This is used in the Customer Portal and will be null if not set through the Membership Wizard."
                     },
                     "active": {
                         "type": "boolean",
@@ -4791,10 +5047,12 @@
                 "type": "object",
                 "properties": {
                     "duration": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Duration of the entry ",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "billingFrequency": {
                         "oneOf": [
@@ -4986,10 +5244,12 @@
                         "format": "date-time"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created this recurring service type",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -5034,22 +5294,28 @@
                         "format": "int32"
                     },
                     "invoiceTemplateId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Invoice template ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Business unit ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "jobTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Job type ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "priority": {
                         "oneOf": [
@@ -5060,25 +5326,33 @@
                         "description": "Priority"
                     },
                     "campaignId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Campaign ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "jobSummary": {
-                        "type": "string",
-                        "description": "Job summary",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Job summary"
                     },
                     "name": {
-                        "type": "string",
-                        "description": "Recurring service type name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Recurring service type name"
                     },
                     "importId": {
-                        "type": "string",
-                        "description": "Import ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Import ID"
                     }
                 },
                 "additionalProperties": false
@@ -5217,10 +5491,12 @@
                         "format": "date-time"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created this membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -5233,28 +5509,36 @@
                         "format": "date-time"
                     },
                     "cancellationDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "When customer membership was or will be cancelled",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "from": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Beginning date of customer membership",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "nextScheduledBillDate": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Next scheduled billing date",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "to": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "End date of customer membership",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "billingFrequency": {
                         "oneOf": [
@@ -5268,10 +5552,12 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Memberships.V2.MembershipRecurrenceType"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Renewal billing frequency",
-                        "nullable": true
+                        "description": "Renewal billing frequency"
                     },
                     "status": {
                         "oneOf": [
@@ -5299,16 +5585,20 @@
                         "format": "decimal"
                     },
                     "duration": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Duration of customer membership in months",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "renewalDuration": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Renewal duration",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "businessUnitId": {
                         "type": "integer",
@@ -5326,97 +5616,129 @@
                         "format": "int64"
                     },
                     "activatedById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that activated this membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "activatedFromId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the invoice item that is the sale task of this membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "billingTemplateId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the invoice template used for membership billing",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "cancellationBalanceInvoiceId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Cancellation balance invoice ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "cancellationInvoiceId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the invoice that either charged or refunded the deferred revenue balance of the customer membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "followUpCustomStatusId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of custom followup status",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "locationId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of location for this customer membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "paymentMethodId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Preferred payment method ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "paymentTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of payment type",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "recurringLocationId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Recurring Location ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "renewalMembershipTaskId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Task ID that renews this membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "renewedById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the renewal membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "soldById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that was credited for the sale of this membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "customerPo": {
-                        "type": "string",
-                        "description": "Customer Purchase Order",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Customer Purchase Order"
                     },
                     "importId": {
-                        "type": "string",
-                        "description": "Internal import ID label",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Internal import ID label"
                     },
                     "memo": {
-                        "type": "string",
-                        "description": "Memo for customer membership",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Memo for customer membership"
                     },
                     "customFields": {
                         "type": "array",
@@ -5473,9 +5795,11 @@
                         "format": "int64"
                     },
                     "name": {
-                        "type": "string",
-                        "description": "Invoice template name (used only for shared invoice templates)",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Invoice template name (used only for shared invoice templates)"
                     },
                     "createdOn": {
                         "type": "string",
@@ -5483,10 +5807,12 @@
                         "format": "date-time"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created invoice template",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -5507,9 +5833,11 @@
                         "description": "Whether invoice template is shared (i.e. visible on the Settings page)"
                     },
                     "importId": {
-                        "type": "string",
-                        "description": "Import ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Import ID"
                     },
                     "items": {
                         "type": "array",
@@ -5565,33 +5893,43 @@
                         "description": "Whether invoice item is add-on"
                     },
                     "importId": {
-                        "type": "string",
-                        "description": "Import ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Import ID"
                     },
                     "workflowActionItemId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The invoice item ID that created this invoice template item via ModifyMembershipWorkflowAction",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "description": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Item description",
-                        "format": "html",
-                        "nullable": true
+                        "format": "html"
                     },
                     "cost": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Materials cost",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "hours": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Sold/billable hours",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     }
                 },
                 "additionalProperties": false
@@ -5682,10 +6020,12 @@
                         "format": "date-time"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created this recurring service",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -5693,15 +6033,19 @@
                         "format": "date-time"
                     },
                     "importId": {
-                        "type": "string",
-                        "description": "Internal import ID label",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Internal import ID label"
                     },
                     "membershipId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Customer membership ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "locationId": {
                         "type": "integer",
@@ -5727,43 +6071,55 @@
                         "format": "int32"
                     },
                     "from": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Beginning date of recurring service",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "to": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "End date of recurring service",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "memo": {
-                        "type": "string",
-                        "description": "Memo",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Memo"
                     },
                     "invoiceTemplateId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Invoice template ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "invoiceTemplateForFollowingYearsId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Invoice template ID for the 2nd year and following (for ongoing memberships)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "firstVisitComplete": {
                         "type": "boolean",
                         "description": "Whether first visit is complete"
                     },
                     "activatedFromId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the invoice item that is the sale task of this membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "allocation": {
                         "type": "number",
@@ -5771,22 +6127,28 @@
                         "format": "decimal"
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Business unit ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "jobTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Job type ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "campaignId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Campaign ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "priority": {
                         "oneOf": [
@@ -5797,9 +6159,11 @@
                         "description": "Recurring service priority"
                     },
                     "jobSummary": {
-                        "type": "string",
-                        "description": "Job summary",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Job summary"
                     },
                     "recurrenceType": {
                         "oneOf": [
@@ -5840,10 +6204,12 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Memberships.V2.WeekDay"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Enum value corresponding to which day of the week this recurring service recurs when\nRecurrenceType is NthWeekdayOfMonth. Used with RecurrenceWeek.",
-                        "nullable": true
+                        "description": "Enum value corresponding to which day of the week this recurring service recurs when\nRecurrenceType is NthWeekdayOfMonth. Used with RecurrenceWeek."
                     },
                     "recurrenceDaysOfMonth": {
                         "type": "array",
@@ -5854,25 +6220,31 @@
                         "description": "A list of days of the month on which this recurring service recurs when\nRecurrenceType is Monthly."
                     },
                     "jobStartTime": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Job start time",
-                        "format": "duration",
-                        "nullable": true
+                        "format": "duration"
                     },
                     "estimatedPayrollCost": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Estimated payroll cost",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "preferredTechnicianIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "A list of technician IDs assigned to this recurring service.\nWill be null if was not requested via IncludeTechnicians field.",
-                        "nullable": true
+                        "description": "A list of technician IDs assigned to this recurring service.\nWill be null if was not requested via IncludeTechnicians field."
                     },
                     "tagTypeIds": {
                         "type": "array",
@@ -5977,20 +6349,26 @@
                         "format": "int64"
                     },
                     "locationRecurringServiceName": {
-                        "type": "string",
-                        "description": "Recurring service name ",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Recurring service name "
                     },
                     "membershipId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Membership ID ",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "membershipName": {
-                        "type": "string",
-                        "description": "Membership name ",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Membership name "
                     },
                     "status": {
                         "oneOf": [
@@ -6011,16 +6389,20 @@
                         "format": "date-time"
                     },
                     "jobId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the job associated with this event ",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created this event (could happen as a result of\nediting recurring service, selling a new membership, etc.)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -6093,9 +6475,11 @@
                         "description": "New status value"
                     },
                     "note": {
-                        "type": "string",
-                        "description": "Optional note attached to this status change",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Optional note attached to this status change"
                     },
                     "createdOn": {
                         "type": "string",
@@ -6103,10 +6487,12 @@
                         "format": "date-time"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created this status change record",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "membershipId": {
                         "type": "integer",
@@ -6140,10 +6526,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -6174,9 +6562,11 @@
                         "format": "int64"
                     },
                     "name": {
-                        "type": "string",
-                        "description": "Invoice template name (used only for shared invoice templates)",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Invoice template name (used only for shared invoice templates)"
                     },
                     "createdOn": {
                         "type": "string",
@@ -6184,10 +6574,12 @@
                         "format": "date-time"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created invoice template",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -6208,9 +6600,11 @@
                         "description": "Whether invoice template is shared (i.e. visible on the Settings page)"
                     },
                     "importId": {
-                        "type": "string",
-                        "description": "Import ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Import ID"
                     },
                     "items": {
                         "type": "array",
@@ -6226,12 +6620,14 @@
                 "type": "object",
                 "properties": {
                     "items": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/Memberships.V2.InvoiceTemplateItemCreateRequest"
                         },
-                        "description": "Invoice template items",
-                        "nullable": true
+                        "description": "Invoice template items"
                     }
                 },
                 "additionalProperties": false
@@ -6265,28 +6661,36 @@
                         "description": "Whether invoice item is add-on"
                     },
                     "workflowActionItemId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "The invoice item ID that created this invoice template item via ModifyMembershipWorkflowAction",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "description": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Item description",
-                        "format": "html",
-                        "nullable": true
+                        "format": "html"
                     },
                     "cost": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Materials cost",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "hours": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Sold/billable hours",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     }
                 },
                 "additionalProperties": false
@@ -6337,10 +6741,12 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Invoice template item ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "skuId": {
                         "type": "integer",
@@ -6362,22 +6768,28 @@
                         "description": "Whether invoice item is add-on"
                     },
                     "description": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Item description",
-                        "format": "html",
-                        "nullable": true
+                        "format": "html"
                     },
                     "cost": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Materials cost",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "hours": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Sold/billable hours",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     }
                 },
                 "additionalProperties": false
@@ -6406,10 +6818,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -6444,20 +6858,26 @@
                         "format": "int64"
                     },
                     "locationRecurringServiceName": {
-                        "type": "string",
-                        "description": "Recurring service name ",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Recurring service name "
                     },
                     "membershipId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Membership ID ",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "membershipName": {
-                        "type": "string",
-                        "description": "Membership name ",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Membership name "
                     },
                     "status": {
                         "oneOf": [
@@ -6478,16 +6898,20 @@
                         "format": "date-time"
                     },
                     "jobId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the job associated with this event ",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created this event (could happen as a result of\nediting recurring service, selling a new membership, etc.)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -6565,10 +6989,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -6624,10 +7050,12 @@
                         "format": "date-time"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created this recurring service",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -6635,15 +7063,19 @@
                         "format": "date-time"
                     },
                     "importId": {
-                        "type": "string",
-                        "description": "Internal import ID label",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Internal import ID label"
                     },
                     "membershipId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Customer membership ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "locationId": {
                         "type": "integer",
@@ -6669,43 +7101,55 @@
                         "format": "int32"
                     },
                     "from": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Beginning date of recurring service",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "to": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "End date of recurring service",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "memo": {
-                        "type": "string",
-                        "description": "Memo",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Memo"
                     },
                     "invoiceTemplateId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Invoice template ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "invoiceTemplateForFollowingYearsId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Invoice template ID for the 2nd year and following (for ongoing memberships)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "firstVisitComplete": {
                         "type": "boolean",
                         "description": "Whether first visit is complete"
                     },
                     "activatedFromId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the invoice item that is the sale task of this membership",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "allocation": {
                         "type": "number",
@@ -6713,22 +7157,28 @@
                         "format": "decimal"
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Business unit ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "jobTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Job type ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "campaignId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Campaign ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "priority": {
                         "oneOf": [
@@ -6739,9 +7189,11 @@
                         "description": "Recurring service priority"
                     },
                     "jobSummary": {
-                        "type": "string",
-                        "description": "Job summary",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Job summary"
                     },
                     "recurrenceType": {
                         "oneOf": [
@@ -6782,10 +7234,12 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Memberships.V2.WeekDay"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Enum value corresponding to which day of the week this recurring service recurs when\nRecurrenceType is NthWeekdayOfMonth. Used with RecurrenceWeek.",
-                        "nullable": true
+                        "description": "Enum value corresponding to which day of the week this recurring service recurs when\nRecurrenceType is NthWeekdayOfMonth. Used with RecurrenceWeek."
                     },
                     "recurrenceDaysOfMonth": {
                         "type": "array",
@@ -6796,25 +7250,31 @@
                         "description": "A list of days of the month on which this recurring service recurs when\nRecurrenceType is Monthly."
                     },
                     "jobStartTime": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Job start time",
-                        "format": "duration",
-                        "nullable": true
+                        "format": "duration"
                     },
                     "estimatedPayrollCost": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Estimated payroll cost",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "preferredTechnicianIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "A list of technician IDs assigned to this recurring service.\nWill be null if was not requested via IncludeTechnicians field.",
-                        "nullable": true
+                        "description": "A list of technician IDs assigned to this recurring service.\nWill be null if was not requested via IncludeTechnicians field."
                     },
                     "tagTypeIds": {
                         "type": "array",
@@ -6866,16 +7326,20 @@
                         "description": "Memo"
                     },
                     "invoiceTemplateId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Invoice template ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "invoiceTemplateForFollowingYearsId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Invoice template ID for the 2nd year and following (for ongoing memberships)",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "businessUnitId": {
                         "type": "integer",
@@ -6943,22 +7407,28 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Memberships.V2.WeekDay"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "Enum value corresponding to which day of the week this recurring service recurs when\nRecurrenceType is NthWeekdayOfMonth. Used with RecurrenceWeek.",
-                        "nullable": true
+                        "description": "Enum value corresponding to which day of the week this recurring service recurs when\nRecurrenceType is NthWeekdayOfMonth. Used with RecurrenceWeek."
                     },
                     "jobStartTime": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Job start time",
-                        "format": "duration",
-                        "nullable": true
+                        "format": "duration"
                     },
                     "estimatedPayrollCost": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Estimated payroll cost",
-                        "format": "decimal",
-                        "nullable": true
+                        "format": "decimal"
                     },
                     "tagTypeIds": {
                         "type": "array",
@@ -7003,10 +7473,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -7041,9 +7513,11 @@
                         "description": "Membership type name"
                     },
                     "displayName": {
-                        "type": "string",
-                        "description": "Membership type display name. This is used in the Customer Portal and will be null if not set through the Membership Wizard.",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Membership type display name. This is used in the Customer Portal and will be null if not set through the Membership Wizard."
                     },
                     "active": {
                         "type": "boolean",
@@ -7096,10 +7570,12 @@
                         "format": "date-time"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created this membership type",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -7107,15 +7583,19 @@
                         "format": "date-time"
                     },
                     "importId": {
-                        "type": "string",
-                        "description": "Internal import ID label",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Internal import ID label"
                     },
                     "billingTemplateId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Billing template ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "discount": {
                         "type": "number",
@@ -7123,37 +7603,45 @@
                         "format": "decimal"
                     },
                     "durationBilling": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/Memberships.V2.MembershipTypeDurationBillingEntry"
                         },
-                        "description": "Membership type duration billing options.\nIf this field is null, it means it was not requested to be loaded via the `IncludeDurationBilling` flag.",
-                        "nullable": true
+                        "description": "Membership type duration billing options.\nIf this field is null, it means it was not requested to be loaded via the `IncludeDurationBilling` flag."
                     },
                     "discounts": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/Memberships.V2.MembershipTypeDiscountEntry"
                         },
-                        "description": "Membership type discounts. This includes a list containing the target of a discount (either a business unit ID or a pricebook\ncategory ID) as well as the percentage discount (0 to 100). Note that this list is relevant only when the\nDiscountMode is set to `Categories` or `BusinessUnits`.\nIf this field is null, it means it was not requested to be loaded via the `IncludeDiscounts` flag.",
-                        "nullable": true
+                        "description": "Membership type discounts. This includes a list containing the target of a discount (either a business unit ID or a pricebook\ncategory ID) as well as the percentage discount (0 to 100). Note that this list is relevant only when the\nDiscountMode is set to `Categories` or `BusinessUnits`.\nIf this field is null, it means it was not requested to be loaded via the `IncludeDiscounts` flag."
                     },
                     "recurringServices": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/Memberships.V2.MembershipTypeRecurringServiceEntry"
                         },
-                        "description": "Membership type recurring service items associated with this membership type. Each item includes the recurring service type ID,\noffset, offset type, and allocation percentage.\nIf this field is null, it means it was not requested to be loaded via the `IncludeRecurringServices` flag.",
-                        "nullable": true
+                        "description": "Membership type recurring service items associated with this membership type. Each item includes the recurring service type ID,\noffset, offset type, and allocation percentage.\nIf this field is null, it means it was not requested to be loaded via the `IncludeRecurringServices` flag."
                     },
                     "tagTypeIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "Tag type IDs associated with this membership type.\nIf this field is null, it means it was not requested to be loaded via the `IncludeTagTypeIds` flag.",
-                        "nullable": true
+                        "description": "Tag type IDs associated with this membership type.\nIf this field is null, it means it was not requested to be loaded via the `IncludeTagTypeIds` flag."
                     }
                 },
                 "additionalProperties": false
@@ -7204,9 +7692,11 @@
                         "format": "int64"
                     },
                     "importId": {
-                        "type": "string",
-                        "description": "Import ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Import ID"
                     },
                     "createdOn": {
                         "type": "string",
@@ -7214,10 +7704,12 @@
                         "format": "date-time"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created this recurring service item",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -7252,10 +7744,12 @@
                         "format": "date-time"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created this discount item",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -7273,10 +7767,12 @@
                 "type": "object",
                 "properties": {
                     "duration": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Duration of the entry ",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "billingFrequency": {
                         "oneOf": [
@@ -7307,9 +7803,11 @@
                         "format": "int64"
                     },
                     "importId": {
-                        "type": "string",
-                        "description": "Import ID of the entry",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Import ID of the entry"
                     },
                     "active": {
                         "type": "boolean",
@@ -7321,10 +7819,12 @@
                         "format": "date-time"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created this duration/billing option",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -7353,10 +7853,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -7395,10 +7897,12 @@
                         "format": "date-time"
                     },
                     "createdById": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "ID of the user that created this recurring service type",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -7443,22 +7947,28 @@
                         "format": "int32"
                     },
                     "invoiceTemplateId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Invoice template ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Business unit ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "jobTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Job type ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "priority": {
                         "oneOf": [
@@ -7469,25 +7979,33 @@
                         "description": "Priority"
                     },
                     "campaignId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Campaign ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "jobSummary": {
-                        "type": "string",
-                        "description": "Job summary",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Job summary"
                     },
                     "name": {
-                        "type": "string",
-                        "description": "Recurring service type name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Recurring service type name"
                     },
                     "importId": {
-                        "type": "string",
-                        "description": "Import ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Import ID"
                     }
                 },
                 "additionalProperties": false
@@ -7497,21 +8015,30 @@
             "apiKeyHeader": {
                 "type": "apiKey",
                 "name": "ST-App-Key",
-                "in": "header"
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
             },
-            "apiKeyQuery": {
-                "type": "apiKey",
-                "name": "servicetitanapplicationkey",
-                "in": "query"
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.mem.memberships:r": "Memberships \u2192 Customer Memberships (Read)",
+                            "tn.mem.memberships:w": "Memberships \u2192 Customer Memberships (Write)",
+                            "tn.mem.membershiptypes:r": "Memberships \u2192 Membership Types (Read)",
+                            "tn.mem.recurringservicetypes:r": "Memberships \u2192 Recurring Service Types (Read)",
+                            "tn.mem.invoicetemplates:r": "Memberships \u2192 Invoice Templates (Read)",
+                            "tn.mem.recurringservices:r": "Memberships \u2192 Recurring Services (Read)",
+                            "tn.mem.recurringserviceevents:r": "Memberships \u2192 Recurring Service Events (Read)",
+                            "tn.mem.invoicetemplates:w": "Memberships \u2192 Invoice Templates (Write)",
+                            "tn.mem.recurringserviceevents:w": "Memberships \u2192 Recurring Service Events (Write)",
+                            "tn.mem.recurringservices:w": "Memberships \u2192 Recurring Services (Write)"
+                        }
+                    }
+                }
             }
         }
-    },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ]
+    }
 }

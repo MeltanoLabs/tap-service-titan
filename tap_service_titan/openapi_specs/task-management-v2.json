@@ -1,12 +1,18 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "info": {
         "title": "Task Management",
+        "description": "Tasks, task management data",
         "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://api-integration.servicetitan.io/taskmanagement/v2"
+            "url": "https://api.servicetitan.io/taskmanagement/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/taskmanagement/v2",
+            "description": "Integration"
         }
     ],
     "paths": {
@@ -116,7 +122,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tsm.data:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/tasks": {
@@ -144,8 +158,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -154,8 +167,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -163,8 +175,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -177,8 +188,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -187,8 +197,7 @@
                         "description": "Created date before",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -197,8 +206,7 @@
                         "description": "Created date on or after",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -207,8 +215,7 @@
                         "description": "Modified date before",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -217,8 +224,7 @@
                         "description": "Modified date on or after",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -227,8 +233,7 @@
                         "description": "Reported date before",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -237,8 +242,7 @@
                         "description": "Reported On or After",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -247,8 +251,7 @@
                         "description": "Completed Before",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -257,8 +260,7 @@
                         "description": "Completed On or After",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -266,8 +268,7 @@
                         "in": "query",
                         "description": "Is Closed\nThis property is deprecated. Use Statuses instead.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -275,8 +276,7 @@
                         "in": "query",
                         "description": "Task Status",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -284,8 +284,7 @@
                         "in": "query",
                         "description": "Task Ids (comma separated Ids)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -293,8 +292,7 @@
                         "in": "query",
                         "description": "Name",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -302,8 +300,7 @@
                         "in": "query",
                         "description": "Include Subtasks",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -311,8 +308,7 @@
                         "in": "query",
                         "description": "Business Unit Ids (comma separated Ids)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -320,8 +316,7 @@
                         "in": "query",
                         "description": "EmployeeTaskType Ids (comma separated Ids)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -329,8 +324,7 @@
                         "in": "query",
                         "description": "EmployeeTaskSource Ids (comma separated Ids)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -338,8 +332,7 @@
                         "in": "query",
                         "description": "EmployeeTaskResolution Ids (comma separated Ids)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -348,8 +341,7 @@
                         "description": "Reported By Id",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -358,8 +350,7 @@
                         "description": "Assigned to Id",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -367,8 +358,7 @@
                         "in": "query",
                         "description": "Involved Employee Ids (comma separated Ids)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -377,8 +367,7 @@
                         "description": "Customer Id",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -387,8 +376,7 @@
                         "description": "Job Id",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -397,8 +385,7 @@
                         "description": "Project Id",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -406,8 +393,7 @@
                         "in": "query",
                         "description": "Priorities (comma separated values)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -416,8 +402,7 @@
                         "description": "Task Number",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -425,8 +410,7 @@
                         "in": "query",
                         "description": "Job Number",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -434,8 +418,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, CreatedOn, DescriptionModifiedOn, CompletedBy, Priority",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -553,7 +536,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tsm.tasks:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -664,7 +655,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tsm.tasks:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/tasks/{id}": {
@@ -699,8 +698,7 @@
                         "name": "includeSubtasks",
                         "in": "query",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -828,7 +826,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tsm.tasks:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/tasks/{id}/subtasks": {
@@ -914,7 +920,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tsm.tasks:w"
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -1224,10 +1238,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -1279,13 +1295,17 @@
                         "$ref": "#/components/schemas/TaskManagement.V2.TaskStatus"
                     },
                     "closedOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "name": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "businessUnitId": {
                         "type": "integer",
@@ -1308,40 +1328,54 @@
                         "format": "date-time"
                     },
                     "completeBy": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "involvedEmployeeIdList": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
-                        },
-                        "nullable": true
+                        }
                     },
                     "customerId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "jobId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "projectId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "description": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "priority": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "id": {
                         "type": "integer",
@@ -1352,58 +1386,76 @@
                         "format": "int64"
                     },
                     "customerName": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "jobNumber": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "refundIssued": {
-                        "type": "number",
-                        "format": "decimal",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "decimal"
                     },
                     "descriptionModifiedOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "descriptionModifiedById": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "createdOn": {
                         "type": "string",
                         "format": "date-time"
                     },
                     "modifiedOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "comments": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TaskManagement.Contracts.ApiModels.Tasks.TaskComment"
-                        },
-                        "nullable": true
+                        }
                     },
                     "attachments": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/TaskManagement.Contracts.ApiModels.Tasks.TaskAttachmentGroup"
-                        },
-                        "nullable": true
+                        }
                     },
                     "subTasksData": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TaskManagement.Contracts.ApiModels.Tasks.SubTasksInfo"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -1528,14 +1580,18 @@
                 "type": "object",
                 "properties": {
                     "assignedToId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "reportedById": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "active": {
                         "type": "boolean"
@@ -1544,9 +1600,11 @@
                         "type": "boolean"
                     },
                     "closedOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "name": {
                         "type": "string"
@@ -1556,9 +1614,11 @@
                         "format": "date-time"
                     },
                     "dueDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "subtaskNumber": {
                         "type": "integer",
@@ -1627,9 +1687,11 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TaskManagement.V2.TaskStatus"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "name": {
                         "type": "string"
@@ -1647,50 +1709,66 @@
                         "format": "int64"
                     },
                     "employeeTaskResolutionId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "reportedDate": {
                         "type": "string",
                         "format": "date-time"
                     },
                     "completeBy": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "startedOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "involvedEmployeeIdList": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
-                        },
-                        "nullable": true
+                        }
                     },
                     "customerId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "jobId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "projectId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "description": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "priority": {
                         "$ref": "#/components/schemas/TaskManagement.V2.TaskPriority"
@@ -1704,26 +1782,36 @@
                         "format": "int64"
                     },
                     "customerName": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "jobNumber": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "refundIssued": {
-                        "type": "number",
-                        "format": "decimal",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "decimal"
                     },
                     "descriptionModifiedOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "descriptionModifiedBy": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "createdOn": {
                         "type": "string",
@@ -1781,9 +1869,11 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/TaskManagement.V2.TaskStatus"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "name": {
                         "type": "string"
@@ -1801,50 +1891,66 @@
                         "format": "int64"
                     },
                     "employeeTaskResolutionId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "reportedDate": {
                         "type": "string",
                         "format": "date-time"
                     },
                     "completeBy": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "startedOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "involvedEmployeeIdList": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
-                        },
-                        "nullable": true
+                        }
                     },
                     "customerId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "jobId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "projectId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "description": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "priority": {
                         "$ref": "#/components/schemas/TaskManagement.V2.TaskPriority"
@@ -1876,9 +1982,11 @@
                         "format": "int64"
                     },
                     "dueDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "parentTaskId": {
                         "type": "integer",
@@ -1920,9 +2028,11 @@
                         "format": "int64"
                     },
                     "dueDateTime": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     }
                 },
                 "additionalProperties": false
@@ -1932,21 +2042,23 @@
             "apiKeyHeader": {
                 "type": "apiKey",
                 "name": "ST-App-Key",
-                "in": "header"
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
             },
-            "apiKeyQuery": {
-                "type": "apiKey",
-                "name": "servicetitanapplicationkey",
-                "in": "query"
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.tsm.data:r": "Task Management \u2192 Task Management Data (Read)",
+                            "tn.tsm.tasks:r": "Task Management \u2192 Tasks (Read)",
+                            "tn.tsm.tasks:w": "Task Management \u2192 Tasks (Write)"
+                        }
+                    }
+                }
             }
         }
-    },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ]
+    }
 }

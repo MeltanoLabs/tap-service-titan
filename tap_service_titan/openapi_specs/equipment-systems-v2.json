@@ -1,12 +1,18 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "info": {
         "title": "Equipment Systems",
+        "description": "Equipment types, installed equipment",
         "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://api-integration.servicetitan.io/equipmentsystems/v2"
+            "url": "https://api.servicetitan.io/equipmentsystems/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/equipmentsystems/v2",
+            "description": "Integration"
         }
     ],
     "paths": {
@@ -34,8 +40,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -43,8 +48,7 @@
                         "in": "query",
                         "description": "Filters records by name (case-insensitive \"contains\" operation)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -53,8 +57,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -63,8 +66,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -73,8 +75,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -83,8 +84,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -93,8 +93,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -103,8 +102,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -112,8 +110,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -121,8 +118,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: ID, Name, CreatedOn, ModifiedOn",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -135,12 +131,29 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     }
                 ],
                 "responses": {
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -165,26 +178,16 @@
                                 }
                             }
                         }
-                    },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.eqs.equipmenttypes:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -218,23 +221,6 @@
                     }
                 },
                 "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeResponse"
-                                },
-                                "example": {
-                                    "id": 0,
-                                    "name": "string",
-                                    "active": true,
-                                    "createdOn": "string",
-                                    "modifiedOn": "string"
-                                }
-                            }
-                        }
-                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -249,6 +235,23 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "active": true,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
                                 }
                             }
                         }
@@ -271,7 +274,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.eqs.equipmenttypes:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/equipment-types/{id}": {
@@ -304,23 +315,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeResponse"
-                                },
-                                "example": {
-                                    "id": 0,
-                                    "name": "string",
-                                    "active": true,
-                                    "createdOn": "string",
-                                    "modifiedOn": "string"
-                                }
-                            }
-                        }
-                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -335,6 +329,23 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "active": true,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
                                 }
                             }
                         }
@@ -357,7 +368,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.eqs.equipmenttypes:r"
+                        ]
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -401,23 +420,6 @@
                     }
                 },
                 "responses": {
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeResponse"
-                                },
-                                "example": {
-                                    "id": 0,
-                                    "name": "string",
-                                    "active": true,
-                                    "createdOn": "string",
-                                    "modifiedOn": "string"
-                                }
-                            }
-                        }
-                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -432,6 +434,23 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "active": true,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
                                 }
                             }
                         }
@@ -472,7 +491,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.eqs.equipmenttypes:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/installed-equipment": {
@@ -498,8 +525,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -507,8 +533,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -589,7 +614,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.eqs.installedequipment:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/installed-equipment": {
@@ -614,8 +647,7 @@
                         "name": "locationIds",
                         "in": "query",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -623,8 +655,7 @@
                         "in": "query",
                         "description": "Perform lookup by multiple IDs (maximum 50)",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -633,8 +664,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -643,8 +673,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -653,8 +682,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -663,8 +691,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -673,8 +700,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -683,8 +709,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -692,8 +717,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -701,8 +725,7 @@
                         "in": "query",
                         "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, CreatedOn, ModifiedOn.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -715,8 +738,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     }
                 ],
@@ -799,7 +821,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.eqs.installedequipment:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -951,24 +981,6 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "The requested entity was not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "409": {
                         "description": "Some conflict occurred while executing the request",
                         "content": {
@@ -986,8 +998,34 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.eqs.installedequipment:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/installed-equipment/{id}": {
@@ -1123,7 +1161,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.eqs.installedequipment:r"
+                        ]
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -1283,24 +1329,6 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "The requested entity was not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "409": {
                         "description": "Some conflict occurred while executing the request",
                         "content": {
@@ -1318,8 +1346,34 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.eqs.installedequipment:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/installed-equipment/attachments": {
@@ -1373,19 +1427,6 @@
                             }
                         }
                     },
-                    "201": {
-                        "description": "The entity has been created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EquipmentSystems.V2.AttachmentUploadResponse"
-                                },
-                                "example": {
-                                    "path": "string"
-                                }
-                            }
-                        }
-                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -1403,8 +1444,29 @@
                                 }
                             }
                         }
+                    },
+                    "201": {
+                        "description": "The entity has been created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.AttachmentUploadResponse"
+                                },
+                                "example": {
+                                    "path": "string"
+                                }
+                            }
+                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.eqs.installedequipment:w"
+                        ]
+                    }
+                ]
             },
             "get": {
                 "tags": [
@@ -1435,9 +1497,6 @@
                     "200": {
                         "description": "The request has succeeded"
                     },
-                    "302": {
-                        "description": ""
-                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -1455,6 +1514,9 @@
                                 }
                             }
                         }
+                    },
+                    "302": {
+                        "description": ""
                     },
                     "404": {
                         "description": "The requested entity was not found",
@@ -1474,7 +1536,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.eqs.installedequipment:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/installed-equipment/custom-field-types": {
@@ -1526,8 +1596,7 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1535,8 +1604,7 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1544,8 +1612,7 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -1553,16 +1620,14 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
                         "name": "sortBy",
                         "in": "query",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -1611,7 +1676,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.eqs.installedequipment:r"
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -1688,10 +1761,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -1833,9 +1908,11 @@
                         "type": "boolean"
                     },
                     "equipmentId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "locationId": {
                         "type": "integer",
@@ -1846,9 +1923,11 @@
                         "format": "int64"
                     },
                     "invoiceItemId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "name": {
                         "type": "string"
@@ -1857,14 +1936,18 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/EquipmentSystems.V2.InstalledEquipmentTypeModel"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "installedOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "createdOn": {
                         "type": "string",
@@ -1878,8 +1961,10 @@
                         "type": "string"
                     },
                     "barcodeId": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "memo": {
                         "type": "string"
@@ -1898,46 +1983,62 @@
                         "$ref": "#/components/schemas/LocationEquipment.InstalledEquipmentStatus"
                     },
                     "manufacturerWarrantyStart": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "manufacturerWarrantyEnd": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "serviceProviderWarrantyStart": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "serviceProviderWarrantyEnd": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "tags": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/EquipmentSystems.V2.TagResponseModel"
-                        },
-                        "nullable": true
+                        }
                     },
                     "actualReplacementDate": {
-                        "type": "string",
-                        "format": "date",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date"
                     },
                     "predictedReplacementMonths": {
-                        "type": "integer",
-                        "format": "int32",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int32"
                     },
                     "predictedReplacementDate": {
-                        "type": "string",
-                        "format": "date",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date"
                     }
                 },
                 "additionalProperties": false
@@ -1953,8 +2054,10 @@
                         "format": "int64"
                     },
                     "name": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -1992,24 +2095,34 @@
                         "format": "int64"
                     },
                     "typeName": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "memo": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "color": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "textColor": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "code": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -2038,10 +2151,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -2080,9 +2195,11 @@
                         "type": "boolean"
                     },
                     "equipmentId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "locationId": {
                         "type": "integer",
@@ -2093,9 +2210,11 @@
                         "format": "int64"
                     },
                     "invoiceItemId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "name": {
                         "type": "string"
@@ -2104,14 +2223,18 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/EquipmentSystems.V2.InstalledEquipmentTypeModel"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "installedOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "createdOn": {
                         "type": "string",
@@ -2125,8 +2248,10 @@
                         "type": "string"
                     },
                     "barcodeId": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "memo": {
                         "type": "string"
@@ -2145,60 +2270,80 @@
                         "$ref": "#/components/schemas/LocationEquipment.InstalledEquipmentStatus"
                     },
                     "manufacturerWarrantyStart": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "manufacturerWarrantyEnd": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "serviceProviderWarrantyStart": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "serviceProviderWarrantyEnd": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "tags": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/EquipmentSystems.V2.TagResponseModel"
-                        },
-                        "nullable": true
+                        }
                     },
                     "actualReplacementDate": {
-                        "type": "string",
-                        "format": "date",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date"
                     },
                     "predictedReplacementMonths": {
-                        "type": "integer",
-                        "format": "int32",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int32"
                     },
                     "predictedReplacementDate": {
-                        "type": "string",
-                        "format": "date",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date"
                     },
                     "customFields": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/EquipmentSystems.V2.CustomFieldResponseModel"
-                        },
-                        "nullable": true
+                        }
                     },
                     "attachments": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/EquipmentSystems.V2.AttachmentApiModel"
-                        },
-                        "nullable": true
+                        }
                     }
                 },
                 "additionalProperties": false
@@ -2219,12 +2364,16 @@
                         "format": "int64"
                     },
                     "name": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "value": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -2237,14 +2386,18 @@
                 "type": "object",
                 "properties": {
                     "alias": {
-                        "type": "string",
-                        "description": "Display name or label for the attachment (optional)",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Display name or label for the attachment (optional)"
                     },
                     "fileName": {
-                        "type": "string",
-                        "description": "Original file name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Original file name"
                     },
                     "type": {
                         "oneOf": [
@@ -2291,98 +2444,134 @@
                         "format": "int64"
                     },
                     "name": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "equipmentTypeId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "status": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/LocationEquipment.InstalledEquipmentStatus"
+                            },
+                            {
+                                "type": "null"
                             }
-                        ],
-                        "nullable": true
+                        ]
                     },
                     "installedOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "actualReplacementDate": {
-                        "type": "string",
-                        "format": "date",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date"
                     },
                     "serialNumber": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "barcodeId": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "memo": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "manufacturer": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "model": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "cost": {
-                        "type": "number",
-                        "format": "decimal",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "decimal"
                     },
                     "manufacturerWarrantyStart": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "manufacturerWarrantyEnd": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "serviceProviderWarrantyStart": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "serviceProviderWarrantyEnd": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "customFields": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/EquipmentSystems.V2.CustomFieldRequestModel"
-                        },
-                        "nullable": true
+                        }
                     },
                     "attachments": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/EquipmentSystems.V2.AttachmentApiModel"
-                        },
-                        "nullable": true
+                        }
                     },
                     "tagTypeIds": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "integer",
                             "format": "int64"
-                        },
-                        "nullable": true
+                        }
                     }
                 },
                 "additionalProperties": false
@@ -2391,18 +2580,24 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "typeId": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
                     },
                     "value": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -2421,14 +2616,18 @@
                         "$ref": "#/components/schemas/LocationEquipment.InstalledEquipmentStatus"
                     },
                     "installedOn": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "actualReplacementDate": {
-                        "type": "string",
-                        "format": "date",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date"
                     },
                     "serialNumber": {
                         "type": "string"
@@ -2446,29 +2645,39 @@
                         "type": "string"
                     },
                     "cost": {
-                        "type": "number",
-                        "format": "decimal",
-                        "nullable": true
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "decimal"
                     },
                     "manufacturerWarrantyStart": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "manufacturerWarrantyEnd": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "serviceProviderWarrantyStart": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "serviceProviderWarrantyEnd": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "customFields": {
                         "type": "array",
@@ -2547,10 +2756,12 @@
                         "description": "The list of items on the current page."
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Optional total count of items across all pages.",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     }
                 },
                 "additionalProperties": false,
@@ -2603,21 +2814,24 @@
             "apiKeyHeader": {
                 "type": "apiKey",
                 "name": "ST-App-Key",
-                "in": "header"
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
             },
-            "apiKeyQuery": {
-                "type": "apiKey",
-                "name": "servicetitanapplicationkey",
-                "in": "query"
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.eqs.equipmenttypes:r": "Equipment Systems \u2192 Equipment Types (Read)",
+                            "tn.eqs.equipmenttypes:w": "Equipment Systems \u2192 Equipment Types (Write)",
+                            "tn.eqs.installedequipment:r": "Equipment Systems \u2192 Installed Equipment (Read)",
+                            "tn.eqs.installedequipment:w": "Equipment Systems \u2192 Installed Equipment (Write)"
+                        }
+                    }
+                }
             }
         }
-    },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ]
+    }
 }

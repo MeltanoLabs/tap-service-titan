@@ -1,12 +1,18 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "info": {
         "title": "Scheduling Pro",
+        "description": "Schedulers",
         "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://api-integration.servicetitan.io/schedulingpro/v2"
+            "url": "https://api.servicetitan.io/schedulingpro/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/schedulingpro/v2",
+            "description": "Integration"
         }
     ],
     "paths": {
@@ -43,8 +49,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -53,8 +58,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -63,8 +67,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -73,8 +76,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -83,8 +85,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -93,8 +94,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -102,12 +102,29 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
                 "responses": {
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -230,26 +247,16 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "The requested entity was not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sp.schedulers:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/routers/{id}/performance": {
@@ -299,6 +306,24 @@
                     }
                 ],
                 "responses": {
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -337,26 +362,16 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "The requested entity was not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sp.schedulers:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/schedulers": {
@@ -384,8 +399,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -394,8 +408,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -404,8 +417,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -414,8 +426,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -424,8 +435,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -434,8 +444,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -443,12 +452,29 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
                 "responses": {
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -496,26 +522,16 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "The requested entity was not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sp.schedulers:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/schedulers/{id}/sessions": {
@@ -551,8 +567,7 @@
                         "description": "Return items created before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -561,8 +576,7 @@
                         "description": "Return items created on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -571,8 +585,7 @@
                         "description": "Return items modified before certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -581,8 +594,7 @@
                         "description": "Return items modified on or after certain date/time (in UTC)",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -591,8 +603,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -601,8 +612,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -610,12 +620,29 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
                 "responses": {
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -738,26 +765,16 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "The requested entity was not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sp.schedulers:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/schedulers/{id}/performance": {
@@ -807,6 +824,24 @@
                     }
                 ],
                 "responses": {
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -867,26 +902,16 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "The requested entity was not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sp.schedulers:r"
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -963,10 +988,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -1010,66 +1037,88 @@
                         "format": "date-time"
                     },
                     "sessionOutcome": {
-                        "type": "string",
-                        "description": "The outcome of the session",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The outcome of the session"
                     },
                     "schedulerId": {
-                        "type": "string",
-                        "description": "Scheduler ID if user was routed to a scheduler, where session was upgraded from router to scheduler",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Scheduler ID if user was routed to a scheduler, where session was upgraded from router to scheduler"
                     },
                     "jobId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Job ID if a job was created from this session",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "bookingId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Booking ID if a booking was created from this session",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "leadId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Lead ID if a lead was created from this session",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "gbpName": {
-                        "type": "string",
-                        "description": "GBP Name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "GBP Name"
                     },
                     "timeslotStart": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Timeslot start",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "timeslotEnd": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Timeslot end",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "category": {
-                        "type": "string",
-                        "description": "Category of the job",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Category of the job"
                     },
                     "jobTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Job type ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Business unit ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "customer": {
                         "oneOf": [
@@ -1080,23 +1129,29 @@
                         "description": "Customer information"
                     },
                     "zoneId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Zone ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "customerResponses": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "string"
                         },
-                        "description": "Customer Responses",
-                        "nullable": true
+                        "description": "Customer Responses"
                     },
                     "notes": {
-                        "type": "string",
-                        "description": "Customer customer",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Customer customer"
                     },
                     "sourceTracking": {
                         "oneOf": [
@@ -1107,75 +1162,103 @@
                         "description": "Source tracking information"
                     },
                     "mobileNotificationOptIn": {
-                        "type": "boolean",
-                        "description": "Check if user opt in for mobile notifications",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Check if user opt in for mobile notifications"
                     },
                     "blockerType": {
-                        "type": "string",
-                        "description": "Blocker Type",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Blocker Type"
                     },
                     "blockerToBookAdditionalData": {
-                        "type": "string",
-                        "description": "Additional data for the blocker to book",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Additional data for the blocker to book"
                     },
                     "lastStep": {
-                        "type": "string",
-                        "description": "Last Step",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Last Step"
                     },
                     "dispatchFeeQuoted": {
-                        "type": "string",
-                        "description": "Dispatch Fee Quoted",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Dispatch Fee Quoted"
                     },
                     "isLocationTakeover": {
-                        "type": "boolean",
-                        "description": "Is Location Takeover",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Is Location Takeover"
                     },
                     "customOptIn": {
-                        "type": "boolean",
-                        "description": "Custom Opt In",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Custom Opt In"
                     },
                     "marketingOptIn": {
-                        "type": "boolean",
-                        "description": "Marketing Opt In",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Marketing Opt In"
                     },
                     "membershipInterest": {
-                        "type": "string",
-                        "description": "Membership Interest",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Membership Interest"
                     },
                     "paymentInfoCaptured": {
-                        "type": "boolean",
-                        "description": "Indicates whether the payment info was captured",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Indicates whether the payment info was captured"
                     },
                     "externalId": {
-                        "type": "string",
-                        "description": "External ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "External ID"
                     },
                     "recurringServiceId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Recurring Service ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "campaignName": {
-                        "type": "string",
-                        "description": "Campaign Name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Campaign Name"
                     },
                     "linearNavigationEnabled": {
-                        "type": "boolean",
-                        "description": "Linear Navigation Enabled",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Linear Navigation Enabled"
                     }
                 },
                 "additionalProperties": false
@@ -1193,36 +1276,48 @@
                         "description": "Whether this is a new customer"
                     },
                     "id": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Customer ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "firstName": {
-                        "type": "string",
-                        "description": "Customer first name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Customer first name"
                     },
                     "lastName": {
-                        "type": "string",
-                        "description": "Customer last name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Customer last name"
                     },
                     "email": {
-                        "type": "string",
-                        "description": "Customer email",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Customer email"
                     },
                     "phone": {
-                        "type": "string",
-                        "description": "Customer phone",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Customer phone"
                     },
                     "locationId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Location ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "isNewLocation": {
                         "type": "boolean",
@@ -1237,69 +1332,95 @@
                         "description": "Customer Address Information"
                     },
                     "browserName": {
-                        "type": "string",
-                        "description": "Browser Name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Browser Name"
                     },
                     "browserVersion": {
-                        "type": "string",
-                        "description": "Browser Version",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Browser Version"
                     },
                     "cpuArchitecture": {
-                        "type": "string",
-                        "description": "CPU Architecture",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "CPU Architecture"
                     },
                     "deviceModel": {
-                        "type": "string",
-                        "description": "Device Model",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Device Model"
                     },
                     "deviceType": {
-                        "type": "string",
-                        "description": "Device Type",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Device Type"
                     },
                     "deviceVendor": {
-                        "type": "string",
-                        "description": "Device Vendor",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Device Vendor"
                     },
                     "engineName": {
-                        "type": "string",
-                        "description": "Engine Name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Engine Name"
                     },
                     "engineVersion": {
-                        "type": "string",
-                        "description": "Engine Version",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Engine Version"
                     },
                     "ipAddress": {
-                        "type": "string",
-                        "description": "IP Address",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "IP Address"
                     },
                     "isBot": {
-                        "type": "boolean",
-                        "description": "Flag whether this session was bot or not",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Flag whether this session was bot or not"
                     },
                     "osName": {
-                        "type": "string",
-                        "description": "OS Name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "OS Name"
                     },
                     "osVersion": {
-                        "type": "string",
-                        "description": "OS Version",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "OS Version"
                     },
                     "userAgent": {
-                        "type": "string",
-                        "description": "User Agent",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "User Agent"
                     }
                 },
                 "additionalProperties": false
@@ -1308,34 +1429,46 @@
                 "type": "object",
                 "properties": {
                     "street": {
-                        "type": "string",
-                        "description": "Street",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Street"
                     },
                     "unit": {
-                        "type": "string",
-                        "description": "Unit",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Unit"
                     },
                     "city": {
-                        "type": "string",
-                        "description": "City",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "City"
                     },
                     "state": {
-                        "type": "string",
-                        "description": "State",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "State"
                     },
                     "zip": {
-                        "type": "string",
-                        "description": "Zip",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Zip"
                     },
                     "country": {
-                        "type": "string",
-                        "description": "Country",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Country"
                     }
                 },
                 "additionalProperties": false
@@ -1344,94 +1477,130 @@
                 "type": "object",
                 "properties": {
                     "isRWGSession": {
-                        "type": "boolean",
-                        "description": "Whether the session came from Reserve with Google",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the session came from Reserve with Google"
                     },
                     "campaignId": {
-                        "type": "string",
-                        "description": "Campaign ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Campaign ID"
                     },
                     "landingPageUrl": {
-                        "type": "string",
-                        "description": "Campaign Name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Campaign Name"
                     },
                     "gclid": {
-                        "type": "string",
-                        "description": "Google Click ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Google Click ID"
                     },
                     "fbclid": {
-                        "type": "string",
-                        "description": "Facebook Click ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Facebook Click ID"
                     },
                     "msclkid": {
-                        "type": "string",
-                        "description": "Microsoft Click ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Microsoft Click ID"
                     },
                     "utmSource": {
-                        "type": "string",
-                        "description": "UTM Source",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "UTM Source"
                     },
                     "utmMedium": {
-                        "type": "string",
-                        "description": "UTM Medium",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "UTM Medium"
                     },
                     "utmCampaign": {
-                        "type": "string",
-                        "description": "UTM Campaign",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "UTM Campaign"
                     },
                     "utmAdgroup": {
-                        "type": "string",
-                        "description": "UTM Content",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "UTM Content"
                     },
                     "utmTerm": {
-                        "type": "string",
-                        "description": "UTM Term",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "UTM Term"
                     },
                     "utmContent": {
-                        "type": "string",
-                        "description": "UTM Content",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "UTM Content"
                     },
                     "googleAnalyticsClientId": {
-                        "type": "string",
-                        "description": "Google Analytics Client ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Google Analytics Client ID"
                     },
                     "bookedFrom": {
-                        "type": "string",
-                        "description": "Booked From",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Booked From"
                     },
                     "sourcedFromMarketingPro": {
-                        "type": "string",
-                        "description": "Sourced From Marketing Pro",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Sourced From Marketing Pro"
                     },
                     "gbraid": {
-                        "type": "string",
-                        "description": "gbraid",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "gbraid"
                     },
                     "wbraid": {
-                        "type": "string",
-                        "description": "wbraid",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "wbraid"
                     },
                     "marketingSource": {
-                        "type": "string",
-                        "description": "Marketing Source",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Marketing Source"
                     }
                 },
                 "additionalProperties": false
@@ -1476,9 +1645,11 @@
                 "type": "object",
                 "properties": {
                     "schedulerId": {
-                        "type": "string",
-                        "description": "Scheduler ID. Null value represents sessions that have not been routed to a scheduler.",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Scheduler ID. Null value represents sessions that have not been routed to a scheduler."
                     },
                     "openedCount": {
                         "type": "integer",
@@ -1512,10 +1683,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -1628,10 +1801,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -1675,66 +1850,88 @@
                         "format": "date-time"
                     },
                     "sessionOutcome": {
-                        "type": "string",
-                        "description": "The outcome of the session",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The outcome of the session"
                     },
                     "schedulerId": {
-                        "type": "string",
-                        "description": "Scheduler ID if user was routed to a scheduler, where session was upgraded from router to scheduler",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Scheduler ID if user was routed to a scheduler, where session was upgraded from router to scheduler"
                     },
                     "jobId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Job ID if a job was created from this session",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "bookingId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Booking ID if a booking was created from this session",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "leadId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Lead ID if a lead was created from this session",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "gbpName": {
-                        "type": "string",
-                        "description": "GBP Name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "GBP Name"
                     },
                     "timeslotStart": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Timeslot start",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "timeslotEnd": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Timeslot end",
-                        "format": "date-time",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "category": {
-                        "type": "string",
-                        "description": "Category of the job",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Category of the job"
                     },
                     "jobTypeId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Job type ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Business unit ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "customer": {
                         "oneOf": [
@@ -1745,23 +1942,29 @@
                         "description": "Customer information"
                     },
                     "zoneId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Zone ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "customerResponses": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "string"
                         },
-                        "description": "Customer Responses",
-                        "nullable": true
+                        "description": "Customer Responses"
                     },
                     "notes": {
-                        "type": "string",
-                        "description": "Customer customer",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Customer customer"
                     },
                     "sourceTracking": {
                         "oneOf": [
@@ -1772,75 +1975,103 @@
                         "description": "Source tracking information"
                     },
                     "mobileNotificationOptIn": {
-                        "type": "boolean",
-                        "description": "Check if user opt in for mobile notifications",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Check if user opt in for mobile notifications"
                     },
                     "blockerType": {
-                        "type": "string",
-                        "description": "Blocker Type",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Blocker Type"
                     },
                     "blockerToBookAdditionalData": {
-                        "type": "string",
-                        "description": "Additional data for the blocker to book",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Additional data for the blocker to book"
                     },
                     "lastStep": {
-                        "type": "string",
-                        "description": "Last Step",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Last Step"
                     },
                     "dispatchFeeQuoted": {
-                        "type": "string",
-                        "description": "Dispatch Fee Quoted",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Dispatch Fee Quoted"
                     },
                     "isLocationTakeover": {
-                        "type": "boolean",
-                        "description": "Is Location Takeover",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Is Location Takeover"
                     },
                     "customOptIn": {
-                        "type": "boolean",
-                        "description": "Custom Opt In",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Custom Opt In"
                     },
                     "marketingOptIn": {
-                        "type": "boolean",
-                        "description": "Marketing Opt In",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Marketing Opt In"
                     },
                     "membershipInterest": {
-                        "type": "string",
-                        "description": "Membership Interest",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Membership Interest"
                     },
                     "paymentInfoCaptured": {
-                        "type": "boolean",
-                        "description": "Indicates whether the payment info was captured",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Indicates whether the payment info was captured"
                     },
                     "externalId": {
-                        "type": "string",
-                        "description": "External ID",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "External ID"
                     },
                     "recurringServiceId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Recurring Service ID",
-                        "format": "int64",
-                        "nullable": true
+                        "format": "int64"
                     },
                     "campaignName": {
-                        "type": "string",
-                        "description": "Campaign Name",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Campaign Name"
                     },
                     "linearNavigationEnabled": {
-                        "type": "boolean",
-                        "description": "Linear Navigation Enabled",
-                        "nullable": true
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Linear Navigation Enabled"
                     }
                 },
                 "additionalProperties": false
@@ -2040,179 +2271,27 @@
                     }
                 },
                 "additionalProperties": false
-            },
-            "CloudEvent_Of_SchedulingPro.V2.Webhooks.SessionAbandonedQualifiedWebhookEvent": {
-                "required": [
-                    "specversion",
-                    "id",
-                    "type",
-                    "time",
-                    "source",
-                    "userassignedid",
-                    "datacontenttype",
-                    "data"
-                ],
-                "type": "object",
-                "properties": {
-                    "specversion": {
-                        "type": "string",
-                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
-                    },
-                    "id": {
-                        "type": "string",
-                        "description": "A value that identifies the delivery of this event to a particular consumer.\n(Rarely, there may be multiple attempts to deliver the same event to a consumer, each with\nthe same or a different id. Use userassignedid to detect duplicate deliveries.)"
-                    },
-                    "type": {
-                        "type": "string",
-                        "description": "A value that identifies the type of this event (\"tn.sp.session-abandoned-qualified\")."
-                    },
-                    "time": {
-                        "type": "string",
-                        "description": "The date and time when this event occurred.",
-                        "format": "date-time"
-                    },
-                    "source": {
-                        "type": "string",
-                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
-                    },
-                    "userassignedid": {
-                        "type": "string",
-                        "description": "A value that uniquely identifies this occurrence of the event."
-                    },
-                    "datacontenttype": {
-                        "type": "string",
-                        "description": "The content type of the data (\"application/json\")."
-                    },
-                    "data": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/SchedulingPro.V2.Webhooks.SessionAbandonedQualifiedWebhookEvent"
-                            }
-                        ],
-                        "description": "The event payload."
-                    }
-                },
-                "additionalProperties": false
-            },
-            "SchedulingPro.V2.Webhooks.SessionAbandonedQualifiedWebhookEvent": {
-                "required": [
-                    "session",
-                    "tenantId",
-                    "tenantName"
-                ],
-                "type": "object",
-                "properties": {
-                    "session": {
-                        "$ref": "#/components/schemas/SchedulingPro.V2.SchedulerSessionResponse"
-                    },
-                    "tenantId": {
-                        "type": "integer",
-                        "description": "The ID of the tenant",
-                        "format": "int64"
-                    },
-                    "tenantName": {
-                        "type": "string",
-                        "description": "The name of the tenant"
-                    }
-                },
-                "additionalProperties": false
-            },
-            "CloudEvent_Of_SchedulingPro.V2.Webhooks.SessionCompletedWebhookEvent": {
-                "required": [
-                    "specversion",
-                    "id",
-                    "type",
-                    "time",
-                    "source",
-                    "userassignedid",
-                    "datacontenttype",
-                    "data"
-                ],
-                "type": "object",
-                "properties": {
-                    "specversion": {
-                        "type": "string",
-                        "description": "The version of the CloudEvents specification used by this event (\"1.0\")."
-                    },
-                    "id": {
-                        "type": "string",
-                        "description": "A value that identifies the delivery of this event to a particular consumer.\n(Rarely, there may be multiple attempts to deliver the same event to a consumer, each with\nthe same or a different id. Use userassignedid to detect duplicate deliveries.)"
-                    },
-                    "type": {
-                        "type": "string",
-                        "description": "A value that identifies the type of this event (\"tn.sp.session-completed\")."
-                    },
-                    "time": {
-                        "type": "string",
-                        "description": "The date and time when this event occurred.",
-                        "format": "date-time"
-                    },
-                    "source": {
-                        "type": "string",
-                        "description": "A URI that identifies the source of this event (\"https://webhooks.servicetitan.io\")."
-                    },
-                    "userassignedid": {
-                        "type": "string",
-                        "description": "A value that uniquely identifies this occurrence of the event."
-                    },
-                    "datacontenttype": {
-                        "type": "string",
-                        "description": "The content type of the data (\"application/json\")."
-                    },
-                    "data": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/SchedulingPro.V2.Webhooks.SessionCompletedWebhookEvent"
-                            }
-                        ],
-                        "description": "The event payload."
-                    }
-                },
-                "additionalProperties": false
-            },
-            "SchedulingPro.V2.Webhooks.SessionCompletedWebhookEvent": {
-                "required": [
-                    "session",
-                    "tenantId",
-                    "tenantName"
-                ],
-                "type": "object",
-                "properties": {
-                    "session": {
-                        "$ref": "#/components/schemas/SchedulingPro.V2.SchedulerSessionResponse"
-                    },
-                    "tenantId": {
-                        "type": "integer",
-                        "description": "The ID of the tenant",
-                        "format": "int64"
-                    },
-                    "tenantName": {
-                        "type": "string",
-                        "description": "The name of the tenant"
-                    }
-                },
-                "additionalProperties": false
             }
         },
         "securitySchemes": {
             "apiKeyHeader": {
                 "type": "apiKey",
                 "name": "ST-App-Key",
-                "in": "header"
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
             },
-            "apiKeyQuery": {
-                "type": "apiKey",
-                "name": "servicetitanapplicationkey",
-                "in": "query"
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.sp.schedulers:r": "Scheduling Pro \u2192 Schedulers (Read)"
+                        }
+                    }
+                }
             }
         }
-    },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ]
+    }
 }
