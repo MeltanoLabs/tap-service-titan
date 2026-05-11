@@ -42,7 +42,7 @@ scrapping = [
     "jsonref>=1.1.0,<2",
     "playwright~=1.59.0",
     "rich>=15.0.0",
-    "typer>=0.25.0",
+    "typer>=0.25.1",
 ]
 test = [
     "pytest>=9.0.3",
@@ -55,8 +55,8 @@ typing = [
     { include-group = "test" },
     "backports-httpmethod",
     "mypy>=1.20.1",
-    "ty>=0.0.33",
-    "types-requests>=2.33.0.20260408",
+    "ty>=0.0.34",
+    "types-requests>=2.33.0.20260503",
 ]
 
 [tool.hatch.build.targets.sdist]
