@@ -1,12 +1,18 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "info": {
         "title": "Reporting",
+        "description": "Dynamic value sets, reports, report categories",
         "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://api-integration.servicetitan.io/reporting/v2"
+            "url": "https://api.servicetitan.io/reporting/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/reporting/v2",
+            "description": "Integration"
         }
     ],
     "paths": {
@@ -44,8 +50,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -54,8 +59,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -63,8 +67,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -132,7 +135,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.rpr.dynamicvaluesets:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/report-categories": {
@@ -160,8 +171,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -170,8 +180,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -179,8 +188,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -225,7 +233,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.rpr.reportcategories:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/report-category/{report_category}/reports": {
@@ -262,8 +278,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -272,8 +287,7 @@
                         "description": "How many records to return (50 by default)",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -281,8 +295,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -346,7 +359,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.rpr.reports:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/report-category/{report_category}/reports/{reportId}": {
@@ -471,7 +492,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.rpr.reports:r"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/report-category/{report_category}/reports/{reportId}/data": {
@@ -518,8 +547,7 @@
                         "description": "The logical number of page to return, starting from 1",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -527,11 +555,10 @@
                         "in": "query",
                         "description": "How many records to return (1000 by default)",
                         "schema": {
-                            "maximum": 25000,
-                            "minimum": 1,
+                            "maximum": 25000.0,
+                            "minimum": 1.0,
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -539,8 +566,7 @@
                         "in": "query",
                         "description": "Whether total count should be returned",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -626,7 +652,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.rpr.reports:r"
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -657,10 +691,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -770,10 +806,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -828,10 +866,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -861,9 +901,11 @@
                         "description": "Display name of the report.\nDo not use the name as the report identifier because it can be modified\nand any references based on the old value would stop working"
                     },
                     "description": {
-                        "type": "string",
-                        "description": "Description about the report ",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Description about the report "
                     }
                 },
                 "additionalProperties": false
@@ -888,9 +930,11 @@
                         "description": "Display name of the report "
                     },
                     "description": {
-                        "type": "string",
-                        "description": "Description about the report ",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Description about the report "
                     },
                     "modifiedOn": {
                         "type": "string",
@@ -952,10 +996,12 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/Reporting.V2.ParameterPossibleValues"
+                            },
+                            {
+                                "type": "null"
                             }
                         ],
-                        "description": "If the filter accepts only certain values as the input this object defines what those values should be",
-                        "nullable": true
+                        "description": "If the filter accepts only certain values as the input this object defines what those values should be"
                     }
                 },
                 "additionalProperties": false
@@ -992,18 +1038,22 @@
                         "description": "Describes key column and then value column of possible value rows "
                     },
                     "dynamicSetId": {
-                        "type": "string",
-                        "description": "If values are based on a dynamic list (e.g. a list of the existing Business Units or Technicians)\nthen this object defines identifier of the value set to get from the corresponding endpoint",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "If values are based on a dynamic list (e.g. a list of the existing Business Units or Technicians)\nthen this object defines identifier of the value set to get from the corresponding endpoint"
                     },
                     "values": {
-                        "type": "array",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "type": "array",
                             "items": {}
                         },
-                        "description": "A predefined list of the values accepted ",
-                        "nullable": true
+                        "description": "A predefined list of the values accepted "
                     }
                 },
                 "additionalProperties": false
@@ -1060,10 +1110,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -1113,7 +1165,7 @@
                     },
                     "value": {
                         "description": "Value of the parameter based of its descrition (data type etc.) ",
-                        "nullable": true
+                        "type": "null"
                     }
                 },
                 "additionalProperties": false
@@ -1123,21 +1175,23 @@
             "apiKeyHeader": {
                 "type": "apiKey",
                 "name": "ST-App-Key",
-                "in": "header"
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
             },
-            "apiKeyQuery": {
-                "type": "apiKey",
-                "name": "servicetitanapplicationkey",
-                "in": "query"
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.rpr.dynamicvaluesets:r": "Reporting \u2192 Dynamic Value Sets (Read)",
+                            "tn.rpr.reportcategories:r": "Reporting \u2192 Report Categories (Read)",
+                            "tn.rpr.reports:r": "Reporting \u2192 Reports within the category (Read)"
+                        }
+                    }
+                }
             }
         }
-    },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ]
+    }
 }

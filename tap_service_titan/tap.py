@@ -226,7 +226,6 @@ class TapServiceTitan(Tap):
             streams.marketing.CampaignsStream(self),
             streams.marketing.CostsStream(self),
             streams.marketing.MarketingCategoriesStream(self),
-            streams.marketing.SuppressionsStream(self),
             streams.marketing_reputation.ReviewsStream(self),
             streams.memberships.InvoiceTemplatesStream(self),
             streams.memberships.MembershipCustomFieldsStream(self),
@@ -269,7 +268,6 @@ class TapServiceTitan(Tap):
             streams.settings.UserRolesStream(self),
             streams.task_management.TasksStream(self),
             streams.telecom.CallsStream(self),
-            streams.telecom.OptOutsStream(self),
         ]
         custom_reports_config = self.config.get("custom_reports", [])
         if custom_reports_config:

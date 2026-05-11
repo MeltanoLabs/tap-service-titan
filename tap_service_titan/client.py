@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING, Any
 
 import requests
 import requests.exceptions
-from singer_sdk.pagination import BaseAPIPaginator, BasePageNumberPaginator
+from singer_sdk.pagination import BaseAPIPaginator, PageNumberPaginator
 from singer_sdk.streams import RESTStream
 
 from tap_service_titan.auth import ServiceTitanAuthenticator
@@ -240,7 +240,7 @@ class ServiceTitanExportStream(ServiceTitanBaseStream):
         return params
 
 
-class ServiceTitanPaginator(BasePageNumberPaginator):
+class ServiceTitanPaginator(PageNumberPaginator):
     """ServiceTitan paginator class."""
 
     @override

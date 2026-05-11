@@ -6,6 +6,15 @@
     {
       "breadcrumb": [
         "properties",
+        "appointmentSummaries"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "id"
       ],
       "metadata": {
@@ -151,6 +160,7 @@
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
+        "replication-key": "modifiedOn",
         "selected": true,
         "selected-by-default": true,
         "table-key-properties": [
@@ -178,6 +188,79 @@
         "description": "Appointment number",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "appointmentSummaries": {
+        "description": "Work performed summaries for this appointment. Private preview: available for specific accounts only.",
+        "items": {
+          "additionalProperties": false,
+          "description": "Appointment summary (work performed log) response model\n            ",
+          "properties": {
+            "createdOn": {
+              "description": "When the summary was created (in UTC)",
+              "format": "date-time",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "jobAppointmentId": {
+              "description": "ID of the appointment",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "jobId": {
+              "description": "ID of the job",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "modifiedOn": {
+              "description": "When the summary was last modified (in UTC)",
+              "format": "date-time",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "notes": {
+              "description": "Work performed notes",
+              "format": "multiline",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "technicianId": {
+              "description": "ID of the technician",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "createdOn",
+            "jobAppointmentId",
+            "jobId",
+            "modifiedOn",
+            "notes",
+            "technicianId"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
           "null"
         ]
       },

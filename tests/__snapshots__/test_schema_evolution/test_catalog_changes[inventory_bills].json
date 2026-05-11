@@ -414,6 +414,15 @@
     {
       "breadcrumb": [
         "properties",
+        "dateReconciled"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "active"
       ],
       "metadata": {
@@ -424,6 +433,7 @@
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
+        "replication-key": "createdOn",
         "selected": true,
         "selected-by-default": true,
         "table-key-properties": [
@@ -560,6 +570,13 @@
         },
         "type": [
           "array",
+          "null"
+        ]
+      },
+      "dateReconciled": {
+        "format": "date-time",
+        "type": [
+          "string",
           "null"
         ]
       },

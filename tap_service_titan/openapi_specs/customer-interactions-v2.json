@@ -1,12 +1,18 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "info": {
         "title": "Customer Interactions",
+        "description": "Technician ratings",
         "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://api-integration.servicetitan.io/customer-interactions/v2"
+            "url": "https://api.servicetitan.io/customer-interactions/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/customer-interactions/v2",
+            "description": "Integration"
         }
     ],
     "paths": {
@@ -100,7 +106,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.csi.technicianrating:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/technician-ratings": {
@@ -127,8 +141,7 @@
                         "in": "query",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -136,8 +149,7 @@
                         "in": "query",
                         "schema": {
                             "type": "integer",
-                            "format": "int64",
-                            "nullable": true
+                            "format": "int64"
                         }
                     },
                     {
@@ -145,8 +157,7 @@
                         "in": "query",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
@@ -154,16 +165,14 @@
                         "in": "query",
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "nullable": true
+                            "format": "int32"
                         }
                     },
                     {
                         "name": "includeTotal",
                         "in": "query",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     },
                     {
@@ -176,8 +185,7 @@
                                 {
                                     "$ref": "#/components/schemas/ActiveRequestArg"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     {
@@ -185,8 +193,7 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -194,8 +201,7 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -203,8 +209,7 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
@@ -212,16 +217,14 @@
                         "in": "query",
                         "schema": {
                             "type": "string",
-                            "format": "date-time",
-                            "nullable": true
+                            "format": "date-time"
                         }
                     },
                     {
                         "name": "sort",
                         "in": "query",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -270,7 +273,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.csi.technicianrating:r"
+                        ]
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -360,7 +371,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.csi.technicianrating:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/export/technician-ratings": {
@@ -387,8 +406,7 @@
                         "in": "query",
                         "description": "Continuation token received from previous export request in \"continueFrom\" field.\nWhen not specified, the export process starts from the beginning.\\\nUse custom date strings, e.g. \"2020-01-01\" to start the export process from the certain point in time.",
                         "schema": {
-                            "type": "string",
-                            "nullable": true
+                            "type": "string"
                         }
                     },
                     {
@@ -396,8 +414,7 @@
                         "in": "query",
                         "description": "Use \"true\" to start receiving the most recent changes quicker.\nNote this may cause the same results appearing multiple times on consecutive requests.",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -444,7 +461,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.csi.technicianrating:r"
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -537,10 +562,12 @@
                         "description": "True if there are more records in the query than returned in this result"
                     },
                     "totalCount": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "description": "Total count of records for this query (can optionally be populated)",
-                        "format": "int32",
-                        "nullable": true
+                        "format": "int32"
                     },
                     "data": {
                         "type": "array",
@@ -699,21 +726,22 @@
             "apiKeyHeader": {
                 "type": "apiKey",
                 "name": "ST-App-Key",
-                "in": "header"
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
             },
-            "apiKeyQuery": {
-                "type": "apiKey",
-                "name": "servicetitanapplicationkey",
-                "in": "query"
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.csi.technicianrating:w": "Customer Interactions \u2192 Technician Rating (Write)",
+                            "tn.csi.technicianrating:r": "Customer Interactions \u2192 Technician Rating (Read)"
+                        }
+                    }
+                }
             }
         }
-    },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ]
+    }
 }

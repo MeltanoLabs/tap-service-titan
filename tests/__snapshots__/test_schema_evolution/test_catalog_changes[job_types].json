@@ -166,9 +166,19 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "defaultEstimateSoldAction"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
+        "replication-key": "modifiedOn",
         "selected": true,
         "selected-by-default": true,
         "table-key-properties": [
@@ -213,6 +223,13 @@
       "createdOn": {
         "description": "Date/time (in UTC) when job type was created",
         "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "defaultEstimateSoldAction": {
+        "description": "Default action when an estimate is sold for this job type",
         "type": [
           "string",
           "null"
@@ -369,7 +386,8 @@
       "createdOn",
       "externalData",
       "active",
-      "isSmartDispatched"
+      "isSmartDispatched",
+      "defaultEstimateSoldAction"
     ],
     "type": "object"
   },

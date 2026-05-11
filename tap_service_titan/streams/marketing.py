@@ -43,16 +43,3 @@ class CostsStream(_BaseMarketingStream):
     path = "/costs"
     primary_keys = ("id",)
     schema = ServiceTitanSchema(MARKETING, key="Marketing.V2.CampaignCostResponse")
-
-
-class SuppressionsStream(_BaseMarketingStream, active_any=True, sort_by="ModifiedOn"):
-    """Define suppressions stream.
-
-    https://developer.servicetitan.io/api-details/#api=tenant-marketing-v2&operation=Suppressions_GetList
-    """
-
-    name = "suppressions"
-    path = "/suppressions"
-    primary_keys = ("email",)
-    replication_key: str = "modifiedOn"
-    schema = ServiceTitanSchema(MARKETING, key="Marketing.V2.SuppressionResponse")

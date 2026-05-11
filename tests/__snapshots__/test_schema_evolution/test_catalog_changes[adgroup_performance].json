@@ -488,6 +488,7 @@
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
+        "replication-key": "from_utc",
         "selected": true,
         "selected-by-default": true,
         "table-key-properties": [

@@ -612,6 +612,15 @@
     {
       "breadcrumb": [
         "properties",
+        "customFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "active"
       ],
       "metadata": {
@@ -622,6 +631,7 @@
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
+        "replication-key": "modifiedOn",
         "selected": true,
         "selected-by-default": true,
         "table-key-properties": [
@@ -688,6 +698,48 @@
         "format": "date-time",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "customFields": {
+        "description": "Custom field values for this service agreement (typeId, name, value)",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "description": "Custom field name",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "typeId": {
+              "description": "Custom field type id",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "value": {
+              "description": "Custom field value",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "typeId",
+            "name"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
           "null"
         ]
       },
@@ -1155,6 +1207,7 @@
       "autoRenew",
       "laborSurcharge",
       "materialSurcharge",
+      "customFields",
       "active"
     ],
     "type": "object"
