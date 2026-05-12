@@ -83,7 +83,6 @@ class _Report:
 class CustomReports(ServiceTitanStream, api_prefix="/reporting/v2"):
     """Define reviews stream."""
 
-    name = "custom_report"
     http_method = HTTPMethod.POST
     is_sorted = True
 
@@ -102,7 +101,7 @@ class CustomReports(ServiceTitanStream, api_prefix="/reporting/v2"):
         self._report = report
         super().__init__(
             tap=tap,
-            name=report.name,
+            name=f"custom_report_{self._report.name}",
             path=f"/report-category/{self._report.category}/reports/{self._report.id}/data",
         )
 
