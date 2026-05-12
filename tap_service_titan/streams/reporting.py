@@ -21,27 +21,59 @@ from tap_service_titan.client import ServiceTitanStream
 
 if sys.version_info >= (3, 11):
     from http import HTTPMethod
+    from typing import NotRequired
 else:
     from backports.httpmethod import HTTPMethod
+    from typing_extensions import NotRequired
 
 if sys.version_info >= (3, 12):
     from typing import override
 else:
     from typing_extensions import override
 
+if sys.version_info >= (3, 15):
+    from typing import TypedDict
+else:
+    from typing_extensions import TypedDict
+
 if TYPE_CHECKING:
-    from collections.abc import Generator, Iterable, Mapping, Sequence
+    from collections.abc import Generator, Iterable, Sequence
     from datetime import date
 
     from singer_sdk.helpers.types import Context, Record
 
 
+class _ParameterDict(TypedDict, closed=True):  # type: ignore[call-arg]
+    name: str
+    value: str
+
+
+class _Payload(TypedDict, closed=True):  # type: ignore[call-arg]
+    parameters: list[_ParameterDict]
+
+
+class _ReportConfig(TypedDict, closed=True):  # type: ignore[call-arg]
+    report_name: str
+    report_id: str
+    report_category: str
+    lookback_window_days: int
+    parameters: list[_ParameterDict]
+
+    backfill_date_parameter: NotRequired[str]
+
+
 @dataclass
-class _Backfill:
+class _Parameter:
     _: KW_ONLY
 
-    start: str
-    parameter: str
+    name: str
+    value: str
+
+    def to_dict(self) -> _ParameterDict:
+        return {
+            "name": self.name,
+            "value": self.value,
+        }
 
 
 @dataclass
@@ -52,23 +84,24 @@ class _Report:
     category: str
     id: str
     lookback_window_days: int
-    parameters: dict[str, str]
+    parameters: list[_Parameter]
 
-    backfill: _Backfill | None = None
+    backfill: _Parameter | None = None
 
     @classmethod
-    def from_dict(cls, report_dict: dict) -> _Report:
-        backfill: _Backfill | None = None
-        backfill_date_parameter: str | None = report_dict.get("backfill_date_parameter")
+    def from_dict(cls, report_dict: _ReportConfig) -> _Report:
+        backfill: _Parameter | None = None
+        backfill_date_parameter = report_dict.get("backfill_date_parameter")
 
-        parameters = {}
+        parameters = []
         for p in report_dict["parameters"]:
-            parameters[p["name"]] = p["value"]
+            param = _Parameter(name=p["name"], value=p["value"])
+            parameters.append(param)
 
             # If the report config names a date parameter for day-by-day backfill,
             # use its configured start value to switch to incremental replication
-            if backfill_date_parameter is not None and p["name"] == backfill_date_parameter:
-                backfill = _Backfill(start=p["value"], parameter=backfill_date_parameter)
+            if backfill_date_parameter is not None and param.name == backfill_date_parameter:
+                backfill = param
 
         return cls(
             name=report_dict["report_name"],
@@ -106,13 +139,13 @@ class CustomReports(ServiceTitanStream, api_prefix="/reporting/v2"):
         )
 
         if report.backfill is not None:
-            self._replication_key = report.backfill.parameter
+            self._replication_key = report.backfill.name
 
         # Initialized lazily in get_records, after stream_state is available.
         self._curr_backfill_date: date | None = None
 
     @classmethod
-    def from_report_dict(cls, *, tap: Tap, report: dict) -> CustomReports:
+    def from_report_dict(cls, *, tap: Tap, report: _ReportConfig) -> CustomReports:
         """Build a report stream from a dictionary."""
         return cls(tap=tap, report=_Report.from_dict(report))
 
@@ -193,7 +226,7 @@ class CustomReports(ServiceTitanStream, api_prefix="/reporting/v2"):
         if self._report.backfill is not None:
             properties.append(
                 th.Property(
-                    self._report.backfill.parameter,
+                    self._report.backfill.name,
                     th.DateTimeType(),
                 )
             )
@@ -224,15 +257,7 @@ class CustomReports(ServiceTitanStream, api_prefix="/reporting/v2"):
         self,
         context: Context | None,
         next_page_token: int | None,
-    ) -> (
-        Iterable[bytes]
-        | str
-        | bytes
-        | list[tuple[Any, Any]]
-        | tuple[tuple[Any, Any]]
-        | Mapping[str, Any]
-        | None
-    ):
+    ) -> _Payload:
         """Prepare the data payload for the REST API request.
 
         By default, no payload will be sent (return None).
@@ -246,19 +271,13 @@ class CustomReports(ServiceTitanStream, api_prefix="/reporting/v2"):
             next_page_token: Token, page number or any request argument to request the
                 next page of data.
         """
-        params = self._report.parameters
+        params_mapping = {p.name: p.to_dict() for p in self._report.parameters}
         if self._report.backfill is not None and self._curr_backfill_date:
-            backfill_param_name = self._report.backfill.parameter
-            params = [
-                {"name": name, "value": value}
-                for name, value in params.items()
-                if name != backfill_param_name
-            ]
-            params.append({
-                "name": backfill_param_name,
-                "value": self._curr_backfill_date.strftime("%Y-%m-%d"),
-            })
-            self.logger.info("Custom report request parameters %s", params)
+            name = self._report.backfill.name
+            params_mapping[name]["value"] = self._curr_backfill_date.strftime("%Y-%m-%d")
+
+        params = list(params_mapping.values())
+        self.logger.info("Custom report request parameters %s", params)
         return {"parameters": params}
 
     @override
@@ -279,7 +298,7 @@ class CustomReports(ServiceTitanStream, api_prefix="/reporting/v2"):
             data = dict(zip(field_names, string_record, strict=False))
             # Add the backfill date to the record if configured
             if self._report.backfill is not None and self._curr_backfill_date is not None:
-                data[self._report.backfill.parameter] = (
+                data[self._report.backfill.name] = (
                     self._curr_backfill_date.strftime("%Y-%m-%d") + "T00:00:00-00:00"
                 )
             yield data
@@ -302,7 +321,7 @@ class CustomReports(ServiceTitanStream, api_prefix="/reporting/v2"):
 
         # stream_state is available here (not in __init__), so initialize lazily.
         if self._curr_backfill_date is None:
-            self._curr_backfill_date = self._get_initial_backfill_date(self._report.backfill.start)
+            self._curr_backfill_date = self._get_initial_backfill_date(self._report.backfill.value)
 
         today = now().date()
         while self._curr_backfill_date <= today:
