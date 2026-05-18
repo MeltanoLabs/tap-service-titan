@@ -1852,7 +1852,6 @@ dev = [
     { name = "time-machine" },
     { name = "ty" },
     { name = "typer" },
-    { name = "types-requests" },
 ]
 scrapping = [
     { name = "anyio" },
@@ -1882,7 +1881,6 @@ typing = [
     { name = "time-machine" },
     { name = "ty" },
     { name = "typer" },
-    { name = "types-requests" },
 ]
 
 [package.metadata]
@@ -1910,7 +1908,6 @@ dev = [
     { name = "time-machine", specifier = ">=3.0.0" },
     { name = "ty", specifier = ">=0.0.34" },
     { name = "typer", specifier = ">=0.25.1" },
-    { name = "types-requests", specifier = ">=2.33.0.20260503" },
 ]
 scrapping = [
     { name = "anyio", specifier = ">=4.12.1" },
@@ -1940,7 +1937,6 @@ typing = [
     { name = "time-machine", specifier = ">=3.0.0" },
     { name = "ty", specifier = ">=0.0.34" },
     { name = "typer", specifier = ">=0.25.1" },
-    { name = "types-requests", specifier = ">=2.33.0.20260503" },
 ]
 
 [[package]]
@@ -2120,18 +2116,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/e4/51/9aed62104cea109b820bbd6c14245af756112017d309da813ef107d42e7e/typer-0.25.1.tar.gz", hash = "sha256:9616eb8853a09ffeabab1698952f33c6f29ffdbceb4eaeecf571880e8d7664cc", size = 122276, upload-time = "2026-04-30T19:32:16.964Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/3f/f9/2b3ff4e56e5fa7debfaf9eb135d0da96f3e9a1d5b27222223c7296336e5f/typer-0.25.1-py3-none-any.whl", hash = "sha256:75caa44ed46a03fb2dab8808753ffacdbfea88495e74c85a28c5eefcf5f39c89", size = 58409, upload-time = "2026-04-30T19:32:18.271Z" },
-]
-
-[[package]]
-name = "types-requests"
-version = "2.33.0.20260508"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "urllib3" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/c7/6b/eb226bdd61a982c9a03e02c657fb4ab001733506e6423906ac142331f2e3/types_requests-2.33.0.20260508.tar.gz", hash = "sha256:81b2ae5f0d20967714a6aa5ef9284c05570d7cb06b7de8f2a77b918b63ddd411", size = 23991, upload-time = "2026-05-08T04:50:56.818Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/cb/96/080db0afdf2c5cc5fe512b41354e8d114fe8f65e9510c56ff8dfd40216ce/types_requests-2.33.0.20260508-py3-none-any.whl", hash = "sha256:fa01459cca184229713df03709db46a905325906d27e042cd4fd7ea3d15d3400", size = 20722, upload-time = "2026-05-08T04:50:55.548Z" },
 ]
 
 [[package]]
