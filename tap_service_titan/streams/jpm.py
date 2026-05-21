@@ -119,7 +119,7 @@ class JobHoldReasonsStream(_BaseJpmStream):
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.JobHoldReasonResponse")
 
 
-class JobTypesStream(_BaseJpmStream):
+class JobTypesStream(_BaseJpmStream, active_any=True):
     """Define job types stream."""
 
     name = "job_types"
