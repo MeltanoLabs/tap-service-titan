@@ -2,7 +2,7 @@
     "openapi": "3.1.0",
     "info": {
         "title": "Marketing Ads",
-        "description": "Attributed leads, capacity warnings, external call attributions, job attributions, performance, web booking attributions, web lead form attributions",
+        "description": "Attributed leads, attribution lookup, capacity warnings, external call attributions, job attributions, performance, web booking attributions, web lead form attributions",
         "version": "1.0"
     },
     "servers": [
@@ -1148,94 +1148,6 @@
                 "additionalProperties": false,
                 "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
             },
-            "Marketing.Ads.Contracts.CapacityAwarenessWarningQueryResult": {
-                "required": [
-                    "tenantId",
-                    "tenantName",
-                    "totalCount",
-                    "data"
-                ],
-                "type": "object",
-                "properties": {
-                    "tenantId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "tenantName": {
-                        "type": "string"
-                    },
-                    "totalCount": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "data": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Marketing.Ads.Client.CapacityAwarenessWarning"
-                        }
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Marketing.Ads.Client.CapacityAwarenessWarning": {
-                "required": [
-                    "campaignName",
-                    "warningType",
-                    "businessUnits",
-                    "lookaheadWindow",
-                    "thresholdValue"
-                ],
-                "type": "object",
-                "properties": {
-                    "campaignName": {
-                        "type": "string"
-                    },
-                    "warningType": {
-                        "type": "string"
-                    },
-                    "businessUnits": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "lookaheadWindow": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "thresholdValue": {
-                        "type": "integer",
-                        "format": "int32"
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Marketing.Ads.V2.CreateExternalCallAttributionRequest": {
-                "required": [
-                    "webSessionData",
-                    "externalCallData"
-                ],
-                "type": "object",
-                "properties": {
-                    "webSessionData": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Marketing.Ads.V2.WebSessionData"
-                            }
-                        ],
-                        "description": "The web session that the entity should be attributed to"
-                    },
-                    "externalCallData": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Marketing.Ads.V2.ExternalCallData"
-                            }
-                        ],
-                        "description": "The external call."
-                    }
-                },
-                "additionalProperties": false
-            },
             "Marketing.Ads.V2.WebSessionData": {
                 "required": [
                     "landingPageUrl",
@@ -1338,6 +1250,94 @@
                 },
                 "additionalProperties": false,
                 "description": "Data from the web session used by the attribution system to determine the marketing campaign that\nled the user to this particular web session."
+            },
+            "Marketing.Ads.Contracts.CapacityAwarenessWarningQueryResult": {
+                "required": [
+                    "tenantId",
+                    "tenantName",
+                    "totalCount",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "tenantId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "tenantName": {
+                        "type": "string"
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Marketing.Ads.Client.CapacityAwarenessWarning"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.Client.CapacityAwarenessWarning": {
+                "required": [
+                    "campaignName",
+                    "warningType",
+                    "businessUnits",
+                    "lookaheadWindow",
+                    "thresholdValue"
+                ],
+                "type": "object",
+                "properties": {
+                    "campaignName": {
+                        "type": "string"
+                    },
+                    "warningType": {
+                        "type": "string"
+                    },
+                    "businessUnits": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "lookaheadWindow": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "thresholdValue": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.Ads.V2.CreateExternalCallAttributionRequest": {
+                "required": [
+                    "webSessionData",
+                    "externalCallData"
+                ],
+                "type": "object",
+                "properties": {
+                    "webSessionData": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Marketing.Ads.V2.WebSessionData"
+                            }
+                        ],
+                        "description": "The web session that the entity should be attributed to"
+                    },
+                    "externalCallData": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Marketing.Ads.V2.ExternalCallData"
+                            }
+                        ],
+                        "description": "The external call."
+                    }
+                },
+                "additionalProperties": false
             },
             "Marketing.Ads.V2.ExternalCallData": {
                 "required": [

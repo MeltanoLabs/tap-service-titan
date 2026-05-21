@@ -2,7 +2,7 @@
     "openapi": "3.1.0",
     "info": {
         "title": "Sales & Estimates",
-        "description": "Estimates",
+        "description": "Estimates, estimate templates, proposal templates, proposal types",
         "version": "1.0"
     },
     "servers": [
@@ -114,7 +114,10 @@
                                     "isRecommended": true,
                                     "budgetCodeId": 0,
                                     "isChangeOrder": true,
-                                    "proposalTagName": "string"
+                                    "proposalTagName": "string",
+                                    "depositAmount": 0,
+                                    "depositPercent": 0,
+                                    "requireDepositOnSignature": true
                                 }
                             }
                         }
@@ -214,7 +217,10 @@
                                         "url": "string"
                                     }
                                 ],
-                                "useDefaultProjectLabels": true
+                                "useDefaultProjectLabels": true,
+                                "depositAmount": 0,
+                                "depositPercent": 0,
+                                "requireDepositOnSignature": true
                             }
                         }
                     }
@@ -289,7 +295,10 @@
                                     "isRecommended": true,
                                     "budgetCodeId": 0,
                                     "isChangeOrder": true,
-                                    "proposalTagName": "string"
+                                    "proposalTagName": "string",
+                                    "depositAmount": 0,
+                                    "depositPercent": 0,
+                                    "requireDepositOnSignature": true
                                 }
                             }
                         }
@@ -610,7 +619,10 @@
                                             "isRecommended": true,
                                             "budgetCodeId": 0,
                                             "isChangeOrder": true,
-                                            "proposalTagName": "string"
+                                            "proposalTagName": "string",
+                                            "depositAmount": 0,
+                                            "depositPercent": 0,
+                                            "requireDepositOnSignature": true
                                         }
                                     ]
                                 }
@@ -704,6 +716,9 @@
                                     }
                                 ],
                                 "useDefaultProjectLabels": true,
+                                "depositAmount": 0,
+                                "depositPercent": 0,
+                                "requireDepositOnSignature": true,
                                 "jobId": 0,
                                 "projectId": 0,
                                 "locationId": 0
@@ -781,7 +796,10 @@
                                     "isRecommended": true,
                                     "budgetCodeId": 0,
                                     "isChangeOrder": true,
-                                    "proposalTagName": "string"
+                                    "proposalTagName": "string",
+                                    "depositAmount": 0,
+                                    "depositPercent": 0,
+                                    "requireDepositOnSignature": true
                                 }
                             }
                         }
@@ -1119,7 +1137,10 @@
                                     "isRecommended": true,
                                     "budgetCodeId": 0,
                                     "isChangeOrder": true,
-                                    "proposalTagName": "string"
+                                    "proposalTagName": "string",
+                                    "depositAmount": 0,
+                                    "depositPercent": 0,
+                                    "requireDepositOnSignature": true
                                 }
                             }
                         }
@@ -1578,7 +1599,10 @@
                                             "isRecommended": true,
                                             "budgetCodeId": 0,
                                             "isChangeOrder": true,
-                                            "proposalTagName": "string"
+                                            "proposalTagName": "string",
+                                            "depositAmount": 0,
+                                            "depositPercent": 0,
+                                            "requireDepositOnSignature": true
                                         }
                                     ]
                                 }
@@ -1724,7 +1748,10 @@
                                             "isRecommended": true,
                                             "budgetCodeId": 0,
                                             "isChangeOrder": true,
-                                            "proposalTagName": "string"
+                                            "proposalTagName": "string",
+                                            "depositAmount": 0,
+                                            "depositPercent": 0,
+                                            "requireDepositOnSignature": true
                                         }
                                     ]
                                 }
@@ -1855,6 +1882,1208 @@
                         "apiKeyHeader": [],
                         "oauth": [
                             "tn.sal.estimates:r"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/estimate-templates": {
+            "get": {
+                "tags": [
+                    "EstimateTemplates"
+                ],
+                "summary": "Gets a paginated list of estimate templates.",
+                "description": "Gets a paginated list of estimate templates.",
+                "operationId": "EstimateTemplates_Get",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "Values: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Estimates.V2.EstimateTemplateResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "internalName": "string",
+                                            "summary": "string",
+                                            "mode": "Dynamic",
+                                            "active": true,
+                                            "businessUnitId": 0,
+                                            "totalCost": 0,
+                                            "totalPrice": 0,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "items": [
+                                                {
+                                                    "id": 0,
+                                                    "skuId": 0,
+                                                    "skuType": "Service",
+                                                    "skuName": "string",
+                                                    "description": "string",
+                                                    "quantity": 0,
+                                                    "unitPrice": 0,
+                                                    "totalPrice": 0,
+                                                    "isAddOn": true,
+                                                    "chargeable": true,
+                                                    "allowDiscounts": true,
+                                                    "unitCost": 0,
+                                                    "memo": "string",
+                                                    "order": 0,
+                                                    "parentItemId": 0,
+                                                    "itemGroupParentId": 0,
+                                                    "itemGroupName": "string",
+                                                    "projectLabels": "string"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sal.estimatetemplates:r"
+                        ]
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "EstimateTemplates"
+                ],
+                "summary": "Creates a new estimate template.",
+                "description": "Creates a new estimate template.",
+                "operationId": "EstimateTemplates_Create",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Estimates.V2.CreateEstimateTemplateRequest"
+                            },
+                            "example": {
+                                "name": "string",
+                                "internalName": "string",
+                                "summary": "string",
+                                "mode": "Dynamic",
+                                "active": true,
+                                "businessUnitId": 0,
+                                "items": [
+                                    {
+                                        "id": 0,
+                                        "skuId": 0,
+                                        "skuType": "Service",
+                                        "description": "string",
+                                        "quantity": 0,
+                                        "unitPrice": 0,
+                                        "isAddOn": true,
+                                        "chargeable": true,
+                                        "allowDiscounts": true,
+                                        "unitCost": 0,
+                                        "memo": "string",
+                                        "parentItemId": 0,
+                                        "itemGroupParentId": 0,
+                                        "itemGroupName": "string",
+                                        "projectLabels": "string"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Estimates.V2.EstimateTemplateResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "internalName": "string",
+                                    "summary": "string",
+                                    "mode": "Dynamic",
+                                    "active": true,
+                                    "businessUnitId": 0,
+                                    "totalCost": 0,
+                                    "totalPrice": 0,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string",
+                                    "items": [
+                                        {
+                                            "id": 0,
+                                            "skuId": 0,
+                                            "skuType": "Service",
+                                            "skuName": "string",
+                                            "description": "string",
+                                            "quantity": 0,
+                                            "unitPrice": 0,
+                                            "totalPrice": 0,
+                                            "isAddOn": true,
+                                            "chargeable": true,
+                                            "allowDiscounts": true,
+                                            "unitCost": 0,
+                                            "memo": "string",
+                                            "order": 0,
+                                            "parentItemId": 0,
+                                            "itemGroupParentId": 0,
+                                            "itemGroupName": "string",
+                                            "projectLabels": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sal.estimatetemplates:w"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/estimate-templates/{id}": {
+            "get": {
+                "tags": [
+                    "EstimateTemplates"
+                ],
+                "summary": "Gets a single estimate template by ID.",
+                "description": "Gets a single estimate template by ID.",
+                "operationId": "EstimateTemplates_GetById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Estimates.V2.EstimateTemplateResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "internalName": "string",
+                                    "summary": "string",
+                                    "mode": "Dynamic",
+                                    "active": true,
+                                    "businessUnitId": 0,
+                                    "totalCost": 0,
+                                    "totalPrice": 0,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string",
+                                    "items": [
+                                        {
+                                            "id": 0,
+                                            "skuId": 0,
+                                            "skuType": "Service",
+                                            "skuName": "string",
+                                            "description": "string",
+                                            "quantity": 0,
+                                            "unitPrice": 0,
+                                            "totalPrice": 0,
+                                            "isAddOn": true,
+                                            "chargeable": true,
+                                            "allowDiscounts": true,
+                                            "unitCost": 0,
+                                            "memo": "string",
+                                            "order": 0,
+                                            "parentItemId": 0,
+                                            "itemGroupParentId": 0,
+                                            "itemGroupName": "string",
+                                            "projectLabels": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sal.estimatetemplates:r"
+                        ]
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "EstimateTemplates"
+                ],
+                "summary": "Updates an existing estimate template.",
+                "description": "Updates an existing estimate template.",
+                "operationId": "EstimateTemplates_Update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Estimates.V2.UpdateEstimateTemplateRequest"
+                            },
+                            "example": {
+                                "name": "string",
+                                "internalName": "string",
+                                "summary": "string",
+                                "mode": {},
+                                "active": true,
+                                "businessUnitId": 0,
+                                "items": [
+                                    {
+                                        "id": 0,
+                                        "skuId": 0,
+                                        "skuType": "Service",
+                                        "description": "string",
+                                        "quantity": 0,
+                                        "unitPrice": 0,
+                                        "isAddOn": true,
+                                        "chargeable": true,
+                                        "allowDiscounts": true,
+                                        "unitCost": 0,
+                                        "memo": "string",
+                                        "parentItemId": 0,
+                                        "itemGroupParentId": 0,
+                                        "itemGroupName": "string",
+                                        "projectLabels": "string"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Estimates.V2.EstimateTemplateResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "internalName": "string",
+                                    "summary": "string",
+                                    "mode": "Dynamic",
+                                    "active": true,
+                                    "businessUnitId": 0,
+                                    "totalCost": 0,
+                                    "totalPrice": 0,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string",
+                                    "items": [
+                                        {
+                                            "id": 0,
+                                            "skuId": 0,
+                                            "skuType": "Service",
+                                            "skuName": "string",
+                                            "description": "string",
+                                            "quantity": 0,
+                                            "unitPrice": 0,
+                                            "totalPrice": 0,
+                                            "isAddOn": true,
+                                            "chargeable": true,
+                                            "allowDiscounts": true,
+                                            "unitCost": 0,
+                                            "memo": "string",
+                                            "order": 0,
+                                            "parentItemId": 0,
+                                            "itemGroupParentId": 0,
+                                            "itemGroupName": "string",
+                                            "projectLabels": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sal.estimatetemplates:w"
+                        ]
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "EstimateTemplates"
+                ],
+                "summary": "Deactivates an estimate template.",
+                "description": "Deactivates an estimate template.",
+                "operationId": "EstimateTemplates_Delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sal.estimatetemplates:w"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/proposal-templates": {
+            "get": {
+                "tags": [
+                    "ProposalTemplates"
+                ],
+                "summary": "Gets a list of proposal templates.",
+                "description": "Gets a list of proposal templates.",
+                "operationId": "ProposalTemplates_Get",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "Values: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "proposalTypeId",
+                        "in": "query",
+                        "description": "Filter by proposal type. Obtain proposal type IDs from GET /proposal-types.",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Estimates.V2.ProposalTemplateResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "description": "string",
+                                            "active": true,
+                                            "status": "Publish",
+                                            "proposalTypeId": 0,
+                                            "proposalTypeName": "string",
+                                            "businessUnitIds": [
+                                                0
+                                            ],
+                                            "estimateAssignments": [
+                                                {
+                                                    "proposalTypeOptionId": 0,
+                                                    "estimateTemplateId": 0,
+                                                    "estimateTemplateName": "string",
+                                                    "order": 0
+                                                }
+                                            ],
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sal.proposaltemplates:r"
+                        ]
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "ProposalTemplates"
+                ],
+                "summary": "Creates a new proposal template.",
+                "description": "Creates a new proposal template.",
+                "operationId": "ProposalTemplates_Create",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Estimates.V2.CreateProposalTemplateRequest"
+                            },
+                            "example": {
+                                "name": "string",
+                                "description": "string",
+                                "proposalTypeId": 0,
+                                "status": {},
+                                "active": true,
+                                "businessUnitIds": [
+                                    0
+                                ],
+                                "estimateAssignments": [
+                                    {
+                                        "proposalTypeOptionId": 0,
+                                        "estimateTemplateId": 0,
+                                        "order": 0
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Estimates.V2.ProposalTemplateResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "description": "string",
+                                    "active": true,
+                                    "status": "Publish",
+                                    "proposalTypeId": 0,
+                                    "proposalTypeName": "string",
+                                    "businessUnitIds": [
+                                        0
+                                    ],
+                                    "estimateAssignments": [
+                                        {
+                                            "proposalTypeOptionId": 0,
+                                            "estimateTemplateId": 0,
+                                            "estimateTemplateName": "string",
+                                            "order": 0
+                                        }
+                                    ],
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sal.proposaltemplates:w"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/proposal-templates/{id}": {
+            "get": {
+                "tags": [
+                    "ProposalTemplates"
+                ],
+                "summary": "Gets a single proposal template by ID.",
+                "description": "Gets a single proposal template by ID.",
+                "operationId": "ProposalTemplates_GetById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Estimates.V2.ProposalTemplateResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "description": "string",
+                                    "active": true,
+                                    "status": "Publish",
+                                    "proposalTypeId": 0,
+                                    "proposalTypeName": "string",
+                                    "businessUnitIds": [
+                                        0
+                                    ],
+                                    "estimateAssignments": [
+                                        {
+                                            "proposalTypeOptionId": 0,
+                                            "estimateTemplateId": 0,
+                                            "estimateTemplateName": "string",
+                                            "order": 0
+                                        }
+                                    ],
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sal.proposaltemplates:r"
+                        ]
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "ProposalTemplates"
+                ],
+                "summary": "Updates an existing proposal template. Only provided fields are changed; omitted fields are left unchanged.",
+                "description": "Updates an existing proposal template. Only provided fields are changed; omitted fields are left unchanged.",
+                "operationId": "ProposalTemplates_Update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Estimates.V2.UpdateProposalTemplateRequest"
+                            },
+                            "example": {
+                                "name": "string",
+                                "description": "string",
+                                "proposalTypeId": 0,
+                                "status": {},
+                                "active": true,
+                                "businessUnitIds": [
+                                    0
+                                ],
+                                "estimateAssignments": [
+                                    {
+                                        "proposalTypeOptionId": 0,
+                                        "estimateTemplateId": 0,
+                                        "order": 0
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Estimates.V2.ProposalTemplateResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "description": "string",
+                                    "active": true,
+                                    "status": "Publish",
+                                    "proposalTypeId": 0,
+                                    "proposalTypeName": "string",
+                                    "businessUnitIds": [
+                                        0
+                                    ],
+                                    "estimateAssignments": [
+                                        {
+                                            "proposalTypeOptionId": 0,
+                                            "estimateTemplateId": 0,
+                                            "estimateTemplateName": "string",
+                                            "order": 0
+                                        }
+                                    ],
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sal.proposaltemplates:w"
+                        ]
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "ProposalTemplates"
+                ],
+                "summary": "Deactivates a proposal template. The template is not deleted and can be reactivated via PATCH.",
+                "description": "Deactivates a proposal template. The template is not deleted and can be reactivated via PATCH.",
+                "operationId": "ProposalTemplates_Delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sal.proposaltemplates:w"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/proposal-types": {
+            "get": {
+                "tags": [
+                    "ProposalTypes"
+                ],
+                "summary": "ProposalTypes_Get",
+                "operationId": "ProposalTypes_Get",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "Values: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Estimates.V2.ProposalTypesResponse"
+                                },
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "type": "Progressive",
+                                            "active": true,
+                                            "isSystemDefault": true,
+                                            "isDefault": true,
+                                            "options": [
+                                                {
+                                                    "id": 0,
+                                                    "name": "string",
+                                                    "order": 0,
+                                                    "color": "string",
+                                                    "estimateType": "Standard"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sal.proposaltypes:r"
                         ]
                     }
                 ]
@@ -2020,6 +3249,26 @@
                     "proposalTagName": {
                         "type": [
                             "string",
+                            "null"
+                        ]
+                    },
+                    "depositAmount": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "decimal"
+                    },
+                    "depositPercent": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "decimal"
+                    },
+                    "requireDepositOnSignature": {
+                        "type": [
+                            "boolean",
                             "null"
                         ]
                     }
@@ -2450,6 +3699,26 @@
                             "null"
                         ]
                     },
+                    "depositAmount": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "decimal"
+                    },
+                    "depositPercent": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "decimal"
+                    },
+                    "requireDepositOnSignature": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
+                    },
                     "jobId": {
                         "type": [
                             "integer",
@@ -2689,6 +3958,26 @@
                         }
                     },
                     "useDefaultProjectLabels": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
+                    },
+                    "depositAmount": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "decimal"
+                    },
+                    "depositPercent": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "decimal"
+                    },
+                    "requireDepositOnSignature": {
                         "type": [
                             "boolean",
                             "null"
@@ -3001,6 +4290,26 @@
                             "string",
                             "null"
                         ]
+                    },
+                    "depositAmount": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "decimal"
+                    },
+                    "depositPercent": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "decimal"
+                    },
+                    "requireDepositOnSignature": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -3046,6 +4355,881 @@
                     }
                 },
                 "additionalProperties": false
+            },
+            "PaginatedResponse_Of_Estimates.V2.EstimateTemplateResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Estimates.V2.EstimateTemplateResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Estimates.V2.EstimateTemplateResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "internalName",
+                    "mode",
+                    "active",
+                    "totalCost",
+                    "totalPrice",
+                    "createdOn",
+                    "modifiedOn",
+                    "items"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "internalName": {
+                        "type": "string"
+                    },
+                    "summary": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "html"
+                    },
+                    "mode": {
+                        "$ref": "#/components/schemas/EstimateTemplates.EstimateTemplateMode"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "businessUnitId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
+                    },
+                    "totalCost": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "totalPrice": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Estimates.V2.EstimateTemplateItemResponse"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "EstimateTemplates.EstimateTemplateMode": {
+                "enum": [
+                    "Dynamic",
+                    "Static"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Dynamic",
+                    "Static"
+                ]
+            },
+            "Estimates.V2.EstimateTemplateItemResponse": {
+                "required": [
+                    "id",
+                    "skuId",
+                    "skuType",
+                    "quantity",
+                    "unitPrice",
+                    "totalPrice",
+                    "isAddOn",
+                    "unitCost",
+                    "order"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "skuId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "skuType": {
+                        "$ref": "#/components/schemas/Pricebook.Types.SkuType"
+                    },
+                    "skuName": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "html"
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "unitPrice": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "totalPrice": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "isAddOn": {
+                        "type": "boolean"
+                    },
+                    "chargeable": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
+                    },
+                    "allowDiscounts": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
+                    },
+                    "unitCost": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "memo": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "order": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "parentItemId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "For add-on items: the ID of the item this is a direct child of.",
+                        "format": "int64"
+                    },
+                    "itemGroupParentId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "For items that belong to an item group: the ID of the group root item.",
+                        "format": "int64"
+                    },
+                    "itemGroupName": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Present only on item group root items. Non-null value indicates this item is a group root."
+                    },
+                    "projectLabels": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Comma-separated project label names associated with this item."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Pricebook.Types.SkuType": {
+                "enum": [
+                    "Service",
+                    "Material",
+                    "Equipment",
+                    "PriceModifier"
+                ],
+                "type": "string",
+                "description": "The type of ISku entity",
+                "x-enumNames": [
+                    "Service",
+                    "Material",
+                    "Equipment",
+                    "PriceModifier"
+                ]
+            },
+            "Estimates.V2.CreateEstimateTemplateRequest": {
+                "required": [
+                    "name",
+                    "internalName",
+                    "mode",
+                    "items"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "internalName": {
+                        "type": "string"
+                    },
+                    "summary": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "mode": {
+                        "$ref": "#/components/schemas/EstimateTemplates.EstimateTemplateMode"
+                    },
+                    "active": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
+                    },
+                    "businessUnitId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64"
+                    },
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Estimates.V2.EstimateTemplateItemRequest"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Estimates.V2.EstimateTemplateItemRequest": {
+                "required": [
+                    "skuId",
+                    "skuType",
+                    "quantity",
+                    "isAddOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "For existing items: the item ID to update. Omit or set to null for new items.",
+                        "format": "int64"
+                    },
+                    "skuId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "skuType": {
+                        "$ref": "#/components/schemas/Pricebook.Types.SkuType"
+                    },
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "unitPrice": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Unit price of the item. Required for Static templates; omit for Dynamic templates where pricing is computed from the pricebook.",
+                        "format": "decimal"
+                    },
+                    "isAddOn": {
+                        "type": "boolean"
+                    },
+                    "chargeable": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
+                    },
+                    "allowDiscounts": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
+                    },
+                    "unitCost": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "decimal"
+                    },
+                    "memo": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "parentItemId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "For add-on items: the ID of the parent item within this template.",
+                        "format": "int64"
+                    },
+                    "itemGroupParentId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "For items belonging to an item group: the ID of the group root item within this template.",
+                        "format": "int64"
+                    },
+                    "itemGroupName": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Set on the group root item to define an item group. Child items reference this item via ItemGroupParentId."
+                    },
+                    "projectLabels": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Comma-separated project label names. Pass null to leave unchanged, empty string to clear."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Estimates.V2.UpdateEstimateTemplateRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "internalName": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "summary": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Omit or pass null to leave unchanged.\nNote: once set, this field cannot be cleared back to null via PATCH."
+                    },
+                    "mode": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EstimateTemplates.EstimateTemplateMode"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "active": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
+                    },
+                    "businessUnitId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Omit or pass null to leave unchanged.\nNote: once set, this field cannot be cleared back to null via PATCH.",
+                        "format": "int64"
+                    },
+                    "items": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/Estimates.V2.EstimateTemplateItemRequest"
+                        },
+                        "description": "When provided, replaces all items on the template. Omit to leave items unchanged."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PaginatedResponse_Of_Estimates.V2.ProposalTemplateResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Estimates.V2.ProposalTemplateResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Estimates.V2.ProposalTemplateResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "active",
+                    "status",
+                    "proposalTypeId",
+                    "businessUnitIds",
+                    "estimateAssignments",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/EstimateTemplates.Types.ProposalTemplateStatus"
+                    },
+                    "proposalTypeId": {
+                        "type": "integer",
+                        "description": "ID of the proposal type this template belongs to. Use the GET /proposal-types endpoint to look up proposal types and their options.",
+                        "format": "int64"
+                    },
+                    "proposalTypeName": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Name of the proposal type. Denormalized for convenience."
+                    },
+                    "businessUnitIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    "estimateAssignments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Estimates.V2.ProposalTemplateAssignmentResponse"
+                        },
+                        "description": "Maps each proposal type option to the estimate template shown for that option.\nKeyed by ProposalTypeOptionId. Providing this field in write requests replaces all existing assignments."
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "EstimateTemplates.Types.ProposalTemplateStatus": {
+                "enum": [
+                    "Publish",
+                    "Draft"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Publish",
+                    "Draft"
+                ]
+            },
+            "Estimates.V2.ProposalTemplateAssignmentResponse": {
+                "required": [
+                    "proposalTypeOptionId",
+                    "estimateTemplateId",
+                    "order"
+                ],
+                "type": "object",
+                "properties": {
+                    "proposalTypeOptionId": {
+                        "type": "integer",
+                        "description": "ID of the proposal type option. Obtain from GET /proposal-types.",
+                        "format": "int64"
+                    },
+                    "estimateTemplateId": {
+                        "type": "integer",
+                        "description": "ID of the estimate template used for this option. Obtain from GET /estimate-templates.",
+                        "format": "int64"
+                    },
+                    "estimateTemplateName": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Name of the estimate template. Denormalized for convenience."
+                    },
+                    "order": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Links a proposal type option to the estimate template shown when that option is selected."
+            },
+            "Estimates.V2.CreateProposalTemplateRequest": {
+                "required": [
+                    "name",
+                    "proposalTypeId",
+                    "estimateAssignments"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "proposalTypeId": {
+                        "type": "integer",
+                        "description": "ID of the proposal type this template belongs to. Obtain from GET /proposal-types.",
+                        "format": "int64"
+                    },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EstimateTemplates.Types.ProposalTemplateStatus"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "active": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
+                    },
+                    "businessUnitIds": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    "estimateAssignments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Estimates.V2.ProposalTemplateAssignmentRequest"
+                        },
+                        "description": "Maps proposal type options to estimate templates.\nEach ProposalTypeOptionId must be unique within the list."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Estimates.V2.ProposalTemplateAssignmentRequest": {
+                "required": [
+                    "proposalTypeOptionId",
+                    "estimateTemplateId",
+                    "order"
+                ],
+                "type": "object",
+                "properties": {
+                    "proposalTypeOptionId": {
+                        "type": "integer",
+                        "description": "ID of the proposal type option to assign. Obtain from GET /proposal-types.",
+                        "format": "int64"
+                    },
+                    "estimateTemplateId": {
+                        "type": "integer",
+                        "description": "ID of the estimate template to use for this option. Obtain from GET /estimate-templates.",
+                        "format": "int64"
+                    },
+                    "order": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Estimates.V2.UpdateProposalTemplateRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Omit or pass null to leave unchanged.\nNote: once set, this field cannot be cleared back to null via PATCH."
+                    },
+                    "proposalTypeId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ID of the proposal type. Omit to leave unchanged.",
+                        "format": "int64"
+                    },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EstimateTemplates.Types.ProposalTemplateStatus"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "active": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
+                    },
+                    "businessUnitIds": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "When provided, replaces all existing business unit associations. Pass an empty list to remove all."
+                    },
+                    "estimateAssignments": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/Estimates.V2.ProposalTemplateAssignmentRequest"
+                        },
+                        "description": "When provided, replaces all existing assignments (full replace, not merge).\nOmit to leave assignments unchanged. Pass an empty list to remove all assignments."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Estimates.V2.ProposalTypesResponse": {
+                "required": [
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Estimates.V2.ProposalTypeResponse"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Estimates.V2.ProposalTypeResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "type",
+                    "active",
+                    "isSystemDefault",
+                    "isDefault",
+                    "options"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/EstimateTemplates.Types.ProposalBehaviorType"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "isSystemDefault": {
+                        "type": "boolean"
+                    },
+                    "isDefault": {
+                        "type": "boolean"
+                    },
+                    "options": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Estimates.V2.ProposalTypeOptionResponse"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "EstimateTemplates.Types.ProposalBehaviorType": {
+                "enum": [
+                    "Progressive",
+                    "Additive"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Progressive",
+                    "Additive"
+                ]
+            },
+            "Estimates.V2.ProposalTypeOptionResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "order",
+                    "estimateType"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "order": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "color": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "estimateType": {
+                        "$ref": "#/components/schemas/Estimates.V2.ProposalTypeOptionEstimateType"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Estimates.V2.ProposalTypeOptionEstimateType": {
+                "enum": [
+                    "Standard",
+                    "Insurance"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Standard",
+                    "Insurance"
+                ]
             }
         },
         "securitySchemes": {
@@ -3063,7 +5247,12 @@
                         "tokenUrl": "https://auth.servicetitan.io/connect/token",
                         "scopes": {
                             "tn.sal.estimates:r": "Sales & Estimates \u2192 Estimates (Read)",
-                            "tn.sal.estimates:w": "Sales & Estimates \u2192 Estimates (Write)"
+                            "tn.sal.estimates:w": "Sales & Estimates \u2192 Estimates (Write)",
+                            "tn.sal.estimatetemplates:r": "Sales & Estimates \u2192 Estimate Templates (Read)",
+                            "tn.sal.estimatetemplates:w": "Sales & Estimates \u2192 Estimate Templates (Write)",
+                            "tn.sal.proposaltemplates:r": "Sales & Estimates \u2192 Proposal Templates (Read)",
+                            "tn.sal.proposaltemplates:w": "Sales & Estimates \u2192 Proposal Templates (Write)",
+                            "tn.sal.proposaltypes:r": "Sales & Estimates \u2192 Proposal Types (Read)"
                         }
                     }
                 }

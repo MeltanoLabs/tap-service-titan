@@ -96,6 +96,24 @@
     {
       "breadcrumb": [
         "properties",
+        "landedCostMethod"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "otherAmount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "createdBy"
       ],
       "metadata": {
@@ -595,6 +613,24 @@
         "items": {
           "additionalProperties": false,
           "properties": {
+            "allocatedOtherCosts": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "allocatedShipping": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "allocatedTax": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
             "assetAccount": {
               "additionalProperties": false,
               "properties": {
@@ -697,6 +733,12 @@
             },
             "description": {
               "format": "html",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "fullyLandedUnitCost": {
               "type": [
                 "string",
                 "null"
@@ -840,8 +882,21 @@
           "null"
         ]
       },
+      "landedCostMethod": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "modifiedOn": {
         "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "otherAmount": {
         "type": [
           "string",
           "null"
@@ -1007,6 +1062,7 @@
     },
     "required": [
       "id",
+      "landedCostMethod",
       "active"
     ],
     "type": "object"

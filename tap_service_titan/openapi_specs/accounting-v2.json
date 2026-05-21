@@ -333,6 +333,8 @@
                                             "vendorInvoiceTotal": "string",
                                             "taxAmount": "string",
                                             "shippingAmount": "string",
+                                            "landedCostMethod": {},
+                                            "otherAmount": "string",
                                             "createdBy": "string",
                                             "createdOn": "string",
                                             "modifiedOn": "string",
@@ -382,6 +384,10 @@
                                                     "description": "string",
                                                     "quantity": "string",
                                                     "cost": "string",
+                                                    "allocatedTax": "string",
+                                                    "allocatedShipping": "string",
+                                                    "allocatedOtherCosts": "string",
+                                                    "fullyLandedUnitCost": "string",
                                                     "inventoryLocation": {
                                                         "id": 0,
                                                         "name": "string",
@@ -543,6 +549,8 @@
                                     "vendorInvoiceTotal": "string",
                                     "taxAmount": "string",
                                     "shippingAmount": "string",
+                                    "landedCostMethod": {},
+                                    "otherAmount": "string",
                                     "createdBy": "string",
                                     "createdOn": "string",
                                     "modifiedOn": "string",
@@ -592,6 +600,10 @@
                                             "description": "string",
                                             "quantity": "string",
                                             "cost": "string",
+                                            "allocatedTax": "string",
+                                            "allocatedShipping": "string",
+                                            "allocatedOtherCosts": "string",
+                                            "fullyLandedUnitCost": "string",
                                             "inventoryLocation": {
                                                 "id": 0,
                                                 "name": "string",
@@ -4391,6 +4403,8 @@
                                             "billAmount": "string",
                                             "taxAmount": "string",
                                             "shippingAmount": "string",
+                                            "landedCostMethod": "None",
+                                            "otherAmount": "string",
                                             "createdBy": "string",
                                             "createdOn": "string",
                                             "modifiedOn": "string",
@@ -4431,6 +4445,10 @@
                                                     "description": "string",
                                                     "quantity": "string",
                                                     "cost": "string",
+                                                    "allocatedTax": "string",
+                                                    "allocatedShipping": "string",
+                                                    "allocatedOtherCosts": "string",
+                                                    "fullyLandedUnitCost": "string",
                                                     "inventoryLocation": "string",
                                                     "serialNumber": "string",
                                                     "generalLedgerAccount": {
@@ -5544,6 +5562,8 @@
                                         "billAmount": "string",
                                         "taxAmount": "string",
                                         "shippingAmount": "string",
+                                        "landedCostMethod": "None",
+                                        "otherAmount": "string",
                                         "createdBy": "string",
                                         "createdOn": "string",
                                         "modifiedOn": "string",
@@ -5584,6 +5604,10 @@
                                                 "description": "string",
                                                 "quantity": "string",
                                                 "cost": "string",
+                                                "allocatedTax": "string",
+                                                "allocatedShipping": "string",
+                                                "allocatedOtherCosts": "string",
+                                                "fullyLandedUnitCost": "string",
                                                 "inventoryLocation": "string",
                                                 "serialNumber": "string",
                                                 "generalLedgerAccount": {
@@ -5931,6 +5955,8 @@
                                             "billAmount": "string",
                                             "taxAmount": "string",
                                             "shippingAmount": "string",
+                                            "landedCostMethod": "None",
+                                            "otherAmount": "string",
                                             "createdBy": "string",
                                             "createdOn": "string",
                                             "modifiedOn": "string",
@@ -5971,6 +5997,10 @@
                                                     "description": "string",
                                                     "quantity": "string",
                                                     "cost": "string",
+                                                    "allocatedTax": "string",
+                                                    "allocatedShipping": "string",
+                                                    "allocatedOtherCosts": "string",
+                                                    "fullyLandedUnitCost": "string",
                                                     "inventoryLocation": "string",
                                                     "serialNumber": "string",
                                                     "generalLedgerAccount": {
@@ -10957,6 +10987,7 @@
             "Accounting.V2.ApBillResponse": {
                 "required": [
                     "id",
+                    "landedCostMethod",
                     "doNotPay"
                 ],
                 "type": "object",
@@ -11074,6 +11105,21 @@
                             "null"
                         ],
                         "description": "Shipping amount as a formatted string"
+                    },
+                    "landedCostMethod": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Inventory.Types.LandedCostMethod"
+                            }
+                        ],
+                        "description": "Landed cost method for this bill (from purchase order type)."
+                    },
+                    "otherAmount": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Other landed costs amount (duties, fees), when applicable"
                     },
                     "createdBy": {
                         "type": [
@@ -11274,6 +11320,18 @@
                 "additionalProperties": false,
                 "description": "Represents a complete AP bill with all associated details, items, and metadata"
             },
+            "Inventory.Types.LandedCostMethod": {
+                "enum": [
+                    "None",
+                    "ByValue"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "None",
+                    "ByValue"
+                ]
+            },
             "Accounting.V2.NamedFieldResponse": {
                 "required": [
                     "id"
@@ -11403,6 +11461,34 @@
                             "null"
                         ],
                         "description": "Cost per unit as a formatted string"
+                    },
+                    "allocatedTax": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Tax amount allocated to this line item"
+                    },
+                    "allocatedShipping": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Shipping amount allocated to this line item"
+                    },
+                    "allocatedOtherCosts": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Other costs allocated to this line item"
+                    },
+                    "fullyLandedUnitCost": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Fully landed unit cost for this line item"
                     },
                     "inventoryLocation": {
                         "oneOf": [
@@ -15336,6 +15422,7 @@
             "Accounting.V2.ExportInventoryBillResponse": {
                 "required": [
                     "id",
+                    "landedCostMethod",
                     "active"
                 ],
                 "type": "object",
@@ -15395,6 +15482,15 @@
                         ]
                     },
                     "shippingAmount": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "landedCostMethod": {
+                        "$ref": "#/components/schemas/Inventory.Types.LandedCostMethod"
+                    },
+                    "otherAmount": {
                         "type": [
                             "string",
                             "null"
@@ -15582,6 +15678,30 @@
                         ]
                     },
                     "cost": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "allocatedTax": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "allocatedShipping": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "allocatedOtherCosts": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "fullyLandedUnitCost": {
                         "type": [
                             "string",
                             "null"
@@ -16038,7 +16158,8 @@
             },
             "Accounting.V2.InventoryBillResponse": {
                 "required": [
-                    "id"
+                    "id",
+                    "landedCostMethod"
                 ],
                 "type": "object",
                 "properties": {
@@ -16097,6 +16218,15 @@
                         ]
                     },
                     "shippingAmount": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "landedCostMethod": {
+                        "$ref": "#/components/schemas/Inventory.Types.LandedCostMethod"
+                    },
+                    "otherAmount": {
                         "type": [
                             "string",
                             "null"

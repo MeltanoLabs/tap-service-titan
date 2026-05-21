@@ -1461,10 +1461,7 @@
             "Telecom.V3.CallResponse": {
                 "required": [
                     "id",
-                    "jobNumber",
                     "projectId",
-                    "businessUnit",
-                    "type",
                     "leadCall"
                 ],
                 "type": "object",
@@ -1474,17 +1471,34 @@
                         "format": "int64"
                     },
                     "jobNumber": {
-                        "type": "string"
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "projectId": {
                         "type": "integer",
                         "format": "int64"
                     },
                     "businessUnit": {
-                        "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
                     "type": {
-                        "$ref": "#/components/schemas/Telecom.V3.JobTypeModel"
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V3.JobTypeModel"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
                     "leadCall": {
                         "$ref": "#/components/schemas/Telecom.V3.CallModelResponse"
@@ -1545,14 +1559,7 @@
                     "from",
                     "to",
                     "direction",
-                    "reason",
-                    "recordingUrl",
-                    "voiceMailUrl",
-                    "createdBy",
-                    "customer",
-                    "campaign",
-                    "modifiedOn",
-                    "agent"
+                    "modifiedOn"
                 ],
                 "type": "object",
                 "properties": {
@@ -1595,29 +1602,70 @@
                         ]
                     },
                     "reason": {
-                        "$ref": "#/components/schemas/Telecom.V3.CallReasonModel"
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V3.CallReasonModel"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
                     "recordingUrl": {
-                        "type": "string"
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "voiceMailUrl": {
-                        "type": "string"
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "createdBy": {
-                        "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
                     "customer": {
-                        "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
                     "campaign": {
-                        "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V2.NamedModel"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
                     "modifiedOn": {
                         "type": "string",
                         "format": "date-time"
                     },
                     "agent": {
-                        "$ref": "#/components/schemas/Telecom.V3.CallAgentModel"
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V3.CallAgentModel"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
                     "sid": {
                         "type": [

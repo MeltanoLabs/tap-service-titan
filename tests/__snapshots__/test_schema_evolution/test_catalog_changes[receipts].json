@@ -288,6 +288,24 @@
     {
       "breadcrumb": [
         "properties",
+        "landedCostMethod"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "otherAmount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "items"
       ],
       "metadata": {
@@ -443,6 +461,30 @@
           "additionalProperties": false,
           "description": "Inventory receipt item response",
           "properties": {
+            "allocatedOtherCosts": {
+              "description": "Allocated other costs for this item (fully landed cost). Null when LandedCostMethod is None.",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "allocatedShipping": {
+              "description": "Allocated shipping cost for this item (fully landed cost). Null when LandedCostMethod is None.",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "allocatedTax": {
+              "description": "Allocated tax for this item (fully landed cost). Null when LandedCostMethod is None.",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
             "assetAccount": {
               "additionalProperties": false,
               "description": "Represents GL account response",
@@ -547,6 +589,14 @@
               "format": "html",
               "type": [
                 "string",
+                "null"
+              ]
+            },
+            "fullyLandedUnitCost": {
+              "description": "Fully landed unit cost for this item. Null when LandedCostMethod is None.",
+              "format": "decimal",
+              "type": [
+                "number",
                 "null"
               ]
             },
@@ -655,6 +705,13 @@
           "null"
         ]
       },
+      "landedCostMethod": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "memo": {
         "description": "Memo/summary field",
         "format": "multiline",
@@ -675,6 +732,14 @@
         "description": "Number",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "otherAmount": {
+        "description": "Other costs on the receipt. Null for non-FLC receipts.",
+        "format": "decimal",
+        "type": [
+          "number",
           "null"
         ]
       },
@@ -824,6 +889,7 @@
       "createdOn",
       "modifiedOn",
       "syncStatus",
+      "landedCostMethod",
       "items",
       "customFields"
     ],

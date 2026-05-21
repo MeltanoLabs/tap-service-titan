@@ -356,6 +356,7 @@
                                             "earningCategory": {},
                                             "createdOn": "string",
                                             "modifiedOn": "string",
+                                            "isDiscretionary": true,
                                             "active": true
                                         }
                                     ]
@@ -1887,6 +1888,7 @@
                                             "earningCategory": {},
                                             "createdOn": "string",
                                             "modifiedOn": "string",
+                                            "isDiscretionary": true,
                                             "active": true
                                         }
                                     ]
@@ -1968,6 +1970,7 @@
                                     "earningCategory": {},
                                     "createdOn": "string",
                                     "modifiedOn": "string",
+                                    "isDiscretionary": true,
                                     "active": true
                                 }
                             }
@@ -5062,6 +5065,7 @@
                     "earningCategory",
                     "createdOn",
                     "modifiedOn",
+                    "isDiscretionary",
                     "active"
                 ],
                 "type": "object",
@@ -5096,6 +5100,10 @@
                         "type": "string",
                         "description": "Date/time (on UTC) when the payroll activity code was modified",
                         "format": "date-time"
+                    },
+                    "isDiscretionary": {
+                        "type": "boolean",
+                        "description": "Indicates whether the earnings code is discretionary (excluded from regular rate of pay calculations)"
                     },
                     "active": {
                         "type": "boolean",
@@ -6543,6 +6551,7 @@
                     "earningCategory",
                     "createdOn",
                     "modifiedOn",
+                    "isDiscretionary",
                     "active"
                 ],
                 "type": "object",
@@ -6577,6 +6586,10 @@
                         "type": "string",
                         "description": "Date/time (on UTC) when the payroll activity code was modified",
                         "format": "date-time"
+                    },
+                    "isDiscretionary": {
+                        "type": "boolean",
+                        "description": "Indicates whether the earnings code is discretionary (excluded from regular rate of pay calculations)"
                     },
                     "active": {
                         "type": "boolean",

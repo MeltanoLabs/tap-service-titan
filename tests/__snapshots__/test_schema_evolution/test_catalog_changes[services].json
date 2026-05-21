@@ -343,6 +343,15 @@
     {
       "breadcrumb": [
         "properties",
+        "isPriceLocked"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "calculatedPrice"
       ],
       "metadata": {
@@ -662,6 +671,13 @@
       },
       "isLabor": {
         "description": "Is a labor service",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "isPriceLocked": {
+        "description": "Whether the price is locked from editing",
         "type": [
           "boolean",
           "null"

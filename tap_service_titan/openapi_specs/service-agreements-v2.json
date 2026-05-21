@@ -1020,7 +1020,7 @@
                     "defaultPricingStrategy": {
                         "oneOf": [
                             {
-                                "$ref": "#/components/schemas/ServiceAgreements.PricingStrategyType"
+                                "$ref": "#/components/schemas/ServiceAgreements.V2.PricingStrategyType"
                             },
                             {
                                 "type": "null"
@@ -1039,7 +1039,7 @@
                     "defaultTargetMarginValueType": {
                         "oneOf": [
                             {
-                                "$ref": "#/components/schemas/ServiceAgreements.TargetMarginValueType"
+                                "$ref": "#/components/schemas/ServiceAgreements.V2.TargetMarginValueType"
                             },
                             {
                                 "type": "null"
@@ -1189,7 +1189,7 @@
                     "Custom"
                 ]
             },
-            "ServiceAgreements.PricingStrategyType": {
+            "ServiceAgreements.V2.PricingStrategyType": {
                 "enum": [
                     "PerVisitCostBasedGrossMarginTarget",
                     "PerVisitCostBasedMarkupAndSurcharge",
@@ -1200,7 +1200,7 @@
                     "TotalAgreementMarkupAndSurcharge"
                 ],
                 "type": "string",
-                "description": "Defines how prices are calculated for service agreements or visits.",
+                "description": "",
                 "x-enumNames": [
                     "PerVisitCostBasedGrossMarginTarget",
                     "PerVisitCostBasedMarkupAndSurcharge",
@@ -1211,13 +1211,13 @@
                     "TotalAgreementMarkupAndSurcharge"
                 ]
             },
-            "ServiceAgreements.TargetMarginValueType": {
+            "ServiceAgreements.V2.TargetMarginValueType": {
                 "enum": [
                     "PercentageMargin",
                     "DollarAmount"
                 ],
                 "type": "string",
-                "description": "Target margin value type.",
+                "description": "",
                 "x-enumNames": [
                     "PercentageMargin",
                     "DollarAmount"

@@ -133,6 +133,28 @@
     {
       "breadcrumb": [
         "properties",
+        "preferences",
+        "properties",
+        "invoiceNotification"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "preferences",
+        "properties",
+        "statementNotification"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "locationId"
       ],
       "metadata": {
@@ -242,8 +264,15 @@
         "additionalProperties": false,
         "description": "Contact Preferences",
         "properties": {
+          "invoiceNotification": {
+            "description": "Invoice Notification - whether this contact receives invoice notifications",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
           "invoiceStatementNotification": {
-            "description": "Invoice Statement Notification",
+            "description": "Invoice Statement Notification (legacy combined field, true only if both InvoiceNotification AND StatementNotification are true)",
             "type": [
               "boolean",
               "null"
@@ -262,12 +291,21 @@
               "boolean",
               "null"
             ]
+          },
+          "statementNotification": {
+            "description": "Statement Notification - whether this contact receives statement notifications",
+            "type": [
+              "boolean",
+              "null"
+            ]
           }
         },
         "required": [
           "jobRemindersEnabled",
           "marketingUpdatesEnabled",
-          "invoiceStatementNotification"
+          "invoiceStatementNotification",
+          "invoiceNotification",
+          "statementNotification"
         ],
         "type": [
           "object",

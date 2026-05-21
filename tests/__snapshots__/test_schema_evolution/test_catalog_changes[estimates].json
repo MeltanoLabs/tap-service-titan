@@ -251,6 +251,33 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "depositAmount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "depositPercent"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "requireDepositOnSignature"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -308,6 +335,20 @@
         "format": "int64",
         "type": [
           "integer",
+          "null"
+        ]
+      },
+      "depositAmount": {
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "depositPercent": {
+        "format": "decimal",
+        "type": [
+          "number",
           "null"
         ]
       },
@@ -611,6 +652,12 @@
       "proposalTagName": {
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "requireDepositOnSignature": {
+        "type": [
+          "boolean",
           "null"
         ]
       },
