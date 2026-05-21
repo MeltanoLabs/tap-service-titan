@@ -6638,7 +6638,9 @@
                                             "preferences": {
                                                 "jobRemindersEnabled": true,
                                                 "marketingUpdatesEnabled": true,
-                                                "invoiceStatementNotification": true
+                                                "invoiceStatementNotification": true,
+                                                "invoiceNotification": true,
+                                                "statementNotification": true
                                             }
                                         }
                                     ]
@@ -6774,7 +6776,9 @@
                                     "preferences": {
                                         "jobRemindersEnabled": true,
                                         "marketingUpdatesEnabled": true,
-                                        "invoiceStatementNotification": true
+                                        "invoiceStatementNotification": true,
+                                        "invoiceNotification": true,
+                                        "statementNotification": true
                                     }
                                 }
                             }
@@ -7001,7 +7005,9 @@
                                 "preferences": {
                                     "jobRemindersEnabled": true,
                                     "marketingUpdatesEnabled": true,
-                                    "invoiceStatementNotification": true
+                                    "invoiceStatementNotification": true,
+                                    "invoiceNotification": true,
+                                    "statementNotification": true
                                 }
                             }
                         }
@@ -7029,7 +7035,9 @@
                                     "preferences": {
                                         "jobRemindersEnabled": true,
                                         "marketingUpdatesEnabled": true,
-                                        "invoiceStatementNotification": true
+                                        "invoiceStatementNotification": true,
+                                        "invoiceNotification": true,
+                                        "statementNotification": true
                                     }
                                 }
                             }
@@ -7214,7 +7222,9 @@
                                             "preferences": {
                                                 "jobRemindersEnabled": true,
                                                 "marketingUpdatesEnabled": true,
-                                                "invoiceStatementNotification": true
+                                                "invoiceStatementNotification": true,
+                                                "invoiceNotification": true,
+                                                "statementNotification": true
                                             },
                                             "id": 0,
                                             "type": {},
@@ -7819,7 +7829,9 @@
                                             "preferences": {
                                                 "jobRemindersEnabled": true,
                                                 "marketingUpdatesEnabled": true,
-                                                "invoiceStatementNotification": true
+                                                "invoiceStatementNotification": true,
+                                                "invoiceNotification": true,
+                                                "statementNotification": true
                                             },
                                             "id": 0,
                                             "type": {},
@@ -7924,7 +7936,9 @@
                                             "preferences": {
                                                 "jobRemindersEnabled": true,
                                                 "marketingUpdatesEnabled": true,
-                                                "invoiceStatementNotification": true
+                                                "invoiceStatementNotification": true,
+                                                "invoiceNotification": true,
+                                                "statementNotification": true
                                             },
                                             "locationId": 0,
                                             "active": true
@@ -10783,7 +10797,9 @@
                                             "preferences": {
                                                 "jobRemindersEnabled": true,
                                                 "marketingUpdatesEnabled": true,
-                                                "invoiceStatementNotification": true
+                                                "invoiceStatementNotification": true,
+                                                "invoiceNotification": true,
+                                                "statementNotification": true
                                             }
                                         }
                                     ]
@@ -10919,7 +10935,9 @@
                                     "preferences": {
                                         "jobRemindersEnabled": true,
                                         "marketingUpdatesEnabled": true,
-                                        "invoiceStatementNotification": true
+                                        "invoiceStatementNotification": true,
+                                        "invoiceNotification": true,
+                                        "statementNotification": true
                                     }
                                 }
                             }
@@ -11105,7 +11123,9 @@
                                             "preferences": {
                                                 "jobRemindersEnabled": true,
                                                 "marketingUpdatesEnabled": true,
-                                                "invoiceStatementNotification": true
+                                                "invoiceStatementNotification": true,
+                                                "invoiceNotification": true,
+                                                "statementNotification": true
                                             },
                                             "locationId": 0
                                         }
@@ -11299,7 +11319,9 @@
                                 "preferences": {
                                     "jobRemindersEnabled": true,
                                     "marketingUpdatesEnabled": true,
-                                    "invoiceStatementNotification": true
+                                    "invoiceStatementNotification": true,
+                                    "invoiceNotification": true,
+                                    "statementNotification": true
                                 }
                             }
                         }
@@ -11327,7 +11349,9 @@
                                     "preferences": {
                                         "jobRemindersEnabled": true,
                                         "marketingUpdatesEnabled": true,
-                                        "invoiceStatementNotification": true
+                                        "invoiceStatementNotification": true,
+                                        "invoiceNotification": true,
+                                        "statementNotification": true
                                     }
                                 }
                             }
@@ -14943,7 +14967,9 @@
                 "required": [
                     "jobRemindersEnabled",
                     "marketingUpdatesEnabled",
-                    "invoiceStatementNotification"
+                    "invoiceStatementNotification",
+                    "invoiceNotification",
+                    "statementNotification"
                 ],
                 "type": "object",
                 "properties": {
@@ -14957,7 +14983,15 @@
                     },
                     "invoiceStatementNotification": {
                         "type": "boolean",
-                        "description": "Invoice Statement Notification"
+                        "description": "Invoice Statement Notification (legacy combined field, true only if both InvoiceNotification AND StatementNotification are true)"
+                    },
+                    "invoiceNotification": {
+                        "type": "boolean",
+                        "description": "Invoice Notification - whether this contact receives invoice notifications"
+                    },
+                    "statementNotification": {
+                        "type": "boolean",
+                        "description": "Statement Notification - whether this contact receives statement notifications"
                     }
                 },
                 "additionalProperties": false
@@ -15025,7 +15059,9 @@
                 "required": [
                     "jobRemindersEnabled",
                     "marketingUpdatesEnabled",
-                    "invoiceStatementNotification"
+                    "invoiceStatementNotification",
+                    "invoiceNotification",
+                    "statementNotification"
                 ],
                 "type": "object",
                 "properties": {
@@ -15039,7 +15075,15 @@
                     },
                     "invoiceStatementNotification": {
                         "type": "boolean",
-                        "description": "Invoice Statement Notification"
+                        "description": "Invoice Statement Notification (legacy combined field - setting this will update both InvoiceNotification and StatementNotification)"
+                    },
+                    "invoiceNotification": {
+                        "type": "boolean",
+                        "description": "Invoice Notification - whether this contact receives invoice notifications"
+                    },
+                    "statementNotification": {
+                        "type": "boolean",
+                        "description": "Statement Notification - whether this contact receives statement notifications"
                     }
                 },
                 "additionalProperties": false

@@ -51,6 +51,15 @@
     {
       "breadcrumb": [
         "properties",
+        "returnTypeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "vendorId"
       ],
       "metadata": {
@@ -892,6 +901,14 @@
           "null"
         ]
       },
+      "returnTypeId": {
+        "description": "Return type Id",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
       "returnedOn": {
         "description": "Date when return was actually processed",
         "format": "date-time",
@@ -945,6 +962,7 @@
       "number",
       "referenceNumber",
       "status",
+      "returnTypeId",
       "vendorId",
       "businessUnitId",
       "memo",

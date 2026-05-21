@@ -96,6 +96,24 @@
     {
       "breadcrumb": [
         "properties",
+        "landedCostMethod"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "includeTaxInFullyLandedCost"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "createdOn"
       ],
       "metadata": {
@@ -196,6 +214,20 @@
           "null"
         ]
       },
+      "includeTaxInFullyLandedCost": {
+        "description": "Whether to include tax in fully landed cost",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "landedCostMethod": {
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "modifiedOn": {
         "description": "Last time purchase order type was modified date",
         "format": "date-time",
@@ -230,6 +262,8 @@
       "defaultRequiredDateDaysOffset",
       "skipWeekends",
       "excludeTaxFromJobCosting",
+      "landedCostMethod",
+      "includeTaxInFullyLandedCost",
       "createdOn",
       "modifiedOn"
     ],

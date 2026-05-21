@@ -905,6 +905,7 @@
                                             "number": "string",
                                             "referenceNumber": "string",
                                             "status": {},
+                                            "returnTypeId": 0,
                                             "vendorId": 0,
                                             "purchaseOrderId": 0,
                                             "jobId": 0,
@@ -3213,6 +3214,8 @@
                                 "isDefault": true,
                                 "copyPurchaseOrderItemsToInvoiceWhenReceived": true,
                                 "isDefaultForConsignment": true,
+                                "landedCostMethod": {},
+                                "includeTaxInFullyLandedCost": true,
                                 "alertSettings": {
                                     "sendEmailToTechnicianWhenPoMovedToSend": true,
                                     "sendEmailToTechnicianWhenPoMovedToReceived": true,
@@ -3392,6 +3395,8 @@
                                             "defaultRequiredDateDaysOffset": 0,
                                             "skipWeekends": true,
                                             "excludeTaxFromJobCosting": true,
+                                            "landedCostMethod": {},
+                                            "includeTaxInFullyLandedCost": true,
                                             "createdOn": "string",
                                             "modifiedOn": "string"
                                         }
@@ -3480,6 +3485,8 @@
                                 "isDefault": true,
                                 "copyPurchaseOrderItemsToInvoiceWhenReceived": true,
                                 "isDefaultForConsignment": true,
+                                "landedCostMethod": {},
+                                "includeTaxInFullyLandedCost": true,
                                 "alertSettings": {
                                     "sendEmailToTechnicianWhenPoMovedToSend": true,
                                     "sendEmailToTechnicianWhenPoMovedToReceived": true,
@@ -3842,6 +3849,8 @@
                                             "batchId": 0,
                                             "syncStatus": {},
                                             "budgetCodeId": 0,
+                                            "landedCostMethod": {},
+                                            "otherAmount": 0,
                                             "items": [
                                                 {
                                                     "id": 0,
@@ -3870,7 +3879,11 @@
                                                         "detailType": "string"
                                                     },
                                                     "purchaseOrderItemId": 0,
-                                                    "budgetCodeId": 0
+                                                    "budgetCodeId": 0,
+                                                    "allocatedShipping": 0,
+                                                    "allocatedTax": 0,
+                                                    "allocatedOtherCosts": 0,
+                                                    "fullyLandedUnitCost": 0
                                                 }
                                             ],
                                             "customFields": [
@@ -4483,6 +4496,7 @@
                                             "number": "string",
                                             "referenceNumber": "string",
                                             "status": {},
+                                            "returnTypeId": 0,
                                             "vendorId": 0,
                                             "purchaseOrderId": 0,
                                             "jobId": 0,
@@ -8871,6 +8885,7 @@
                     "number",
                     "referenceNumber",
                     "status",
+                    "returnTypeId",
                     "vendorId",
                     "businessUnitId",
                     "memo",
@@ -8911,6 +8926,11 @@
                             }
                         ],
                         "description": "Status"
+                    },
+                    "returnTypeId": {
+                        "type": "integer",
+                        "description": "Return type Id",
+                        "format": "int64"
                     },
                     "vendorId": {
                         "type": "integer",
@@ -11112,6 +11132,24 @@
                         "type": "boolean",
                         "description": "Is Default For Consignment"
                     },
+                    "landedCostMethod": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Inventory.V2.LandedCostMethod"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Landed cost method for this PO type"
+                    },
+                    "includeTaxInFullyLandedCost": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether to include tax in fully landed cost"
+                    },
                     "alertSettings": {
                         "oneOf": [
                             {
@@ -11123,6 +11161,18 @@
                 },
                 "additionalProperties": false,
                 "description": "Request model to create Purchase Order Types\n            "
+            },
+            "Inventory.V2.LandedCostMethod": {
+                "enum": [
+                    "None",
+                    "ByValue"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "None",
+                    "ByValue"
+                ]
             },
             "Inventory.PoTypeAlertSettings": {
                 "required": [
@@ -11207,6 +11257,8 @@
                     "defaultRequiredDateDaysOffset",
                     "skipWeekends",
                     "excludeTaxFromJobCosting",
+                    "landedCostMethod",
+                    "includeTaxInFullyLandedCost",
                     "createdOn",
                     "modifiedOn"
                 ],
@@ -11254,6 +11306,18 @@
                         "type": "boolean",
                         "description": "Exclude tax from job costing"
                     },
+                    "landedCostMethod": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Inventory.V2.LandedCostMethod"
+                            }
+                        ],
+                        "description": "Landed cost method for this PO type"
+                    },
+                    "includeTaxInFullyLandedCost": {
+                        "type": "boolean",
+                        "description": "Whether to include tax in fully landed cost"
+                    },
                     "createdOn": {
                         "type": "string",
                         "description": "System created date",
@@ -11269,6 +11333,26 @@
                 "description": "Represents purchase order type response"
             },
             "Inventory.V2.UpdatePurchaseOrderTypeRequest": {
+                "required": [
+                    "active",
+                    "name",
+                    "includeInPoScreen",
+                    "automaticallyReceive",
+                    "displayToTechnician",
+                    "excludeTaxFromJobCosting",
+                    "impactToTechnicianPayroll",
+                    "allowTechniciansToSendPo",
+                    "defaultRequiredDateDaysOffset",
+                    "skipWeekends",
+                    "requireJobBeforeReceipt",
+                    "includeInSalesTax",
+                    "isDefault",
+                    "copyPurchaseOrderItemsToInvoiceWhenReceived",
+                    "isDefaultForConsignment",
+                    "landedCostMethod",
+                    "includeTaxInFullyLandedCost",
+                    "alertSettings"
+                ],
                 "type": "object",
                 "properties": {
                     "active": {
@@ -11332,6 +11416,18 @@
                         "type": "boolean",
                         "description": "Should the Purchase Order Type be the default for consignment"
                     },
+                    "landedCostMethod": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Inventory.Types.LandedCostMethod"
+                            }
+                        ],
+                        "description": "Landed cost method for this PO type"
+                    },
+                    "includeTaxInFullyLandedCost": {
+                        "type": "boolean",
+                        "description": "Whether to include tax in fully landed cost"
+                    },
                     "alertSettings": {
                         "oneOf": [
                             {
@@ -11343,6 +11439,18 @@
                 },
                 "additionalProperties": false,
                 "description": "Request model to Update Purchase Order Types"
+            },
+            "Inventory.Types.LandedCostMethod": {
+                "enum": [
+                    "None",
+                    "ByValue"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "None",
+                    "ByValue"
+                ]
             },
             "PaginatedResponse_Of_Inventory.V2.InventoryReceiptResponse": {
                 "required": [
@@ -11403,6 +11511,7 @@
                     "createdOn",
                     "modifiedOn",
                     "syncStatus",
+                    "landedCostMethod",
                     "items",
                     "customFields"
                 ],
@@ -11557,6 +11666,22 @@
                         "description": "Id of the budget code",
                         "format": "int64"
                     },
+                    "landedCostMethod": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Inventory.V2.LandedCostMethod"
+                            }
+                        ],
+                        "description": "Landed cost method for this receipt (from purchase order type)."
+                    },
+                    "otherAmount": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Other costs on the receipt. Null for non-FLC receipts.",
+                        "format": "decimal"
+                    },
                     "items": {
                         "type": "array",
                         "items": {
@@ -11665,6 +11790,38 @@
                         ],
                         "description": "Id of the budget code",
                         "format": "int64"
+                    },
+                    "allocatedShipping": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Allocated shipping cost for this item (fully landed cost). Null when LandedCostMethod is None.",
+                        "format": "decimal"
+                    },
+                    "allocatedTax": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Allocated tax for this item (fully landed cost). Null when LandedCostMethod is None.",
+                        "format": "decimal"
+                    },
+                    "allocatedOtherCosts": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Allocated other costs for this item (fully landed cost). Null when LandedCostMethod is None.",
+                        "format": "decimal"
+                    },
+                    "fullyLandedUnitCost": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Fully landed unit cost for this item. Null when LandedCostMethod is None.",
+                        "format": "decimal"
                     }
                 },
                 "additionalProperties": false,
@@ -11881,6 +12038,7 @@
                     "number",
                     "referenceNumber",
                     "status",
+                    "returnTypeId",
                     "vendorId",
                     "businessUnitId",
                     "memo",
@@ -11921,6 +12079,11 @@
                             }
                         ],
                         "description": "Status"
+                    },
+                    "returnTypeId": {
+                        "type": "integer",
+                        "description": "Return type Id",
+                        "format": "int64"
                     },
                     "vendorId": {
                         "type": "integer",

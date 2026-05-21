@@ -1846,7 +1846,9 @@
                                                 "depth": 0
                                             },
                                             "budgetCostCode": "string",
-                                            "budgetCostType": "string"
+                                            "budgetCostType": "string",
+                                            "isCostLocked": true,
+                                            "isPriceLocked": true
                                         }
                                     ]
                                 }
@@ -2001,7 +2003,9 @@
                                     "height": 0,
                                     "width": 0,
                                     "depth": 0
-                                }
+                                },
+                                "isCostLocked": true,
+                                "isPriceLocked": true
                             }
                         }
                     }
@@ -2159,7 +2163,9 @@
                                         "depth": 0
                                     },
                                     "budgetCostCode": "string",
-                                    "budgetCostType": "string"
+                                    "budgetCostType": "string",
+                                    "isCostLocked": true,
+                                    "isPriceLocked": true
                                 }
                             }
                         }
@@ -2367,7 +2373,9 @@
                                         "depth": 0
                                     },
                                     "budgetCostCode": "string",
-                                    "budgetCostType": "string"
+                                    "budgetCostType": "string",
+                                    "isCostLocked": true,
+                                    "isPriceLocked": true
                                 }
                             }
                         }
@@ -2549,7 +2557,9 @@
                                     "depth": 0
                                 },
                                 "budgetCostCode": "string",
-                                "budgetCostType": "string"
+                                "budgetCostType": "string",
+                                "isCostLocked": true,
+                                "isPriceLocked": true
                             }
                         }
                     }
@@ -2707,7 +2717,9 @@
                                         "depth": 0
                                     },
                                     "budgetCostCode": "string",
-                                    "budgetCostType": "string"
+                                    "budgetCostType": "string",
+                                    "isCostLocked": true,
+                                    "isPriceLocked": true
                                 }
                             }
                         }
@@ -3071,7 +3083,9 @@
                                                 "depth": 0
                                             },
                                             "budgetCostCode": "string",
-                                            "budgetCostType": "string"
+                                            "budgetCostType": "string",
+                                            "isCostLocked": true,
+                                            "isPriceLocked": true
                                         }
                                     ]
                                 }
@@ -3226,7 +3240,8 @@
                                             "soldByCommission": 0,
                                             "defaultAssetUrl": "string",
                                             "budgetCostCode": "string",
-                                            "budgetCostType": "string"
+                                            "budgetCostType": "string",
+                                            "isPriceLocked": true
                                         }
                                     ]
                                 }
@@ -3411,7 +3426,12 @@
                                             "costTypeId": 0,
                                             "defaultAssetUrl": "string",
                                             "budgetCostCode": "string",
-                                            "budgetCostType": "string"
+                                            "budgetCostType": "string",
+                                            "isCostLocked": true,
+                                            "isPriceLocked": true,
+                                            "isChemical": true,
+                                            "epaNumber": "string",
+                                            "activeIngredients": "string"
                                         }
                                     ]
                                 }
@@ -3901,7 +3921,12 @@
                                             "costTypeId": 0,
                                             "defaultAssetUrl": "string",
                                             "budgetCostCode": "string",
-                                            "budgetCostType": "string"
+                                            "budgetCostType": "string",
+                                            "isCostLocked": true,
+                                            "isPriceLocked": true,
+                                            "isChemical": true,
+                                            "epaNumber": "string",
+                                            "activeIngredients": "string"
                                         }
                                     ]
                                 }
@@ -4029,7 +4054,12 @@
                                 "isOtherDirectCost": true,
                                 "costTypeId": 0,
                                 "budgetCostCode": "string",
-                                "budgetCostType": "string"
+                                "budgetCostType": "string",
+                                "isCostLocked": true,
+                                "isPriceLocked": true,
+                                "isChemical": true,
+                                "epaNumber": "string",
+                                "activeIngredients": "string"
                             }
                         }
                     }
@@ -4161,7 +4191,12 @@
                                     "costTypeId": 0,
                                     "defaultAssetUrl": "string",
                                     "budgetCostCode": "string",
-                                    "budgetCostType": "string"
+                                    "budgetCostType": "string",
+                                    "isCostLocked": true,
+                                    "isPriceLocked": true,
+                                    "isChemical": true,
+                                    "epaNumber": "string",
+                                    "activeIngredients": "string"
                                 }
                             }
                         }
@@ -4343,7 +4378,12 @@
                                     "costTypeId": 0,
                                     "defaultAssetUrl": "string",
                                     "budgetCostCode": "string",
-                                    "budgetCostType": "string"
+                                    "budgetCostType": "string",
+                                    "isCostLocked": true,
+                                    "isPriceLocked": true,
+                                    "isChemical": true,
+                                    "epaNumber": "string",
+                                    "activeIngredients": "string"
                                 }
                             }
                         }
@@ -4497,7 +4537,12 @@
                                 ],
                                 "costTypeId": 0,
                                 "budgetCostCode": "string",
-                                "budgetCostType": "string"
+                                "budgetCostType": "string",
+                                "isCostLocked": true,
+                                "isPriceLocked": true,
+                                "isChemical": true,
+                                "epaNumber": "string",
+                                "activeIngredients": "string"
                             }
                         }
                     }
@@ -4629,7 +4674,12 @@
                                     "costTypeId": 0,
                                     "defaultAssetUrl": "string",
                                     "budgetCostCode": "string",
-                                    "budgetCostType": "string"
+                                    "budgetCostType": "string",
+                                    "isCostLocked": true,
+                                    "isPriceLocked": true,
+                                    "isChemical": true,
+                                    "epaNumber": "string",
+                                    "activeIngredients": "string"
                                 }
                             }
                         }
@@ -5289,6 +5339,7 @@
                                         },
                                         "budgetCostCode": "string",
                                         "budgetCostType": "string",
+                                        "isPriceLocked": true,
                                         "customId": "string"
                                     }
                                 ],
@@ -5412,6 +5463,8 @@
                                             "width": 0,
                                             "depth": 0
                                         },
+                                        "isCostLocked": true,
+                                        "isPriceLocked": true,
                                         "customId": "string"
                                     }
                                 ],
@@ -5503,6 +5556,11 @@
                                         "costTypeId": 0,
                                         "budgetCostCode": "string",
                                         "budgetCostType": "string",
+                                        "isCostLocked": true,
+                                        "isPriceLocked": true,
+                                        "isChemical": true,
+                                        "epaNumber": "string",
+                                        "activeIngredients": "string",
                                         "customId": "string"
                                     }
                                 ],
@@ -5708,6 +5766,7 @@
                                         },
                                         "budgetCostCode": "string",
                                         "budgetCostType": "string",
+                                        "isPriceLocked": true,
                                         "id": 0
                                     }
                                 ],
@@ -5827,6 +5886,8 @@
                                         },
                                         "budgetCostCode": "string",
                                         "budgetCostType": "string",
+                                        "isCostLocked": true,
+                                        "isPriceLocked": true,
                                         "id": 0
                                     }
                                 ],
@@ -5918,6 +5979,11 @@
                                         "costTypeId": 0,
                                         "budgetCostCode": "string",
                                         "budgetCostType": "string",
+                                        "isCostLocked": true,
+                                        "isPriceLocked": true,
+                                        "isChemical": true,
+                                        "epaNumber": "string",
+                                        "activeIngredients": "string",
                                         "id": 0
                                     }
                                 ],
@@ -6262,6 +6328,7 @@
                                             "defaultAssetUrl": "string",
                                             "budgetCostCode": "string",
                                             "budgetCostType": "string",
+                                            "isPriceLocked": true,
                                             "calculatedPrice": 0,
                                             "useStaticPrices": true
                                         }
@@ -6366,7 +6433,8 @@
                                     ]
                                 },
                                 "budgetCostCode": "string",
-                                "budgetCostType": "string"
+                                "budgetCostType": "string",
+                                "isPriceLocked": true
                             }
                         }
                     }
@@ -6468,7 +6536,8 @@
                                     "soldByCommission": 0,
                                     "defaultAssetUrl": "string",
                                     "budgetCostCode": "string",
-                                    "budgetCostType": "string"
+                                    "budgetCostType": "string",
+                                    "isPriceLocked": true
                                 }
                             }
                         }
@@ -6630,6 +6699,7 @@
                                     "defaultAssetUrl": "string",
                                     "budgetCostCode": "string",
                                     "budgetCostType": "string",
+                                    "isPriceLocked": true,
                                     "calculatedPrice": 0,
                                     "useStaticPrices": true
                                 }
@@ -6761,7 +6831,8 @@
                                     ]
                                 },
                                 "budgetCostCode": "string",
-                                "budgetCostType": "string"
+                                "budgetCostType": "string",
+                                "isPriceLocked": true
                             }
                         }
                     }
@@ -6863,7 +6934,8 @@
                                     "soldByCommission": 0,
                                     "defaultAssetUrl": "string",
                                     "budgetCostCode": "string",
-                                    "budgetCostType": "string"
+                                    "budgetCostType": "string",
+                                    "isPriceLocked": true
                                 }
                             }
                         }
@@ -8687,6 +8759,20 @@
                             "null"
                         ],
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)"
+                    },
+                    "isCostLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the cost is locked from editing"
+                    },
+                    "isPriceLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the price is locked from editing"
                     }
                 },
                 "additionalProperties": false
@@ -9198,6 +9284,20 @@
                             }
                         ],
                         "description": "The equipment dimensions"
+                    },
+                    "isCostLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the cost is locked from editing"
+                    },
+                    "isPriceLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the price is locked from editing"
                     }
                 },
                 "additionalProperties": false
@@ -9568,6 +9668,14 @@
                     "budgetCostType": {
                         "type": "string",
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)"
+                    },
+                    "isCostLocked": {
+                        "type": "boolean",
+                        "description": "Whether the cost is locked from editing"
+                    },
+                    "isPriceLocked": {
+                        "type": "boolean",
+                        "description": "Whether the price is locked from editing"
                     }
                 },
                 "additionalProperties": false
@@ -10088,6 +10196,20 @@
                             "null"
                         ],
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)"
+                    },
+                    "isCostLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the cost is locked from editing"
+                    },
+                    "isPriceLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the price is locked from editing"
                     }
                 },
                 "additionalProperties": false
@@ -10363,6 +10485,13 @@
                             "null"
                         ],
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)"
+                    },
+                    "isPriceLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the price is locked from editing"
                     }
                 },
                 "additionalProperties": false
@@ -10703,6 +10832,41 @@
                             "null"
                         ],
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)"
+                    },
+                    "isCostLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the cost is locked from editing"
+                    },
+                    "isPriceLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the price is locked from editing"
+                    },
+                    "isChemical": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "When true, EPA number and active ingredients may be recorded for this chemical material."
+                    },
+                    "epaNumber": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Optional EPA registration number when IsChemical is true."
+                    },
+                    "activeIngredients": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Optional active ingredients text when IsChemical is true."
                     }
                 },
                 "additionalProperties": false
@@ -11047,6 +11211,41 @@
                             "null"
                         ],
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)"
+                    },
+                    "isCostLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the cost is locked from editing"
+                    },
+                    "isPriceLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the price is locked from editing"
+                    },
+                    "isChemical": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "When true, EPA number and active ingredients may be recorded for this chemical material."
+                    },
+                    "epaNumber": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Optional EPA registration number when IsChemical is true."
+                    },
+                    "activeIngredients": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Optional active ingredients text when IsChemical is true."
                     }
                 },
                 "additionalProperties": false
@@ -11312,6 +11511,43 @@
                             "null"
                         ],
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)"
+                    },
+                    "isCostLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the cost is locked from editing"
+                    },
+                    "isPriceLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the price is locked from editing"
+                    },
+                    "isChemical": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "When true, EPA number and active ingredients may be recorded for this chemical material."
+                    },
+                    "epaNumber": {
+                        "maxLength": 500,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Optional EPA registration number (up to 500 characters) when IsChemical is true."
+                    },
+                    "activeIngredients": {
+                        "maxLength": 500,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Optional active ingredients (up to 500 characters) when IsChemical is true."
                     }
                 },
                 "additionalProperties": false
@@ -11482,6 +11718,26 @@
                     "budgetCostType": {
                         "type": "string",
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)"
+                    },
+                    "isCostLocked": {
+                        "type": "boolean",
+                        "description": "Whether the cost is locked from editing"
+                    },
+                    "isPriceLocked": {
+                        "type": "boolean",
+                        "description": "Whether the price is locked from editing"
+                    },
+                    "isChemical": {
+                        "type": "boolean",
+                        "description": "When true, EPA number and active ingredients may be recorded for this chemical material."
+                    },
+                    "epaNumber": {
+                        "type": "string",
+                        "description": "Optional EPA registration number (up to 500 characters) when chemical tracking applies."
+                    },
+                    "activeIngredients": {
+                        "type": "string",
+                        "description": "Optional active ingredients (up to 500 characters) when chemical tracking applies."
                     }
                 },
                 "additionalProperties": false
@@ -11983,6 +12239,13 @@
                         ],
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)"
                     },
+                    "isPriceLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the price is locked from editing"
+                    },
                     "customId": {
                         "type": [
                             "string",
@@ -12380,6 +12643,20 @@
                         ],
                         "description": "The equipment dimensions"
                     },
+                    "isCostLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the cost is locked from editing"
+                    },
+                    "isPriceLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the price is locked from editing"
+                    },
                     "customId": {
                         "type": [
                             "string",
@@ -12678,6 +12955,43 @@
                         ],
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)"
                     },
+                    "isCostLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the cost is locked from editing"
+                    },
+                    "isPriceLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the price is locked from editing"
+                    },
+                    "isChemical": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "When true, EPA number and active ingredients may be recorded for this chemical material."
+                    },
+                    "epaNumber": {
+                        "maxLength": 500,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Optional EPA registration number (up to 500 characters) when IsChemical is true."
+                    },
+                    "activeIngredients": {
+                        "maxLength": 500,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Optional active ingredients (up to 500 characters) when IsChemical is true."
+                    },
                     "customId": {
                         "type": [
                             "string",
@@ -12940,6 +13254,7 @@
                     "commissionBonus",
                     "budgetCostCode",
                     "budgetCostType",
+                    "isPriceLocked",
                     "id"
                 ],
                 "type": "object",
@@ -13092,6 +13407,10 @@
                         "type": "string",
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)"
                     },
+                    "isPriceLocked": {
+                        "type": "boolean",
+                        "description": "Whether the price is locked from editing"
+                    },
                     "id": {
                         "type": "integer",
                         "format": "int64"
@@ -13138,6 +13457,8 @@
                     "dimensions",
                     "budgetCostCode",
                     "budgetCostType",
+                    "isCostLocked",
+                    "isPriceLocked",
                     "id"
                 ],
                 "type": "object",
@@ -13348,6 +13669,14 @@
                         "type": "string",
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)"
                     },
+                    "isCostLocked": {
+                        "type": "boolean",
+                        "description": "Whether the cost is locked from editing"
+                    },
+                    "isPriceLocked": {
+                        "type": "boolean",
+                        "description": "Whether the price is locked from editing"
+                    },
                     "id": {
                         "type": "integer",
                         "format": "int64"
@@ -13387,6 +13716,11 @@
                     "variationMaterials",
                     "budgetCostCode",
                     "budgetCostType",
+                    "isCostLocked",
+                    "isPriceLocked",
+                    "isChemical",
+                    "epaNumber",
+                    "activeIngredients",
                     "id"
                 ],
                 "type": "object",
@@ -13554,6 +13888,26 @@
                     "budgetCostType": {
                         "type": "string",
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)"
+                    },
+                    "isCostLocked": {
+                        "type": "boolean",
+                        "description": "Whether the cost is locked from editing"
+                    },
+                    "isPriceLocked": {
+                        "type": "boolean",
+                        "description": "Whether the price is locked from editing"
+                    },
+                    "isChemical": {
+                        "type": "boolean",
+                        "description": "When true, EPA number and active ingredients may be recorded for this chemical material."
+                    },
+                    "epaNumber": {
+                        "type": "string",
+                        "description": "Optional EPA registration number (up to 500 characters) when chemical tracking applies."
+                    },
+                    "activeIngredients": {
+                        "type": "string",
+                        "description": "Optional active ingredients (up to 500 characters) when chemical tracking applies."
                     },
                     "id": {
                         "type": "integer",
@@ -13999,6 +14353,13 @@
                         ],
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)"
                     },
+                    "isPriceLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the price is locked from editing"
+                    },
                     "calculatedPrice": {
                         "type": [
                             "number",
@@ -14261,6 +14622,13 @@
                             "null"
                         ],
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)"
+                    },
+                    "isPriceLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the price is locked from editing"
                     }
                 },
                 "additionalProperties": false
@@ -14491,6 +14859,13 @@
                             "null"
                         ],
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)"
+                    },
+                    "isPriceLocked": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the price is locked from editing"
                     }
                 },
                 "additionalProperties": false
@@ -14645,6 +15020,10 @@
                     "budgetCostType": {
                         "type": "string",
                         "description": "The Budget CostType segment for this entity (Note: BudgetCostCode should also be provided)"
+                    },
+                    "isPriceLocked": {
+                        "type": "boolean",
+                        "description": "Whether the price is locked from editing"
                     }
                 },
                 "additionalProperties": false

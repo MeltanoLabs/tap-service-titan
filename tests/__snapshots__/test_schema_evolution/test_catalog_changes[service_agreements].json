@@ -1088,7 +1088,7 @@
             ]
           },
           "defaultPricingStrategy": {
-            "description": "Defines how prices are calculated for service agreements or visits.",
+            "description": "",
             "type": [
               "string",
               "null"
@@ -1119,7 +1119,7 @@
             ]
           },
           "defaultTargetMarginValueType": {
-            "description": "Target margin value type.",
+            "description": "",
             "type": [
               "string",
               "null"

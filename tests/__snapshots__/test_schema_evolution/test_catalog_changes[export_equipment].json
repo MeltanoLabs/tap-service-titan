@@ -633,6 +633,24 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "isCostLocked"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isPriceLocked"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -990,8 +1008,22 @@
           "null"
         ]
       },
+      "isCostLocked": {
+        "description": "Whether the cost is locked from editing",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
       "isInventory": {
         "description": "Is this equipment a part of your inventory",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "isPriceLocked": {
+        "description": "Whether the price is locked from editing",
         "type": [
           "boolean",
           "null"

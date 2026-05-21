@@ -520,6 +520,51 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "isCostLocked"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isPriceLocked"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isChemical"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "epaNumber"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "activeIngredients"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -551,6 +596,13 @@
         "description": "Active shows if the SKU is active or inactive",
         "type": [
           "boolean",
+          "null"
+        ]
+      },
+      "activeIngredients": {
+        "description": "Optional active ingredients text when IsChemical is true.",
+        "type": [
+          "string",
           "null"
         ]
       },
@@ -769,6 +821,13 @@
           "null"
         ]
       },
+      "epaNumber": {
+        "description": "Optional EPA registration number when IsChemical is true.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "externalData": {
         "description": "List of external data attached to this job,\nthat corresponds to the application guid provided in the request.",
         "items": {
@@ -831,8 +890,22 @@
         "format": "int64",
         "type": "integer"
       },
+      "isChemical": {
+        "description": "When true, EPA number and active ingredients may be recorded for this chemical material.",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
       "isConfigurableMaterial": {
         "description": "Shows if is a Configurable Material",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "isCostLocked": {
+        "description": "Whether the cost is locked from editing",
         "type": [
           "boolean",
           "null"
@@ -847,6 +920,13 @@
       },
       "isOtherDirectCost": {
         "description": "Shows if is Other Direct Cost",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "isPriceLocked": {
+        "description": "Whether the price is locked from editing",
         "type": [
           "boolean",
           "null"

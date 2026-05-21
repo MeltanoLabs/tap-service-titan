@@ -4611,7 +4611,8 @@
                                 "customerPo": "string",
                                 "soldById": 0,
                                 "isAutoDispatched": true,
-                                "summaryOfWork": "string"
+                                "summaryOfWork": "string",
+                                "noCharge": true
                             }
                         }
                     }
@@ -4809,7 +4810,8 @@
                                 "soldById": 0,
                                 "partnerLeadCallId": 0,
                                 "leadId": 0,
-                                "bookingId": 0
+                                "bookingId": 0,
+                                "noCharge": true
                             }
                         }
                     }
@@ -6624,7 +6626,10 @@
                                             ],
                                             "active": true,
                                             "isSmartDispatched": true,
-                                            "defaultEstimateSoldAction": "string"
+                                            "defaultEstimateSoldAction": "string",
+                                            "customFieldTypeIds": [
+                                                0
+                                            ]
                                         }
                                     ]
                                 }
@@ -6713,7 +6718,10 @@
                                         }
                                     ]
                                 },
-                                "defaultEstimateSoldAction": "string"
+                                "defaultEstimateSoldAction": "string",
+                                "customFieldTypeIds": [
+                                    0
+                                ]
                             }
                         }
                     }
@@ -6756,7 +6764,10 @@
                                     ],
                                     "active": true,
                                     "isSmartDispatched": true,
-                                    "defaultEstimateSoldAction": "string"
+                                    "defaultEstimateSoldAction": "string",
+                                    "customFieldTypeIds": [
+                                        0
+                                    ]
                                 }
                             }
                         }
@@ -6867,7 +6878,10 @@
                                     ],
                                     "active": true,
                                     "isSmartDispatched": true,
-                                    "defaultEstimateSoldAction": "string"
+                                    "defaultEstimateSoldAction": "string",
+                                    "customFieldTypeIds": [
+                                        0
+                                    ]
                                 }
                             }
                         }
@@ -6983,7 +6997,11 @@
                                         }
                                     ]
                                 },
-                                "defaultEstimateSoldAction": "string"
+                                "defaultEstimateSoldAction": "string",
+                                "customFieldTypeIds": [
+                                    0
+                                ],
+                                "customFieldsUpdateMode": {}
                             }
                         }
                     }
@@ -7026,7 +7044,10 @@
                                     ],
                                     "active": true,
                                     "isSmartDispatched": true,
-                                    "defaultEstimateSoldAction": "string"
+                                    "defaultEstimateSoldAction": "string",
+                                    "customFieldTypeIds": [
+                                        0
+                                    ]
                                 }
                             }
                         }
@@ -11018,7 +11039,8 @@
                     "SmartSchedule",
                     "SmartDispatch",
                     "TechnicianRouteOptimization",
-                    "AdaptiveCapacity"
+                    "AdaptiveCapacity",
+                    "Routing"
                 ],
                 "type": "string",
                 "description": "",
@@ -11027,7 +11049,8 @@
                     "SmartSchedule",
                     "SmartDispatch",
                     "TechnicianRouteOptimization",
-                    "AdaptiveCapacity"
+                    "AdaptiveCapacity",
+                    "Routing"
                 ]
             },
             "PaginatedResponse_Of_Jpm.V2.JobCancelReasonResponse": {
@@ -11669,6 +11692,13 @@
                         ],
                         "description": "ID of the Booking that resulted in this job",
                         "format": "int64"
+                    },
+                    "noCharge": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the job is a no-charge job."
                     }
                 },
                 "additionalProperties": false
@@ -11877,6 +11907,10 @@
                     "summaryOfWork": {
                         "type": "string",
                         "description": "Summary of work completed on the job. Private preview: available for specific accounts only."
+                    },
+                    "noCharge": {
+                        "type": "boolean",
+                        "description": "Whether the job is a no-charge job."
                     }
                 },
                 "additionalProperties": false
@@ -12377,7 +12411,8 @@
                     "SmartSchedule",
                     "SmartDispatch",
                     "TechnicianRouteOptimization",
-                    "AdaptiveCapacity"
+                    "AdaptiveCapacity",
+                    "Routing"
                 ],
                 "type": "string",
                 "description": "",
@@ -12386,7 +12421,8 @@
                     "SmartSchedule",
                     "SmartDispatch",
                     "TechnicianRouteOptimization",
-                    "AdaptiveCapacity"
+                    "AdaptiveCapacity",
+                    "Routing"
                 ]
             },
             "PaginatedResponse_Of_Jpm.V2.JobCanceledLogResponse": {
@@ -12714,7 +12750,8 @@
                     "externalData",
                     "active",
                     "isSmartDispatched",
-                    "defaultEstimateSoldAction"
+                    "defaultEstimateSoldAction",
+                    "customFieldTypeIds"
                 ],
                 "type": "object",
                 "properties": {
@@ -12819,6 +12856,14 @@
                     "defaultEstimateSoldAction": {
                         "type": "string",
                         "description": "Default action when an estimate is sold for this job type"
+                    },
+                    "customFieldTypeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Custom field type IDs assigned to this job type"
                     }
                 },
                 "additionalProperties": false
@@ -12941,6 +12986,17 @@
                             "null"
                         ],
                         "description": "Default action when an estimate is sold for this job type"
+                    },
+                    "customFieldTypeIds": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Custom field type IDs to assign to this job type. Order determines display order."
                     }
                 },
                 "additionalProperties": false
@@ -13023,9 +13079,40 @@
                     "defaultEstimateSoldAction": {
                         "type": "string",
                         "description": "Default action when an estimate is sold for this job type"
+                    },
+                    "customFieldTypeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Custom field type IDs to assign to this job type. Order determines display order."
+                    },
+                    "customFieldsUpdateMode": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Jpm.V2.CustomFieldsUpdateMode"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Custom fields update mode.\\\n\"Replace\" (default) replaces all existing custom field type assignments with the provided list.\nIf the job type has custom fields X and Y and only X is provided, Y will be removed.\\\n\"Merge\" preserves existing custom field type assignments and appends any new IDs from the provided list."
                     }
                 },
                 "additionalProperties": false
+            },
+            "Jpm.V2.CustomFieldsUpdateMode": {
+                "enum": [
+                    "Replace",
+                    "Merge"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Replace",
+                    "Merge"
+                ]
             },
             "Jpm.V2.ProjectResponse": {
                 "required": [

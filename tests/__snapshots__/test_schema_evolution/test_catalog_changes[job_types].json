@@ -175,6 +175,15 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "customFieldTypeIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -225,6 +234,17 @@
         "format": "date-time",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "customFieldTypeIds": {
+        "description": "Custom field type IDs assigned to this job type",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
           "null"
         ]
       },
@@ -387,7 +407,8 @@
       "externalData",
       "active",
       "isSmartDispatched",
-      "defaultEstimateSoldAction"
+      "defaultEstimateSoldAction",
+      "customFieldTypeIds"
     ],
     "type": "object"
   },

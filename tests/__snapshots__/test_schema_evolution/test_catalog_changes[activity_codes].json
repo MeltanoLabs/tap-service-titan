@@ -60,6 +60,15 @@
     {
       "breadcrumb": [
         "properties",
+        "isDiscretionary"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "active"
       ],
       "metadata": {
@@ -121,6 +130,13 @@
         "format": "int64",
         "type": "integer"
       },
+      "isDiscretionary": {
+        "description": "Indicates whether the earnings code is discretionary (excluded from regular rate of pay calculations)",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
       "modifiedOn": {
         "description": "Date/time (on UTC) when the payroll activity code was modified",
         "format": "date-time",
@@ -144,6 +160,7 @@
       "earningCategory",
       "createdOn",
       "modifiedOn",
+      "isDiscretionary",
       "active"
     ],
     "type": "object"
