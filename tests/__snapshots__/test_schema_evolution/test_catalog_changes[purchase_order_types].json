@@ -224,6 +224,7 @@
       "landedCostMethod": {
         "description": "",
         "type": [
+          "integer",
           "string",
           "null"
         ]
