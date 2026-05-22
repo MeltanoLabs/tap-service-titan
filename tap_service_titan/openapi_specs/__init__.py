@@ -137,6 +137,16 @@ class ServiceTitanSchema(StreamSchema):
                 "type": "integer",
             }
 
+        if stream.name in ("inventory_bills", "purchase_order_types", "receipts"):
+            # TODO(maintainers): Remove once ServiceTitan fixes this.
+            # API returns integer enum values (e.g. 0) instead of string names.
+            # https://github.com/MeltanoLabs/tap-service-titan/issues/358
+            schema["properties"]["landedCostMethod"]["type"] = [
+                "integer",
+                "string",
+                "null",
+            ]
+
         return schema
 
 
