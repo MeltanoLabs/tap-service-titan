@@ -71,7 +71,7 @@ class TapServiceTitan(Tap):
         th.Property(
             "start_date",
             th.DateTimeType,
-            default="2024-01-01T00:00:00Z",
+            default="2026-01-01T00:00:00Z",
             description="The start date for the records to pull.",
         ),
         th.Property(
