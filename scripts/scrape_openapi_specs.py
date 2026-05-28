@@ -43,8 +43,9 @@ async def download_openapi_spec(
     page = await browser.new_page()
     page.set_default_timeout(100000)
     await page.goto(url, wait_until="networkidle")
+    await page.get_by_text("OpenAPI Document", exact=False).click()
     async with page.expect_download() as download_info:
-        await page.get_by_text("OpenAPI Document", exact=False).click()
+        await page.get_by_text("Download JSON", exact=True).click()
     download = await download_info.value
 
     async with anyio.NamedTemporaryFile(mode="wb+", suffix=".json", delete=True) as tmp_file:
