@@ -45,7 +45,7 @@ scrapping = [
     "typer>=0.26.7",
 ]
 test = [
-    "pytest>=9.0.3",
+    "pytest>=9.1.0",
     "singer-sdk[testing]",
     "syrupy>=5.3.2",
     "time-machine>=3.0.0",
