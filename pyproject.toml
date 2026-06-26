@@ -45,7 +45,7 @@ scrapping = [
     "typer>=0.26.7",
 ]
 test = [
-    "pytest>=9.1.0",
+    "pytest>=9.1.1",
     "singer-sdk[testing]",
     "syrupy>=5.3.2",
     "time-machine>=3.0.0",
@@ -55,7 +55,7 @@ typing = [
     { include-group = "test" },
     "backports-httpmethod",
     "mypy>=1.20.1",
-    "ty>=0.0.50",
+    "ty>=0.0.51",
 ]
 
 [tool.hatch.build.targets.sdist]
