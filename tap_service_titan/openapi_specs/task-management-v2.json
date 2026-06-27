@@ -21,7 +21,6 @@
                 "tags": [
                     "ClientSideData"
                 ],
-                "summary": "ClientSideData_Get",
                 "operationId": "ClientSideData_Get",
                 "parameters": [
                     {
@@ -139,7 +138,6 @@
                     "Tasks"
                 ],
                 "summary": "Get a list of tasks",
-                "description": "Get a list of tasks",
                 "operationId": "Tasks_GetTasks",
                 "parameters": [
                     {
@@ -550,7 +548,6 @@
                 "tags": [
                     "Tasks"
                 ],
-                "summary": "Tasks_Create",
                 "operationId": "Tasks_Create",
                 "parameters": [
                     {
@@ -672,7 +669,6 @@
                     "Tasks"
                 ],
                 "summary": "Get a Task by Id",
-                "description": "Get a Task by Id",
                 "operationId": "Tasks_GetTask",
                 "parameters": [
                     {
@@ -842,7 +838,6 @@
                 "tags": [
                     "Tasks"
                 ],
-                "summary": "Tasks_CreateSubtask",
                 "operationId": "Tasks_CreateSubtask",
                 "parameters": [
                     {

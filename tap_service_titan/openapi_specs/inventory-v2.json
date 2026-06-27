@@ -22,7 +22,6 @@
                     "Adjustments"
                 ],
                 "summary": "Get a list of inventory adjustments",
-                "description": "Get a list of inventory adjustments",
                 "operationId": "Adjustments_GetList",
                 "parameters": [
                     {
@@ -375,7 +374,6 @@
                     "Adjustments"
                 ],
                 "summary": "Update an existing adjustment",
-                "description": "Update an existing adjustment",
                 "operationId": "Adjustments_Update",
                 "parameters": [
                     {
@@ -488,7 +486,6 @@
                     "Adjustments"
                 ],
                 "summary": "Update custom fields on adjustments",
-                "description": "Update custom fields on adjustments",
                 "operationId": "Adjustments_UpdateCustomFields",
                 "parameters": [
                     {
@@ -563,7 +560,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for adjustments",
-                "description": "Provides export feed for adjustments",
                 "operationId": "Export_Adjustments",
                 "parameters": [
                     {
@@ -707,7 +703,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for purchase orders",
-                "description": "Provides export feed for purchase orders",
                 "operationId": "Export_PurchaseOrders",
                 "parameters": [
                     {
@@ -857,7 +852,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for returns",
-                "description": "Provides export feed for returns",
                 "operationId": "Export_Returns",
                 "parameters": [
                     {
@@ -1028,7 +1022,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for transfers",
-                "description": "Provides export feed for transfers",
                 "operationId": "Export_Transfers",
                 "parameters": [
                     {
@@ -1179,7 +1172,6 @@
                     "InventoryTemplates"
                 ],
                 "summary": "Get a list of inventory template details",
-                "description": "Get a list of inventory template details",
                 "operationId": "InventoryTemplates_GetList",
                 "parameters": [
                     {
@@ -1386,7 +1378,6 @@
                     "PurchaseOrders"
                 ],
                 "summary": "Create a new purchase order",
-                "description": "Create a new purchase order",
                 "operationId": "PurchaseOrders_Create",
                 "parameters": [
                     {
@@ -1494,7 +1485,6 @@
                     "PurchaseOrders"
                 ],
                 "summary": "Get a list of purchase orders",
-                "description": "Get a list of purchase orders",
                 "operationId": "PurchaseOrders_GetList",
                 "parameters": [
                     {
@@ -1795,7 +1785,6 @@
                     "PurchaseOrders"
                 ],
                 "summary": "Get a list of purchase order requests",
-                "description": "Get a list of purchase order requests",
                 "operationId": "PurchaseOrders_GetRequests",
                 "parameters": [
                     {
@@ -2078,7 +2067,6 @@
                     "PurchaseOrders"
                 ],
                 "summary": "Get purchase order by Id",
-                "description": "Get purchase order by Id",
                 "operationId": "PurchaseOrders_GetById",
                 "parameters": [
                     {
@@ -2231,7 +2219,6 @@
                     "PurchaseOrders"
                 ],
                 "summary": "Update an existing purchase order",
-                "description": "Update an existing purchase order",
                 "operationId": "PurchaseOrders_Update",
                 "parameters": [
                     {
@@ -2369,7 +2356,6 @@
                     "PurchaseOrders"
                 ],
                 "summary": "Cancel a purchase order",
-                "description": "Cancel a purchase order",
                 "operationId": "PurchaseOrders_Cancel",
                 "parameters": [
                     {
@@ -2473,7 +2459,6 @@
                     "PurchaseOrders"
                 ],
                 "summary": "Approve purchase order request",
-                "description": "Approve purchase order request",
                 "operationId": "PurchaseOrders_ApproveRequest",
                 "parameters": [
                     {
@@ -2563,7 +2548,6 @@
                     "PurchaseOrders"
                 ],
                 "summary": "Reject purchase order request",
-                "description": "Reject purchase order request",
                 "operationId": "PurchaseOrders_RejectRequest",
                 "parameters": [
                     {
@@ -2667,7 +2651,6 @@
                     "PurchaseOrdersMarkup"
                 ],
                 "summary": "Get a list of purchase order markups",
-                "description": "Get a list of purchase order markups",
                 "operationId": "PurchaseOrdersMarkup_Get",
                 "parameters": [
                     {
@@ -2815,7 +2798,6 @@
                     "PurchaseOrdersMarkup"
                 ],
                 "summary": "Create a new purchase order markup",
-                "description": "Create a new purchase order markup",
                 "operationId": "PurchaseOrdersMarkup_Create",
                 "parameters": [
                     {
@@ -2897,7 +2879,6 @@
                     "PurchaseOrdersMarkup"
                 ],
                 "summary": "Get purchase order markup by Id",
-                "description": "Get purchase order markup by Id",
                 "operationId": "PurchaseOrdersMarkup_GetById",
                 "parameters": [
                     {
@@ -2990,7 +2971,6 @@
                     "PurchaseOrdersMarkup"
                 ],
                 "summary": "Update an existing purchase order markup",
-                "description": "Update an existing purchase order markup",
                 "operationId": "PurchaseOrdersMarkup_Update",
                 "parameters": [
                     {
@@ -3097,7 +3077,6 @@
                     "PurchaseOrdersMarkup"
                 ],
                 "summary": "Deletes aan existing purchase order markup.",
-                "description": "Deletes aan existing purchase order markup.",
                 "operationId": "PurchaseOrdersMarkup_Delete",
                 "parameters": [
                     {
@@ -3177,7 +3156,6 @@
                     "PurchaseOrderTypes"
                 ],
                 "summary": "Create a new Purchase Order Type",
-                "description": "Create a new Purchase Order Type",
                 "operationId": "PurchaseOrderTypes_Create",
                 "parameters": [
                     {
@@ -3273,7 +3251,6 @@
                     "PurchaseOrderTypes"
                 ],
                 "summary": "Get a list of purchase order types",
-                "description": "Get a list of purchase order types",
                 "operationId": "PurchaseOrderTypes_GetList",
                 "parameters": [
                     {
@@ -3440,7 +3417,6 @@
                     "PurchaseOrderTypes"
                 ],
                 "summary": "Update an existing purchase order type",
-                "description": "Update an existing purchase order type",
                 "operationId": "PurchaseOrderTypes_Update",
                 "parameters": [
                     {
@@ -3582,7 +3558,6 @@
                     "Receipts"
                 ],
                 "summary": "Get a list of receipts",
-                "description": "Get a list of receipts",
                 "operationId": "Receipts_GetList",
                 "parameters": [
                     {
@@ -3932,7 +3907,6 @@
                     "Receipts"
                 ],
                 "summary": "Create a receipt for Purchase Order",
-                "description": "Create a receipt for Purchase Order",
                 "operationId": "Receipts_CreateReceipt",
                 "parameters": [
                     {
@@ -4044,7 +4018,6 @@
                     "Receipts"
                 ],
                 "summary": "Update custom fields on receipts",
-                "description": "Update custom fields on receipts",
                 "operationId": "Receipts_UpdateCustomFields",
                 "parameters": [
                     {
@@ -4119,7 +4092,6 @@
                     "Receipts"
                 ],
                 "summary": "Cancel the receipts",
-                "description": "Cancel the receipts",
                 "operationId": "Receipts_CancelReceipts",
                 "parameters": [
                     {
@@ -4229,7 +4201,6 @@
                     "Returns"
                 ],
                 "summary": "Get a list of returns",
-                "description": "Get a list of returns",
                 "operationId": "Returns_GetList",
                 "parameters": [
                     {
@@ -4617,7 +4588,6 @@
                     "Returns"
                 ],
                 "summary": "Create a Return",
-                "description": "Create a Return",
                 "operationId": "Returns_CreateReturn",
                 "parameters": [
                     {
@@ -4733,7 +4703,6 @@
                     "Returns"
                 ],
                 "summary": "Update custom fields on returns",
-                "description": "Update custom fields on returns",
                 "operationId": "Returns_UpdateCustomFields",
                 "parameters": [
                     {
@@ -4808,7 +4777,6 @@
                     "Returns"
                 ],
                 "summary": "Update an existing Return",
-                "description": "Update an existing Return",
                 "operationId": "Returns_Update",
                 "parameters": [
                     {
@@ -4959,7 +4927,6 @@
                     "Returns"
                 ],
                 "summary": "Cancel a Return",
-                "description": "Cancel a Return",
                 "operationId": "Returns_Cancel",
                 "parameters": [
                     {
@@ -5063,7 +5030,6 @@
                     "ReturnTypes"
                 ],
                 "summary": "Create a new Return Type",
-                "description": "Create a new Return Type",
                 "operationId": "ReturnTypes_Create",
                 "parameters": [
                     {
@@ -5095,6 +5061,19 @@
                     }
                 },
                 "responses": {
+                    "200": {
+                        "description": "Id of the newly created Return Type",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModificationResponse"
+                                },
+                                "example": {
+                                    "id": 0
+                                }
+                            }
+                        }
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -5109,19 +5088,6 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "Id of the newly created Return Type",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ModificationResponse"
-                                },
-                                "example": {
-                                    "id": 0
                                 }
                             }
                         }
@@ -5141,7 +5107,6 @@
                     "ReturnTypes"
                 ],
                 "summary": "Returns the list of Return Types",
-                "description": "Returns the list of Return Types",
                 "operationId": "ReturnTypes_GetList",
                 "parameters": [
                     {
@@ -5243,24 +5208,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "Paginated list of the Return Types",
                         "content": {
@@ -5289,6 +5236,24 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -5307,7 +5272,6 @@
                     "ReturnTypes"
                 ],
                 "summary": "Update an existing Return Type",
-                "description": "Update an existing Return Type",
                 "operationId": "ReturnTypes_Update",
                 "parameters": [
                     {
@@ -5351,6 +5315,19 @@
                     }
                 },
                 "responses": {
+                    "200": {
+                        "description": "Id of the newly created Return Type",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModificationResponse"
+                                },
+                                "example": {
+                                    "id": 0
+                                }
+                            }
+                        }
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -5365,19 +5342,6 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "Id of the newly created Return Type",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ModificationResponse"
-                                },
-                                "example": {
-                                    "id": 0
                                 }
                             }
                         }
@@ -5435,7 +5399,6 @@
                     "Transfers"
                 ],
                 "summary": "Get a list of transfers",
-                "description": "Get a list of transfers",
                 "operationId": "Transfers_GetList",
                 "parameters": [
                     {
@@ -5782,7 +5745,6 @@
                     "Transfers"
                 ],
                 "summary": "Update custom fields on transfers",
-                "description": "Update custom fields on transfers",
                 "operationId": "Transfers_UpdateCustomFields",
                 "parameters": [
                     {
@@ -5857,7 +5819,6 @@
                     "Transfers"
                 ],
                 "summary": "Update an existing Transfer",
-                "description": "Update an existing Transfer",
                 "operationId": "Transfers_Update",
                 "parameters": [
                     {
@@ -5970,7 +5931,6 @@
                     "Trucks"
                 ],
                 "summary": "Get a list of trucks",
-                "description": "Get a list of trucks",
                 "operationId": "Trucks_GetList",
                 "parameters": [
                     {
@@ -6171,7 +6131,6 @@
                     "Trucks"
                 ],
                 "summary": "Create a new truck",
-                "description": "Create a new truck",
                 "operationId": "Trucks_Create",
                 "parameters": [
                     {
@@ -6261,7 +6220,6 @@
                     "Trucks"
                 ],
                 "summary": "Update an existing truck",
-                "description": "Update an existing truck",
                 "operationId": "Trucks_Update",
                 "parameters": [
                     {
@@ -6382,7 +6340,6 @@
                     "Vendors"
                 ],
                 "summary": "Create a new vendor",
-                "description": "Create a new vendor",
                 "operationId": "Vendors_Create",
                 "parameters": [
                     {
@@ -6497,7 +6454,6 @@
                     "Vendors"
                 ],
                 "summary": "Get a list of vendors",
-                "description": "Get a list of vendors",
                 "operationId": "Vendors_GetList",
                 "parameters": [
                     {
@@ -6749,7 +6705,6 @@
                     "Vendors"
                 ],
                 "summary": "Get vendor by Id",
-                "description": "Get vendor by Id",
                 "operationId": "Vendors_GetById",
                 "parameters": [
                     {
@@ -6899,7 +6854,6 @@
                     "Vendors"
                 ],
                 "summary": "Update an existing vendor",
-                "description": "Update an existing vendor",
                 "operationId": "Vendors_Update",
                 "parameters": [
                     {
@@ -7047,7 +7001,6 @@
                     "Vendors"
                 ],
                 "summary": "Returns a paginated list of filtered custom field types available for vendors",
-                "description": "Returns a paginated list of filtered custom field types available for vendors",
                 "operationId": "Vendors_GetCustomFieldTypes",
                 "parameters": [
                     {
@@ -7192,7 +7145,6 @@
                     "Vendors"
                 ],
                 "summary": "Update custom fields on vendors",
-                "description": "Update custom fields on vendors",
                 "operationId": "Vendors_UpdateCustomFields",
                 "parameters": [
                     {
@@ -7267,7 +7219,6 @@
                     "Warehouses"
                 ],
                 "summary": "Get a list of warehouses",
-                "description": "Get a list of warehouses",
                 "operationId": "Warehouses_GetList",
                 "parameters": [
                     {
@@ -7473,7 +7424,6 @@
                     "Warehouses"
                 ],
                 "summary": "Update an existing warehouse",
-                "description": "Update an existing warehouse",
                 "operationId": "Warehouses_Update",
                 "parameters": [
                     {
@@ -9702,10 +9652,10 @@
             },
             "Inventory.V2.InventoryTemplateResponse": {
                 "required": [
-                    "id",
                     "name",
-                    "active",
                     "type",
+                    "id",
+                    "active",
                     "createdOn",
                     "modifiedOn",
                     "isConsignment"
@@ -9770,11 +9720,11 @@
             },
             "Inventory.V2.InventoryTemplateItemResponse": {
                 "required": [
-                    "id",
-                    "skuId",
                     "code",
                     "name",
                     "skuType",
+                    "id",
+                    "skuId",
                     "minQuantity",
                     "maxQuantity",
                     "isConsignment"
@@ -10489,9 +10439,10 @@
             },
             "Inventory.V2.PurchaseOrderRequestResponse": {
                 "required": [
-                    "id",
                     "requestNumber",
                     "requestStatus",
+                    "items",
+                    "id",
                     "typeId",
                     "vendorId",
                     "date",
@@ -10499,8 +10450,7 @@
                     "modifiedOn",
                     "total",
                     "tax",
-                    "shipping",
-                    "items"
+                    "shipping"
                 ],
                 "type": "object",
                 "properties": {

@@ -552,6 +552,15 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "internalCostType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -773,6 +782,13 @@
         },
         "type": [
           "array",
+          "null"
+        ]
+      },
+      "internalCostType": {
+        "description": "",
+        "type": [
+          "string",
           "null"
         ]
       },

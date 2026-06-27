@@ -247,6 +247,24 @@
     {
       "breadcrumb": [
         "properties",
+        "membershipBillingFrequency"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "membershipDuration"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "estimate_id"
       ],
       "metadata": {
@@ -325,6 +343,21 @@
       },
       "itemGroupRootId": {
         "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "membershipBillingFrequency": {
+        "description": "Membership billing frequency. Mirrors ServiceTitan.Model.Memberships.MembershipRecurrenceType.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "membershipDuration": {
+        "description": "Membership duration in months. Null for non-membership items or ongoing (never expires) memberships.",
+        "format": "int32",
         "type": [
           "integer",
           "null"

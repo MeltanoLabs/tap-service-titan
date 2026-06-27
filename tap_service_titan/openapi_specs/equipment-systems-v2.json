@@ -2,7 +2,7 @@
     "openapi": "3.1.0",
     "info": {
         "title": "Equipment Systems",
-        "description": "Equipment types, installed equipment",
+        "description": "Equipment types, installed equipment, installed equipment systems",
         "version": "1.0"
     },
     "servers": [
@@ -22,7 +22,6 @@
                     "EquipmentTypes"
                 ],
                 "summary": "Gets a list of equipment types",
-                "description": "Gets a list of equipment types",
                 "operationId": "EquipmentTypes_GetList",
                 "parameters": [
                     {
@@ -136,24 +135,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -178,6 +159,24 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -194,7 +193,6 @@
                     "EquipmentTypes"
                 ],
                 "summary": "Creates a new equipment type",
-                "description": "Creates a new equipment type",
                 "operationId": "EquipmentTypes_Create",
                 "parameters": [
                     {
@@ -221,6 +219,23 @@
                     }
                 },
                 "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "active": true,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -235,23 +250,6 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeResponse"
-                                },
-                                "example": {
-                                    "id": 0,
-                                    "name": "string",
-                                    "active": true,
-                                    "createdOn": "string",
-                                    "modifiedOn": "string"
                                 }
                             }
                         }
@@ -291,7 +289,6 @@
                     "EquipmentTypes"
                 ],
                 "summary": "Gets equipment type specified by ID",
-                "description": "Gets equipment type specified by ID",
                 "operationId": "EquipmentTypes_Get",
                 "parameters": [
                     {
@@ -315,6 +312,23 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "active": true,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -329,23 +343,6 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeResponse"
-                                },
-                                "example": {
-                                    "id": 0,
-                                    "name": "string",
-                                    "active": true,
-                                    "createdOn": "string",
-                                    "modifiedOn": "string"
                                 }
                             }
                         }
@@ -383,7 +380,6 @@
                     "EquipmentTypes"
                 ],
                 "summary": "Updates an existing equipment type",
-                "description": "Updates an existing equipment type",
                 "operationId": "EquipmentTypes_Update",
                 "parameters": [
                     {
@@ -420,6 +416,23 @@
                     }
                 },
                 "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "active": true,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -434,23 +447,6 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EquipmentSystems.V2.EquipmentTypeResponse"
-                                },
-                                "example": {
-                                    "id": 0,
-                                    "name": "string",
-                                    "active": true,
-                                    "createdOn": "string",
-                                    "modifiedOn": "string"
                                 }
                             }
                         }
@@ -507,7 +503,6 @@
                 "tags": [
                     "Export"
                 ],
-                "summary": "Export_ExportInstalledEquipment",
                 "operationId": "Export_ExportInstalledEquipment",
                 "parameters": [
                     {
@@ -631,7 +626,6 @@
                 "tags": [
                     "InstalledEquipment"
                 ],
-                "summary": "InstalledEquipment_GetList",
                 "operationId": "InstalledEquipment_GetList",
                 "parameters": [
                     {
@@ -837,7 +831,6 @@
                 "tags": [
                     "InstalledEquipment"
                 ],
-                "summary": "InstalledEquipment_Create",
                 "operationId": "InstalledEquipment_Create",
                 "parameters": [
                     {
@@ -985,8 +978,8 @@
                             }
                         }
                     },
-                    "409": {
-                        "description": "Some conflict occurred while executing the request",
+                    "404": {
+                        "description": "The requested entity was not found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1003,8 +996,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "The requested entity was not found",
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1037,7 +1030,6 @@
                 "tags": [
                     "InstalledEquipment"
                 ],
-                "summary": "InstalledEquipment_Get",
                 "operationId": "InstalledEquipment_Get",
                 "parameters": [
                     {
@@ -1180,7 +1172,6 @@
                 "tags": [
                     "InstalledEquipment"
                 ],
-                "summary": "InstalledEquipment_Update",
                 "operationId": "InstalledEquipment_Update",
                 "parameters": [
                     {
@@ -1337,8 +1328,8 @@
                             }
                         }
                     },
-                    "409": {
-                        "description": "Some conflict occurred while executing the request",
+                    "404": {
+                        "description": "The requested entity was not found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1355,8 +1346,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "The requested entity was not found",
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1389,7 +1380,6 @@
                 "tags": [
                     "InstalledEquipment"
                 ],
-                "summary": "InstalledEquipment_PostAttachment",
                 "operationId": "InstalledEquipment_PostAttachment",
                 "parameters": [
                     {
@@ -1435,6 +1425,19 @@
                             }
                         }
                     },
+                    "201": {
+                        "description": "The entity has been created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.AttachmentUploadResponse"
+                                },
+                                "example": {
+                                    "path": "string"
+                                }
+                            }
+                        }
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -1449,19 +1452,6 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
-                                }
-                            }
-                        }
-                    },
-                    "201": {
-                        "description": "The entity has been created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EquipmentSystems.V2.AttachmentUploadResponse"
-                                },
-                                "example": {
-                                    "path": "string"
                                 }
                             }
                         }
@@ -1480,7 +1470,6 @@
                 "tags": [
                     "InstalledEquipment"
                 ],
-                "summary": "InstalledEquipment_Get2",
                 "operationId": "InstalledEquipment_Get2",
                 "parameters": [
                     {
@@ -1505,6 +1494,9 @@
                     "200": {
                         "description": "The request has succeeded"
                     },
+                    "302": {
+                        "description": ""
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -1522,9 +1514,6 @@
                                 }
                             }
                         }
-                    },
-                    "302": {
-                        "description": ""
                     },
                     "404": {
                         "description": "The requested entity was not found",
@@ -1560,7 +1549,6 @@
                 "tags": [
                     "InstalledEquipment"
                 ],
-                "summary": "InstalledEquipment_GetCustomFieldTypes",
                 "operationId": "InstalledEquipment_GetCustomFieldTypes",
                 "parameters": [
                     {
@@ -1789,8 +1777,8 @@
             },
             "EquipmentSystems.V2.EquipmentTypeResponse": {
                 "required": [
-                    "id",
                     "name",
+                    "id",
                     "active",
                     "createdOn",
                     "modifiedOn"
@@ -2721,9 +2709,11 @@
                             "oneOf": [
                                 {
                                     "$ref": "#/components/schemas/EquipmentSystems.V2.CustomFieldRequestModel"
+                                },
+                                {
+                                    "type": "null"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     "attachments": {
@@ -2732,9 +2722,11 @@
                             "oneOf": [
                                 {
                                     "$ref": "#/components/schemas/EquipmentSystems.V2.AttachmentApiModel"
+                                },
+                                {
+                                    "type": "null"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     },
                     "tagTypeIds": {

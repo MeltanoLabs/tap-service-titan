@@ -22,7 +22,6 @@
                     "CustomerMemberships"
                 ],
                 "summary": "Gets a list of customer memberships",
-                "description": "Gets a list of customer memberships",
                 "operationId": "CustomerMemberships_GetList",
                 "parameters": [
                     {
@@ -269,7 +268,6 @@
                     "CustomerMemberships"
                 ],
                 "summary": "Gets a list of custom field types that apply to customer memberships",
-                "description": "Gets a list of custom field types that apply to customer memberships",
                 "operationId": "CustomerMemberships_GetCustomFields",
                 "parameters": [
                     {
@@ -417,7 +415,6 @@
                     "CustomerMemberships"
                 ],
                 "summary": "Gets customer membership specified by ID",
-                "description": "Gets customer membership specified by ID",
                 "operationId": "CustomerMemberships_Get",
                 "parameters": [
                     {
@@ -548,7 +545,6 @@
                     "CustomerMemberships"
                 ],
                 "summary": "Updates specified customer membership in \"patch\" mode",
-                "description": "Updates specified customer membership in \"patch\" mode",
                 "operationId": "CustomerMemberships_Update",
                 "parameters": [
                     {
@@ -668,7 +664,6 @@
                     "CustomerMemberships"
                 ],
                 "summary": "Gets status changes for the given customer membership",
-                "description": "Gets status changes for the given customer membership",
                 "operationId": "CustomerMemberships_GetStatusChanges",
                 "parameters": [
                     {
@@ -769,7 +764,6 @@
                     "CustomerMemberships"
                 ],
                 "summary": "Creates membership sale invoice",
-                "description": "Creates membership sale invoice",
                 "operationId": "CustomerMemberships_Create",
                 "parameters": [
                     {
@@ -851,7 +845,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for membership types",
-                "description": "Provides export feed for membership types",
                 "operationId": "Export_MembershipTypes",
                 "parameters": [
                     {
@@ -978,7 +971,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for recurring service types",
-                "description": "Provides export feed for recurring service types",
                 "operationId": "Export_RecurringServiceTypes",
                 "parameters": [
                     {
@@ -1082,7 +1074,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for customer memberships",
-                "description": "Provides export feed for customer memberships",
                 "operationId": "Export_Memberships",
                 "parameters": [
                     {
@@ -1209,7 +1200,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for invoice templates",
-                "description": "Provides export feed for invoice templates",
                 "operationId": "Export_InvoiceTemplates",
                 "parameters": [
                     {
@@ -1317,7 +1307,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for recurring services",
-                "description": "Provides export feed for recurring services",
                 "operationId": "Export_LocationRecurringServices",
                 "parameters": [
                     {
@@ -1447,7 +1436,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for recurring service events",
-                "description": "Provides export feed for recurring service events",
                 "operationId": "Export_LocationRecurringServiceEvents",
                 "parameters": [
                     {
@@ -1543,7 +1531,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for customer membership status changes",
-                "description": "Provides export feed for customer membership status changes",
                 "operationId": "Export_MembershipStatusChanges",
                 "parameters": [
                     {
@@ -1735,7 +1722,6 @@
                     "InvoiceTemplates"
                 ],
                 "summary": "Creates new invoice template",
-                "description": "Creates new invoice template",
                 "operationId": "InvoiceTemplates_Create",
                 "parameters": [
                     {
@@ -1821,7 +1807,6 @@
                     "InvoiceTemplates"
                 ],
                 "summary": "Gets invoice template specified by ID",
-                "description": "Gets invoice template specified by ID",
                 "operationId": "InvoiceTemplates_Get",
                 "parameters": [
                     {
@@ -1933,7 +1918,6 @@
                     "InvoiceTemplates"
                 ],
                 "summary": "Updates specified invoice template in \"patch\" mode",
-                "description": "Updates specified invoice template in \"patch\" mode",
                 "operationId": "InvoiceTemplates_Update",
                 "parameters": [
                     {
@@ -2052,7 +2036,6 @@
                     "LocationRecurringServiceEvents"
                 ],
                 "summary": "Gets a list of recurring service events",
-                "description": "Gets a list of recurring service events",
                 "operationId": "LocationRecurringServiceEvents_GetList",
                 "parameters": [
                     {
@@ -2452,7 +2435,6 @@
                     "LocationRecurringServices"
                 ],
                 "summary": "Gets a list of recurring services",
-                "description": "Gets a list of recurring services",
                 "operationId": "LocationRecurringServices_GetList",
                 "parameters": [
                     {
@@ -2683,7 +2665,6 @@
                     "LocationRecurringServices"
                 ],
                 "summary": "Gets recurring service specified by ID",
-                "description": "Gets recurring service specified by ID",
                 "operationId": "LocationRecurringServices_Get",
                 "parameters": [
                     {
@@ -2817,7 +2798,6 @@
                     "LocationRecurringServices"
                 ],
                 "summary": "Updates specified recurring service in \"patch\" mode",
-                "description": "Updates specified recurring service in \"patch\" mode",
                 "operationId": "LocationRecurringServices_Update",
                 "parameters": [
                     {
@@ -2952,7 +2932,6 @@
                     "MembershipTypes"
                 ],
                 "summary": "Gets a list of membership types",
-                "description": "Gets a list of membership types",
                 "operationId": "MembershipTypes_GetList",
                 "parameters": [
                     {
@@ -3210,7 +3189,6 @@
                     "MembershipTypes"
                 ],
                 "summary": "Gets membership type specified by ID",
-                "description": "Gets membership type specified by ID",
                 "operationId": "MembershipTypes_Get",
                 "parameters": [
                     {
@@ -3343,7 +3321,6 @@
                     "MembershipTypes"
                 ],
                 "summary": "Gets recurring services for the given membership type",
-                "description": "Gets recurring services for the given membership type",
                 "operationId": "MembershipTypes_GetRecurringServiceItems",
                 "parameters": [
                     {
@@ -3447,7 +3424,6 @@
                     "MembershipTypes"
                 ],
                 "summary": "Gets discounts for the given membership type",
-                "description": "Gets discounts for the given membership type",
                 "operationId": "MembershipTypes_GetDiscountsList",
                 "parameters": [
                     {
@@ -3547,7 +3523,6 @@
                     "MembershipTypes"
                 ],
                 "summary": "Gets duration/billing options for the given membership type",
-                "description": "Gets duration/billing options for the given membership type",
                 "operationId": "MembershipTypes_GetDurationBillingList",
                 "parameters": [
                     {
@@ -3665,7 +3640,6 @@
                     "RecurringServiceTypes"
                 ],
                 "summary": "Gets a list of recurring service types",
-                "description": "Gets a list of recurring service types",
                 "operationId": "RecurringServiceTypes_GetList",
                 "parameters": [
                     {
@@ -3881,7 +3855,6 @@
                     "RecurringServiceTypes"
                 ],
                 "summary": "Gets recurring service type specified by ID",
-                "description": "Gets recurring service type specified by ID",
                 "operationId": "RecurringServiceTypes_Get",
                 "parameters": [
                     {
@@ -6722,9 +6695,11 @@
                             "oneOf": [
                                 {
                                     "$ref": "#/components/schemas/Memberships.V2.InvoiceTemplateItemUpdateRequest"
+                                },
+                                {
+                                    "type": "null"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         },
                         "description": "Invoice template items"
                     }
