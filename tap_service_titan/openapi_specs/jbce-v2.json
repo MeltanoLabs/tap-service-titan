@@ -22,7 +22,6 @@
                     "CallReasons"
                 ],
                 "summary": "Gets a list of call reasons",
-                "description": "Gets a list of call reasons",
                 "operationId": "CallReasons_Get",
                 "parameters": [
                     {

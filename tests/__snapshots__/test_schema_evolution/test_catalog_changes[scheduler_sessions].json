@@ -1139,9 +1139,9 @@
           }
         },
         "required": [
+          "address",
           "isNewCustomer",
-          "isNewLocation",
-          "address"
+          "isNewLocation"
         ],
         "type": [
           "object",
@@ -1471,11 +1471,11 @@
     },
     "required": [
       "id",
+      "customer",
+      "sourceTracking",
       "createdOn",
       "modifiedOn",
-      "lastCheckinDate",
-      "customer",
-      "sourceTracking"
+      "lastCheckinDate"
     ],
     "type": "object"
   },

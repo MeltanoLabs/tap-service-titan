@@ -22,7 +22,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for job splits",
-                "description": "Provides export feed for job splits",
                 "operationId": "Export_JobSplits",
                 "parameters": [
                     {
@@ -113,7 +112,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for payroll adjustments",
-                "description": "Provides export feed for payroll adjustments",
                 "operationId": "Export_PayrollAdjustments",
                 "parameters": [
                     {
@@ -212,7 +210,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for job timesheets",
-                "description": "Provides export feed for job timesheets",
                 "operationId": "Export_Timesheets",
                 "parameters": [
                     {
@@ -307,7 +304,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for activity codes",
-                "description": "Provides export feed for activity codes",
                 "operationId": "Export_ActivityCodes",
                 "parameters": [
                     {
@@ -399,7 +395,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for timesheet codes",
-                "description": "Provides export feed for timesheet codes",
                 "operationId": "Export_TimesheetCodes",
                 "parameters": [
                     {
@@ -496,7 +491,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for gross pay items",
-                "description": "Provides export feed for gross pay items",
                 "operationId": "Export_GrossPayItems",
                 "parameters": [
                     {
@@ -623,7 +617,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for payroll settings",
-                "description": "Provides export feed for payroll settings",
                 "operationId": "Export_PayrollSettings",
                 "parameters": [
                     {
@@ -725,7 +718,6 @@
                     "GrossPayItems"
                 ],
                 "summary": "Creates new gross pay item",
-                "description": "Creates new gross pay item",
                 "operationId": "GrossPayItems_Create",
                 "parameters": [
                     {
@@ -823,7 +815,6 @@
                     "GrossPayItems"
                 ],
                 "summary": "Gets a list of gross pay items",
-                "description": "Gets a list of gross pay items",
                 "operationId": "GrossPayItems_GetList",
                 "parameters": [
                     {
@@ -1062,7 +1053,6 @@
                     "GrossPayItems"
                 ],
                 "summary": "Update specified gross pay item",
-                "description": "Update specified gross pay item",
                 "operationId": "GrossPayItems_Update",
                 "parameters": [
                     {
@@ -1170,7 +1160,6 @@
                     "GrossPayItems"
                 ],
                 "summary": "Delete specified gross pay item",
-                "description": "Delete specified gross pay item",
                 "operationId": "GrossPayItems_Delete",
                 "parameters": [
                     {
@@ -1233,7 +1222,6 @@
                     "JobSplits"
                 ],
                 "summary": "Gets a list of job splits",
-                "description": "Gets a list of job splits",
                 "operationId": "JobSplits_GetList",
                 "parameters": [
                     {
@@ -1419,7 +1407,6 @@
                     "JobSplits"
                 ],
                 "summary": "Gets a list of job splits by multiple jobs",
-                "description": "Gets a list of job splits by multiple jobs",
                 "operationId": "JobSplits_GetListByJobs",
                 "parameters": [
                     {
@@ -1603,7 +1590,6 @@
                     "LocationLaborType"
                 ],
                 "summary": "Gets a list of location hourly rates by multiple locations",
-                "description": "Gets a list of location hourly rates by multiple locations",
                 "operationId": "LocationLaborType_GetListByLocations",
                 "parameters": [
                     {
@@ -1770,7 +1756,6 @@
                     "ActivityCodes"
                 ],
                 "summary": "Gets a list of payroll activity codes",
-                "description": "Gets a list of payroll activity codes",
                 "operationId": "ActivityCodes_GetList",
                 "parameters": [
                     {
@@ -1931,7 +1916,6 @@
                     "ActivityCodes"
                 ],
                 "summary": "Gets payroll activity code specified by ID",
-                "description": "Gets payroll activity code specified by ID",
                 "operationId": "ActivityCodes_Get",
                 "parameters": [
                     {
@@ -2029,7 +2013,6 @@
                     "PayrollAdjustments"
                 ],
                 "summary": "Creates new payroll adjustment",
-                "description": "Creates new payroll adjustment",
                 "operationId": "PayrollAdjustments_Create",
                 "parameters": [
                     {
@@ -2130,7 +2113,6 @@
                     "PayrollAdjustments"
                 ],
                 "summary": "Gets a list of payroll adjustments",
-                "description": "Gets a list of payroll adjustments",
                 "operationId": "PayrollAdjustments_GetList",
                 "parameters": [
                     {
@@ -2324,7 +2306,6 @@
                     "PayrollAdjustments"
                 ],
                 "summary": "Gets payroll adjustment specified by ID",
-                "description": "Gets payroll adjustment specified by ID",
                 "operationId": "PayrollAdjustments_Get",
                 "parameters": [
                     {
@@ -2437,7 +2418,6 @@
                     "Payrolls"
                 ],
                 "summary": "Gets a list of payrolls",
-                "description": "Gets a list of payrolls",
                 "operationId": "Payrolls_GetList",
                 "parameters": [
                     {
@@ -2672,7 +2652,6 @@
                     "Payrolls"
                 ],
                 "summary": "Gets a list of technician payrolls",
-                "description": "Gets a list of technician payrolls",
                 "operationId": "Payrolls_GetTechnicianPayrolls",
                 "parameters": [
                     {
@@ -2904,7 +2883,6 @@
                     "Payrolls"
                 ],
                 "summary": "Gets a list of employee payrolls",
-                "description": "Gets a list of employee payrolls",
                 "operationId": "Payrolls_GetEmployeePayrolls",
                 "parameters": [
                     {
@@ -3136,7 +3114,6 @@
                     "PayrollSettings"
                 ],
                 "summary": "Gets the payroll settings list",
-                "description": "Gets the payroll settings list",
                 "operationId": "PayrollSettings_GetPayrollSettingsList",
                 "parameters": [
                     {
@@ -3330,7 +3307,6 @@
                     "PayrollSettings"
                 ],
                 "summary": "Gets the employee payroll settings",
-                "description": "Gets the employee payroll settings",
                 "operationId": "PayrollSettings_GetEmployeePayrollSettings",
                 "parameters": [
                     {
@@ -3436,7 +3412,6 @@
                     "PayrollSettings"
                 ],
                 "summary": "Updates the employee payroll settings",
-                "description": "Updates the employee payroll settings",
                 "operationId": "PayrollSettings_UpdateEmployeePayrollSettings",
                 "parameters": [
                     {
@@ -3551,7 +3526,6 @@
                     "PayrollSettings"
                 ],
                 "summary": "Gets the technician payroll settings",
-                "description": "Gets the technician payroll settings",
                 "operationId": "PayrollSettings_GetTechnicianPayrollSettings",
                 "parameters": [
                     {
@@ -3657,7 +3631,6 @@
                     "PayrollSettings"
                 ],
                 "summary": "Updates the technician payroll settings",
-                "description": "Updates the technician payroll settings",
                 "operationId": "PayrollSettings_UpdateTechnicianPayrollSettings",
                 "parameters": [
                     {
@@ -3772,7 +3745,6 @@
                     "TimesheetCodes"
                 ],
                 "summary": "Gets a list of timesheet codes",
-                "description": "Gets a list of timesheet codes",
                 "operationId": "TimesheetCodes_GetList",
                 "parameters": [
                     {
@@ -3938,7 +3910,6 @@
                     "TimesheetCodes"
                 ],
                 "summary": "Gets timesheet code specified by ID",
-                "description": "Gets timesheet code specified by ID",
                 "operationId": "TimesheetCodes_Get",
                 "parameters": [
                     {
@@ -4041,7 +4012,6 @@
                     "Timesheets"
                 ],
                 "summary": "Gets a list of job timesheets",
-                "description": "Gets a list of job timesheets",
                 "operationId": "Timesheets_GetJobTimesheets",
                 "parameters": [
                     {
@@ -4241,7 +4211,6 @@
                     "Timesheets"
                 ],
                 "summary": "Gets a list of non job timesheets for employee",
-                "description": "Gets a list of non job timesheets for employee",
                 "operationId": "Timesheets_GetNonJobTimesheets",
                 "parameters": [
                     {
@@ -4425,7 +4394,6 @@
                     "Timesheets"
                 ],
                 "summary": "Gets a list of job timesheets by multiple jobs",
-                "description": "Gets a list of job timesheets by multiple jobs",
                 "operationId": "Timesheets_GetJobTimesheetsByJobs",
                 "parameters": [
                     {
