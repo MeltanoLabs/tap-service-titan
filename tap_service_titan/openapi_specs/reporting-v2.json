@@ -22,7 +22,6 @@
                     "DynamicValueSets"
                 ],
                 "summary": "List values of given dynamic set including key and display name",
-                "description": "List values of given dynamic set including key and display name",
                 "operationId": "DynamicValueSets_GetDynamicSet",
                 "parameters": [
                     {
@@ -152,7 +151,6 @@
                     "ReportCategories"
                 ],
                 "summary": "List categories for existing  reports",
-                "description": "List categories for existing  reports",
                 "operationId": "ReportCategories_GetCategories",
                 "parameters": [
                     {
@@ -250,7 +248,6 @@
                     "ReportCategoryReports"
                 ],
                 "summary": "List reports within given category",
-                "description": "List reports within given category",
                 "operationId": "ReportCategoryReports_GetReports",
                 "parameters": [
                     {
@@ -376,7 +373,6 @@
                     "ReportCategoryReports"
                 ],
                 "summary": "Get report description including input parameters and output fields etc.\nTake a note that the report description isn't fixed and may be changed by the report owner.",
-                "description": "Get report description including input parameters and output fields etc.\nTake a note that the report description isn't fixed and may be changed by the report owner.",
                 "operationId": "ReportCategoryReports_Get",
                 "parameters": [
                     {
@@ -509,7 +505,6 @@
                     "ReportCategoryReports"
                 ],
                 "summary": "Get report data. The result is based on current report description which isn't constant in general.\nBeware that report columns may be changed. Result field names are listed alongside the data in the response\nto validate that all the requested columns are there.",
-                "description": "Get report data. The result is based on current report description which isn't constant in general.\nBeware that report columns may be changed. Result field names are listed alongside the data in the response\nto validate that all the requested columns are there.",
                 "operationId": "ReportCategoryReports_GetData",
                 "parameters": [
                     {
@@ -555,8 +550,8 @@
                         "in": "query",
                         "description": "How many records to return (1000 by default)",
                         "schema": {
-                            "maximum": 25000.0,
-                            "minimum": 1.0,
+                            "maximum": 25000,
+                            "minimum": 1,
                             "type": "integer",
                             "format": "int32"
                         }

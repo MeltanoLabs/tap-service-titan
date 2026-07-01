@@ -21,7 +21,6 @@
                 "tags": [
                     "Estimates"
                 ],
-                "summary": "Estimates_Get",
                 "operationId": "Estimates_Get",
                 "parameters": [
                     {
@@ -98,7 +97,9 @@
                                             "modifiedOn": "string",
                                             "chargeable": true,
                                             "invoiceItemId": 0,
-                                            "budgetCodeId": 0
+                                            "budgetCodeId": 0,
+                                            "membershipBillingFrequency": {},
+                                            "membershipDuration": 0
                                         }
                                     ],
                                     "externalLinks": [
@@ -154,7 +155,6 @@
                 "tags": [
                     "Estimates"
                 ],
-                "summary": "Estimates_Update",
                 "operationId": "Estimates_Update",
                 "parameters": [
                     {
@@ -208,7 +208,8 @@
                                         "chargeable": true,
                                         "useDefaultProjectLabels": true,
                                         "budgetCodeId": 0,
-                                        "unitCost": 0
+                                        "unitCost": 0,
+                                        "membershipDurationBillingId": 0
                                     }
                                 ],
                                 "externalLinks": [
@@ -279,7 +280,9 @@
                                             "modifiedOn": "string",
                                             "chargeable": true,
                                             "invoiceItemId": 0,
-                                            "budgetCodeId": 0
+                                            "budgetCodeId": 0,
+                                            "membershipBillingFrequency": {},
+                                            "membershipDuration": 0
                                         }
                                     ],
                                     "externalLinks": [
@@ -337,7 +340,6 @@
                 "tags": [
                     "Estimates"
                 ],
-                "summary": "Estimates_GetList",
                 "operationId": "Estimates_GetList",
                 "parameters": [
                     {
@@ -603,7 +605,9 @@
                                                     "modifiedOn": "string",
                                                     "chargeable": true,
                                                     "invoiceItemId": 0,
-                                                    "budgetCodeId": 0
+                                                    "budgetCodeId": 0,
+                                                    "membershipBillingFrequency": {},
+                                                    "membershipDuration": 0
                                                 }
                                             ],
                                             "externalLinks": [
@@ -661,7 +665,6 @@
                 "tags": [
                     "Estimates"
                 ],
-                "summary": "Estimates_Create",
                 "operationId": "Estimates_Create",
                 "parameters": [
                     {
@@ -706,7 +709,8 @@
                                         "chargeable": true,
                                         "useDefaultProjectLabels": true,
                                         "budgetCodeId": 0,
-                                        "unitCost": 0
+                                        "unitCost": 0,
+                                        "membershipDurationBillingId": 0
                                     }
                                 ],
                                 "externalLinks": [
@@ -780,7 +784,9 @@
                                             "modifiedOn": "string",
                                             "chargeable": true,
                                             "invoiceItemId": 0,
-                                            "budgetCodeId": 0
+                                            "budgetCodeId": 0,
+                                            "membershipBillingFrequency": {},
+                                            "membershipDuration": 0
                                         }
                                     ],
                                     "externalLinks": [
@@ -838,7 +844,6 @@
                 "tags": [
                     "Estimates"
                 ],
-                "summary": "Estimates_GetItems",
                 "operationId": "Estimates_GetItems",
                 "parameters": [
                     {
@@ -991,7 +996,9 @@
                                             "modifiedOn": "string",
                                             "chargeable": true,
                                             "invoiceItemId": 0,
-                                            "budgetCodeId": 0
+                                            "budgetCodeId": 0,
+                                            "membershipBillingFrequency": {},
+                                            "membershipDuration": 0
                                         }
                                     ]
                                 }
@@ -1032,7 +1039,6 @@
                 "tags": [
                     "Estimates"
                 ],
-                "summary": "Estimates_Sell",
                 "operationId": "Estimates_Sell",
                 "parameters": [
                     {
@@ -1121,7 +1127,9 @@
                                             "modifiedOn": "string",
                                             "chargeable": true,
                                             "invoiceItemId": 0,
-                                            "budgetCodeId": 0
+                                            "budgetCodeId": 0,
+                                            "membershipBillingFrequency": {},
+                                            "membershipDuration": 0
                                         }
                                     ],
                                     "externalLinks": [
@@ -1179,7 +1187,6 @@
                 "tags": [
                     "Estimates"
                 ],
-                "summary": "Estimates_Unsell",
                 "operationId": "Estimates_Unsell",
                 "parameters": [
                     {
@@ -1240,7 +1247,6 @@
                 "tags": [
                     "Estimates"
                 ],
-                "summary": "Estimates_Dismiss",
                 "operationId": "Estimates_Dismiss",
                 "parameters": [
                     {
@@ -1301,7 +1307,6 @@
                 "tags": [
                     "Estimates"
                 ],
-                "summary": "Estimates_PutItem",
                 "operationId": "Estimates_PutItem",
                 "parameters": [
                     {
@@ -1345,7 +1350,8 @@
                                 "chargeable": true,
                                 "useDefaultProjectLabels": true,
                                 "budgetCodeId": 0,
-                                "unitCost": 0
+                                "unitCost": 0,
+                                "membershipDurationBillingId": 0
                             }
                         }
                     }
@@ -1385,6 +1391,8 @@
                                     "chargeable": true,
                                     "invoiceItemId": 0,
                                     "budgetCodeId": 0,
+                                    "membershipBillingFrequency": {},
+                                    "membershipDuration": 0,
                                     "estimateId": 0
                                 }
                             }
@@ -1424,7 +1432,6 @@
                 "tags": [
                     "Estimates"
                 ],
-                "summary": "Estimates_DeleteItem",
                 "operationId": "Estimates_DeleteItem",
                 "parameters": [
                     {
@@ -1495,7 +1502,6 @@
                     "EstimatesExport"
                 ],
                 "summary": "Provides export feed for estimates",
-                "description": "Provides export feed for estimates",
                 "operationId": "EstimatesExport_Estimates",
                 "parameters": [
                     {
@@ -1583,7 +1589,9 @@
                                                     "modifiedOn": "string",
                                                     "chargeable": true,
                                                     "invoiceItemId": 0,
-                                                    "budgetCodeId": 0
+                                                    "budgetCodeId": 0,
+                                                    "membershipBillingFrequency": {},
+                                                    "membershipDuration": 0
                                                 }
                                             ],
                                             "externalLinks": [
@@ -1644,7 +1652,6 @@
                     "EstimatesExport"
                 ],
                 "summary": "Provides export feed for estimates (legacy endpoint)",
-                "description": "Provides export feed for estimates (legacy endpoint)",
                 "operationId": "EstimatesExport_EstimatesAsyncLegacy",
                 "parameters": [
                     {
@@ -1732,7 +1739,9 @@
                                                     "modifiedOn": "string",
                                                     "chargeable": true,
                                                     "invoiceItemId": 0,
-                                                    "budgetCodeId": 0
+                                                    "budgetCodeId": 0,
+                                                    "membershipBillingFrequency": {},
+                                                    "membershipDuration": 0
                                                 }
                                             ],
                                             "externalLinks": [
@@ -1793,7 +1802,6 @@
                     "EstimatesStatus"
                 ],
                 "summary": "Get estimate status change details along with UTC timestamp.",
-                "description": "Get estimate status change details along with UTC timestamp.",
                 "operationId": "EstimatesStatus_GetEstimateStatusChanges",
                 "parameters": [
                     {
@@ -1893,7 +1901,6 @@
                     "EstimateTemplates"
                 ],
                 "summary": "Gets a paginated list of estimate templates.",
-                "description": "Gets a paginated list of estimate templates.",
                 "operationId": "EstimateTemplates_Get",
                 "parameters": [
                     {
@@ -2046,7 +2053,6 @@
                     "EstimateTemplates"
                 ],
                 "summary": "Creates a new estimate template.",
-                "description": "Creates a new estimate template.",
                 "operationId": "EstimateTemplates_Create",
                 "parameters": [
                     {
@@ -2177,7 +2183,6 @@
                     "EstimateTemplates"
                 ],
                 "summary": "Gets a single estimate template by ID.",
-                "description": "Gets a single estimate template by ID.",
                 "operationId": "EstimateTemplates_GetById",
                 "parameters": [
                     {
@@ -2279,7 +2284,6 @@
                     "EstimateTemplates"
                 ],
                 "summary": "Updates an existing estimate template.",
-                "description": "Updates an existing estimate template.",
                 "operationId": "EstimateTemplates_Update",
                 "parameters": [
                     {
@@ -2417,7 +2421,6 @@
                     "EstimateTemplates"
                 ],
                 "summary": "Deactivates an estimate template.",
-                "description": "Deactivates an estimate template.",
                 "operationId": "EstimateTemplates_Delete",
                 "parameters": [
                     {
@@ -2479,7 +2482,6 @@
                     "ProposalTemplates"
                 ],
                 "summary": "Gets a list of proposal templates.",
-                "description": "Gets a list of proposal templates.",
                 "operationId": "ProposalTemplates_Get",
                 "parameters": [
                     {
@@ -2628,7 +2630,6 @@
                     "ProposalTemplates"
                 ],
                 "summary": "Creates a new proposal template.",
-                "description": "Creates a new proposal template.",
                 "operationId": "ProposalTemplates_Create",
                 "parameters": [
                     {
@@ -2736,7 +2737,6 @@
                     "ProposalTemplates"
                 ],
                 "summary": "Gets a single proposal template by ID.",
-                "description": "Gets a single proposal template by ID.",
                 "operationId": "ProposalTemplates_GetById",
                 "parameters": [
                     {
@@ -2825,7 +2825,6 @@
                     "ProposalTemplates"
                 ],
                 "summary": "Updates an existing proposal template. Only provided fields are changed; omitted fields are left unchanged.",
-                "description": "Updates an existing proposal template. Only provided fields are changed; omitted fields are left unchanged.",
                 "operationId": "ProposalTemplates_Update",
                 "parameters": [
                     {
@@ -2940,7 +2939,6 @@
                     "ProposalTemplates"
                 ],
                 "summary": "Deactivates a proposal template. The template is not deleted and can be reactivated via PATCH.",
-                "description": "Deactivates a proposal template. The template is not deleted and can be reactivated via PATCH.",
                 "operationId": "ProposalTemplates_Delete",
                 "parameters": [
                     {
@@ -3001,7 +2999,6 @@
                 "tags": [
                     "ProposalTypes"
                 ],
-                "summary": "ProposalTypes_Get",
                 "operationId": "ProposalTypes_Get",
                 "parameters": [
                     {
@@ -3404,6 +3401,25 @@
                             "null"
                         ],
                         "format": "int64"
+                    },
+                    "membershipBillingFrequency": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Estimates.V2.EstimateMembershipBillingFrequency"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Billing frequency for this membership item, or null for non-membership items."
+                    },
+                    "membershipDuration": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Membership duration in months. Null for non-membership items or ongoing (never expires) memberships.",
+                        "format": "int32"
                     }
                 },
                 "additionalProperties": false
@@ -3451,6 +3467,26 @@
                     }
                 },
                 "additionalProperties": false
+            },
+            "Estimates.V2.EstimateMembershipBillingFrequency": {
+                "enum": [
+                    "OneTime",
+                    "Monthly",
+                    "EveryOtherMonth",
+                    "Quarterly",
+                    "BiAnnual",
+                    "Annual"
+                ],
+                "type": "string",
+                "description": "Membership billing frequency. Mirrors ServiceTitan.Model.Memberships.MembershipRecurrenceType.",
+                "x-enumNames": [
+                    "OneTime",
+                    "Monthly",
+                    "EveryOtherMonth",
+                    "Quarterly",
+                    "BiAnnual",
+                    "Annual"
+                ]
             },
             "Estimates.V2.ExternalLinkResponse": {
                 "required": [
@@ -3855,6 +3891,14 @@
                     "unitCost": {
                         "type": "number",
                         "format": "decimal"
+                    },
+                    "membershipDurationBillingId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ID of the membership duration/billing option. Obtain available options from GET /memberships/v2/tenant/{tenant}/membership-types with includeDurationBilling=true.",
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -4096,6 +4140,25 @@
                             "null"
                         ],
                         "format": "int64"
+                    },
+                    "membershipBillingFrequency": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Estimates.V2.EstimateMembershipBillingFrequency"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Billing frequency for this membership item, or null for non-membership items."
+                    },
+                    "membershipDuration": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Membership duration in months. Null for non-membership items or ongoing (never expires) memberships.",
+                        "format": "int32"
                     },
                     "estimateId": {
                         "type": "integer",
@@ -4489,8 +4552,8 @@
                     "unitPrice",
                     "totalPrice",
                     "isAddOn",
-                    "unitCost",
-                    "order"
+                    "order",
+                    "unitCost"
                 ],
                 "type": "object",
                 "properties": {

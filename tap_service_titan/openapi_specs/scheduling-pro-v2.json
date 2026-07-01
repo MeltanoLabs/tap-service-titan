@@ -22,7 +22,6 @@
                     "Router"
                 ],
                 "summary": "Gets a paginated list of sessions for router",
-                "description": "Gets a paginated list of sessions for router",
                 "operationId": "Router_RouterSessions",
                 "parameters": [
                     {
@@ -107,24 +106,6 @@
                     }
                 ],
                 "responses": {
-                    "404": {
-                        "description": "The requested entity was not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -249,6 +230,24 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -267,7 +266,6 @@
                     "Router"
                 ],
                 "summary": "Provides performance data for router",
-                "description": "Provides performance data for router",
                 "operationId": "Router_RouterPerformance",
                 "parameters": [
                     {
@@ -308,24 +306,6 @@
                     }
                 ],
                 "responses": {
-                    "404": {
-                        "description": "The requested entity was not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -364,6 +344,24 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -382,7 +380,6 @@
                     "Scheduler"
                 ],
                 "summary": "Gets a list of schedulers",
-                "description": "Gets a list of schedulers",
                 "operationId": "Scheduler_Schedulers",
                 "parameters": [
                     {
@@ -459,24 +456,6 @@
                     }
                 ],
                 "responses": {
-                    "404": {
-                        "description": "The requested entity was not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -524,6 +503,24 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -542,7 +539,6 @@
                     "Scheduler"
                 ],
                 "summary": "Gets a paginated list of sessions for scheduler",
-                "description": "Gets a paginated list of sessions for scheduler",
                 "operationId": "Scheduler_SchedulerSessions",
                 "parameters": [
                     {
@@ -627,24 +623,6 @@
                     }
                 ],
                 "responses": {
-                    "404": {
-                        "description": "The requested entity was not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -769,6 +747,24 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -787,7 +783,6 @@
                     "Scheduler"
                 ],
                 "summary": "Provides performance data for scheduler",
-                "description": "Provides performance data for scheduler",
                 "operationId": "Scheduler_SchedulerPerformance",
                 "parameters": [
                     {
@@ -828,24 +823,6 @@
                     }
                 ],
                 "responses": {
-                    "404": {
-                        "description": "The requested entity was not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -891,6 +868,24 @@
                     },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1013,11 +1008,11 @@
             "SchedulingPro.V2.RouterSessionResponse": {
                 "required": [
                     "id",
+                    "customer",
+                    "sourceTracking",
                     "createdOn",
                     "modifiedOn",
-                    "lastCheckinDate",
-                    "customer",
-                    "sourceTracking"
+                    "lastCheckinDate"
                 ],
                 "type": "object",
                 "properties": {
@@ -1283,9 +1278,9 @@
             },
             "SchedulingPro.V2.Customer": {
                 "required": [
+                    "address",
                     "isNewCustomer",
-                    "isNewLocation",
-                    "address"
+                    "isNewLocation"
                 ],
                 "type": "object",
                 "properties": {
@@ -1626,9 +1621,9 @@
             "SchedulingPro.V2.RouterPerformanceResponse": {
                 "required": [
                     "id",
+                    "sessionCountBySchedulerId",
                     "openedCount",
-                    "interactedCount",
-                    "sessionCountBySchedulerId"
+                    "interactedCount"
                 ],
                 "type": "object",
                 "properties": {
@@ -1724,12 +1719,12 @@
                     "id",
                     "name",
                     "companyName",
-                    "createdOn",
-                    "modifiedOn",
                     "schedulerStatus",
                     "dataApiKey",
-                    "isDefault",
                     "mode",
+                    "createdOn",
+                    "modifiedOn",
+                    "isDefault",
                     "quickLaunchLink"
                 ],
                 "type": "object",
@@ -1840,11 +1835,11 @@
             "SchedulingPro.V2.SchedulerSessionResponse": {
                 "required": [
                     "id",
+                    "customer",
+                    "sourceTracking",
                     "createdOn",
                     "modifiedOn",
-                    "lastCheckinDate",
-                    "customer",
-                    "sourceTracking"
+                    "lastCheckinDate"
                 ],
                 "type": "object",
                 "properties": {
@@ -2113,6 +2108,7 @@
                     "id",
                     "schedulerName",
                     "brandName",
+                    "milestoneFrequencyCount",
                     "schedulerCompletionRate",
                     "openedCompletionRate",
                     "totalCustomerContactsCaptured",
@@ -2129,8 +2125,7 @@
                     "totalBookingsRecoveredFromAbandonedSessions",
                     "totalJobsRecoveredFromAbandonedSessions",
                     "totalMembershipInterest",
-                    "totalSessions",
-                    "milestoneFrequencyCount"
+                    "totalSessions"
                 ],
                 "type": "object",
                 "properties": {

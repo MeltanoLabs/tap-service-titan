@@ -22,7 +22,6 @@
                     "Appointments"
                 ],
                 "summary": "Gets appointment specified by ID",
-                "description": "Gets appointment specified by ID",
                 "operationId": "Appointments_Get",
                 "parameters": [
                     {
@@ -136,7 +135,6 @@
                     "Appointments"
                 ],
                 "summary": "Deletes appointment with specified id.",
-                "description": "Deletes appointment with specified id.",
                 "operationId": "Appointments_Delete",
                 "parameters": [
                     {
@@ -235,7 +233,6 @@
                     "Appointments"
                 ],
                 "summary": "Gets a list of appointments",
-                "description": "Gets a list of appointments",
                 "operationId": "Appointments_GetList",
                 "parameters": [
                     {
@@ -503,7 +500,6 @@
                     "Appointments"
                 ],
                 "summary": "Adds a new appointment to an existing job",
-                "description": "Adds a new appointment to an existing job",
                 "operationId": "Appointments_Add",
                 "parameters": [
                     {
@@ -629,7 +625,6 @@
                     "Appointments"
                 ],
                 "summary": "Reschedule job appointment",
-                "description": "Reschedule job appointment",
                 "operationId": "Appointments_Reschedule",
                 "parameters": [
                     {
@@ -779,7 +774,6 @@
                     "Appointments"
                 ],
                 "summary": "Puts the appointment on hold",
-                "description": "Puts the appointment on hold",
                 "operationId": "Appointments_Hold",
                 "parameters": [
                     {
@@ -890,7 +884,6 @@
                     "Appointments"
                 ],
                 "summary": "Removes hold from the appointment",
-                "description": "Removes hold from the appointment",
                 "operationId": "Appointments_RemoveHold",
                 "parameters": [
                     {
@@ -989,7 +982,6 @@
                     "Appointments"
                 ],
                 "summary": "Updates special instructions for the specified appointment.",
-                "description": "Updates special instructions for the specified appointment.",
                 "operationId": "Appointments_UpdateSpecialInstructions",
                 "parameters": [
                     {
@@ -1136,7 +1128,6 @@
                     "Appointments"
                 ],
                 "summary": "Adds a confirmation to the specified appointment.",
-                "description": "Adds a confirmation to the specified appointment.",
                 "operationId": "Appointments_Confirm",
                 "parameters": [
                     {
@@ -1233,7 +1224,6 @@
                     "Appointments"
                 ],
                 "summary": "Removes a confirmation to the specified appointment.",
-                "description": "Removes a confirmation to the specified appointment.",
                 "operationId": "Appointments_RemoveConfirmation",
                 "parameters": [
                     {
@@ -1332,7 +1322,6 @@
                     "Appointments"
                 ],
                 "summary": "Sets an appointment summary (work performed log) for the specified appointment and technician.\nPrivate preview: available for specific accounts only.",
-                "description": "Sets an appointment summary (work performed log) for the specified appointment and technician.\nPrivate preview: available for specific accounts only.",
                 "operationId": "Appointments_SetSummary",
                 "parameters": [
                     {
@@ -1441,7 +1430,6 @@
                 "tags": [
                     "BudgetCodes"
                 ],
-                "summary": "BudgetCodes_ListCompanySegments",
                 "operationId": "BudgetCodes_ListCompanySegments",
                 "parameters": [
                     {
@@ -1535,7 +1523,6 @@
                 "tags": [
                     "BudgetCodes"
                 ],
-                "summary": "BudgetCodes_ListProjectSegments",
                 "operationId": "BudgetCodes_ListProjectSegments",
                 "parameters": [
                     {
@@ -1638,7 +1625,6 @@
                 "tags": [
                     "BudgetCodes"
                 ],
-                "summary": "BudgetCodes_ListCompanySegmentItems",
                 "operationId": "BudgetCodes_ListCompanySegmentItems",
                 "parameters": [
                     {
@@ -1753,7 +1739,6 @@
                 "tags": [
                     "BudgetCodes"
                 ],
-                "summary": "BudgetCodes_ListProjectSegmentItems",
                 "operationId": "BudgetCodes_ListProjectSegmentItems",
                 "parameters": [
                     {
@@ -1877,7 +1862,6 @@
                 "tags": [
                     "BudgetCodes"
                 ],
-                "summary": "BudgetCodes_ListCompanySegmentItemChildren",
                 "operationId": "BudgetCodes_ListCompanySegmentItemChildren",
                 "parameters": [
                     {
@@ -2001,7 +1985,6 @@
                 "tags": [
                     "BudgetCodes"
                 ],
-                "summary": "BudgetCodes_ListProjectSegmentItemChildren",
                 "operationId": "BudgetCodes_ListProjectSegmentItemChildren",
                 "parameters": [
                     {
@@ -2134,7 +2117,6 @@
                 "tags": [
                     "BudgetCodes"
                 ],
-                "summary": "BudgetCodes_ListCompanyBudgetCodes",
                 "operationId": "BudgetCodes_ListCompanyBudgetCodes",
                 "parameters": [
                     {
@@ -2257,7 +2239,6 @@
                 "tags": [
                     "BudgetCodes"
                 ],
-                "summary": "BudgetCodes_CreateBudgetCode",
                 "operationId": "BudgetCodes_CreateBudgetCode",
                 "parameters": [
                     {
@@ -2346,7 +2327,6 @@
                 "tags": [
                     "BudgetCodes"
                 ],
-                "summary": "BudgetCodes_ListProjectBudgetCodes",
                 "operationId": "BudgetCodes_ListProjectBudgetCodes",
                 "parameters": [
                     {
@@ -2480,7 +2460,6 @@
                 "tags": [
                     "BudgetCodes"
                 ],
-                "summary": "BudgetCodes_MatchCompanyBudgetCodes",
                 "operationId": "BudgetCodes_MatchCompanyBudgetCodes",
                 "parameters": [
                     {
@@ -2574,7 +2553,6 @@
                 "tags": [
                     "BudgetCodes"
                 ],
-                "summary": "BudgetCodes_MatchProjectBudgetCodes",
                 "operationId": "BudgetCodes_MatchProjectBudgetCodes",
                 "parameters": [
                     {
@@ -2677,7 +2655,6 @@
                 "tags": [
                     "BudgetCodes"
                 ],
-                "summary": "BudgetCodes_CreateBudgetCodePartial",
                 "operationId": "BudgetCodes_CreateBudgetCodePartial",
                 "parameters": [
                     {
@@ -2769,7 +2746,6 @@
                 "tags": [
                     "BudgetCodes"
                 ],
-                "summary": "BudgetCodes_CreateBudgetCodesBatch",
                 "operationId": "BudgetCodes_CreateBudgetCodesBatch",
                 "parameters": [
                     {
@@ -2846,7 +2822,6 @@
                 "tags": [
                     "BudgetCodes"
                 ],
-                "summary": "BudgetCodes_CreateBudgetCodesPartialBatch",
                 "operationId": "BudgetCodes_CreateBudgetCodesPartialBatch",
                 "parameters": [
                     {
@@ -2924,7 +2899,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for jobs",
-                "description": "Provides export feed for jobs",
                 "operationId": "Export_Jobs",
                 "parameters": [
                     {
@@ -3068,7 +3042,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for projects",
-                "description": "Provides export feed for projects",
                 "operationId": "Export_Projects",
                 "parameters": [
                     {
@@ -3191,7 +3164,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for appointments",
-                "description": "Provides export feed for appointments",
                 "operationId": "Export_Appointments",
                 "parameters": [
                     {
@@ -3314,7 +3286,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for job canceled logs",
-                "description": "Provides export feed for job canceled logs",
                 "operationId": "Export_JobCancelReasons",
                 "parameters": [
                     {
@@ -3405,7 +3376,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for job notes",
-                "description": "Provides export feed for job notes",
                 "operationId": "Export_JobNotes",
                 "parameters": [
                     {
@@ -3497,7 +3467,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for project notes",
-                "description": "Provides export feed for project notes",
                 "operationId": "Export_ProjectNotes",
                 "parameters": [
                     {
@@ -3589,7 +3558,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for job status history.",
-                "description": "Provides export feed for job status history.",
                 "operationId": "Export_JobHistory",
                 "parameters": [
                     {
@@ -3683,7 +3651,6 @@
                     "JobCancelReasons"
                 ],
                 "summary": "Gets a list of job cancel reasons",
-                "description": "Gets a list of job cancel reasons",
                 "operationId": "JobCancelReasons_GetList",
                 "parameters": [
                     {
@@ -3841,7 +3808,6 @@
                     "JobEquipment"
                 ],
                 "summary": "Gets the list of equipment IDs attached to the specified job",
-                "description": "Gets the list of equipment IDs attached to the specified job",
                 "operationId": "JobEquipment_Get",
                 "parameters": [
                     {
@@ -3932,7 +3898,6 @@
                     "JobEquipment"
                 ],
                 "summary": "Attaches one or more equipment items to the specified job.\nReturns the updated list of all attached equipment IDs.",
-                "description": "Attaches one or more equipment items to the specified job.\nReturns the updated list of all attached equipment IDs.",
                 "operationId": "JobEquipment_Attach",
                 "parameters": [
                     {
@@ -4038,7 +4003,6 @@
                     "JobEquipment"
                 ],
                 "summary": "Detaches one or more equipment items from the specified job.\nReturns 204 No Content on success.",
-                "description": "Detaches one or more equipment items from the specified job.\nReturns 204 No Content on success.",
                 "operationId": "JobEquipment_DetachBulk",
                 "parameters": [
                     {
@@ -4081,6 +4045,9 @@
                     "200": {
                         "description": "The request has succeeded"
                     },
+                    "204": {
+                        "description": "The request has succeeded, no content to return"
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -4098,9 +4065,6 @@
                                 }
                             }
                         }
-                    },
-                    "204": {
-                        "description": "The request has succeeded, no content to return"
                     },
                     "404": {
                         "description": "The requested entity was not found",
@@ -4137,7 +4101,6 @@
                     "JobEquipment"
                 ],
                 "summary": "Detaches a single equipment item from the specified job.\nReturns 204 No Content on success; 404 if the equipment is not attached to the job.",
-                "description": "Detaches a single equipment item from the specified job.\nReturns 204 No Content on success; 404 if the equipment is not attached to the job.",
                 "operationId": "JobEquipment_Detach",
                 "parameters": [
                     {
@@ -4175,6 +4138,9 @@
                     "200": {
                         "description": "The request has succeeded"
                     },
+                    "204": {
+                        "description": "The request has succeeded, no content to return"
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -4192,9 +4158,6 @@
                                 }
                             }
                         }
-                    },
-                    "204": {
-                        "description": "The request has succeeded, no content to return"
                     },
                     "404": {
                         "description": "The requested entity was not found",
@@ -4231,7 +4194,6 @@
                     "JobHoldReasons"
                 ],
                 "summary": "Gets a list of job hold reasons",
-                "description": "Gets a list of job hold reasons",
                 "operationId": "JobHoldReasons_Get",
                 "parameters": [
                     {
@@ -4389,7 +4351,6 @@
                     "Jobs"
                 ],
                 "summary": "Gets a job by ID",
-                "description": "Gets a job by ID",
                 "operationId": "Jobs_Get",
                 "parameters": [
                     {
@@ -4545,7 +4506,6 @@
                     "Jobs"
                 ],
                 "summary": "Updates a job",
-                "description": "Updates a job",
                 "operationId": "Jobs_Update",
                 "parameters": [
                     {
@@ -4742,7 +4702,6 @@
                     "Jobs"
                 ],
                 "summary": "Creates a job",
-                "description": "Creates a job",
                 "operationId": "Jobs_Create",
                 "parameters": [
                     {
@@ -4921,7 +4880,6 @@
                     "Jobs"
                 ],
                 "summary": "Gets a list of jobs",
-                "description": "Gets a list of jobs",
                 "operationId": "Jobs_GetList",
                 "parameters": [
                     {
@@ -5380,7 +5338,6 @@
                     "Jobs"
                 ],
                 "summary": "Cancels a job",
-                "description": "Cancels a job",
                 "operationId": "Jobs_Cancel",
                 "parameters": [
                     {
@@ -5475,7 +5432,6 @@
                     "Jobs"
                 ],
                 "summary": "Removes cancellation from a job",
-                "description": "Removes cancellation from a job",
                 "operationId": "Jobs_RemoveCancellation",
                 "parameters": [
                     {
@@ -5538,7 +5494,6 @@
                     "Jobs"
                 ],
                 "summary": "Gets a list of notes on the specified job",
-                "description": "Gets a list of notes on the specified job",
                 "operationId": "Jobs_GetNotes",
                 "parameters": [
                     {
@@ -5665,7 +5620,6 @@
                     "Jobs"
                 ],
                 "summary": "Creates a note on the specified job",
-                "description": "Creates a note on the specified job",
                 "operationId": "Jobs_CreateNote",
                 "parameters": [
                     {
@@ -5774,7 +5728,6 @@
                     "Jobs"
                 ],
                 "summary": "Gets a list of hold reasons for specific jobs",
-                "description": "Gets a list of hold reasons for specific jobs",
                 "operationId": "Jobs_GetHoldReasons",
                 "parameters": [
                     {
@@ -5865,7 +5818,6 @@
                     "Jobs"
                 ],
                 "summary": "Gets a list of cancel reasons for specific jobs",
-                "description": "Gets a list of cancel reasons for specific jobs",
                 "operationId": "Jobs_GetCancelReasons",
                 "parameters": [
                     {
@@ -5948,7 +5900,6 @@
                     "Jobs"
                 ],
                 "summary": "Gets a list of history entries for the specified job",
-                "description": "Gets a list of history entries for the specified job",
                 "operationId": "Jobs_GetHistory",
                 "parameters": [
                     {
@@ -6048,7 +5999,6 @@
                     "Jobs"
                 ],
                 "summary": "Get a list of cancelled logs for the specified job",
-                "description": "Get a list of cancelled logs for the specified job",
                 "operationId": "Jobs_GetJobCanceledLogs",
                 "parameters": [
                     {
@@ -6179,7 +6129,6 @@
                     "Jobs"
                 ],
                 "summary": "Get booked log for the specified job",
-                "description": "Get booked log for the specified job",
                 "operationId": "Jobs_GetBookedLog",
                 "parameters": [
                     {
@@ -6278,7 +6227,6 @@
                     "Jobs"
                 ],
                 "summary": "Returns a list of custom field types available for projects",
-                "description": "Returns a list of custom field types available for projects",
                 "operationId": "Jobs_GetCustomFieldTypes",
                 "parameters": [
                     {
@@ -6426,7 +6374,6 @@
                     "JobTypes"
                 ],
                 "summary": "Gets a list of job types",
-                "description": "Gets a list of job types",
                 "operationId": "JobTypes_GetList",
                 "parameters": [
                     {
@@ -6669,7 +6616,6 @@
                     "JobTypes"
                 ],
                 "summary": "Creates a job type",
-                "description": "Creates a job type",
                 "operationId": "JobTypes_Create",
                 "parameters": [
                     {
@@ -6807,7 +6753,6 @@
                     "JobTypes"
                 ],
                 "summary": "Gets a job type by ID",
-                "description": "Gets a job type by ID",
                 "operationId": "JobTypes_Get",
                 "parameters": [
                     {
@@ -6937,7 +6882,6 @@
                     "JobTypes"
                 ],
                 "summary": "Update a job type",
-                "description": "Update a job type",
                 "operationId": "JobTypes_Update",
                 "parameters": [
                     {
@@ -7087,7 +7031,6 @@
                     "Projects"
                 ],
                 "summary": "Gets a project by ID",
-                "description": "Gets a project by ID",
                 "operationId": "Projects_Get",
                 "parameters": [
                     {
@@ -7222,7 +7165,6 @@
                     "Projects"
                 ],
                 "summary": "Update a project",
-                "description": "Update a project",
                 "operationId": "Projects_Update",
                 "parameters": [
                     {
@@ -7395,7 +7337,6 @@
                     "Projects"
                 ],
                 "summary": "Gets a list of projects",
-                "description": "Gets a list of projects",
                 "operationId": "Projects_GetList",
                 "parameters": [
                     {
@@ -7745,7 +7686,6 @@
                     "Projects"
                 ],
                 "summary": "Creates a New Project",
-                "description": "Creates a New Project",
                 "operationId": "Projects_Create",
                 "parameters": [
                     {
@@ -7888,7 +7828,6 @@
                     "Projects"
                 ],
                 "summary": "Gets a list of notes on the specified project",
-                "description": "Gets a list of notes on the specified project",
                 "operationId": "Projects_GetNotes",
                 "parameters": [
                     {
@@ -8015,7 +7954,6 @@
                     "Projects"
                 ],
                 "summary": "Creates a note on the specified project",
-                "description": "Creates a note on the specified project",
                 "operationId": "Projects_CreateNote",
                 "parameters": [
                     {
@@ -8124,7 +8062,6 @@
                     "Projects"
                 ],
                 "summary": "Attaches Job to the specified project",
-                "description": "Attaches Job to the specified project",
                 "operationId": "Projects_AttachJob",
                 "parameters": [
                     {
@@ -8197,7 +8134,6 @@
                     "Projects"
                 ],
                 "summary": "Detaches Job from the project",
-                "description": "Detaches Job from the project",
                 "operationId": "Projects_DetachJob",
                 "parameters": [
                     {
@@ -8260,7 +8196,6 @@
                     "Projects"
                 ],
                 "summary": "Returns a list of custom field types available for projects",
-                "description": "Returns a list of custom field types available for projects",
                 "operationId": "Projects_GetCustomFieldTypes",
                 "parameters": [
                     {
@@ -8408,7 +8343,6 @@
                     "ProjectStatuses"
                 ],
                 "summary": "Gets a list of project statuses",
-                "description": "Gets a list of project statuses",
                 "operationId": "ProjectStatuses_GetList",
                 "parameters": [
                     {
@@ -8568,7 +8502,6 @@
                     "ProjectStatuses"
                 ],
                 "summary": "Gets a project status by ID",
-                "description": "Gets a project status by ID",
                 "operationId": "ProjectStatuses_Get",
                 "parameters": [
                     {
@@ -8662,7 +8595,6 @@
                     "ProjectSubStatuses"
                 ],
                 "summary": "Gets a list of project sub statuses",
-                "description": "Gets a list of project sub statuses",
                 "operationId": "ProjectSubStatuses_GetList",
                 "parameters": [
                     {
@@ -8846,7 +8778,6 @@
                     "ProjectSubStatuses"
                 ],
                 "summary": "Gets a project sub status by ID",
-                "description": "Gets a project sub status by ID",
                 "operationId": "ProjectSubStatuses_Get",
                 "parameters": [
                     {
@@ -8942,7 +8873,6 @@
                     "ProjectTypes"
                 ],
                 "summary": "Gets a project type by ID",
-                "description": "Gets a project type by ID",
                 "operationId": "ProjectTypes_Get",
                 "parameters": [
                     {
@@ -9036,7 +8966,6 @@
                     "ProjectTypes"
                 ],
                 "summary": "Gets a list of project types",
-                "description": "Gets a list of project types",
                 "operationId": "ProjectTypes_GetList",
                 "parameters": [
                     {
@@ -10014,16 +9943,19 @@
             },
             "Jpm.V2.ExportJobsResponse": {
                 "required": [
+                    "jobNumber",
+                    "jobStatus",
+                    "priority",
+                    "tagTypeIds",
+                    "customerPo",
+                    "estimateIds",
                     "customFields",
                     "externalData",
                     "id",
-                    "jobNumber",
                     "customerId",
                     "locationId",
-                    "jobStatus",
                     "businessUnitId",
                     "jobTypeId",
-                    "priority",
                     "campaignId",
                     "appointmentCount",
                     "firstAppointmentId",
@@ -10033,10 +9965,7 @@
                     "createdOn",
                     "createdById",
                     "modifiedOn",
-                    "tagTypeIds",
-                    "customerPo",
                     "invoiceId",
-                    "estimateIds",
                     "equipmentIds",
                     "active"
                 ],
@@ -11262,14 +11191,17 @@
             },
             "Jpm.V2.JobResponse": {
                 "required": [
-                    "id",
                     "jobNumber",
+                    "jobStatus",
+                    "priority",
+                    "tagTypeIds",
+                    "customerPo",
+                    "estimateIds",
+                    "id",
                     "customerId",
                     "locationId",
-                    "jobStatus",
                     "businessUnitId",
                     "jobTypeId",
-                    "priority",
                     "campaignId",
                     "appointmentCount",
                     "firstAppointmentId",
@@ -11279,10 +11211,7 @@
                     "createdOn",
                     "createdById",
                     "modifiedOn",
-                    "tagTypeIds",
-                    "customerPo",
                     "invoiceId",
-                    "estimateIds",
                     "equipmentIds",
                     "customFields",
                     "externalData"
@@ -12242,10 +12171,10 @@
             },
             "Jpm.V2.AppointmentHoldReason": {
                 "required": [
-                    "appointmentId",
-                    "reasonId",
                     "name",
-                    "text"
+                    "text",
+                    "appointmentId",
+                    "reasonId"
                 ],
                 "type": "object",
                 "properties": {

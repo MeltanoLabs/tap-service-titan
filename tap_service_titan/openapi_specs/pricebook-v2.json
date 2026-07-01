@@ -21,7 +21,6 @@
                 "tags": [
                     "ClientSpecificPricing"
                 ],
-                "summary": "ClientSpecificPricing_GetAllRateSheets",
                 "operationId": "ClientSpecificPricing_GetAllRateSheets",
                 "parameters": [
                     {
@@ -149,7 +148,6 @@
                 "tags": [
                     "ClientSpecificPricing"
                 ],
-                "summary": "ClientSpecificPricing_UpdateRateSheet",
                 "operationId": "ClientSpecificPricing_UpdateRateSheet",
                 "parameters": [
                     {
@@ -245,7 +243,6 @@
                     "Categories"
                 ],
                 "summary": "GET the categories in your pricebook",
-                "description": "GET the categories in your pricebook",
                 "operationId": "Categories_GetList",
                 "parameters": [
                     {
@@ -356,6 +353,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Pricebook.V2.CategoryResponse"
+                                }
+                            }
+                        }
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -370,16 +377,6 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Pricebook.V2.CategoryResponse"
                                 }
                             }
                         }
@@ -399,7 +396,6 @@
                     "Categories"
                 ],
                 "summary": "Post to add a new category to your pricebook",
-                "description": "Post to add a new category to your pricebook",
                 "operationId": "Categories_Create",
                 "parameters": [
                     {
@@ -441,6 +437,16 @@
                     }
                 },
                 "responses": {
+                    "201": {
+                        "description": "The entity has been created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Pricebook.V2.CategoryResponse"
+                                }
+                            }
+                        }
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -455,16 +461,6 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
-                                }
-                            }
-                        }
-                    },
-                    "201": {
-                        "description": "The entity has been created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Pricebook.V2.CategoryResponse"
                                 }
                             }
                         }
@@ -486,7 +482,6 @@
                     "Categories"
                 ],
                 "summary": "Gets category details",
-                "description": "Gets category details",
                 "operationId": "Categories_Get",
                 "parameters": [
                     {
@@ -511,6 +506,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Pricebook.V2.CategoryResponse"
+                                }
+                            }
+                        }
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -525,16 +530,6 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Pricebook.V2.CategoryResponse"
                                 }
                             }
                         }
@@ -572,7 +567,6 @@
                     "Categories"
                 ],
                 "summary": "Edits an existing category in your pricebook",
-                "description": "Edits an existing category in your pricebook",
                 "operationId": "Categories_Update",
                 "parameters": [
                     {
@@ -624,6 +618,16 @@
                     }
                 },
                 "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Pricebook.V2.CategoryResponse"
+                                }
+                            }
+                        }
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -638,16 +642,6 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Pricebook.V2.CategoryResponse"
                                 }
                             }
                         }
@@ -685,7 +679,6 @@
                     "Categories"
                 ],
                 "summary": "Deletes an existing category from your pricebook",
-                "description": "Deletes an existing category from your pricebook",
                 "operationId": "Categories_Delete",
                 "parameters": [
                     {
@@ -710,6 +703,9 @@
                     }
                 ],
                 "responses": {
+                    "204": {
+                        "description": "The request has succeeded, no content to return"
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -727,9 +723,6 @@
                                 }
                             }
                         }
-                    },
-                    "204": {
-                        "description": "The request has succeeded, no content to return"
                     },
                     "404": {
                         "description": "The requested entity was not found",
@@ -766,7 +759,6 @@
                     "DiscountAndFees"
                 ],
                 "summary": "Get data on all of the discounts or fees in the pricebook. Supports optional search filtering.",
-                "description": "Get data on all of the discounts or fees in the pricebook. Supports optional search filtering.",
                 "operationId": "DiscountAndFees_GetList",
                 "parameters": [
                     {
@@ -908,24 +900,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -984,6 +958,24 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -1000,7 +992,6 @@
                     "DiscountAndFees"
                 ],
                 "summary": "Post to add a new discount or fee to your pricebook",
-                "description": "Post to add a new discount or fee to your pricebook",
                 "operationId": "DiscountAndFees_Create",
                 "parameters": [
                     {
@@ -1065,24 +1056,6 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "201": {
                         "description": "The entity has been created",
                         "content": {
@@ -1133,6 +1106,24 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -1151,7 +1142,6 @@
                     "DiscountAndFees"
                 ],
                 "summary": "Get details of a discount or fee in the pricebook.",
-                "description": "Get details of a discount or fee in the pricebook.",
                 "operationId": "DiscountAndFees_Get",
                 "parameters": [
                     {
@@ -1185,24 +1175,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -1254,6 +1226,24 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "The requested entity was not found",
                         "content": {
@@ -1287,7 +1277,6 @@
                     "DiscountAndFees"
                 ],
                 "summary": "Edit an existing item in your pricebook",
-                "description": "Edit an existing item in your pricebook",
                 "operationId": "DiscountAndFees_Update",
                 "parameters": [
                     {
@@ -1363,24 +1352,6 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -1432,6 +1403,24 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "The requested entity was not found",
                         "content": {
@@ -1465,7 +1454,6 @@
                     "DiscountAndFees"
                 ],
                 "summary": "Deletes a discount or fee from your pricebook",
-                "description": "Deletes a discount or fee from your pricebook",
                 "operationId": "DiscountAndFees_Delete",
                 "parameters": [
                     {
@@ -1490,6 +1478,9 @@
                     }
                 ],
                 "responses": {
+                    "204": {
+                        "description": "The request has succeeded, no content to return"
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -1507,9 +1498,6 @@
                                 }
                             }
                         }
-                    },
-                    "204": {
-                        "description": "The request has succeeded, no content to return"
                     },
                     "404": {
                         "description": "The requested entity was not found",
@@ -1546,7 +1534,6 @@
                     "Equipment"
                 ],
                 "summary": "Get data on all the equipment in the pricebook. Supports optional search filtering.",
-                "description": "Get data on all the equipment in the pricebook. Supports optional search filtering.",
                 "operationId": "Equipment_GetList",
                 "parameters": [
                     {
@@ -1688,24 +1675,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -1854,6 +1823,24 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -1870,7 +1857,6 @@
                     "Equipment"
                 ],
                 "summary": "Post to add new equipment to your pricebook",
-                "description": "Post to add new equipment to your pricebook",
                 "operationId": "Equipment_Create",
                 "parameters": [
                     {
@@ -2011,24 +1997,6 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "201": {
                         "description": "The entity has been created",
                         "content": {
@@ -2169,6 +2137,24 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -2187,7 +2173,6 @@
                     "Equipment"
                 ],
                 "summary": "Get details of equipment in the pricebook.",
-                "description": "Get details of equipment in the pricebook.",
                 "operationId": "Equipment_Get",
                 "parameters": [
                     {
@@ -2221,24 +2206,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -2380,6 +2347,24 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "The requested entity was not found",
                         "content": {
@@ -2413,7 +2398,6 @@
                     "Equipment"
                 ],
                 "summary": "Edit an existing item in your pricebook",
-                "description": "Edit an existing item in your pricebook",
                 "operationId": "Equipment_Update",
                 "parameters": [
                     {
@@ -2565,24 +2549,6 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -2724,6 +2690,24 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "The requested entity was not found",
                         "content": {
@@ -2757,7 +2741,6 @@
                     "Equipment"
                 ],
                 "summary": "Deletes equipment from your pricebook",
-                "description": "Deletes equipment from your pricebook",
                 "operationId": "Equipment_Delete",
                 "parameters": [
                     {
@@ -2782,6 +2765,9 @@
                     }
                 ],
                 "responses": {
+                    "204": {
+                        "description": "The request has succeeded, no content to return"
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -2799,9 +2785,6 @@
                                 }
                             }
                         }
-                    },
-                    "204": {
-                        "description": "The request has succeeded, no content to return"
                     },
                     "404": {
                         "description": "The requested entity was not found",
@@ -2838,7 +2821,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for categories",
-                "description": "Provides export feed for categories",
                 "operationId": "Export_Categories",
                 "parameters": [
                     {
@@ -2914,7 +2896,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for equipment",
-                "description": "Provides export feed for equipment",
                 "operationId": "Export_Equipment",
                 "parameters": [
                     {
@@ -3127,7 +3108,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for services",
-                "description": "Provides export feed for services",
                 "operationId": "Export_Services",
                 "parameters": [
                     {
@@ -3283,7 +3263,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for materials",
-                "description": "Provides export feed for materials",
                 "operationId": "Export_Materials",
                 "parameters": [
                     {
@@ -3473,7 +3452,6 @@
                     "Images"
                 ],
                 "summary": "Downloads a specified pricebook image.",
-                "description": "Downloads a specified pricebook image.",
                 "operationId": "Images_Get",
                 "parameters": [
                     {
@@ -3496,6 +3474,9 @@
                     }
                 ],
                 "responses": {
+                    "302": {
+                        "description": ""
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -3513,9 +3494,6 @@
                                 }
                             }
                         }
-                    },
-                    "302": {
-                        "description": ""
                     },
                     "404": {
                         "description": "The requested entity was not found",
@@ -3550,7 +3528,6 @@
                     "Images"
                 ],
                 "summary": "Uploads a specified image to temporary storage.\nTo associate the image with a pricebook item, send a separate request to update that item.",
-                "description": "Uploads a specified image to temporary storage.\nTo associate the image with a pricebook item, send a separate request to update that item.",
                 "operationId": "Images_Post",
                 "parameters": [
                     {
@@ -3583,6 +3560,19 @@
                     }
                 },
                 "responses": {
+                    "201": {
+                        "description": "The entity has been created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Pricebook.V2.ImageUploadResponse"
+                                },
+                                "example": {
+                                    "path": "string"
+                                }
+                            }
+                        }
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -3597,19 +3587,6 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
-                                }
-                            }
-                        }
-                    },
-                    "201": {
-                        "description": "The entity has been created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Pricebook.V2.ImageUploadResponse"
-                                },
-                                "example": {
-                                    "path": "string"
                                 }
                             }
                         }
@@ -3631,7 +3608,6 @@
                     "Materials"
                 ],
                 "summary": "Get details on materials in the pricebook. Supports optional search filtering.",
-                "description": "Get details on materials in the pricebook. Supports optional search filtering.",
                 "operationId": "Materials_GetList",
                 "parameters": [
                     {
@@ -3789,24 +3765,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -3932,6 +3890,24 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -3948,7 +3924,6 @@
                     "Materials"
                 ],
                 "summary": "Add a new Materials to your pricebook",
-                "description": "Add a new Materials to your pricebook",
                 "operationId": "Materials_Create",
                 "parameters": [
                     {
@@ -4065,24 +4040,6 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "201": {
                         "description": "The entity has been created",
                         "content": {
@@ -4200,6 +4157,24 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -4218,7 +4193,6 @@
                     "Materials"
                 ],
                 "summary": "Get details on a material in the pricebook.",
-                "description": "Get details on a material in the pricebook.",
                 "operationId": "Materials_Get",
                 "parameters": [
                     {
@@ -4252,24 +4226,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -4388,6 +4344,24 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "The requested entity was not found",
                         "content": {
@@ -4421,7 +4395,6 @@
                     "Materials"
                 ],
                 "summary": "Edit an existing item in your pricebook",
-                "description": "Edit an existing item in your pricebook",
                 "operationId": "Materials_Update",
                 "parameters": [
                     {
@@ -4548,24 +4521,6 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -4684,6 +4639,24 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "The requested entity was not found",
                         "content": {
@@ -4717,7 +4690,6 @@
                     "Materials"
                 ],
                 "summary": "Deletes a material from your pricebook",
-                "description": "Deletes a material from your pricebook",
                 "operationId": "Materials_Delete",
                 "parameters": [
                     {
@@ -4742,6 +4714,9 @@
                     }
                 ],
                 "responses": {
+                    "204": {
+                        "description": "The request has succeeded, no content to return"
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -4759,9 +4734,6 @@
                                 }
                             }
                         }
-                    },
-                    "204": {
-                        "description": "The request has succeeded, no content to return"
                     },
                     "404": {
                         "description": "The requested entity was not found",
@@ -4798,7 +4770,6 @@
                     "Materials"
                 ],
                 "summary": "Get details on materials in the pricebook.",
-                "description": "Get details on materials in the pricebook.",
                 "operationId": "Materials_GetCostTypes",
                 "parameters": [
                     {
@@ -4813,24 +4784,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -4852,6 +4805,24 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -4870,7 +4841,6 @@
                     "MaterialsMarkup"
                 ],
                 "summary": "Get materials markup collection",
-                "description": "Get materials markup collection",
                 "operationId": "MaterialsMarkup_GetList",
                 "parameters": [
                     {
@@ -4901,24 +4871,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "Materials Markup collection",
                         "content": {
@@ -4942,6 +4894,24 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -4958,7 +4928,6 @@
                     "MaterialsMarkup"
                 ],
                 "summary": "Create materials markup item",
-                "description": "Create materials markup item",
                 "operationId": "MaterialsMarkup_Create",
                 "parameters": [
                     {
@@ -4989,24 +4958,6 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "201": {
                         "description": "Created materials markup item",
                         "content": {
@@ -5021,6 +4972,24 @@
                                         "to": 0,
                                         "percent": 0
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
                                 }
                             }
                         }
@@ -5042,7 +5011,6 @@
                     "MaterialsMarkup"
                 ],
                 "summary": "Get materials markup item",
-                "description": "Get materials markup item",
                 "operationId": "MaterialsMarkup_Get",
                 "parameters": [
                     {
@@ -5067,24 +5035,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "Materials markup item",
                         "content": {
@@ -5099,6 +5049,24 @@
                                         "to": 0,
                                         "percent": 0
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
                                 }
                             }
                         }
@@ -5136,7 +5104,6 @@
                     "MaterialsMarkup"
                 ],
                 "summary": "Update materials markup item",
-                "description": "Update materials markup item",
                 "operationId": "MaterialsMarkup_Update",
                 "parameters": [
                     {
@@ -5177,24 +5144,6 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "Updated materials markup item",
                         "content": {
@@ -5209,6 +5158,24 @@
                                         "to": 0,
                                         "percent": 0
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
                                 }
                             }
                         }
@@ -5247,7 +5214,6 @@
                 "tags": [
                     "PricebookBulk"
                 ],
-                "summary": "PricebookBulk_Create",
                 "operationId": "PricebookBulk_Create",
                 "parameters": [
                     {
@@ -5613,24 +5579,6 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "201": {
                         "description": "The entity has been created",
                         "content": {
@@ -5666,6 +5614,24 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -5681,7 +5647,6 @@
                 "tags": [
                     "PricebookBulk"
                 ],
-                "summary": "PricebookBulk_Update",
                 "operationId": "PricebookBulk_Update",
                 "parameters": [
                     {
@@ -6037,6 +6002,9 @@
                     }
                 },
                 "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -6054,9 +6022,6 @@
                                 }
                             }
                         }
-                    },
-                    "200": {
-                        "description": "The request has succeeded"
                     }
                 },
                 "security": [
@@ -6075,7 +6040,6 @@
                     "Services"
                 ],
                 "summary": "Get data on all of the services in the pricebook. Supports optional search filtering.",
-                "description": "Get data on all of the services in the pricebook. Supports optional search filtering.",
                 "operationId": "Services_GetList",
                 "parameters": [
                     {
@@ -6225,24 +6189,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -6336,6 +6282,24 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -6352,7 +6316,6 @@
                     "Services"
                 ],
                 "summary": "Post to add a new service to your pricebook",
-                "description": "Post to add a new service to your pricebook",
                 "operationId": "Services_Create",
                 "parameters": [
                     {
@@ -6440,24 +6403,6 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "201": {
                         "description": "The entity has been created",
                         "content": {
@@ -6541,6 +6486,24 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -6559,7 +6522,6 @@
                     "Services"
                 ],
                 "summary": "Get details a service in the pricebook.",
-                "description": "Get details a service in the pricebook.",
                 "operationId": "Services_Get",
                 "parameters": [
                     {
@@ -6602,24 +6564,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -6706,6 +6650,24 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "The requested entity was not found",
                         "content": {
@@ -6739,7 +6701,6 @@
                     "Services"
                 ],
                 "summary": "Edit an existing item in your pricebook",
-                "description": "Edit an existing item in your pricebook",
                 "operationId": "Services_Update",
                 "parameters": [
                     {
@@ -6838,24 +6799,6 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -6940,6 +6883,24 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "The requested entity was not found",
                         "content": {
@@ -6973,7 +6934,6 @@
                     "Services"
                 ],
                 "summary": "Deletes a service from your pricebook",
-                "description": "Deletes a service from your pricebook",
                 "operationId": "Services_Delete",
                 "parameters": [
                     {
@@ -6998,6 +6958,9 @@
                     }
                 ],
                 "responses": {
+                    "204": {
+                        "description": "The request has succeeded, no content to return"
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -7015,9 +6978,6 @@
                                 }
                             }
                         }
-                    },
-                    "204": {
-                        "description": "The request has succeeded, no content to return"
                     },
                     "404": {
                         "description": "The requested entity was not found",
@@ -7636,16 +7596,20 @@
                     "skuImages": {
                         "type": "array",
                         "items": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "The images that will be used for the SKUs under this category"
                     },
                     "skuVideos": {
                         "type": "array",
                         "items": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "The videos that will be used for the videos under this category"
                     }
@@ -11893,20 +11857,20 @@
                         "format": "int64"
                     },
                     "from": {
-                        "maximum": 2147483647.0,
-                        "minimum": 0.0,
+                        "maximum": 2147483647,
+                        "minimum": 0,
                         "type": "number",
                         "format": "decimal"
                     },
                     "to": {
-                        "maximum": 2147483647.0,
-                        "minimum": 0.0,
+                        "maximum": 2147483647,
+                        "minimum": 0,
                         "type": "number",
                         "format": "decimal"
                     },
                     "percent": {
-                        "maximum": 100.0,
-                        "minimum": 0.0,
+                        "maximum": 100,
+                        "minimum": 0,
                         "type": "number",
                         "format": "decimal"
                     }

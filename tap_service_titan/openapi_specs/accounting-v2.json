@@ -22,7 +22,6 @@
                     "ApBills"
                 ],
                 "summary": "Returns a paginated list of AP bills with detailed item information, filtering capabilities, and associated metadata",
-                "description": "Returns a paginated list of AP bills with detailed item information, filtering capabilities, and associated metadata",
                 "operationId": "ApBills_GetListPaginated",
                 "parameters": [
                     {
@@ -335,6 +334,10 @@
                                             "shippingAmount": "string",
                                             "landedCostMethod": {},
                                             "otherAmount": "string",
+                                            "preTaxDiscountAmount": "string",
+                                            "preTaxCharge": "string",
+                                            "postTaxDiscountAmount": "string",
+                                            "postTaxCharge": "string",
                                             "createdBy": "string",
                                             "createdOn": "string",
                                             "modifiedOn": "string",
@@ -500,7 +503,6 @@
                     "ApBills"
                 ],
                 "summary": "Returns a single AP bill by its unique identifier with complete details including items, expense items, and associated metadata",
-                "description": "Returns a single AP bill by its unique identifier with complete details including items, expense items, and associated metadata",
                 "operationId": "ApBills_GetById",
                 "parameters": [
                     {
@@ -551,6 +553,10 @@
                                     "shippingAmount": "string",
                                     "landedCostMethod": {},
                                     "otherAmount": "string",
+                                    "preTaxDiscountAmount": "string",
+                                    "preTaxCharge": "string",
+                                    "postTaxDiscountAmount": "string",
+                                    "postTaxCharge": "string",
                                     "createdBy": "string",
                                     "createdOn": "string",
                                     "modifiedOn": "string",
@@ -732,7 +738,6 @@
                     "ApBills"
                 ],
                 "summary": "Returns a paginated list of filtered custom field types available for AP bills",
-                "description": "Returns a paginated list of filtered custom field types available for AP bills",
                 "operationId": "ApBills_GetCustomFieldTypes",
                 "parameters": [
                     {
@@ -877,7 +882,6 @@
                     "ApBills"
                 ],
                 "summary": "Updates custom field values on multiple AP bills",
-                "description": "Updates custom field values on multiple AP bills",
                 "operationId": "ApBills_UpdateCustomFields",
                 "parameters": [
                     {
@@ -953,7 +957,6 @@
                     "ApBills"
                 ],
                 "summary": "Marks multiple AP bills as exported, updating their sync status to indicate they have been exported to external systems",
-                "description": "Marks multiple AP bills as exported, updating their sync status to indicate they have been exported to external systems",
                 "operationId": "ApBills_MarkAsExported",
                 "parameters": [
                     {
@@ -1038,7 +1041,6 @@
                     "ApCredits"
                 ],
                 "summary": "Gets a paginated list of ap credits",
-                "description": "Gets a paginated list of ap credits",
                 "operationId": "ApCredits_GetList",
                 "parameters": [
                     {
@@ -1271,7 +1273,6 @@
                     "ApCredits"
                 ],
                 "summary": "Returns a paginated list of filtered custom field types available for AP credits",
-                "description": "Returns a paginated list of filtered custom field types available for AP credits",
                 "operationId": "ApCredits_GetCustomFieldTypes",
                 "parameters": [
                     {
@@ -1416,7 +1417,6 @@
                     "ApCredits"
                 ],
                 "summary": "Updates custom field values on multiple AP credits",
-                "description": "Updates custom field values on multiple AP credits",
                 "operationId": "ApCredits_UpdateCustomFields",
                 "parameters": [
                     {
@@ -1492,7 +1492,6 @@
                     "ApCredits"
                 ],
                 "summary": "Marks ap-credits as exported.",
-                "description": "Marks ap-credits as exported.",
                 "operationId": "ApCredits_MarkAsExported",
                 "parameters": [
                     {
@@ -1578,7 +1577,6 @@
                 "tags": [
                     "ApPayments"
                 ],
-                "summary": "ApPayments_GetList",
                 "operationId": "ApPayments_GetList",
                 "parameters": [
                     {
@@ -1814,7 +1812,6 @@
                     "ApPayments"
                 ],
                 "summary": "Returns a paginated list of filtered custom field types available for AP payments",
-                "description": "Returns a paginated list of filtered custom field types available for AP payments",
                 "operationId": "ApPayments_GetCustomFieldTypes",
                 "parameters": [
                     {
@@ -1959,7 +1956,6 @@
                     "ApPayments"
                 ],
                 "summary": "Updates custom field values on multiple AP payments",
-                "description": "Updates custom field values on multiple AP payments",
                 "operationId": "ApPayments_UpdateCustomFields",
                 "parameters": [
                     {
@@ -2035,7 +2031,6 @@
                     "ApPayments"
                 ],
                 "summary": "Marks ap-payments as exported.",
-                "description": "Marks ap-payments as exported.",
                 "operationId": "ApPayments_MarkAsExported",
                 "parameters": [
                     {
@@ -2123,7 +2118,6 @@
                 "tags": [
                     "CreditMemos"
                 ],
-                "summary": "CreditMemos_GetCreditMemosList",
                 "operationId": "CreditMemos_GetCreditMemosList",
                 "parameters": [
                     {
@@ -2479,7 +2473,6 @@
                 "tags": [
                     "CreditMemos"
                 ],
-                "summary": "CreditMemos_GetCreditMemoItemsList",
                 "operationId": "CreditMemos_GetCreditMemoItemsList",
                 "parameters": [
                     {
@@ -2652,7 +2645,6 @@
                 "tags": [
                     "CreditMemos"
                 ],
-                "summary": "CreditMemos_GetCreditMemosItemsList",
                 "operationId": "CreditMemos_GetCreditMemosItemsList",
                 "parameters": [
                     {
@@ -2825,7 +2817,6 @@
                     "CreditMemos"
                 ],
                 "summary": "Returns a paginated list of filtered custom field types available for credit memos",
-                "description": "Returns a paginated list of filtered custom field types available for credit memos",
                 "operationId": "CreditMemos_GetCustomFieldTypes",
                 "parameters": [
                     {
@@ -2970,7 +2961,6 @@
                     "CreditMemos"
                 ],
                 "summary": "Update custom fields for specified credit memos",
-                "description": "Update custom fields for specified credit memos",
                 "operationId": "CreditMemos_UpdateCustomFields",
                 "parameters": [
                     {
@@ -3044,7 +3034,6 @@
                 "tags": [
                     "CreditMemos"
                 ],
-                "summary": "CreditMemos_UpdateCreditMemo",
                 "operationId": "CreditMemos_UpdateCreditMemo",
                 "parameters": [
                     {
@@ -3134,7 +3123,6 @@
                 "tags": [
                     "CreditMemos"
                 ],
-                "summary": "CreditMemos_AddCreditMemoSplits",
                 "operationId": "CreditMemos_AddCreditMemoSplits",
                 "parameters": [
                     {
@@ -3229,7 +3217,6 @@
                     "CreditMemos"
                 ],
                 "summary": "mark credit memo as exported. Id = creditMemoId",
-                "description": "mark credit memo as exported. Id = creditMemoId",
                 "operationId": "CreditMemos_MarkAsExported",
                 "parameters": [
                     {
@@ -3318,7 +3305,6 @@
                     "Deposits"
                 ],
                 "summary": "Gets a paginated list of deposits",
-                "description": "Gets a paginated list of deposits",
                 "operationId": "Deposits_GetList",
                 "parameters": [
                     {
@@ -3587,7 +3573,6 @@
                     "Deposits"
                 ],
                 "summary": "Gets a paginated list of transactions",
-                "description": "Gets a paginated list of transactions",
                 "operationId": "Deposits_GetTransactionsList",
                 "parameters": [
                     {
@@ -3747,7 +3732,6 @@
                     "Deposits"
                 ],
                 "summary": "Marks deposits as exported",
-                "description": "Marks deposits as exported",
                 "operationId": "Deposits_MarkAsExported",
                 "parameters": [
                     {
@@ -3814,7 +3798,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for invoices",
-                "description": "Provides export feed for invoices",
                 "operationId": "Export_Invoices",
                 "parameters": [
                     {
@@ -4062,7 +4045,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for invoice items",
-                "description": "Provides export feed for invoice items",
                 "operationId": "Export_InvoiceItems",
                 "parameters": [
                     {
@@ -4210,7 +4192,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for payments",
-                "description": "Provides export feed for payments",
                 "operationId": "Export_Payments",
                 "parameters": [
                     {
@@ -4350,7 +4331,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for inventory bills",
-                "description": "Provides export feed for inventory bills",
                 "operationId": "Export_InventoryBills",
                 "parameters": [
                     {
@@ -4531,7 +4511,6 @@
                     "GlAccounts"
                 ],
                 "summary": "Retrieves General Ledger accounts that match the given criteria",
-                "description": "Retrieves General Ledger accounts that match the given criteria",
                 "operationId": "GlAccounts_GetList",
                 "parameters": [
                     {
@@ -4707,24 +4686,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "A collection of General Ledger accounts that match the given criteria.",
                         "content": {
@@ -4757,6 +4718,24 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -4773,7 +4752,6 @@
                     "GlAccounts"
                 ],
                 "summary": "Creates a new General Ledger account",
-                "description": "Creates a new General Ledger account",
                 "operationId": "GlAccounts_CreateAccount",
                 "parameters": [
                     {
@@ -4804,24 +4782,6 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "201": {
                         "description": "New General Ledger account has been created successfully",
                         "content": {
@@ -4843,6 +4803,24 @@
                                     "defaultAccountType": {},
                                     "createdOn": "string",
                                     "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
                                 }
                             }
                         }
@@ -4882,7 +4860,6 @@
                     "GlAccounts"
                 ],
                 "summary": "Retrieves single General Ledger account by account id",
-                "description": "Retrieves single General Ledger account by account id",
                 "operationId": "GlAccounts_GetAccount",
                 "parameters": [
                     {
@@ -4907,24 +4884,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "General Ledger account data",
                         "content": {
@@ -4946,6 +4905,24 @@
                                     "defaultAccountType": {},
                                     "createdOn": "string",
                                     "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
                                 }
                             }
                         }
@@ -5026,24 +5003,6 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "Updated General Ledger account data",
                         "content": {
@@ -5065,6 +5024,24 @@
                                     "defaultAccountType": {},
                                     "createdOn": "string",
                                     "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
                                 }
                             }
                         }
@@ -5122,7 +5099,6 @@
                     "GlAccounts"
                 ],
                 "summary": "Retrieves General Ledger account types that match the given criteria",
-                "description": "Retrieves General Ledger account types that match the given criteria",
                 "operationId": "GlAccounts_GetTypeList",
                 "parameters": [
                     {
@@ -5236,24 +5212,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "A collection of General Ledger account types that match the given criteria.",
                         "content": {
@@ -5279,6 +5237,24 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -5296,7 +5272,6 @@
                 "tags": [
                     "InventoryBills"
                 ],
-                "summary": "InventoryBills_GetList",
                 "operationId": "InventoryBills_GetList",
                 "parameters": [
                     {
@@ -5687,7 +5662,6 @@
                 "tags": [
                     "InventoryBills"
                 ],
-                "summary": "InventoryBills_GetListPaginated",
                 "operationId": "InventoryBills_GetListPaginated",
                 "parameters": [
                     {
@@ -6082,7 +6056,6 @@
                     "InventoryBills"
                 ],
                 "summary": "Returns a paginated list of filtered custom field types available for inventory bills",
-                "description": "Returns a paginated list of filtered custom field types available for inventory bills",
                 "operationId": "InventoryBills_GetCustomFieldTypes",
                 "parameters": [
                     {
@@ -6226,7 +6199,6 @@
                 "tags": [
                     "InventoryBills"
                 ],
-                "summary": "InventoryBills_UpdateCustomFields",
                 "operationId": "InventoryBills_UpdateCustomFields",
                 "parameters": [
                     {
@@ -6301,7 +6273,6 @@
                     "InventoryBills"
                 ],
                 "summary": "mark bill as exported. Id = inventoryBillId",
-                "description": "mark bill as exported. Id = inventoryBillId",
                 "operationId": "InventoryBills_MarkAsExported",
                 "parameters": [
                     {
@@ -6385,7 +6356,6 @@
                     "Invoices"
                 ],
                 "summary": "Retrieves a list of invoices.  By default, all invoices will be returned regardless of status.",
-                "description": "Retrieves a list of invoices.  By default, all invoices will be returned regardless of status.",
                 "operationId": "Invoices_GetList",
                 "parameters": [
                     {
@@ -6932,7 +6902,6 @@
                     "Invoices"
                 ],
                 "summary": "create adjustment invoice",
-                "description": "create adjustment invoice",
                 "operationId": "Invoices_CreateAdjustmentInvoice",
                 "parameters": [
                     {
@@ -7044,7 +7013,6 @@
                     "Invoices"
                 ],
                 "summary": "Updates custom fields for specified invoices",
-                "description": "Updates custom fields for specified invoices",
                 "operationId": "Invoices_UpdateCustomFields",
                 "parameters": [
                     {
@@ -7117,7 +7085,6 @@
                     "Invoices"
                 ],
                 "summary": "Returns a paginated list of filtered custom field types available for invoices",
-                "description": "Returns a paginated list of filtered custom field types available for invoices",
                 "operationId": "Invoices_GetCustomFieldTypes",
                 "parameters": [
                     {
@@ -7264,7 +7231,6 @@
                     "Invoices"
                 ],
                 "summary": "update invoice",
-                "description": "update invoice",
                 "operationId": "Invoices_UpdateInvoice",
                 "parameters": [
                     {
@@ -7383,7 +7349,6 @@
                     "Invoices"
                 ],
                 "summary": "update invoice items",
-                "description": "update invoice items",
                 "operationId": "Invoices_UpdateInvoiceItems",
                 "parameters": [
                     {
@@ -7475,7 +7440,6 @@
                     "Invoices"
                 ],
                 "summary": "delete invoice item",
-                "description": "delete invoice item",
                 "operationId": "Invoices_DeleteInvoiceItem",
                 "parameters": [
                     {
@@ -7546,7 +7510,6 @@
                     "Invoices"
                 ],
                 "summary": "mark invoice as exported. Id = invoiceId",
-                "description": "mark invoice as exported. Id = invoiceId",
                 "operationId": "Invoices_MarkAsExported",
                 "parameters": [
                     {
@@ -7634,7 +7597,6 @@
                 "tags": [
                     "Invoices"
                 ],
-                "summary": "Invoices_GetInvoiceTasks",
                 "operationId": "Invoices_GetInvoiceTasks",
                 "parameters": [
                     {
@@ -7749,7 +7711,6 @@
                     "Invoices"
                 ],
                 "summary": "Creates an invoice task from a template",
-                "description": "Creates an invoice task from a template",
                 "operationId": "Invoices_CreateInvoiceTask",
                 "parameters": [
                     {
@@ -7846,7 +7807,6 @@
                     "Invoices"
                 ],
                 "summary": "Updates an invoice task",
-                "description": "Updates an invoice task",
                 "operationId": "Invoices_UpdateInvoiceTask",
                 "parameters": [
                     {
@@ -7943,7 +7903,6 @@
                     "JournalEntries"
                 ],
                 "summary": "Gets a journal entry by ID",
-                "description": "Gets a journal entry by ID",
                 "operationId": "JournalEntries_Get",
                 "parameters": [
                     {
@@ -8037,7 +7996,6 @@
                     "JournalEntries"
                 ],
                 "summary": "Updates journal entry, supports only for external journal entry records.\nTo add a line, supply all the original lines along with the new one. To delete a line, supply only the lines you want to keep.",
-                "description": "Updates journal entry, supports only for external journal entry records.\nTo add a line, supply all the original lines along with the new one. To delete a line, supply only the lines you want to keep.",
                 "operationId": "JournalEntries_FullUpdate",
                 "parameters": [
                     {
@@ -8109,7 +8067,8 @@
                                         "sku": {
                                             "id": 0,
                                             "type": "Service"
-                                        }
+                                        },
+                                        "internalCostType": {}
                                     }
                                 ]
                             }
@@ -8153,7 +8112,6 @@
                     "JournalEntries"
                 ],
                 "summary": "Deletes journal entry, supports only for external journal entry records.",
-                "description": "Deletes journal entry, supports only for external journal entry records.",
                 "operationId": "JournalEntries_DeleteJournalEntry",
                 "parameters": [
                     {
@@ -8213,7 +8171,6 @@
                     "JournalEntries"
                 ],
                 "summary": "Updates a journal entry.",
-                "description": "Updates a journal entry.",
                 "operationId": "JournalEntries_Update",
                 "parameters": [
                     {
@@ -8322,7 +8279,6 @@
                     "JournalEntries"
                 ],
                 "summary": "Gets a list of journal entries.",
-                "description": "Gets a list of journal entries.",
                 "operationId": "JournalEntries_GetList",
                 "parameters": [
                     {
@@ -8703,7 +8659,6 @@
                     "JournalEntries"
                 ],
                 "summary": "Creates a new journal entry record, automatically marks it as external.",
-                "description": "Creates a new journal entry record, automatically marks it as external.",
                 "operationId": "JournalEntries_CreateJournalEntry",
                 "parameters": [
                     {
@@ -8766,7 +8721,8 @@
                                         "sku": {
                                             "id": 0,
                                             "type": "Service"
-                                        }
+                                        },
+                                        "internalCostType": {}
                                     }
                                 ]
                             }
@@ -8812,7 +8768,6 @@
                     "JournalEntries"
                 ],
                 "summary": "Gets a list of journal entry items aggregated by account and business unit.",
-                "description": "Gets a list of journal entry items aggregated by account and business unit.",
                 "operationId": "JournalEntries_GetSummary",
                 "parameters": [
                     {
@@ -8932,7 +8887,6 @@
                     "JournalEntries"
                 ],
                 "summary": "Gets a list of journal entry items aggregated by account, business unit, transaction and pricebook item.",
-                "description": "Gets a list of journal entry items aggregated by account, business unit, transaction and pricebook item.",
                 "operationId": "JournalEntries_GetDetails",
                 "parameters": [
                     {
@@ -9069,7 +9023,8 @@
                                                 "code": "string"
                                             },
                                             "transactionDate": "string",
-                                            "budgetCodeId": 0
+                                            "budgetCodeId": 0,
+                                            "internalCostType": {}
                                         }
                                     ]
                                 }
@@ -9111,7 +9066,6 @@
                     "JournalEntries"
                 ],
                 "summary": "Updates a journal entry sync state.",
-                "description": "Updates a journal entry sync state.",
                 "operationId": "JournalEntries_SyncUpdate",
                 "parameters": [
                     {
@@ -9222,7 +9176,6 @@
                     "Payments"
                 ],
                 "summary": "Gets a paginated list of payments",
-                "description": "Gets a paginated list of payments",
                 "operationId": "Payments_GetList",
                 "parameters": [
                     {
@@ -9568,7 +9521,6 @@
                     "Payments"
                 ],
                 "summary": "Returns a paginated list of filtered custom field types available for payments",
-                "description": "Returns a paginated list of filtered custom field types available for payments",
                 "operationId": "Payments_GetCustomFieldTypes",
                 "parameters": [
                     {
@@ -9713,7 +9665,6 @@
                     "Payments"
                 ],
                 "summary": "Update custom fields for specified payments",
-                "description": "Update custom fields for specified payments",
                 "operationId": "Payments_UpdateCustomFields",
                 "parameters": [
                     {
@@ -9788,7 +9739,6 @@
                     "Payments"
                 ],
                 "summary": "Updates specified payment in \"patch\" mode",
-                "description": "Updates specified payment in \"patch\" mode",
                 "operationId": "Payments_Update",
                 "parameters": [
                     {
@@ -9903,7 +9853,6 @@
                     "Payments"
                 ],
                 "summary": "Updates payment status",
-                "description": "Updates payment status",
                 "operationId": "Payments_UpdateStatus",
                 "parameters": [
                     {
@@ -9971,7 +9920,6 @@
                     "PaymentTerms"
                 ],
                 "summary": "Gets Payment Term",
-                "description": "Gets Payment Term",
                 "operationId": "PaymentTerms_GetPaymentTermModel",
                 "parameters": [
                     {
@@ -10075,7 +10023,6 @@
                     "PaymentTerms"
                 ],
                 "summary": "Gets a list of payment terms",
-                "description": "Gets a list of payment terms",
                 "operationId": "PaymentTerms_GetList",
                 "parameters": [
                     {
@@ -10254,7 +10201,6 @@
                     "PaymentTypes"
                 ],
                 "summary": "Gets a list of payment types",
-                "description": "Gets a list of payment types",
                 "operationId": "PaymentTypes_GetList",
                 "parameters": [
                     {
@@ -10393,7 +10339,6 @@
                     "PaymentTypes"
                 ],
                 "summary": "Gets payment type specified by ID",
-                "description": "Gets payment type specified by ID",
                 "operationId": "PaymentTypes_Get",
                 "parameters": [
                     {
@@ -10468,7 +10413,6 @@
                     "RemittanceVendors"
                 ],
                 "summary": "Returns a paginated list of Remittance Vendors with detailed item information, filtering capabilities, and associated metadata",
-                "description": "Returns a paginated list of Remittance Vendors with detailed item information, filtering capabilities, and associated metadata",
                 "operationId": "RemittanceVendors_GetList",
                 "parameters": [
                     {
@@ -10656,7 +10600,6 @@
                     "RemittanceVendors"
                 ],
                 "summary": "Returns a single Remittance Vendor by its unique identifier with complete details including items, expense items, and associated metadata",
-                "description": "Returns a single Remittance Vendor by its unique identifier with complete details including items, expense items, and associated metadata",
                 "operationId": "RemittanceVendors_GetById",
                 "parameters": [
                     {
@@ -11120,6 +11063,34 @@
                             "null"
                         ],
                         "description": "Other landed costs amount (duties, fees), when applicable"
+                    },
+                    "preTaxDiscountAmount": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Pre-tax discount amount applied to the bill"
+                    },
+                    "preTaxCharge": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Pre-tax charge amount applied to the bill"
+                    },
+                    "postTaxDiscountAmount": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Post-tax discount amount applied to the bill"
+                    },
+                    "postTaxCharge": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Post-tax charge amount applied to the bill"
                     },
                     "createdBy": {
                         "type": [
@@ -13495,9 +13466,11 @@
                             "oneOf": [
                                 {
                                     "$ref": "#/components/schemas/Accounting.V2.CreditMemos.CreditMemoAddSplitPublicRequest"
+                                },
+                                {
+                                    "type": "null"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         }
                     }
                 },
@@ -15954,7 +15927,9 @@
                     "ProcessingFees",
                     "GoodsReturnedNotCredited",
                     "UseTaxExpense",
-                    "UseTaxLiability"
+                    "UseTaxLiability",
+                    "CreditCardPayable",
+                    "UncategorizedExpense"
                 ],
                 "type": "string",
                 "description": "",
@@ -15993,7 +15968,9 @@
                     "ProcessingFees",
                     "GoodsReturnedNotCredited",
                     "UseTaxExpense",
-                    "UseTaxLiability"
+                    "UseTaxLiability",
+                    "CreditCardPayable",
+                    "UncategorizedExpense"
                 ]
             },
             "PaginatedResponse_Of_Accounting.V2.GlAccountTypeResponse": {
@@ -17538,8 +17515,8 @@
             "Accounting.V2.CreateInvoiceTaskResponse": {
                 "required": [
                     "executionId",
-                    "tasks",
                     "status",
+                    "tasks",
                     "errors"
                 ],
                 "type": "object",
@@ -17567,8 +17544,8 @@
             },
             "Accounting.V2.CreatedTaskResponse": {
                 "required": [
-                    "taskId",
-                    "key"
+                    "key",
+                    "taskId"
                 ],
                 "type": "object",
                 "properties": {
@@ -17884,7 +17861,8 @@
                     "ItemConsumption",
                     "External",
                     "CreditMemo",
-                    "CreditMemoApplication"
+                    "CreditMemoApplication",
+                    "ExpenseTransaction"
                 ],
                 "type": "string",
                 "description": "",
@@ -17910,7 +17888,8 @@
                     "ItemConsumption",
                     "External",
                     "CreditMemo",
-                    "CreditMemoApplication"
+                    "CreditMemoApplication",
+                    "ExpenseTransaction"
                 ]
             },
             "Accounting.V2.EmptyJeHandling": {
@@ -18281,6 +18260,16 @@
                             "null"
                         ],
                         "format": "int64"
+                    },
+                    "internalCostType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.JournalEntryCostType"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -18404,6 +18393,38 @@
                     "Unspecified"
                 ]
             },
+            "Accounting.V2.JournalEntryCostType": {
+                "enum": [
+                    "None",
+                    "Service",
+                    "Material",
+                    "Equipment",
+                    "Labor",
+                    "LaborBurden",
+                    "Tax",
+                    "Shipping",
+                    "RestockingFee",
+                    "OtherDirectCost",
+                    "LaborUnpaid",
+                    "OtherExpense"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "None",
+                    "Service",
+                    "Material",
+                    "Equipment",
+                    "Labor",
+                    "LaborBurden",
+                    "Tax",
+                    "Shipping",
+                    "RestockingFee",
+                    "OtherDirectCost",
+                    "LaborUnpaid",
+                    "OtherExpense"
+                ]
+            },
             "Accounting.V2.JournalEntryCreateRequest": {
                 "required": [
                     "status",
@@ -18443,8 +18464,10 @@
                             "null"
                         ],
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "lines": {
@@ -18613,6 +18636,16 @@
                                 "type": "null"
                             }
                         ]
+                    },
+                    "internalCostType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.JournalEntryCostType"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     }
                 },
                 "additionalProperties": false
@@ -18703,8 +18736,10 @@
                             "null"
                         ],
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "lines": {
@@ -18737,8 +18772,10 @@
                             "null"
                         ],
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "Custom fields to create or update.\\\n            An existing custom field cannot be deleted, but it can be set to null.\\\n            Existing fields not specified in this request will not be affected.\\\n            Maximum 5 custom fields per journal entry are supported."
                     }
@@ -18787,8 +18824,10 @@
                             "null"
                         ],
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "Custom fields to create or update.\\\n            An existing custom field cannot be deleted, but it can be set to null.\\\n            Existing fields not specified in this request will not be affected.\\\n            Maximum 5 custom fields per journal entry are supported."
                     }
