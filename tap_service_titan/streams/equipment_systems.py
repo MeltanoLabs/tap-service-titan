@@ -10,7 +10,7 @@ class _BaseEquipmentSystemsStream(ServiceTitanStream, api_prefix="/equipmentsyst
     pass
 
 
-class InstalledEquipmentStream(_BaseEquipmentSystemsStream):
+class InstalledEquipmentStream(_BaseEquipmentSystemsStream, active_any=True):
     """Define installed equipment stream."""
 
     name = "installed_equipment"

@@ -26,7 +26,7 @@ class _BaseFormsStream(ServiceTitanStream, api_prefix="/forms/v2"):
     pass
 
 
-class FormsStream(_BaseFormsStream):
+class FormsStream(_BaseFormsStream, active_any=True):
     """Define forms stream."""
 
     name = "forms"
@@ -36,7 +36,7 @@ class FormsStream(_BaseFormsStream):
     schema = ServiceTitanSchema(FORMS, key="Forms.V2.FormResponse")
 
 
-class SubmissionsStream(_BaseFormsStream):
+class SubmissionsStream(_BaseFormsStream, active_any=True):
     """Define submissions stream."""
 
     name = "submissions"
@@ -164,6 +164,9 @@ class SubmissionsStream(_BaseFormsStream):
             # isoformat includes timezone +00:00 etc which is not supported by the API,
             # this format is better
             params["submittedOnOrAfter"] = starting_date.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+        if self._active_any:
+            params["active"] = "Any"
 
         # We were getting Memory Issues with page size of 5000 so we're using a custom page size.
         params["pageSize"] = 500

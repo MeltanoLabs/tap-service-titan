@@ -44,7 +44,7 @@ class TechniciansStream(_BaseSettingsExportStream):
     schema = ServiceTitanSchema(SETTINGS, key="TenantSettings.V2.ExportTechnicianResponse")
 
 
-class TagTypesStream(_BaseSettingsStream):
+class TagTypesStream(_BaseSettingsStream, active_any=True):
     """Define tag types stream."""
 
     name = "tag_types"
@@ -54,7 +54,7 @@ class TagTypesStream(_BaseSettingsStream):
     schema = ServiceTitanSchema(SETTINGS, key="TenantSettings.V2.TagTypeResponse")
 
 
-class UserRolesStream(_BaseSettingsStream):
+class UserRolesStream(_BaseSettingsStream, active_any=True):
     """Define user roles stream."""
 
     name = "user_roles"

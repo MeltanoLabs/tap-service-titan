@@ -10,7 +10,7 @@ class _BaseJobBookingStream(ServiceTitanStream, api_prefix="/jbce/v2"):
     pass
 
 
-class CallReasonsStream(_BaseJobBookingStream):
+class CallReasonsStream(_BaseJobBookingStream, active_any=True):
     """Define call reasons stream."""
 
     name = "call_reasons"

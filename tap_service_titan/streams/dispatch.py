@@ -205,6 +205,16 @@ class TeamsStream(_BaseDispatchStream):
     replication_key: str = "modifiedOn"
     schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.TeamResponse")
 
+    @override
+    def get_url_params(
+        self,
+        context: Context | None,
+        next_page_token: int | None,
+    ) -> dict[str, Any]:
+        params = super().get_url_params(context, next_page_token)
+        params["includeInactive"] = "true"
+        return params
+
 
 class TechnicianShiftsStream(_BaseDispatchStream, active_any=True):
     """Define technician shifts stream.

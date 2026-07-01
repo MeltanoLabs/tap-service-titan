@@ -10,7 +10,7 @@ class _BaseTaskManagementStream(ServiceTitanStream, api_prefix="/task-management
     pass
 
 
-class TasksStream(_BaseTaskManagementStream):
+class TasksStream(_BaseTaskManagementStream, active_any=True):
     """Define tasks stream."""
 
     name = "tasks"
