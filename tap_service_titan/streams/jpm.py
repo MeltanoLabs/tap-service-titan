@@ -99,7 +99,7 @@ class JobCanceledLogsStream(_BaseJpmExportStream):
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.ExportJobCanceledLogResponse")
 
 
-class JobCancelReasonsStream(_BaseJpmStream):
+class JobCancelReasonsStream(_BaseJpmStream, active_any=True):
     """Define job cancel reasons stream."""
 
     name = "job_cancel_reasons"
@@ -109,7 +109,7 @@ class JobCancelReasonsStream(_BaseJpmStream):
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.JobCancelReasonResponse")
 
 
-class JobHoldReasonsStream(_BaseJpmStream):
+class JobHoldReasonsStream(_BaseJpmStream, active_any=True):
     """Define job hold reasons stream."""
 
     name = "job_hold_reasons"
@@ -139,7 +139,7 @@ class ProjectStatusesStream(_BaseJpmStream):
     schema = ServiceTitanSchema(JPM, key="Jpm.V2.ProjectStatusResponse")
 
 
-class ProjectSubStatusesStream(_BaseJpmStream):
+class ProjectSubStatusesStream(_BaseJpmStream, active_any=True):
     """Define project substatuses stream."""
 
     name = "project_sub_statuses"

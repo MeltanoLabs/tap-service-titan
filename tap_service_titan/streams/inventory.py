@@ -48,7 +48,7 @@ class PurchaseOrderMarkupsStream(_BaseInventoryStream):
     schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.Markups.PurchaseOrderMarkupResponse")
 
 
-class PurchaseOrderTypesStream(_BaseInventoryStream):
+class PurchaseOrderTypesStream(_BaseInventoryStream, active_any=True):
     """Define purchase order types stream."""
 
     name = "purchase_order_types"
@@ -78,7 +78,7 @@ class ReturnsStream(_BaseInventoryStream, active_any=True):
     schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.InventoryReturnResponse")
 
 
-class AdjustmentsStream(_BaseInventoryStream):
+class AdjustmentsStream(_BaseInventoryStream, active_any=True):
     """Define adjustments stream."""
 
     name = "adjustments"
@@ -122,7 +122,7 @@ class TransfersStream(_BaseInventoryStream):
     schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.InventoryTransferResponse")
 
 
-class TrucksStream(_BaseInventoryStream):
+class TrucksStream(_BaseInventoryStream, active_any=True):
     """Define trucks stream."""
 
     name = "trucks"
@@ -132,7 +132,7 @@ class TrucksStream(_BaseInventoryStream):
     schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.TruckResponse")
 
 
-class VendorsStream(_BaseInventoryStream):
+class VendorsStream(_BaseInventoryStream, active_any=True):
     """Define vendors stream."""
 
     name = "vendors"
@@ -142,7 +142,7 @@ class VendorsStream(_BaseInventoryStream):
     schema = ServiceTitanSchema(INVENTORY, key="Inventory.V2.VendorResponse")
 
 
-class WarehousesStream(_BaseInventoryStream):
+class WarehousesStream(_BaseInventoryStream, active_any=True):
     """Define warehouses stream."""
 
     name = "warehouses"

@@ -97,7 +97,7 @@ class PaymentTermsStream(_BaseAccountingStream):
     schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.PaymentTermAPIModel")
 
 
-class PaymentTypesStream(_BaseAccountingStream):
+class PaymentTypesStream(_BaseAccountingStream, active_any=True):
     """Define payment types stream."""
 
     name = "payment_types"
@@ -107,7 +107,7 @@ class PaymentTypesStream(_BaseAccountingStream):
     schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.PaymentTypeResponse")
 
 
-class TaxZonesStream(_BaseAccountingStream):
+class TaxZonesStream(_BaseAccountingStream, active_any=True):
     """Define tax zones stream."""
 
     name = "tax_zones"
@@ -166,7 +166,7 @@ class InventoryBillsCustomFieldsStream(_BaseAccountingStream):
     schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.CustomFieldTypeResponse")
 
 
-class GLAccountsStream(_BaseAccountingStream):
+class GLAccountsStream(_BaseAccountingStream, active_any=True):
     """Define GL accounts stream."""
 
     name = "gl_accounts"
@@ -176,7 +176,7 @@ class GLAccountsStream(_BaseAccountingStream):
     schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.GlAccountExtendedResponse")
 
 
-class GLAccountTypesStream(_BaseAccountingStream):
+class GLAccountTypesStream(_BaseAccountingStream, active_any=True):
     """Define GL account types stream."""
 
     name = "gl_account_types"
@@ -186,7 +186,7 @@ class GLAccountTypesStream(_BaseAccountingStream):
     schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.GlAccountTypeResponse")
 
 
-class CreditMemosStream(_BaseAccountingStream):
+class CreditMemosStream(_BaseAccountingStream, active_any=True):
     """Define credit memos stream."""
 
     name = "credit_memos"
