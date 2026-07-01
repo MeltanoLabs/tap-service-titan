@@ -219,7 +219,7 @@ class TechnicianShiftsStream(_BaseDispatchStream, active_any=True):
     schema = ServiceTitanSchema(DISPATCH, key="Dispatch.V2.TechnicianShiftResponse")
 
 
-class ZonesStream(_BaseDispatchStream):
+class ZonesStream(_BaseDispatchStream, active_any=True):
     """Define zones stream."""
 
     name = "zones"
