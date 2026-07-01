@@ -22,7 +22,6 @@
                     "ActivitiesControllers"
                 ],
                 "summary": "Gets a list of activities",
-                "description": "Gets a list of activities",
                 "operationId": "ActivitiesControllers_GetList",
                 "parameters": [
                     {
@@ -219,7 +218,6 @@
                     "ActivitiesControllers"
                 ],
                 "summary": "Creates new activity",
-                "description": "Creates new activity",
                 "operationId": "ActivitiesControllers_Create",
                 "parameters": [
                     {
@@ -330,7 +328,6 @@
                     "ActivitiesControllers"
                 ],
                 "summary": "Gets activity specified by ID",
-                "description": "Gets activity specified by ID",
                 "operationId": "ActivitiesControllers_Get",
                 "parameters": [
                     {
@@ -446,7 +443,6 @@
                     "ActivitiesControllers"
                 ],
                 "summary": "Updates the specified activity",
-                "description": "Updates the specified activity",
                 "operationId": "ActivitiesControllers_Update",
                 "parameters": [
                     {
@@ -564,7 +560,6 @@
                     "ActivitiesControllers"
                 ],
                 "summary": "Deletes the specified activity",
-                "description": "Deletes the specified activity",
                 "operationId": "ActivitiesControllers_Delete",
                 "parameters": [
                     {
@@ -627,7 +622,6 @@
                     "ActivityCategories"
                 ],
                 "summary": "Gets a list of activity categories",
-                "description": "Gets a list of activity categories",
                 "operationId": "ActivityCategories_GetList",
                 "parameters": [
                     {
@@ -806,7 +800,6 @@
                     "ActivityCategories"
                 ],
                 "summary": "Gets activity category specified by ID",
-                "description": "Gets activity category specified by ID",
                 "operationId": "ActivityCategories_Get",
                 "parameters": [
                     {
@@ -904,7 +897,6 @@
                     "ActivityTypes"
                 ],
                 "summary": "Gets a list of activity types",
-                "description": "Gets a list of activity types",
                 "operationId": "ActivityTypes_GetList",
                 "parameters": [
                     {
@@ -1107,7 +1099,6 @@
                     "ActivityTypes"
                 ],
                 "summary": "Gets activity types specified by ID",
-                "description": "Gets activity types specified by ID",
                 "operationId": "ActivityTypes_Get",
                 "parameters": [
                     {
@@ -1171,7 +1162,8 @@
                                     "isInUse": true,
                                     "active": true,
                                     "createdOn": "string",
-                                    "modifiedOn": "string"
+                                    "modifiedOn": "string",
+                                    "displayedTechnicianStatus": {}
                                 }
                             }
                         }
@@ -1229,7 +1221,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for activity categories.",
-                "description": "Provides export feed for activity categories.",
                 "operationId": "Export_ActivityCategories",
                 "parameters": [
                     {
@@ -1321,7 +1312,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for activity types.",
-                "description": "Provides export feed for activity types.",
                 "operationId": "Export_ActivityTypes",
                 "parameters": [
                     {
@@ -1395,7 +1385,8 @@
                                             "isInUse": true,
                                             "active": true,
                                             "createdOn": "string",
-                                            "modifiedOn": "string"
+                                            "modifiedOn": "string",
+                                            "displayedTechnicianStatus": {}
                                         }
                                     ]
                                 }
@@ -1437,7 +1428,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for activity.",
-                "description": "Provides export feed for activity.",
                 "operationId": "Export_Activities",
                 "parameters": [
                     {
@@ -2306,8 +2296,8 @@
             },
             "Timesheets.V2.ActivityCategories.ActivityCategoriesResponse": {
                 "required": [
-                    "id",
                     "name",
+                    "id",
                     "type",
                     "allowEdit",
                     "isDefault",
@@ -2383,8 +2373,8 @@
             },
             "Timesheets.V2.ActivityCategories.ActivityCategoryResponse": {
                 "required": [
-                    "id",
                     "name",
+                    "id",
                     "type",
                     "allowEdit",
                     "isDefault",
@@ -2480,14 +2470,14 @@
             },
             "Timesheets.V2.ActivityTypes.ActivityTypesResponse": {
                 "required": [
-                    "id",
                     "code",
-                    "categoryId",
                     "icon",
-                    "isUsersHomeBusinessUnit",
-                    "isTechnicianProfileLaborType",
                     "visibleToRoles",
                     "defaultTagTypeIds",
+                    "id",
+                    "categoryId",
+                    "isUsersHomeBusinessUnit",
+                    "isTechnicianProfileLaborType",
                     "tagAssociation",
                     "jobAssociation",
                     "projectAssociation",
@@ -2692,14 +2682,14 @@
             },
             "Timesheets.V2.ActivityTypes.ActivityTypeResponse": {
                 "required": [
-                    "id",
                     "code",
-                    "categoryId",
                     "icon",
-                    "isUsersHomeBusinessUnit",
-                    "isTechnicianProfileLaborType",
                     "visibleToRoles",
                     "defaultTagTypeIds",
+                    "id",
+                    "categoryId",
+                    "isUsersHomeBusinessUnit",
+                    "isTechnicianProfileLaborType",
                     "tagAssociation",
                     "jobAssociation",
                     "projectAssociation",
@@ -2715,7 +2705,8 @@
                     "isInUse",
                     "active",
                     "createdOn",
-                    "modifiedOn"
+                    "modifiedOn",
+                    "displayedTechnicianStatus"
                 ],
                 "type": "object",
                 "properties": {
@@ -2884,9 +2875,33 @@
                         "type": "string",
                         "description": "The last date when the activity category was last modified (in UTC)",
                         "format": "date-time"
+                    },
+                    "displayedTechnicianStatus": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.Contracts.Services.ActivityTypes.DisplayedTechnicianStatusDto"
+                            }
+                        ],
+                        "description": "The technician status displayed on the Dispatch board when a technician is clocked into this activity.\nPossible values: Idle (0), Working (1), Dispatched (2), Meal (3)."
                     }
                 },
                 "additionalProperties": false
+            },
+            "Timesheets.Contracts.Services.ActivityTypes.DisplayedTechnicianStatusDto": {
+                "enum": [
+                    "Idle",
+                    "Working",
+                    "Dispatched",
+                    "Meal"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Idle",
+                    "Working",
+                    "Dispatched",
+                    "Meal"
+                ]
             },
             "ExportResponse_Of_Timesheets.V2.ActivityCategories.ActivityCategoryExportResponse": {
                 "required": [
@@ -2917,8 +2932,8 @@
             },
             "Timesheets.V2.ActivityCategories.ActivityCategoryExportResponse": {
                 "required": [
-                    "id",
                     "name",
+                    "id",
                     "type",
                     "allowEdit",
                     "isDefault",
@@ -2999,14 +3014,14 @@
             },
             "Timesheets.V2.ActivityTypes.ActivityTypeExportResponse": {
                 "required": [
-                    "id",
                     "code",
-                    "categoryId",
                     "icon",
-                    "isUsersHomeBusinessUnit",
-                    "isTechnicianProfileLaborType",
                     "visibleToRoles",
                     "defaultTagTypeIds",
+                    "id",
+                    "categoryId",
+                    "isUsersHomeBusinessUnit",
+                    "isTechnicianProfileLaborType",
                     "tagAssociation",
                     "jobAssociation",
                     "projectAssociation",
@@ -3022,7 +3037,8 @@
                     "isInUse",
                     "active",
                     "createdOn",
-                    "modifiedOn"
+                    "modifiedOn",
+                    "displayedTechnicianStatus"
                 ],
                 "type": "object",
                 "properties": {
@@ -3191,6 +3207,14 @@
                         "type": "string",
                         "description": "The last date when the activity category was last modified (in UTC)",
                         "format": "date-time"
+                    },
+                    "displayedTechnicianStatus": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Timesheets.Contracts.Services.ActivityTypes.DisplayedTechnicianStatusDto"
+                            }
+                        ],
+                        "description": "The technician status displayed on the Dispatch board when a technician is clocked into this activity.\nPossible values: Idle (0), Working (1), Dispatched (2), Meal (3)."
                     }
                 },
                 "additionalProperties": false

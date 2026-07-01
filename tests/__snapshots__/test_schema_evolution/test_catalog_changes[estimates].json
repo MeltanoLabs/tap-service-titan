@@ -458,6 +458,21 @@
                 "null"
               ]
             },
+            "membershipBillingFrequency": {
+              "description": "Membership billing frequency. Mirrors ServiceTitan.Model.Memberships.MembershipRecurrenceType.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "membershipDuration": {
+              "description": "Membership duration in months. Null for non-membership items or ongoing (never expires) memberships.",
+              "format": "int32",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
             "membershipTypeId": {
               "format": "int64",
               "type": [

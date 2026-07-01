@@ -22,7 +22,6 @@
                     "AttributedLeads"
                 ],
                 "summary": "Returns attributed leads data.",
-                "description": "Returns attributed leads data.",
                 "operationId": "AttributedLeads_Get",
                 "parameters": [
                     {
@@ -197,7 +196,6 @@
                     "CapacityAwarenessWarning"
                 ],
                 "summary": "Returns all capacity awareness warnings.",
-                "description": "Returns all capacity awareness warnings.",
                 "operationId": "CapacityAwarenessWarning_Get",
                 "parameters": [
                     {
@@ -273,7 +271,6 @@
                     "ExternalCallAttributions"
                 ],
                 "summary": "Attributes an external call (possibly coming from Call Tracking Software) to a web session.",
-                "description": "Attributes an external call (possibly coming from Call Tracking Software) to a web session.",
                 "operationId": "ExternalCallAttributions_Create",
                 "parameters": [
                     {
@@ -359,7 +356,6 @@
                     "Performance"
                 ],
                 "summary": "Returns performance data.",
-                "description": "Returns performance data.",
                 "operationId": "Performance_Get",
                 "parameters": [
                     {
@@ -528,7 +524,6 @@
                     "ScheduledJobAttributions"
                 ],
                 "summary": "Attributes a job to a web session.",
-                "description": "Attributes a job to a web session.",
                 "operationId": "ScheduledJobAttributions_Create",
                 "parameters": [
                     {
@@ -609,7 +604,6 @@
                     "WebBookingAttributions"
                 ],
                 "summary": "Attributes a web booking to a web session.",
-                "description": "Attributes a web booking to a web session.",
                 "operationId": "WebBookingAttributions_Create",
                 "parameters": [
                     {
@@ -690,7 +684,6 @@
                     "WebLeadFormAttributions"
                 ],
                 "summary": "Attributes a web lead form to a web session.",
-                "description": "Attributes a web lead form to a web session.",
                 "operationId": "WebLeadFormAttributions_Create",
                 "parameters": [
                     {

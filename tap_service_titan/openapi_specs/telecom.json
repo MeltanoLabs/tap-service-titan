@@ -22,7 +22,6 @@
                     "Calls"
                 ],
                 "summary": "Provides a feed for telecom calls",
-                "description": "Provides a feed for telecom calls",
                 "operationId": "Calls_Calls",
                 "parameters": [
                     {
@@ -341,7 +340,6 @@
                     "Calls"
                 ],
                 "summary": "Get call's details.",
-                "description": "Get call's details.",
                 "operationId": "Calls_GetDetails",
                 "parameters": [
                     {
@@ -557,7 +555,6 @@
                     "Calls"
                 ],
                 "summary": "Update existing call.",
-                "description": "Update existing call.",
                 "operationId": "Calls_Update",
                 "parameters": [
                     {
@@ -794,7 +791,6 @@
                     "Calls (Deprecated)"
                 ],
                 "summary": "Get filtered calls.",
-                "description": "Get filtered calls.",
                 "operationId": "Calls_GetCalls",
                 "parameters": [
                     {
@@ -1174,7 +1170,6 @@
                     "Calls"
                 ],
                 "summary": "Get recording of the call.",
-                "description": "Get recording of the call.",
                 "operationId": "Calls_GetRecording",
                 "parameters": [
                     {
@@ -1232,7 +1227,6 @@
                     "Calls"
                 ],
                 "summary": "Get voicemail of the call.",
-                "description": "Get voicemail of the call.",
                 "operationId": "Calls_GetVoiceMail",
                 "parameters": [
                     {
@@ -1290,7 +1284,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for telecom calls",
-                "description": "Provides export feed for telecom calls",
                 "operationId": "Export_Calls",
                 "parameters": [
                     {

@@ -188,12 +188,12 @@
       "id",
       "name",
       "companyName",
-      "createdOn",
-      "modifiedOn",
       "schedulerStatus",
       "dataApiKey",
-      "isDefault",
       "mode",
+      "createdOn",
+      "modifiedOn",
+      "isDefault",
       "quickLaunchLink"
     ],
     "type": "object"
