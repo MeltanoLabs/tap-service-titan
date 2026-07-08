@@ -114,6 +114,15 @@
     {
       "breadcrumb": [
         "properties",
+        "preventJobDetachment"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "createdOn"
       ],
       "metadata": {
@@ -244,6 +253,13 @@
           "null"
         ]
       },
+      "preventJobDetachment": {
+        "description": "When enabled, once a Job is set on a PO of this type it cannot be cleared",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
       "skipWeekends": {
         "description": "Skip weekends",
         "type": [
@@ -265,6 +281,7 @@
       "excludeTaxFromJobCosting",
       "landedCostMethod",
       "includeTaxInFullyLandedCost",
+      "preventJobDetachment",
       "createdOn",
       "modifiedOn"
     ],

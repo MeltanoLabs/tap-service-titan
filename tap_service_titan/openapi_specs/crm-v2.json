@@ -22,7 +22,6 @@
                     "BookingProviderTags"
                 ],
                 "summary": "Create a booking provider tag",
-                "description": "Create a booking provider tag",
                 "operationId": "BookingProviderTags_Create",
                 "parameters": [
                     {
@@ -119,7 +118,6 @@
                     "BookingProviderTags"
                 ],
                 "summary": "Gets a list of booking provider tags",
-                "description": "Gets a list of booking provider tags",
                 "operationId": "BookingProviderTags_GetList",
                 "parameters": [
                     {
@@ -282,7 +280,6 @@
                     "BookingProviderTags"
                 ],
                 "summary": "Gets a single booking provider tag by ID",
-                "description": "Gets a single booking provider tag by ID",
                 "operationId": "BookingProviderTags_Get",
                 "parameters": [
                     {
@@ -376,7 +373,6 @@
                     "BookingProviderTags"
                 ],
                 "summary": "Update a booking provider tag",
-                "description": "Update a booking provider tag",
                 "operationId": "BookingProviderTags_Update",
                 "parameters": [
                     {
@@ -466,7 +462,6 @@
                     "Bookings"
                 ],
                 "summary": "Gets a booking by ID",
-                "description": "Gets a booking by ID",
                 "operationId": "Bookings_Get",
                 "parameters": [
                     {
@@ -585,7 +580,6 @@
                     "Bookings"
                 ],
                 "summary": "Gets a list of bookings",
-                "description": "Gets a list of bookings",
                 "operationId": "Bookings_GetList",
                 "parameters": [
                     {
@@ -771,7 +765,6 @@
                     "Bookings"
                 ],
                 "summary": "Get a list of contacts for a booking",
-                "description": "Get a list of contacts for a booking",
                 "operationId": "Bookings_GetContactList",
                 "parameters": [
                     {
@@ -899,7 +892,6 @@
                     "Bookings"
                 ],
                 "summary": "Gets a booking by ID for a booking provider",
-                "description": "Gets a booking by ID for a booking provider",
                 "operationId": "Bookings_GetForProvider",
                 "parameters": [
                     {
@@ -1025,7 +1017,6 @@
                     "Bookings"
                 ],
                 "summary": "Updates a booking for a booking provider",
-                "description": "Updates a booking for a booking provider",
                 "operationId": "Bookings_Update",
                 "parameters": [
                     {
@@ -1204,7 +1195,6 @@
                     "Bookings"
                 ],
                 "summary": "Gets a list of bookings for a booking provider",
-                "description": "Gets a list of bookings for a booking provider",
                 "operationId": "Bookings_GetList2",
                 "parameters": [
                     {
@@ -1397,7 +1387,6 @@
                     "Bookings"
                 ],
                 "summary": "Creates a booking for a booking provider",
-                "description": "Creates a booking for a booking provider",
                 "operationId": "Bookings_Create",
                 "parameters": [
                     {
@@ -1539,7 +1528,6 @@
                     "Bookings"
                 ],
                 "summary": "Creates a contact on the specified booking for a booking provider",
-                "description": "Creates a contact on the specified booking for a booking provider",
                 "operationId": "Bookings_CreateContact",
                 "parameters": [
                     {
@@ -1654,7 +1642,6 @@
                     "Bookings"
                 ],
                 "summary": "Get a list of contacts for a booking for a booking provider",
-                "description": "Get a list of contacts for a booking for a booking provider",
                 "operationId": "Bookings_GetContactList2",
                 "parameters": [
                     {
@@ -1791,7 +1778,6 @@
                     "Bookings"
                 ],
                 "summary": "Updates a single booking contact for a booking provider",
-                "description": "Updates a single booking contact for a booking provider",
                 "operationId": "Bookings_UpdateBookingContact",
                 "parameters": [
                     {
@@ -1931,7 +1917,6 @@
                     "Bookings"
                 ],
                 "summary": "Removes a contact from a booking for a booking provider",
-                "description": "Removes a contact from a booking for a booking provider",
                 "operationId": "Bookings_DeleteContact",
                 "parameters": [
                     {
@@ -2028,7 +2013,6 @@
                 "tags": [
                     "Bookings"
                 ],
-                "summary": "Bookings_DismissBooking",
                 "operationId": "Bookings_DismissBooking",
                 "parameters": [
                     {
@@ -2111,7 +2095,6 @@
                     "BulkTags"
                 ],
                 "summary": "Add multiple tags to more than 1 customer",
-                "description": "Add multiple tags to more than 1 customer",
                 "operationId": "BulkTags_AddTags",
                 "parameters": [
                     {
@@ -2197,7 +2180,6 @@
                     "BulkTags"
                 ],
                 "summary": "Remove multiple tags to more than 1 customer",
-                "description": "Remove multiple tags to more than 1 customer",
                 "operationId": "BulkTags_RemoveTags",
                 "parameters": [
                     {
@@ -2285,7 +2267,6 @@
                     "ContactMethods"
                 ],
                 "summary": "Gets a list of contact methods for a specified contact ID",
-                "description": "Gets a list of contact methods for a specified contact ID",
                 "operationId": "ContactMethods_GetContactMethods",
                 "parameters": [
                     {
@@ -2433,8 +2414,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2451,8 +2432,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2502,7 +2483,6 @@
                     "ContactMethods"
                 ],
                 "summary": "Creates a new contact method",
-                "description": "Creates a new contact method",
                 "operationId": "ContactMethods_CreateContactMethod",
                 "parameters": [
                     {
@@ -2563,8 +2543,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2581,8 +2561,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2634,7 +2614,6 @@
                     "ContactMethods"
                 ],
                 "summary": "Gets a contact method specified by ID",
-                "description": "Gets a contact method specified by ID",
                 "operationId": "ContactMethods_GetContactMethod",
                 "parameters": [
                     {
@@ -2689,8 +2668,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2707,8 +2686,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2758,7 +2737,6 @@
                     "ContactMethods"
                 ],
                 "summary": "Replaces a contact method",
-                "description": "Replaces a contact method",
                 "operationId": "ContactMethods_UpsertContactMethod",
                 "parameters": [
                     {
@@ -2828,8 +2806,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2846,8 +2824,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2897,7 +2875,6 @@
                     "ContactMethods"
                 ],
                 "summary": "Updates a contact method",
-                "description": "Updates a contact method",
                 "operationId": "ContactMethods_UpdateContactMethod",
                 "parameters": [
                     {
@@ -2965,8 +2942,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2983,8 +2960,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3034,7 +3011,6 @@
                     "ContactMethods"
                 ],
                 "summary": "Deletes a contact method",
-                "description": "Deletes a contact method",
                 "operationId": "ContactMethods_DeleteContactMethod",
                 "parameters": [
                     {
@@ -3070,8 +3046,8 @@
                     "200": {
                         "description": "The request has succeeded"
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3088,8 +3064,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3141,7 +3117,6 @@
                     "ContactPreferences"
                 ],
                 "summary": "Gets a list of contact preferences for a specified contact method ID",
-                "description": "Gets a list of contact preferences for a specified contact method ID",
                 "operationId": "ContactPreferences_GetContactMethodPreferences",
                 "parameters": [
                     {
@@ -3194,8 +3169,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3212,8 +3187,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3265,7 +3240,6 @@
                     "ContactPreferences"
                 ],
                 "summary": "Gets a contact preference specified by preference name",
-                "description": "Gets a contact preference specified by preference name",
                 "operationId": "ContactPreferences_GetContactMethodPreference",
                 "parameters": [
                     {
@@ -3321,8 +3295,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3339,8 +3313,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3390,7 +3364,6 @@
                     "ContactPreferences"
                 ],
                 "summary": "Updates a contact preference",
-                "description": "Updates a contact preference",
                 "operationId": "ContactPreferences_UpdateContactMethodPreference",
                 "parameters": [
                     {
@@ -3458,8 +3431,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3476,8 +3449,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3529,7 +3502,6 @@
                     "Contacts"
                 ],
                 "summary": "Gets a contact specified by ID",
-                "description": "Gets a contact specified by ID",
                 "operationId": "Contacts_Get",
                 "parameters": [
                     {
@@ -3574,8 +3546,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3592,8 +3564,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3643,7 +3615,6 @@
                     "Contacts"
                 ],
                 "summary": "Replaces a contact",
-                "description": "Replaces a contact",
                 "operationId": "Contacts_Replace",
                 "parameters": [
                     {
@@ -3703,8 +3674,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3721,8 +3692,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3754,7 +3725,6 @@
                     "Contacts"
                 ],
                 "summary": "Deletes a contact",
-                "description": "Deletes a contact",
                 "operationId": "Contacts_DeleteContact",
                 "parameters": [
                     {
@@ -3781,8 +3751,8 @@
                     "200": {
                         "description": "The request has succeeded"
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3799,8 +3769,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3868,7 +3838,6 @@
                     "Contacts"
                 ],
                 "summary": "Updates a contact",
-                "description": "Updates a contact",
                 "operationId": "Contacts_Update",
                 "parameters": [
                     {
@@ -3928,8 +3897,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3946,8 +3915,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3999,7 +3968,6 @@
                     "Contacts"
                 ],
                 "summary": "Gets a list of contacts for a specified relationship ID",
-                "description": "Gets a list of contacts for a specified relationship ID",
                 "operationId": "Contacts_GetByRelationshipId",
                 "parameters": [
                     {
@@ -4154,8 +4122,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4172,8 +4140,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4225,7 +4193,6 @@
                     "Contacts"
                 ],
                 "summary": "Gets a list of contacts",
-                "description": "Gets a list of contacts",
                 "operationId": "Contacts_GetList",
                 "parameters": [
                     {
@@ -4371,8 +4338,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4389,8 +4356,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4422,7 +4389,6 @@
                     "Contacts"
                 ],
                 "summary": "Creates a new contact",
-                "description": "Creates a new contact",
                 "operationId": "Contacts_Create",
                 "parameters": [
                     {
@@ -4472,8 +4438,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4490,8 +4456,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4543,7 +4509,6 @@
                     "Contacts"
                 ],
                 "summary": "Removes a relationship from a contact",
-                "description": "Removes a relationship from a contact",
                 "operationId": "Contacts_DeleteContactRelationship",
                 "parameters": [
                     {
@@ -4590,8 +4555,8 @@
                     "200": {
                         "description": "The request has succeeded"
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "Invalid args",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4608,8 +4573,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "Invalid args",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4677,7 +4642,6 @@
                     "Contacts"
                 ],
                 "summary": "Create a contact relationship",
-                "description": "Create a contact relationship",
                 "operationId": "Contacts_CreateContactRelationship",
                 "parameters": [
                     {
@@ -4724,8 +4688,8 @@
                     "200": {
                         "description": "The request has succeeded"
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "Invalid args",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4742,8 +4706,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "Invalid args",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4813,7 +4777,6 @@
                     "Contacts"
                 ],
                 "summary": "Gets a list of contact relationships",
-                "description": "Gets a list of contact relationships",
                 "operationId": "Contacts_GetContactRelationshipList",
                 "parameters": [
                     {
@@ -4940,8 +4903,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "Invalid filter args",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4958,8 +4921,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "Invalid filter args",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -5029,7 +4992,6 @@
                     "Contacts"
                 ],
                 "summary": "Gets a list of preferences metadata",
-                "description": "Gets a list of preferences metadata",
                 "operationId": "Contacts_GetPreferenceMetadataList",
                 "parameters": [
                     {
@@ -5065,8 +5027,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -5083,8 +5045,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -5118,7 +5080,6 @@
                     "Contacts"
                 ],
                 "summary": "Search for contact methods",
-                "description": "Search for contact methods",
                 "operationId": "Contacts_SearchContactMethods",
                 "parameters": [
                     {
@@ -5265,8 +5226,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Provided authentication is insufficient to grant access",
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -5283,8 +5244,8 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
+                    "403": {
+                        "description": "Provided authentication is insufficient to grant access",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -5318,7 +5279,6 @@
                     "Customers"
                 ],
                 "summary": "Gets a Customer specified by ID",
-                "description": "Gets a Customer specified by ID",
                 "operationId": "Customers_Get",
                 "parameters": [
                     {
@@ -5447,7 +5407,6 @@
                     "Customers"
                 ],
                 "summary": "Update a customer",
-                "description": "Update a customer",
                 "operationId": "Customers_Update",
                 "parameters": [
                     {
@@ -5628,7 +5587,6 @@
                     "Customers"
                 ],
                 "summary": "Gets a list of Customers",
-                "description": "Gets a list of Customers",
                 "operationId": "Customers_GetList",
                 "parameters": [
                     {
@@ -5942,7 +5900,6 @@
                     "Customers"
                 ],
                 "summary": "Creates a New Customer",
-                "description": "Creates a New Customer",
                 "operationId": "Customers_Create",
                 "parameters": [
                     {
@@ -6200,7 +6157,6 @@
                     "Customers"
                 ],
                 "summary": "Gets a list of notes for a customer",
-                "description": "Gets a list of notes for a customer",
                 "operationId": "Customers_GetNotes",
                 "parameters": [
                     {
@@ -6363,7 +6319,6 @@
                     "Customers"
                 ],
                 "summary": "Creates a New Note",
-                "description": "Creates a New Note",
                 "operationId": "Customers_CreateNote",
                 "parameters": [
                     {
@@ -6472,7 +6427,6 @@
                     "Customers"
                 ],
                 "summary": "Deletes a note on the specified customer",
-                "description": "Deletes a note on the specified customer",
                 "operationId": "Customers_DeleteNote",
                 "parameters": [
                     {
@@ -6561,7 +6515,6 @@
                     "Customers"
                 ],
                 "summary": "Gets a list of contacts for the specified customer",
-                "description": "Gets a list of contacts for the specified customer",
                 "operationId": "Customers_GetContactList",
                 "parameters": [
                     {
@@ -6717,7 +6670,6 @@
                     "Customers"
                 ],
                 "summary": "Creates a contact on the customer",
-                "description": "Creates a contact on the customer",
                 "operationId": "Customers_CreateContact",
                 "parameters": [
                     {
@@ -6855,7 +6807,6 @@
                     "Customers"
                 ],
                 "summary": "Removes a contact from a customer",
-                "description": "Removes a contact from a customer",
                 "operationId": "Customers_DeleteContact",
                 "parameters": [
                     {
@@ -6960,7 +6911,6 @@
                     "Customers"
                 ],
                 "summary": "Updates a contact on the customer",
-                "description": "Updates a contact on the customer",
                 "operationId": "Customers_UpdateContact",
                 "parameters": [
                     {
@@ -7114,7 +7064,6 @@
                     "Customers"
                 ],
                 "summary": "Gets a list of contacts for a specific modified-on date range or by their Customer IDs. Either CustomerIds, modifiedOn or modifiedOnOrAfter parameter must be specified",
-                "description": "Gets a list of contacts for a specific modified-on date range or by their Customer IDs. Either CustomerIds, modifiedOn or modifiedOnOrAfter parameter must be specified",
                 "operationId": "Customers_GetModifiedContactsList",
                 "parameters": [
                     {
@@ -7290,7 +7239,6 @@
                     "Customers"
                 ],
                 "summary": "Adds a Tag to a Customer",
-                "description": "Adds a Tag to a Customer",
                 "operationId": "Customers_CreateTag",
                 "parameters": [
                     {
@@ -7408,7 +7356,6 @@
                     "Customers"
                 ],
                 "summary": "Removes a Tag from a Customer",
-                "description": "Removes a Tag from a Customer",
                 "operationId": "Customers_DeleteTag",
                 "parameters": [
                     {
@@ -7497,7 +7444,6 @@
                     "Customers"
                 ],
                 "summary": "Gets a list of custom field types available for customers",
-                "description": "Gets a list of custom field types available for customers",
                 "operationId": "Customers_GetCustomFieldTypes",
                 "parameters": [
                     {
@@ -7662,7 +7608,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for bookings",
-                "description": "Provides export feed for bookings",
                 "operationId": "ExportBookings_Get",
                 "parameters": [
                     {
@@ -7777,7 +7722,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for customer contacts",
-                "description": "Provides export feed for customer contacts",
                 "operationId": "ExportContacts_CustomersContacts",
                 "parameters": [
                     {
@@ -7880,7 +7824,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for locations contacts",
-                "description": "Provides export feed for locations contacts",
                 "operationId": "ExportContacts_LocationsContacts",
                 "parameters": [
                     {
@@ -7983,7 +7926,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for customers",
-                "description": "Provides export feed for customers",
                 "operationId": "ExportCustomers_GetCustomers",
                 "parameters": [
                     {
@@ -8109,7 +8051,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for leads",
-                "description": "Provides export feed for leads",
                 "operationId": "ExportLeads_Leads",
                 "parameters": [
                     {
@@ -8226,7 +8167,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for appointments",
-                "description": "Provides export feed for appointments",
                 "operationId": "ExportLocations_Locations",
                 "parameters": [
                     {
@@ -8347,7 +8287,6 @@
                     "Leads"
                 ],
                 "summary": "Gets a lead specified by ID",
-                "description": "Gets a lead specified by ID",
                 "operationId": "Leads_Get",
                 "parameters": [
                     {
@@ -8466,7 +8405,6 @@
                     "Leads"
                 ],
                 "summary": "Updates a lead",
-                "description": "Updates a lead",
                 "operationId": "Leads_Update",
                 "parameters": [
                     {
@@ -8594,7 +8532,6 @@
                     "Leads"
                 ],
                 "summary": "Gets a list of leads",
-                "description": "Gets a list of leads",
                 "operationId": "Leads_GetList",
                 "parameters": [
                     {
@@ -8893,7 +8830,6 @@
                     "Leads"
                 ],
                 "summary": "Creates a lead",
-                "description": "Creates a lead",
                 "operationId": "Leads_Create",
                 "parameters": [
                     {
@@ -9020,7 +8956,6 @@
                     "Leads"
                 ],
                 "summary": "Creates a follow-up",
-                "description": "Creates a follow-up",
                 "operationId": "Leads_CreateFollowUp",
                 "parameters": [
                     {
@@ -9109,7 +9044,6 @@
                     "Leads"
                 ],
                 "summary": "Gets notes for a lead",
-                "description": "Gets notes for a lead",
                 "operationId": "Leads_GetNotes",
                 "parameters": [
                     {
@@ -9272,7 +9206,6 @@
                     "Leads"
                 ],
                 "summary": "Creates a note on the specified lead",
-                "description": "Creates a note on the specified lead",
                 "operationId": "Leads_CreateNote",
                 "parameters": [
                     {
@@ -9380,7 +9313,6 @@
                     "Leads"
                 ],
                 "summary": "Dismisses a lead specified by ID",
-                "description": "Dismisses a lead specified by ID",
                 "operationId": "Leads_Dismiss",
                 "parameters": [
                     {
@@ -9472,7 +9404,6 @@
                     "Leads"
                 ],
                 "summary": "Submits a lead form",
-                "description": "Submits a lead form",
                 "operationId": "Leads_SubmitLeadForm",
                 "parameters": [
                     {
@@ -9568,7 +9499,6 @@
                     "Locations"
                 ],
                 "summary": "Gets a location specified by ID",
-                "description": "Gets a location specified by ID",
                 "operationId": "Locations_Get",
                 "parameters": [
                     {
@@ -9692,7 +9622,6 @@
                     "Locations"
                 ],
                 "summary": "Updates a location",
-                "description": "Updates a location",
                 "operationId": "Locations_Update",
                 "parameters": [
                     {
@@ -9880,7 +9809,6 @@
                     "Locations"
                 ],
                 "summary": "Creates a new location",
-                "description": "Creates a new location",
                 "operationId": "Locations_Create",
                 "parameters": [
                     {
@@ -10053,7 +9981,6 @@
                     "Locations"
                 ],
                 "summary": "Gets a list of locations",
-                "description": "Gets a list of locations",
                 "operationId": "Locations_GetList",
                 "parameters": [
                     {
@@ -10359,7 +10286,6 @@
                     "Locations"
                 ],
                 "summary": "Gets a list of notes on the specified location",
-                "description": "Gets a list of notes on the specified location",
                 "operationId": "Locations_GetNotes",
                 "parameters": [
                     {
@@ -10522,7 +10448,6 @@
                     "Locations"
                 ],
                 "summary": "Creates a note on the specified location",
-                "description": "Creates a note on the specified location",
                 "operationId": "Locations_CreateNote",
                 "parameters": [
                     {
@@ -10631,7 +10556,6 @@
                     "Locations"
                 ],
                 "summary": "Deletes a note on the specified location",
-                "description": "Deletes a note on the specified location",
                 "operationId": "Locations_DeleteNote",
                 "parameters": [
                     {
@@ -10720,7 +10644,6 @@
                     "Locations"
                 ],
                 "summary": "Gets a list of contacts for the specified location",
-                "description": "Gets a list of contacts for the specified location",
                 "operationId": "Locations_GetContactList",
                 "parameters": [
                     {
@@ -10876,7 +10799,6 @@
                     "Locations"
                 ],
                 "summary": "Creates a contact on the location",
-                "description": "Creates a contact on the location",
                 "operationId": "Locations_CreateContact",
                 "parameters": [
                     {
@@ -11014,7 +10936,6 @@
                     "Locations"
                 ],
                 "summary": "Gets a list of contacts for a specific ModifiedOn date range, CreatedOn date range or by their Location IDs. Either LocationIds, modifiedOn, modifiedOnOrAfter, createdBefore or createdOnOrAfter parameter must be specified.",
-                "description": "Gets a list of contacts for a specific ModifiedOn date range, CreatedOn date range or by their Location IDs. Either LocationIds, modifiedOn, modifiedOnOrAfter, createdBefore or createdOnOrAfter parameter must be specified.",
                 "operationId": "Locations_GetLocationsContactsList",
                 "parameters": [
                     {
@@ -11169,7 +11090,6 @@
                     "Locations"
                 ],
                 "summary": "Removes a contact from a location",
-                "description": "Removes a contact from a location",
                 "operationId": "Locations_DeleteContact",
                 "parameters": [
                     {
@@ -11274,7 +11194,6 @@
                     "Locations"
                 ],
                 "summary": "Updates a contact on the location",
-                "description": "Updates a contact on the location",
                 "operationId": "Locations_UpdateContact",
                 "parameters": [
                     {
@@ -11428,7 +11347,6 @@
                     "Locations"
                 ],
                 "summary": "Adds a Tag to a Location",
-                "description": "Adds a Tag to a Location",
                 "operationId": "Locations_CreateTag",
                 "parameters": [
                     {
@@ -11546,7 +11464,6 @@
                     "Locations"
                 ],
                 "summary": "Removes a Tag from a Location",
-                "description": "Removes a Tag from a Location",
                 "operationId": "Locations_DeleteTag",
                 "parameters": [
                     {
@@ -11635,7 +11552,6 @@
                     "Locations"
                 ],
                 "summary": "Gets a list of custom field types available for locations",
-                "description": "Gets a list of custom field types available for locations",
                 "operationId": "Locations_GetCustomFieldTypes",
                 "parameters": [
                     {
@@ -11799,7 +11715,6 @@
                 "tags": [
                     "Locations"
                 ],
-                "summary": "Locations_UpdatePreferredTechnician",
                 "operationId": "Locations_UpdatePreferredTechnician",
                 "parameters": [
                     {
@@ -11887,7 +11802,6 @@
                 "tags": [
                     "Locations"
                 ],
-                "summary": "Locations_GetPreferredTechnician",
                 "operationId": "Locations_GetPreferredTechnician",
                 "parameters": [
                     {
@@ -11916,9 +11830,11 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "integer",
-                                    "format": "int64",
-                                    "nullable": true
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "format": "int64"
                                 },
                                 "example": 0
                             }
@@ -13047,10 +12963,10 @@
             },
             "Crm.V2.ContactMethodResponse": {
                 "required": [
-                    "id",
-                    "contactId",
                     "type",
                     "value",
+                    "id",
+                    "contactId",
                     "createdOn",
                     "createdBy",
                     "modifiedOn",

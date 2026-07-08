@@ -350,6 +350,15 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "tags"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -786,6 +795,42 @@
           "null"
         ]
       },
+      "tags": {
+        "description": "Conversion opportunity tags on this service (from tag types with conversion opportunity enabled).\nEmpty when the service has none.",
+        "items": {
+          "additionalProperties": false,
+          "description": "A conversion-opportunity tag on a pricebook service (public API shape).",
+          "properties": {
+            "id": {
+              "description": "Tag instance id.",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "name": {
+              "description": "Tag type display name.",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "name"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
       "taxable": {
         "description": "Is this SKU taxable",
         "type": [
@@ -856,7 +901,8 @@
       "modifiedOn",
       "cost",
       "createdOn",
-      "soldByCommission"
+      "soldByCommission",
+      "tags"
     ],
     "type": "object"
   },

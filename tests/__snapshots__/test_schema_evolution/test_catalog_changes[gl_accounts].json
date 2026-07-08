@@ -33,6 +33,15 @@
     {
       "breadcrumb": [
         "properties",
+        "externalId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "description"
       ],
       "metadata": {
@@ -162,6 +171,13 @@
         ]
       },
       "description": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "externalId": {
+        "description": "The account's ERP external identifier imported by the tenant's accounting integration\n(for Sage Intacct, the record number — RECORDNO; the human-facing account code is in Number).\nNull when the integration does not import an id for the account (e.g. QuickBooks Online,\nwhere accounts are reconciled by name).",
         "type": [
           "string",
           "null"

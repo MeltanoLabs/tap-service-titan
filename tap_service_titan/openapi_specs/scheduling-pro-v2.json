@@ -22,7 +22,6 @@
                     "Router"
                 ],
                 "summary": "Gets a paginated list of sessions for router",
-                "description": "Gets a paginated list of sessions for router",
                 "operationId": "Router_RouterSessions",
                 "parameters": [
                     {
@@ -107,24 +106,6 @@
                     }
                 ],
                 "responses": {
-                    "404": {
-                        "description": "The requested entity was not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -205,6 +186,7 @@
                                                 "utmContent": "string",
                                                 "googleAnalyticsClientId": "string",
                                                 "bookedFrom": "string",
+                                                "yelpTrackingId": "string",
                                                 "sourcedFromMarketingPro": "string",
                                                 "gbraid": "string",
                                                 "wbraid": "string",
@@ -249,6 +231,24 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -267,7 +267,6 @@
                     "Router"
                 ],
                 "summary": "Provides performance data for router",
-                "description": "Provides performance data for router",
                 "operationId": "Router_RouterPerformance",
                 "parameters": [
                     {
@@ -291,6 +290,7 @@
                     {
                         "name": "sessionCreatedOnOrAfter",
                         "in": "query",
+                        "description": "Filter sessions created on or after this date/time (in UTC)",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -300,6 +300,7 @@
                     {
                         "name": "sessionCreatedBefore",
                         "in": "query",
+                        "description": "Filter sessions created before this date/time (in UTC)",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -308,24 +309,6 @@
                     }
                 ],
                 "responses": {
-                    "404": {
-                        "description": "The requested entity was not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -364,6 +347,24 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -382,7 +383,6 @@
                     "Scheduler"
                 ],
                 "summary": "Gets a list of schedulers",
-                "description": "Gets a list of schedulers",
                 "operationId": "Scheduler_Schedulers",
                 "parameters": [
                     {
@@ -459,24 +459,6 @@
                     }
                 ],
                 "responses": {
-                    "404": {
-                        "description": "The requested entity was not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -524,6 +506,24 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -542,7 +542,6 @@
                     "Scheduler"
                 ],
                 "summary": "Gets a paginated list of sessions for scheduler",
-                "description": "Gets a paginated list of sessions for scheduler",
                 "operationId": "Scheduler_SchedulerSessions",
                 "parameters": [
                     {
@@ -627,24 +626,6 @@
                     }
                 ],
                 "responses": {
-                    "404": {
-                        "description": "The requested entity was not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -725,6 +706,7 @@
                                                 "utmContent": "string",
                                                 "googleAnalyticsClientId": "string",
                                                 "bookedFrom": "string",
+                                                "yelpTrackingId": "string",
                                                 "sourcedFromMarketingPro": "string",
                                                 "gbraid": "string",
                                                 "wbraid": "string",
@@ -769,6 +751,24 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -787,7 +787,6 @@
                     "Scheduler"
                 ],
                 "summary": "Provides performance data for scheduler",
-                "description": "Provides performance data for scheduler",
                 "operationId": "Scheduler_SchedulerPerformance",
                 "parameters": [
                     {
@@ -811,6 +810,7 @@
                     {
                         "name": "sessionCreatedOnOrAfter",
                         "in": "query",
+                        "description": "Filter sessions created on or after this date/time (in UTC)",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -820,6 +820,7 @@
                     {
                         "name": "sessionCreatedBefore",
                         "in": "query",
+                        "description": "Filter sessions created before this date/time (in UTC)",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -828,24 +829,6 @@
                     }
                 ],
                 "responses": {
-                    "404": {
-                        "description": "The requested entity was not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -891,6 +874,24 @@
                     },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1013,11 +1014,11 @@
             "SchedulingPro.V2.RouterSessionResponse": {
                 "required": [
                     "id",
+                    "customer",
+                    "sourceTracking",
                     "createdOn",
                     "modifiedOn",
-                    "lastCheckinDate",
-                    "customer",
-                    "sourceTracking"
+                    "lastCheckinDate"
                 ],
                 "type": "object",
                 "properties": {
@@ -1027,17 +1028,17 @@
                     },
                     "createdOn": {
                         "type": "string",
-                        "description": "When this session was created",
+                        "description": "When this session was created (in UTC)",
                         "format": "date-time"
                     },
                     "modifiedOn": {
                         "type": "string",
-                        "description": "When this session was last modified",
+                        "description": "When this session was last modified (in UTC)",
                         "format": "date-time"
                     },
                     "lastCheckinDate": {
                         "type": "string",
-                        "description": "When the customer last interacted with the session",
+                        "description": "When the customer last interacted with the session (in UTC)",
                         "format": "date-time"
                     },
                     "sessionOutcome": {
@@ -1090,7 +1091,7 @@
                             "string",
                             "null"
                         ],
-                        "description": "Timeslot start",
+                        "description": "Timeslot start (in UTC)",
                         "format": "date-time"
                     },
                     "timeslotEnd": {
@@ -1098,7 +1099,7 @@
                             "string",
                             "null"
                         ],
-                        "description": "Timeslot end",
+                        "description": "Timeslot end (in UTC)",
                         "format": "date-time"
                     },
                     "category": {
@@ -1155,7 +1156,7 @@
                             "string",
                             "null"
                         ],
-                        "description": "Customer customer"
+                        "description": "Notes"
                     },
                     "sourceTracking": {
                         "oneOf": [
@@ -1283,9 +1284,9 @@
             },
             "SchedulingPro.V2.Customer": {
                 "required": [
+                    "address",
                     "isNewCustomer",
-                    "isNewLocation",
-                    "address"
+                    "isNewLocation"
                 ],
                 "type": "object",
                 "properties": {
@@ -1513,7 +1514,7 @@
                             "string",
                             "null"
                         ],
-                        "description": "Campaign Name"
+                        "description": "Landing Page URL"
                     },
                     "gclid": {
                         "type": [
@@ -1562,7 +1563,7 @@
                             "string",
                             "null"
                         ],
-                        "description": "UTM Content"
+                        "description": "UTM Ad Group"
                     },
                     "utmTerm": {
                         "type": [
@@ -1591,6 +1592,13 @@
                             "null"
                         ],
                         "description": "Booked From"
+                    },
+                    "yelpTrackingId": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Yelp Tracking ID"
                     },
                     "sourcedFromMarketingPro": {
                         "type": [
@@ -1626,9 +1634,9 @@
             "SchedulingPro.V2.RouterPerformanceResponse": {
                 "required": [
                     "id",
+                    "sessionCountBySchedulerId",
                     "openedCount",
-                    "interactedCount",
-                    "sessionCountBySchedulerId"
+                    "interactedCount"
                 ],
                 "type": "object",
                 "properties": {
@@ -1724,12 +1732,12 @@
                     "id",
                     "name",
                     "companyName",
-                    "createdOn",
-                    "modifiedOn",
                     "schedulerStatus",
                     "dataApiKey",
-                    "isDefault",
                     "mode",
+                    "createdOn",
+                    "modifiedOn",
+                    "isDefault",
                     "quickLaunchLink"
                 ],
                 "type": "object",
@@ -1748,12 +1756,12 @@
                     },
                     "createdOn": {
                         "type": "string",
-                        "description": "When this scheduler was created",
+                        "description": "When this scheduler was created (in UTC)",
                         "format": "date-time"
                     },
                     "modifiedOn": {
                         "type": "string",
-                        "description": "When this scheduler was last modified",
+                        "description": "When this scheduler was last modified (in UTC)",
                         "format": "date-time"
                     },
                     "schedulerStatus": {
@@ -1840,11 +1848,11 @@
             "SchedulingPro.V2.SchedulerSessionResponse": {
                 "required": [
                     "id",
+                    "customer",
+                    "sourceTracking",
                     "createdOn",
                     "modifiedOn",
-                    "lastCheckinDate",
-                    "customer",
-                    "sourceTracking"
+                    "lastCheckinDate"
                 ],
                 "type": "object",
                 "properties": {
@@ -1854,17 +1862,17 @@
                     },
                     "createdOn": {
                         "type": "string",
-                        "description": "When this session was created",
+                        "description": "When this session was created (in UTC)",
                         "format": "date-time"
                     },
                     "modifiedOn": {
                         "type": "string",
-                        "description": "When this session was last modified",
+                        "description": "When this session was last modified (in UTC)",
                         "format": "date-time"
                     },
                     "lastCheckinDate": {
                         "type": "string",
-                        "description": "When the customer last interacted with the session",
+                        "description": "When the customer last interacted with the session (in UTC)",
                         "format": "date-time"
                     },
                     "sessionOutcome": {
@@ -1917,7 +1925,7 @@
                             "string",
                             "null"
                         ],
-                        "description": "Timeslot start",
+                        "description": "Timeslot start (in UTC)",
                         "format": "date-time"
                     },
                     "timeslotEnd": {
@@ -1925,7 +1933,7 @@
                             "string",
                             "null"
                         ],
-                        "description": "Timeslot end",
+                        "description": "Timeslot end (in UTC)",
                         "format": "date-time"
                     },
                     "category": {
@@ -1982,7 +1990,7 @@
                             "string",
                             "null"
                         ],
-                        "description": "Customer customer"
+                        "description": "Notes"
                     },
                     "sourceTracking": {
                         "oneOf": [
@@ -2113,6 +2121,7 @@
                     "id",
                     "schedulerName",
                     "brandName",
+                    "milestoneFrequencyCount",
                     "schedulerCompletionRate",
                     "openedCompletionRate",
                     "totalCustomerContactsCaptured",
@@ -2129,8 +2138,7 @@
                     "totalBookingsRecoveredFromAbandonedSessions",
                     "totalJobsRecoveredFromAbandonedSessions",
                     "totalMembershipInterest",
-                    "totalSessions",
-                    "milestoneFrequencyCount"
+                    "totalSessions"
                 ],
                 "type": "object",
                 "properties": {

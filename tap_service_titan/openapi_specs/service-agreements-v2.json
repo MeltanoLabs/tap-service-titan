@@ -22,7 +22,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for service agreements",
-                "description": "Provides export feed for service agreements",
                 "operationId": "Export_ServiceAgreements",
                 "parameters": [
                     {
@@ -132,6 +131,7 @@
                                             "tagTypeIds": [
                                                 0
                                             ],
+                                            "opportunityId": "string",
                                             "customFields": [
                                                 {
                                                     "typeId": 0,
@@ -181,7 +181,6 @@
                     "ServiceAgreements"
                 ],
                 "summary": "Gets a list of service agreements",
-                "description": "Gets a list of service agreements",
                 "operationId": "ServiceAgreements_GetList",
                 "parameters": [
                     {
@@ -384,6 +383,7 @@
                                             "tagTypeIds": [
                                                 0
                                             ],
+                                            "opportunityId": "string",
                                             "customFields": [
                                                 {
                                                     "typeId": 0,
@@ -432,7 +432,6 @@
                     "ServiceAgreements"
                 ],
                 "summary": "Gets service agreement specified by ID",
-                "description": "Gets service agreement specified by ID",
                 "operationId": "ServiceAgreements_Get",
                 "parameters": [
                     {
@@ -532,6 +531,7 @@
                                     "tagTypeIds": [
                                         0
                                     ],
+                                    "opportunityId": "string",
                                     "customFields": [
                                         {
                                             "typeId": 0,
@@ -563,6 +563,153 @@
                     },
                     "404": {
                         "description": "Service agreement not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sa.serviceagreements:r"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/service-agreements/custom-fields": {
+            "get": {
+                "tags": [
+                    "ServiceAgreements"
+                ],
+                "summary": "Gets a list of custom field types for service agreements",
+                "operationId": "ServiceAgreements_GetCustomFields",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by specified fields",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_ServiceAgreements.V2.CustomFieldTypeResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "dataType": {},
+                                            "dataTypeOptions": [
+                                                "string"
+                                            ],
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -914,6 +1061,14 @@
                             "format": "int64"
                         },
                         "description": "Tag type IDs associated with this service agreement.\nIf this field is null, it means it was not requested to be loaded via the `IncludeTags` flag."
+                    },
+                    "opportunityId": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "ID of the CRM Opportunity linked to this service agreement (null when no Opportunity is linked)",
+                        "format": "guid"
                     },
                     "customFields": {
                         "type": "array",
@@ -1670,6 +1825,14 @@
                         },
                         "description": "Tag type IDs associated with this service agreement.\nIf this field is null, it means it was not requested to be loaded via the `IncludeTags` flag."
                     },
+                    "opportunityId": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "ID of the CRM Opportunity linked to this service agreement (null when no Opportunity is linked)",
+                        "format": "guid"
+                    },
                     "customFields": {
                         "type": "array",
                         "items": {
@@ -1679,6 +1842,112 @@
                     }
                 },
                 "additionalProperties": false
+            },
+            "PaginatedResponse_Of_ServiceAgreements.V2.CustomFieldTypeResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ServiceAgreements.V2.CustomFieldTypeResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "ServiceAgreements.V2.CustomFieldTypeResponse": {
+                "required": [
+                    "id",
+                    "name",
+                    "dataType",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "The ID of the custom field.",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the custom field."
+                    },
+                    "dataType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ServiceAgreements.V2.CustomFieldDataType"
+                            }
+                        ],
+                        "description": "Indicates the data type of the custom field."
+                    },
+                    "dataTypeOptions": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Indicates the dropdown options if the custom field is a dropdown data type."
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "The date the custom field was created in UTC date / time.",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "The last date the custom field was modified in UTC date / time.",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ServiceAgreements.V2.CustomFieldDataType": {
+                "enum": [
+                    "Text",
+                    "Dropdown",
+                    "Numeric"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Text",
+                    "Dropdown",
+                    "Numeric"
+                ]
             }
         },
         "securitySchemes": {

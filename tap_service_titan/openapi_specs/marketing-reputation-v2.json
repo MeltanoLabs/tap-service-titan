@@ -21,7 +21,6 @@
                 "tags": [
                     "Reviews"
                 ],
-                "summary": "reviews",
                 "operationId": "reviews",
                 "parameters": [
                     {

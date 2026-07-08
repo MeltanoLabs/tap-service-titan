@@ -105,6 +105,15 @@
     {
       "breadcrumb": [
         "properties",
+        "businessUnitAccessIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "createdOn"
       ],
       "metadata": {
@@ -341,6 +350,17 @@
         "format": "int32",
         "type": [
           "integer",
+          "null"
+        ]
+      },
+      "businessUnitAccessIds": {
+        "description": "Business Unit Access IDs. Returns null when the 'Business units filtering for employees' feature flag is disabled.",
+        "items": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": [
+          "array",
           "null"
         ]
       },

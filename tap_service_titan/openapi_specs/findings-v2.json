@@ -22,7 +22,6 @@
                     "FindingAssets"
                 ],
                 "summary": "Uploads a file and returns the asset path for use in /findings endpoint requests",
-                "description": "Uploads a file and returns the asset path for use in /findings endpoint requests",
                 "operationId": "FindingAssets_PostAttachment",
                 "parameters": [
                     {
@@ -55,6 +54,19 @@
                     }
                 },
                 "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAssetUploadResponse"
+                                },
+                                "example": {
+                                    "path": "string"
+                                }
+                            }
+                        }
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -69,19 +81,6 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAssetUploadResponse"
-                                },
-                                "example": {
-                                    "path": "string"
                                 }
                             }
                         }
@@ -101,7 +100,6 @@
                     "FindingAssets"
                 ],
                 "summary": "Downloads an asset by path. Redirects to a temporary download URL",
-                "description": "Downloads an asset by path. Redirects to a temporary download URL",
                 "operationId": "FindingAssets_Get",
                 "parameters": [
                     {
@@ -123,6 +121,9 @@
                     }
                 ],
                 "responses": {
+                    "302": {
+                        "description": ""
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -140,9 +141,6 @@
                                 }
                             }
                         }
-                    },
-                    "302": {
-                        "description": ""
                     },
                     "404": {
                         "description": "The requested entity was not found",
@@ -179,7 +177,6 @@
                     "Findings"
                 ],
                 "summary": "Gets a list of findings",
-                "description": "Gets a list of findings",
                 "operationId": "Findings_GetList",
                 "parameters": [
                     {
@@ -312,24 +309,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -364,6 +343,24 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -380,7 +377,6 @@
                     "Findings"
                 ],
                 "summary": "Creates a new finding to document an issue or observation at a customer location",
-                "description": "Creates a new finding to document an issue or observation at a customer location",
                 "operationId": "Findings_Create",
                 "parameters": [
                     {
@@ -421,24 +417,6 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -480,6 +458,24 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -498,7 +494,6 @@
                     "Findings"
                 ],
                 "summary": "Gets finding specified by ID",
-                "description": "Gets finding specified by ID",
                 "operationId": "Findings_Get",
                 "parameters": [
                     {
@@ -522,24 +517,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -578,6 +555,24 @@
                                     "linkedJobIds": [
                                         0
                                     ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
                                 }
                             }
                         }
@@ -615,7 +610,6 @@
                     "Findings"
                 ],
                 "summary": "Updates a finding",
-                "description": "Updates a finding",
                 "operationId": "Findings_Update",
                 "parameters": [
                     {
@@ -657,24 +651,6 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -717,6 +693,24 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "The requested entity was not found",
                         "content": {
@@ -752,7 +746,6 @@
                     "Findings"
                 ],
                 "summary": "Gets a paginated list of attachments for a finding",
-                "description": "Gets a paginated list of attachments for a finding",
                 "operationId": "Findings_GetFindingAttachments",
                 "parameters": [
                     {
@@ -836,24 +829,6 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "The request cannot be processed, check validation errors or request format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiErrorResponse"
-                                },
-                                "example": {
-                                    "type": "string",
-                                    "title": "string",
-                                    "status": 0,
-                                    "traceId": "string",
-                                    "errors": {},
-                                    "data": {}
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "The request has succeeded",
                         "content": {
@@ -874,6 +849,24 @@
                                             "type": {}
                                         }
                                     ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
                                 }
                             }
                         }
@@ -911,7 +904,6 @@
                     "Findings"
                 ],
                 "summary": "Creates a new attachment for a finding",
-                "description": "Creates a new attachment for a finding",
                 "operationId": "Findings_CreateFindingAttachment",
                 "parameters": [
                     {
@@ -949,6 +941,22 @@
                     }
                 },
                 "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "fileName": "string",
+                                    "url": "string",
+                                    "type": {}
+                                }
+                            }
+                        }
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -963,22 +971,6 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentResponse"
-                                },
-                                "example": {
-                                    "id": 0,
-                                    "fileName": "string",
-                                    "url": "string",
-                                    "type": {}
                                 }
                             }
                         }
@@ -1036,7 +1028,6 @@
                     "Findings"
                 ],
                 "summary": "Gets an attachment for a finding by ID",
-                "description": "Gets an attachment for a finding by ID",
                 "operationId": "Findings_GetFindingAttachment",
                 "parameters": [
                     {
@@ -1069,6 +1060,22 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "fileName": "string",
+                                    "url": "string",
+                                    "type": {}
+                                }
+                            }
+                        }
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -1083,22 +1090,6 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentResponse"
-                                },
-                                "example": {
-                                    "id": 0,
-                                    "fileName": "string",
-                                    "url": "string",
-                                    "type": {}
                                 }
                             }
                         }
@@ -1136,7 +1127,6 @@
                     "Findings"
                 ],
                 "summary": "Updates an attachment associated with a finding",
-                "description": "Updates an attachment associated with a finding",
                 "operationId": "Findings_UpdateFindingAttachment",
                 "parameters": [
                     {
@@ -1183,6 +1173,22 @@
                     }
                 },
                 "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "fileName": "string",
+                                    "url": "string",
+                                    "type": {}
+                                }
+                            }
+                        }
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -1197,22 +1203,6 @@
                                     "traceId": "string",
                                     "errors": {},
                                     "data": {}
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "The request has succeeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EquipmentSystems.V2.FindingAttachmentResponse"
-                                },
-                                "example": {
-                                    "id": 0,
-                                    "fileName": "string",
-                                    "url": "string",
-                                    "type": {}
                                 }
                             }
                         }
@@ -1268,7 +1258,6 @@
                     "Findings"
                 ],
                 "summary": "Removes an attachment associated with a finding",
-                "description": "Removes an attachment associated with a finding",
                 "operationId": "Findings_DeleteFindingAttachment",
                 "parameters": [
                     {
@@ -1301,6 +1290,9 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
                         "content": {
@@ -1318,9 +1310,6 @@
                                 }
                             }
                         }
-                    },
-                    "200": {
-                        "description": "The request has succeeded"
                     }
                 },
                 "security": [
@@ -1752,9 +1741,9 @@
             },
             "EquipmentSystems.V2.FindingAttachmentModel": {
                 "required": [
-                    "id",
                     "fileName",
                     "url",
+                    "id",
                     "type"
                 ],
                 "type": "object",
@@ -2001,9 +1990,9 @@
             },
             "EquipmentSystems.V2.FindingAttachmentResponse": {
                 "required": [
-                    "id",
                     "fileName",
                     "url",
+                    "id",
                     "type"
                 ],
                 "type": "object",

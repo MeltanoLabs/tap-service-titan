@@ -51,6 +51,46 @@
     {
       "breadcrumb": [
         "properties",
+        "parent"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "parent",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "parent",
+        "properties",
+        "type"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "systemId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "invoiceItemId"
       ],
       "metadata": {
@@ -413,6 +453,35 @@
           "null"
         ]
       },
+      "parent": {
+        "additionalProperties": false,
+        "description": "Response shape for an installed-equipment parent reference.",
+        "properties": {
+          "id": {
+            "description": "The ID of the parent entity. Interpretation depends on the Type.",
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "description": "",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      },
       "predictedReplacementDate": {
         "format": "date",
         "type": [
@@ -451,6 +520,13 @@
         "description": "",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "systemId": {
+        "format": "int64",
+        "type": [
+          "integer",
           "null"
         ]
       },

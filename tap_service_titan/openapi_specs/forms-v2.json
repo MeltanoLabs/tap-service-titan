@@ -22,7 +22,6 @@
                     "Form"
                 ],
                 "summary": "Retrieve Form data",
-                "description": "Retrieve Form data",
                 "operationId": "Form_GetForms",
                 "parameters": [
                     {
@@ -217,7 +216,6 @@
                     "FormSubmission"
                 ],
                 "summary": "Retrieve Form Submission Data",
-                "description": "Retrieve Form Submission Data",
                 "operationId": "FormSubmission_GetFormSubmissions",
                 "parameters": [
                     {
@@ -442,7 +440,6 @@
                     "Jobs"
                 ],
                 "summary": "Creates a Attachment on the specified Job",
-                "description": "Creates a Attachment on the specified Job",
                 "operationId": "Jobs_CreateAttachment",
                 "parameters": [
                     {
@@ -533,7 +530,6 @@
                     "Jobs"
                 ],
                 "summary": "Gets Attachments on the specified Job",
-                "description": "Gets Attachments on the specified Job",
                 "operationId": "Jobs_GetJobAttachments",
                 "parameters": [
                     {
@@ -642,7 +638,6 @@
                     "Jobs"
                 ],
                 "summary": "Downloads a specified job attachment.",
-                "description": "Downloads a specified job attachment.",
                 "operationId": "Jobs_Get",
                 "parameters": [
                     {
@@ -667,9 +662,6 @@
                     }
                 ],
                 "responses": {
-                    "404": {
-                        "description": "The requested entity was not found"
-                    },
                     "200": {
                         "description": "The request has succeeded"
                     },
@@ -690,6 +682,9 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found"
                     }
                 },
                 "security": [

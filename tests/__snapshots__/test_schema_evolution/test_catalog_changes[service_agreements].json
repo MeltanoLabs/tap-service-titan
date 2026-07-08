@@ -612,6 +612,15 @@
     {
       "breadcrumb": [
         "properties",
+        "opportunityId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "customFields"
       ],
       "metadata": {
@@ -896,6 +905,14 @@
       },
       "name": {
         "description": "Service agreement name",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "opportunityId": {
+        "description": "ID of the CRM Opportunity linked to this service agreement (null when no Opportunity is linked)",
+        "format": "guid",
         "type": [
           "string",
           "null"
