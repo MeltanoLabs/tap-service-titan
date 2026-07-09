@@ -69,6 +69,15 @@
     {
       "breadcrumb": [
         "properties",
+        "projectLabelIds"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "createdOn"
       ],
       "metadata": {
@@ -960,6 +969,17 @@
         "items": {
           "description": "",
           "type": "string"
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "projectLabelIds": {
+        "description": "Project label IDs. Returns null when 'Budget vs Actual' feature flag is disabled.",
+        "items": {
+          "format": "int64",
+          "type": "integer"
         },
         "type": [
           "array",

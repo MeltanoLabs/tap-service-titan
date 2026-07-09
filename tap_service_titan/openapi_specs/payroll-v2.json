@@ -22,7 +22,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for job splits",
-                "description": "Provides export feed for job splits",
                 "operationId": "Export_JobSplits",
                 "parameters": [
                     {
@@ -113,7 +112,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for payroll adjustments",
-                "description": "Provides export feed for payroll adjustments",
                 "operationId": "Export_PayrollAdjustments",
                 "parameters": [
                     {
@@ -164,6 +162,7 @@
                                             "memo": "string",
                                             "activityCodeId": 0,
                                             "invoiceId": 0,
+                                            "businessUnitId": 0,
                                             "hours": 0,
                                             "rate": 0,
                                             "quantity": 0,
@@ -212,7 +211,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for job timesheets",
-                "description": "Provides export feed for job timesheets",
                 "operationId": "Export_Timesheets",
                 "parameters": [
                     {
@@ -307,7 +305,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for activity codes",
-                "description": "Provides export feed for activity codes",
                 "operationId": "Export_ActivityCodes",
                 "parameters": [
                     {
@@ -399,7 +396,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for timesheet codes",
-                "description": "Provides export feed for timesheet codes",
                 "operationId": "Export_TimesheetCodes",
                 "parameters": [
                     {
@@ -496,7 +492,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for gross pay items",
-                "description": "Provides export feed for gross pay items",
                 "operationId": "Export_GrossPayItems",
                 "parameters": [
                     {
@@ -623,7 +618,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for payroll settings",
-                "description": "Provides export feed for payroll settings",
                 "operationId": "Export_PayrollSettings",
                 "parameters": [
                     {
@@ -725,7 +719,6 @@
                     "GrossPayItems"
                 ],
                 "summary": "Creates new gross pay item",
-                "description": "Creates new gross pay item",
                 "operationId": "GrossPayItems_Create",
                 "parameters": [
                     {
@@ -823,7 +816,6 @@
                     "GrossPayItems"
                 ],
                 "summary": "Gets a list of gross pay items",
-                "description": "Gets a list of gross pay items",
                 "operationId": "GrossPayItems_GetList",
                 "parameters": [
                     {
@@ -1062,7 +1054,6 @@
                     "GrossPayItems"
                 ],
                 "summary": "Update specified gross pay item",
-                "description": "Update specified gross pay item",
                 "operationId": "GrossPayItems_Update",
                 "parameters": [
                     {
@@ -1170,7 +1161,6 @@
                     "GrossPayItems"
                 ],
                 "summary": "Delete specified gross pay item",
-                "description": "Delete specified gross pay item",
                 "operationId": "GrossPayItems_Delete",
                 "parameters": [
                     {
@@ -1233,7 +1223,6 @@
                     "JobSplits"
                 ],
                 "summary": "Gets a list of job splits",
-                "description": "Gets a list of job splits",
                 "operationId": "JobSplits_GetList",
                 "parameters": [
                     {
@@ -1419,7 +1408,6 @@
                     "JobSplits"
                 ],
                 "summary": "Gets a list of job splits by multiple jobs",
-                "description": "Gets a list of job splits by multiple jobs",
                 "operationId": "JobSplits_GetListByJobs",
                 "parameters": [
                     {
@@ -1603,7 +1591,6 @@
                     "LocationLaborType"
                 ],
                 "summary": "Gets a list of location hourly rates by multiple locations",
-                "description": "Gets a list of location hourly rates by multiple locations",
                 "operationId": "LocationLaborType_GetListByLocations",
                 "parameters": [
                     {
@@ -1770,7 +1757,6 @@
                     "ActivityCodes"
                 ],
                 "summary": "Gets a list of payroll activity codes",
-                "description": "Gets a list of payroll activity codes",
                 "operationId": "ActivityCodes_GetList",
                 "parameters": [
                     {
@@ -1931,7 +1917,6 @@
                     "ActivityCodes"
                 ],
                 "summary": "Gets payroll activity code specified by ID",
-                "description": "Gets payroll activity code specified by ID",
                 "operationId": "ActivityCodes_Get",
                 "parameters": [
                     {
@@ -2029,7 +2014,6 @@
                     "PayrollAdjustments"
                 ],
                 "summary": "Creates new payroll adjustment",
-                "description": "Creates new payroll adjustment",
                 "operationId": "PayrollAdjustments_Create",
                 "parameters": [
                     {
@@ -2058,6 +2042,7 @@
                                 "memo": "string",
                                 "activityCodeId": 0,
                                 "invoiceId": 0,
+                                "businessUnitId": 0,
                                 "hours": 0,
                                 "rate": 0,
                                 "quantity": 0
@@ -2130,7 +2115,6 @@
                     "PayrollAdjustments"
                 ],
                 "summary": "Gets a list of payroll adjustments",
-                "description": "Gets a list of payroll adjustments",
                 "operationId": "PayrollAdjustments_GetList",
                 "parameters": [
                     {
@@ -2276,6 +2260,7 @@
                                             "memo": "string",
                                             "activityCodeId": 0,
                                             "invoiceId": 0,
+                                            "businessUnitId": 0,
                                             "hours": 0,
                                             "rate": 0,
                                             "quantity": 0,
@@ -2324,7 +2309,6 @@
                     "PayrollAdjustments"
                 ],
                 "summary": "Gets payroll adjustment specified by ID",
-                "description": "Gets payroll adjustment specified by ID",
                 "operationId": "PayrollAdjustments_Get",
                 "parameters": [
                     {
@@ -2351,6 +2335,7 @@
                         "name": "employeeType",
                         "in": "query",
                         "description": "The employee type\\\nValues: [Technician, Employee]",
+                        "required": true,
                         "schema": {
                             "$ref": "#/components/schemas/Payroll.V2.EmployeeType"
                         }
@@ -2373,6 +2358,7 @@
                                     "memo": "string",
                                     "activityCodeId": 0,
                                     "invoiceId": 0,
+                                    "businessUnitId": 0,
                                     "hours": 0,
                                     "rate": 0,
                                     "quantity": 0,
@@ -2429,6 +2415,212 @@
                         ]
                     }
                 ]
+            },
+            "put": {
+                "tags": [
+                    "PayrollAdjustments"
+                ],
+                "summary": "Updates payroll adjustment specified by ID",
+                "operationId": "PayrollAdjustments_Update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of payroll adjustment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "employeeType",
+                        "in": "query",
+                        "description": "The employee type\\\nValues: [Technician, Employee]",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Payroll.V2.EmployeeType"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The payroll adjustment model to update",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Payroll.V2.PayrollAdjustments.PayrollAdjustmentUpdateRequest"
+                            },
+                            "example": {
+                                "employeeId": 0,
+                                "postedOn": "string",
+                                "amount": 0,
+                                "memo": "string",
+                                "activityCodeId": 0,
+                                "invoiceId": 0,
+                                "businessUnitId": 0,
+                                "hours": 0,
+                                "rate": 0,
+                                "quantity": 0
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModificationResponse"
+                                },
+                                "example": {
+                                    "id": 0
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Payroll adjustment was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.payrolladjustments:w"
+                        ]
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "PayrollAdjustments"
+                ],
+                "summary": "Deletes payroll adjustment specified by ID",
+                "operationId": "PayrollAdjustments_Delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of payroll adjustment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "employeeType",
+                        "in": "query",
+                        "description": "The employee type\\\nValues: [Technician, Employee]",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Payroll.V2.EmployeeType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Payroll adjustment was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.payrolladjustments:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/payrolls": {
@@ -2437,7 +2629,6 @@
                     "Payrolls"
                 ],
                 "summary": "Gets a list of payrolls",
-                "description": "Gets a list of payrolls",
                 "operationId": "Payrolls_GetList",
                 "parameters": [
                     {
@@ -2672,7 +2863,6 @@
                     "Payrolls"
                 ],
                 "summary": "Gets a list of technician payrolls",
-                "description": "Gets a list of technician payrolls",
                 "operationId": "Payrolls_GetTechnicianPayrolls",
                 "parameters": [
                     {
@@ -2904,7 +3094,6 @@
                     "Payrolls"
                 ],
                 "summary": "Gets a list of employee payrolls",
-                "description": "Gets a list of employee payrolls",
                 "operationId": "Payrolls_GetEmployeePayrolls",
                 "parameters": [
                     {
@@ -3136,7 +3325,6 @@
                     "PayrollSettings"
                 ],
                 "summary": "Gets the payroll settings list",
-                "description": "Gets the payroll settings list",
                 "operationId": "PayrollSettings_GetPayrollSettingsList",
                 "parameters": [
                     {
@@ -3330,7 +3518,6 @@
                     "PayrollSettings"
                 ],
                 "summary": "Gets the employee payroll settings",
-                "description": "Gets the employee payroll settings",
                 "operationId": "PayrollSettings_GetEmployeePayrollSettings",
                 "parameters": [
                     {
@@ -3436,7 +3623,6 @@
                     "PayrollSettings"
                 ],
                 "summary": "Updates the employee payroll settings",
-                "description": "Updates the employee payroll settings",
                 "operationId": "PayrollSettings_UpdateEmployeePayrollSettings",
                 "parameters": [
                     {
@@ -3551,7 +3737,6 @@
                     "PayrollSettings"
                 ],
                 "summary": "Gets the technician payroll settings",
-                "description": "Gets the technician payroll settings",
                 "operationId": "PayrollSettings_GetTechnicianPayrollSettings",
                 "parameters": [
                     {
@@ -3657,7 +3842,6 @@
                     "PayrollSettings"
                 ],
                 "summary": "Updates the technician payroll settings",
-                "description": "Updates the technician payroll settings",
                 "operationId": "PayrollSettings_UpdateTechnicianPayrollSettings",
                 "parameters": [
                     {
@@ -3772,7 +3956,6 @@
                     "TimesheetCodes"
                 ],
                 "summary": "Gets a list of timesheet codes",
-                "description": "Gets a list of timesheet codes",
                 "operationId": "TimesheetCodes_GetList",
                 "parameters": [
                     {
@@ -3938,7 +4121,6 @@
                     "TimesheetCodes"
                 ],
                 "summary": "Gets timesheet code specified by ID",
-                "description": "Gets timesheet code specified by ID",
                 "operationId": "TimesheetCodes_Get",
                 "parameters": [
                     {
@@ -4041,7 +4223,6 @@
                     "Timesheets"
                 ],
                 "summary": "Gets a list of job timesheets",
-                "description": "Gets a list of job timesheets",
                 "operationId": "Timesheets_GetJobTimesheets",
                 "parameters": [
                     {
@@ -4241,7 +4422,6 @@
                     "Timesheets"
                 ],
                 "summary": "Gets a list of non job timesheets for employee",
-                "description": "Gets a list of non job timesheets for employee",
                 "operationId": "Timesheets_GetNonJobTimesheets",
                 "parameters": [
                     {
@@ -4425,7 +4605,6 @@
                     "Timesheets"
                 ],
                 "summary": "Gets a list of job timesheets by multiple jobs",
-                "description": "Gets a list of job timesheets by multiple jobs",
                 "operationId": "Timesheets_GetJobTimesheetsByJobs",
                 "parameters": [
                     {
@@ -4833,6 +5012,14 @@
                             "null"
                         ],
                         "description": "ID of the payroll adjustment invoice",
+                        "format": "int64"
+                    },
+                    "businessUnitId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ID of the payroll adjustment business unit",
                         "format": "int64"
                     },
                     "hours": {
@@ -6655,6 +6842,14 @@
                         "description": "ID of the payroll adjustment invoice",
                         "format": "int64"
                     },
+                    "businessUnitId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ID of the payroll adjustment business unit",
+                        "format": "int64"
+                    },
                     "hours": {
                         "type": [
                             "number",
@@ -6789,6 +6984,14 @@
                         "description": "ID of the payroll adjustment invoice",
                         "format": "int64"
                     },
+                    "businessUnitId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ID of the payroll adjustment business unit",
+                        "format": "int64"
+                    },
                     "hours": {
                         "type": [
                             "number",
@@ -6834,6 +7037,89 @@
                     "active": {
                         "type": "boolean",
                         "description": "Whether payroll adjustment is active"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Payroll.V2.PayrollAdjustments.PayrollAdjustmentUpdateRequest": {
+                "required": [
+                    "employeeId",
+                    "postedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "employeeId": {
+                        "type": "integer",
+                        "description": "ID of the employee",
+                        "format": "int64"
+                    },
+                    "postedOn": {
+                        "type": "string",
+                        "description": "The posted on date/time (in UTC)",
+                        "format": "date-time"
+                    },
+                    "amount": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "The payroll adjustment amount",
+                        "format": "decimal"
+                    },
+                    "memo": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Memo of the payroll adjustment"
+                    },
+                    "activityCodeId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ID of the payroll adjustment activity code",
+                        "format": "int64"
+                    },
+                    "invoiceId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ID of the payroll adjustment invoice",
+                        "format": "int64"
+                    },
+                    "businessUnitId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ID of the payroll adjustment business unit",
+                        "format": "int64"
+                    },
+                    "hours": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Hours of the payroll adjustment",
+                        "format": "decimal"
+                    },
+                    "rate": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Rate of the payroll adjustment",
+                        "format": "decimal"
+                    },
+                    "quantity": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Quantity of the payroll adjustment",
+                        "format": "decimal"
                     }
                 },
                 "additionalProperties": false

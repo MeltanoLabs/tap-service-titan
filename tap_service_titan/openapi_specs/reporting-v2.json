@@ -22,7 +22,6 @@
                     "DynamicValueSets"
                 ],
                 "summary": "List values of given dynamic set including key and display name",
-                "description": "List values of given dynamic set including key and display name",
                 "operationId": "DynamicValueSets_GetDynamicSet",
                 "parameters": [
                     {
@@ -152,7 +151,6 @@
                     "ReportCategories"
                 ],
                 "summary": "List categories for existing  reports",
-                "description": "List categories for existing  reports",
                 "operationId": "ReportCategories_GetCategories",
                 "parameters": [
                     {
@@ -250,7 +248,6 @@
                     "ReportCategoryReports"
                 ],
                 "summary": "List reports within given category",
-                "description": "List reports within given category",
                 "operationId": "ReportCategoryReports_GetReports",
                 "parameters": [
                     {
@@ -376,7 +373,6 @@
                     "ReportCategoryReports"
                 ],
                 "summary": "Get report description including input parameters and output fields etc.\nTake a note that the report description isn't fixed and may be changed by the report owner.",
-                "description": "Get report description including input parameters and output fields etc.\nTake a note that the report description isn't fixed and may be changed by the report owner.",
                 "operationId": "ReportCategoryReports_Get",
                 "parameters": [
                     {
@@ -509,7 +505,6 @@
                     "ReportCategoryReports"
                 ],
                 "summary": "Get report data. The result is based on current report description which isn't constant in general.\nBeware that report columns may be changed. Result field names are listed alongside the data in the response\nto validate that all the requested columns are there.",
-                "description": "Get report data. The result is based on current report description which isn't constant in general.\nBeware that report columns may be changed. Result field names are listed alongside the data in the response\nto validate that all the requested columns are there.",
                 "operationId": "ReportCategoryReports_GetData",
                 "parameters": [
                     {
@@ -555,8 +550,8 @@
                         "in": "query",
                         "description": "How many records to return (1000 by default)",
                         "schema": {
-                            "maximum": 25000.0,
-                            "minimum": 1.0,
+                            "maximum": 25000,
+                            "minimum": 1,
                             "type": "integer",
                             "format": "int32"
                         }
@@ -658,6 +653,371 @@
                         "apiKeyHeader": [],
                         "oauth": [
                             "tn.rpr.reports:r"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/report-category/{report_category}/reports/{reportId}/data/query": {
+            "post": {
+                "tags": [
+                    "ReportCategoryReports"
+                ],
+                "summary": "Start a long-running report data query. Returns 200 with the report payload streamed straight from\nthe result blob if the query completes within the inline timeout (~10s); otherwise returns 202 with\na token to poll the result endpoint.",
+                "operationId": "ReportCategoryReports_StartGetData",
+                "parameters": [
+                    {
+                        "name": "report_category",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "reportId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number (1-based, 1 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (1000 by default)",
+                        "schema": {
+                            "maximum": 25000,
+                            "minimum": 1,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "notifyWhenReady",
+                        "in": "query",
+                        "description": "When true and the report does not complete inline within the start handler's window, fires a\ntn.rpr.report-data-ready webhook to tenant subscribers when the long-running task finishes\n(Success or Error). Default false.",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Reporting.V2.ReportDataRequest"
+                            },
+                            "example": {
+                                "parameters": [
+                                    {
+                                        "name": "string",
+                                        "value": {}
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Reporting.V2.ReportDataResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        [
+                                            {}
+                                        ]
+                                    ],
+                                    "fields": [
+                                        {
+                                            "name": "string",
+                                            "label": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "202": {
+                        "description": "The request has been accepted for processing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Reporting.V2.ReportDataPendingResponse"
+                                },
+                                "example": {
+                                    "status": {},
+                                    "token": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.rpr.reports:r"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/data-queries/{token}": {
+            "get": {
+                "tags": [
+                    "ReportDataQueries"
+                ],
+                "summary": "Poll the result of a long-running report data query. On Success, the gzipped JSON blob is streamed\ndirectly to the client (gzip pass-through when the client accepts gzip, decompress otherwise).",
+                "operationId": "ReportDataQueries_Get",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Reporting.V2.ReportDataResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        [
+                                            {}
+                                        ]
+                                    ],
+                                    "fields": [
+                                        {
+                                            "name": "string",
+                                            "label": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "202": {
+                        "description": "The request has been accepted for processing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Reporting.V2.ReportDataPendingResponse"
+                                },
+                                "example": {
+                                    "status": {},
+                                    "token": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.rpr.reports:r"
+                        ]
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "ReportDataQueries"
+                ],
+                "summary": "Cancel a long-running report data query. The associated background task (if any) is signalled to\nstop and the token is released, freeing the per-tenant slot. Always returns 204 on success even if\nthe task has already finished \u2014 the binding is removed in either case.",
+                "operationId": "ReportDataQueries_Cancel",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "204": {
+                        "description": "The request has succeeded, no content to return"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.rpr.reports:w"
                         ]
                     }
                 ]
@@ -1169,6 +1529,41 @@
                     }
                 },
                 "additionalProperties": false
+            },
+            "Reporting.V2.ReportDataPendingResponse": {
+                "required": [
+                    "token",
+                    "status"
+                ],
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Reporting.V2.ReportDataAsyncStatus"
+                            }
+                        ],
+                        "description": "Current status of the long-running query "
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "Token used to poll the result endpoint "
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Returned with HTTP 202 when an asynchronous report data request is still running.\nPoll the result endpoint with the supplied token to retrieve the report payload."
+            },
+            "Reporting.V2.ReportDataAsyncStatus": {
+                "enum": [
+                    "NotStarted",
+                    "InProgress"
+                ],
+                "type": "string",
+                "description": "Status of an asynchronous report data request returned alongside HTTP 202.\n`Success` is never returned with 202 \u2014 it is delivered with HTTP 200 and the report payload.",
+                "x-enumNames": [
+                    "NotStarted",
+                    "InProgress"
+                ]
             }
         },
         "securitySchemes": {
@@ -1187,7 +1582,8 @@
                         "scopes": {
                             "tn.rpr.dynamicvaluesets:r": "Reporting \u2192 Dynamic Value Sets (Read)",
                             "tn.rpr.reportcategories:r": "Reporting \u2192 Report Categories (Read)",
-                            "tn.rpr.reports:r": "Reporting \u2192 Reports within the category (Read)"
+                            "tn.rpr.reports:r": "Reporting \u2192 Reports within the category (Read)",
+                            "tn.rpr.reports:w": "Reporting \u2192 Reports within the category (Write)"
                         }
                     }
                 }

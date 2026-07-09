@@ -22,7 +22,6 @@
                     "TechnicianRating"
                 ],
                 "summary": "Add a rating for the specified technician, tied to the specific job.\nIf the rating already exists for that technician/ job combination, update it with the new score.",
-                "description": "Add a rating for the specified technician, tied to the specific job.\nIf the rating already exists for that technician/ job combination, update it with the new score.",
                 "operationId": "TechnicianRating_Update",
                 "parameters": [
                     {
@@ -123,7 +122,6 @@
                     "TechnicianRatings"
                 ],
                 "summary": "Gets a list of technician ratings",
-                "description": "Gets a list of technician ratings",
                 "operationId": "TechnicianRatings_GetList",
                 "parameters": [
                     {
@@ -288,7 +286,6 @@
                     "TechnicianRatings"
                 ],
                 "summary": "Add a rating for the specified technician, tied to the specific job.\nIf the rating already exists for that technician/ job combination, update it with the new score.",
-                "description": "Add a rating for the specified technician, tied to the specific job.\nIf the rating already exists for that technician/ job combination, update it with the new score.",
                 "operationId": "TechnicianRatings_Update",
                 "parameters": [
                     {
@@ -388,7 +385,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for technician ratings",
-                "description": "Provides export feed for technician ratings",
                 "operationId": "Export_TechnicianRatings",
                 "parameters": [
                     {

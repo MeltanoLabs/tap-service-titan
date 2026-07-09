@@ -78,6 +78,15 @@
     {
       "breadcrumb": [
         "properties",
+        "businessUnitId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "hours"
       ],
       "metadata": {
@@ -179,6 +188,14 @@
         "format": "decimal",
         "type": [
           "number",
+          "null"
+        ]
+      },
+      "businessUnitId": {
+        "description": "ID of the payroll adjustment business unit",
+        "format": "int64",
+        "type": [
+          "integer",
           "null"
         ]
       },

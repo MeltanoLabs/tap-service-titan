@@ -122,7 +122,7 @@
         ]
       },
       "createdOn": {
-        "description": "When this scheduler was created",
+        "description": "When this scheduler was created (in UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -155,7 +155,7 @@
         ]
       },
       "modifiedOn": {
-        "description": "When this scheduler was last modified",
+        "description": "When this scheduler was last modified (in UTC)",
         "format": "date-time",
         "type": [
           "string",
@@ -188,12 +188,12 @@
       "id",
       "name",
       "companyName",
-      "createdOn",
-      "modifiedOn",
       "schedulerStatus",
       "dataApiKey",
-      "isDefault",
       "mode",
+      "createdOn",
+      "modifiedOn",
+      "isDefault",
       "quickLaunchLink"
     ],
     "type": "object"

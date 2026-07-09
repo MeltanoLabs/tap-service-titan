@@ -22,7 +22,6 @@
                     "CampaignCategories"
                 ],
                 "summary": "Gets a paginated list of campaign categories",
-                "description": "Gets a paginated list of campaign categories",
                 "operationId": "CampaignCategories_GetList",
                 "parameters": [
                     {
@@ -166,7 +165,6 @@
                     "CampaignCategories"
                 ],
                 "summary": "Creates new campaign category",
-                "description": "Creates new campaign category",
                 "operationId": "CampaignCategories_Create",
                 "parameters": [
                     {
@@ -241,7 +239,6 @@
                     "CampaignCategories"
                 ],
                 "summary": "Gets campaign category specified by ID",
-                "description": "Gets campaign category specified by ID",
                 "operationId": "CampaignCategories_Get",
                 "parameters": [
                     {
@@ -316,7 +313,6 @@
                     "CampaignCategories"
                 ],
                 "summary": "Updates specified campaign category in \"patch\" mode",
-                "description": "Updates specified campaign category in \"patch\" mode",
                 "operationId": "CampaignCategories_Update",
                 "parameters": [
                     {
@@ -401,7 +397,6 @@
                     "CampaignCosts"
                 ],
                 "summary": "Gets a paginated list of campaign costs",
-                "description": "Gets a paginated list of campaign costs",
                 "operationId": "CampaignCosts_GetList",
                 "parameters": [
                     {
@@ -535,7 +530,6 @@
                     "CampaignCosts"
                 ],
                 "summary": "Creates new campaign cost",
-                "description": "Creates new campaign cost",
                 "operationId": "CampaignCosts_Create",
                 "parameters": [
                     {
@@ -617,7 +611,6 @@
                     "CampaignCosts"
                 ],
                 "summary": "Gets campaign cost specified by ID",
-                "description": "Gets campaign cost specified by ID",
                 "operationId": "CampaignCosts_Get",
                 "parameters": [
                     {
@@ -691,7 +684,6 @@
                     "CampaignCosts"
                 ],
                 "summary": "Updates specified campaign cost in \"patch\" mode",
-                "description": "Updates specified campaign cost in \"patch\" mode",
                 "operationId": "CampaignCosts_Update",
                 "parameters": [
                     {
@@ -774,7 +766,6 @@
                 "tags": [
                     "CampaignCostSummary"
                 ],
-                "summary": "CampaignCostSummary_Get",
                 "operationId": "CampaignCostSummary_Get",
                 "parameters": [
                     {
@@ -861,7 +852,6 @@
                     "Campaigns"
                 ],
                 "summary": "Gets a paginated list of campaigns",
-                "description": "Gets a paginated list of campaigns",
                 "operationId": "Campaigns_GetList",
                 "parameters": [
                     {
@@ -1055,7 +1045,6 @@
                     "Campaigns"
                 ],
                 "summary": "Creates new campaign",
-                "description": "Creates new campaign",
                 "operationId": "Campaigns_Create",
                 "parameters": [
                     {
@@ -1157,7 +1146,6 @@
                     "Campaigns"
                 ],
                 "summary": "Gets campaign specified by ID",
-                "description": "Gets campaign specified by ID",
                 "operationId": "Campaigns_Get",
                 "parameters": [
                     {
@@ -1245,7 +1233,6 @@
                     "Campaigns"
                 ],
                 "summary": "Updates specified campaign in \"patch\" mode",
-                "description": "Updates specified campaign in \"patch\" mode",
                 "operationId": "Campaigns_Update",
                 "parameters": [
                     {
@@ -1356,7 +1343,6 @@
                     "Campaigns"
                 ],
                 "summary": "Gets a paginated list of campaign costs",
-                "description": "Gets a paginated list of campaign costs",
                 "operationId": "Campaigns_GetCosts",
                 "parameters": [
                     {
@@ -1489,7 +1475,6 @@
                 "tags": [
                     "EmailChannelCost"
                 ],
-                "summary": "EmailChannelCost_Get",
                 "operationId": "EmailChannelCost_Get",
                 "parameters": [
                     {

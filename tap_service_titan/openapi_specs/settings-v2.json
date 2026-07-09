@@ -22,7 +22,6 @@
                     "IntacctBusinessUnitMappings"
                 ],
                 "summary": "Retrieves a paginated list of Intacct business unit mappings based on the specified query parameters.",
-                "description": "Retrieves a paginated list of Intacct business unit mappings based on the specified query parameters.",
                 "operationId": "IntacctBusinessUnitMappings_Get",
                 "parameters": [
                     {
@@ -40,8 +39,8 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "maximum": 2147483647.0,
-                            "minimum": 0.0,
+                            "maximum": 2147483647,
+                            "minimum": 0,
                             "type": "integer",
                             "format": "int32"
                         }
@@ -51,8 +50,8 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "maximum": 500.0,
-                            "minimum": 1.0,
+                            "maximum": 500,
+                            "minimum": 1,
                             "type": "integer",
                             "format": "int32"
                         }
@@ -141,7 +140,6 @@
                     "Employees"
                 ],
                 "summary": "Gets a list of employees",
-                "description": "Gets a list of employees",
                 "operationId": "Employees_GetList",
                 "parameters": [
                     {
@@ -288,6 +286,9 @@
                                                 0
                                             ],
                                             "businessUnitId": 0,
+                                            "businessUnitAccessIds": [
+                                                0
+                                            ],
                                             "createdOn": "string",
                                             "modifiedOn": "string",
                                             "email": "string",
@@ -361,7 +362,6 @@
                     "Employees"
                 ],
                 "summary": "Creates new employee",
-                "description": "Creates new employee",
                 "operationId": "Employees_Create",
                 "parameters": [
                     {
@@ -390,6 +390,9 @@
                                 "password": "string",
                                 "accountCreationMethod": {},
                                 "businessUnitId": 0,
+                                "businessUnitAccessIds": [
+                                    0
+                                ],
                                 "roleId": 0,
                                 "positions": [
                                     "CSR"
@@ -454,7 +457,6 @@
                     "Employees"
                 ],
                 "summary": "Gets a employee by ID",
-                "description": "Gets a employee by ID",
                 "operationId": "Employees_Get",
                 "parameters": [
                     {
@@ -497,6 +499,9 @@
                                         0
                                     ],
                                     "businessUnitId": 0,
+                                    "businessUnitAccessIds": [
+                                        0
+                                    ],
                                     "createdOn": "string",
                                     "modifiedOn": "string",
                                     "email": "string",
@@ -586,7 +591,6 @@
                     "Employees"
                 ],
                 "summary": "Updates employee",
-                "description": "Updates employee",
                 "operationId": "Employees_Update",
                 "parameters": [
                     {
@@ -622,6 +626,9 @@
                                 "email": "string",
                                 "login": "string",
                                 "businessUnitId": 0,
+                                "businessUnitAccessIds": [
+                                    0
+                                ],
                                 "roleId": 0,
                                 "positions": [
                                     "CSR"
@@ -705,7 +712,6 @@
                     "Employees"
                 ],
                 "summary": "Performs standard actions with the account",
-                "description": "Performs standard actions with the account",
                 "operationId": "Employees_AccountActions",
                 "parameters": [
                     {
@@ -789,7 +795,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for employees",
-                "description": "Provides export feed for employees",
                 "operationId": "Export_Employees",
                 "parameters": [
                     {
@@ -856,6 +861,9 @@
                                                 0
                                             ],
                                             "businessUnitId": 0,
+                                            "businessUnitAccessIds": [
+                                                0
+                                            ],
                                             "createdOn": "string",
                                             "modifiedOn": "string",
                                             "email": "string",
@@ -918,7 +926,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for technicians",
-                "description": "Provides export feed for technicians",
                 "operationId": "Export_Technicians",
                 "parameters": [
                     {
@@ -970,6 +977,9 @@
                                             "businessUnitId": 0,
                                             "mainZoneId": 0,
                                             "zoneIds": [
+                                                0
+                                            ],
+                                            "projectLabelIds": [
                                                 0
                                             ],
                                             "createdOn": "string",
@@ -1083,7 +1093,6 @@
                     "Technicians"
                 ],
                 "summary": "Gets a list of technicians",
-                "description": "Gets a list of technicians",
                 "operationId": "Technicians_GetList",
                 "parameters": [
                     {
@@ -1222,6 +1231,9 @@
                                             "zoneIds": [
                                                 0
                                             ],
+                                            "projectLabelIds": [
+                                                0
+                                            ],
                                             "createdOn": "string",
                                             "modifiedOn": "string",
                                             "email": "string",
@@ -1331,7 +1343,6 @@
                     "Technicians"
                 ],
                 "summary": "Creates new technician",
-                "description": "Creates new technician",
                 "operationId": "Technicians_Create",
                 "parameters": [
                     {
@@ -1360,6 +1371,13 @@
                                 "accountCreationMethod": {},
                                 "businessUnitId": 0,
                                 "roleId": 0,
+                                "mainZoneId": 0,
+                                "zoneIds": [
+                                    0
+                                ],
+                                "projectLabelIds": [
+                                    0
+                                ],
                                 "positions": [
                                     "Installer"
                                 ],
@@ -1441,7 +1459,6 @@
                     "Technicians"
                 ],
                 "summary": "Gets a technician by ID",
-                "description": "Gets a technician by ID",
                 "operationId": "Technicians_Get",
                 "parameters": [
                     {
@@ -1482,6 +1499,9 @@
                                     "businessUnitId": 0,
                                     "mainZoneId": 0,
                                     "zoneIds": [
+                                        0
+                                    ],
+                                    "projectLabelIds": [
                                         0
                                     ],
                                     "createdOn": "string",
@@ -1609,7 +1629,6 @@
                     "Technicians"
                 ],
                 "summary": "Updates technician",
-                "description": "Updates technician",
                 "operationId": "Technicians_Update",
                 "parameters": [
                     {
@@ -1645,6 +1664,13 @@
                                 "login": "string",
                                 "businessUnitId": 0,
                                 "roleId": 0,
+                                "mainZoneId": 0,
+                                "zoneIds": [
+                                    0
+                                ],
+                                "projectLabelIds": [
+                                    0
+                                ],
                                 "positions": [
                                     "Installer"
                                 ],
@@ -1745,7 +1771,6 @@
                     "Technicians"
                 ],
                 "summary": "Performs standard actions with the account",
-                "description": "Performs standard actions with the account",
                 "operationId": "Technicians_AccountActions",
                 "parameters": [
                     {
@@ -1831,7 +1856,6 @@
                     "UserRoles"
                 ],
                 "summary": "Gets a list of user roles",
-                "description": "Gets a list of user roles",
                 "operationId": "UserRoles_GetList",
                 "parameters": [
                     {
@@ -1992,7 +2016,6 @@
                     "BusinessUnits"
                 ],
                 "summary": "Gets a list of business units",
-                "description": "Gets a list of business units",
                 "operationId": "BusinessUnits_GetList",
                 "parameters": [
                     {
@@ -2220,7 +2243,6 @@
                     "BusinessUnits"
                 ],
                 "summary": "Gets a business unit by ID",
-                "description": "Gets a business unit by ID",
                 "operationId": "BusinessUnits_Get",
                 "parameters": [
                     {
@@ -2373,7 +2395,6 @@
                     "BusinessUnits"
                 ],
                 "summary": "Update an existing BusinessUnit",
-                "description": "Update an existing BusinessUnit",
                 "operationId": "BusinessUnits_Update",
                 "parameters": [
                     {
@@ -2486,7 +2507,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for business units",
-                "description": "Provides export feed for business units",
                 "operationId": "Export_BusinessUnits",
                 "parameters": [
                     {
@@ -2628,7 +2648,6 @@
                     "Export"
                 ],
                 "summary": "Provides export feed for tag types",
-                "description": "Provides export feed for tag types",
                 "operationId": "Export_TagTypes",
                 "parameters": [
                     {
@@ -2723,7 +2742,6 @@
                     "TagTypes"
                 ],
                 "summary": "Gets a list of tag types",
-                "description": "Gets a list of tag types",
                 "operationId": "TagTypes_GetList",
                 "parameters": [
                     {
@@ -2880,7 +2898,6 @@
                     "TagTypes"
                 ],
                 "summary": "Creates a tag type",
-                "description": "Creates a tag type",
                 "operationId": "TagTypes_Create",
                 "parameters": [
                     {
@@ -2961,7 +2978,6 @@
                     "TagTypes"
                 ],
                 "summary": "Updates a tag type",
-                "description": "Updates a tag type",
                 "operationId": "TagTypes_Update",
                 "parameters": [
                     {
@@ -3327,6 +3343,17 @@
                         "description": "ID of business unit employee belongs to",
                         "format": "int64"
                     },
+                    "businessUnitAccessIds": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Business Unit Access IDs. Returns null when the 'Business units filtering for employees' feature flag is disabled."
+                    },
                     "createdOn": {
                         "type": "string",
                         "description": "When the employee was created",
@@ -3680,6 +3707,17 @@
                         "description": "Business unit Id",
                         "format": "int64"
                     },
+                    "businessUnitAccessIds": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Business Unit Access IDs. Requires 'Business units filtering for employees' feature flag, otherwise HTTP 400."
+                    },
                     "roleId": {
                         "type": "integer",
                         "description": "User role Id",
@@ -3838,6 +3876,14 @@
                         ],
                         "description": "Business unit Id",
                         "format": "int64"
+                    },
+                    "businessUnitAccessIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Business Unit Access IDs. Full replacement. Requires 'Business units filtering for employees' feature flag, otherwise HTTP 400."
                     },
                     "roleId": {
                         "type": "integer",
@@ -4053,6 +4099,17 @@
                         "description": "ID of business unit employee belongs to",
                         "format": "int64"
                     },
+                    "businessUnitAccessIds": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Business Unit Access IDs. Returns null when the 'Business units filtering for employees' feature flag is disabled."
+                    },
                     "createdOn": {
                         "type": "string",
                         "description": "When the employee was created",
@@ -4248,6 +4305,17 @@
                             "format": "int64"
                         },
                         "description": "IDs of all technician's zones"
+                    },
+                    "projectLabelIds": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Project label IDs. Returns null when 'Budget vs Actual' feature flag is disabled."
                     },
                     "createdOn": {
                         "type": "string",
@@ -4891,6 +4959,17 @@
                         },
                         "description": "IDs of all technician's zones"
                     },
+                    "projectLabelIds": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Project label IDs. Returns null when 'Budget vs Actual' feature flag is disabled."
+                    },
                     "createdOn": {
                         "type": "string",
                         "description": "When the technician was created",
@@ -5262,6 +5341,36 @@
                         "description": "User role Id",
                         "format": "int64"
                     },
+                    "mainZoneId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ID of the main technician's zone",
+                        "format": "int64"
+                    },
+                    "zoneIds": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "IDs of all technician's zones"
+                    },
+                    "projectLabelIds": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Project label IDs. Requires 'Budget vs Actual' feature flag, otherwise HTTP 400."
+                    },
                     "positions": {
                         "type": "array",
                         "items": {
@@ -5508,6 +5617,30 @@
                         "type": "integer",
                         "description": "User role Id",
                         "format": "int64"
+                    },
+                    "mainZoneId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ID of the main technician's zone",
+                        "format": "int64"
+                    },
+                    "zoneIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "IDs of all technician's zones. Full replacement."
+                    },
+                    "projectLabelIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Project label IDs. Full replacement. Requires 'Budget vs Actual' feature flag, otherwise HTTP 400."
                     },
                     "positions": {
                         "type": "array",
