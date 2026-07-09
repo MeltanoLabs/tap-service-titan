@@ -4,11 +4,12 @@ from __future__ import annotations
 
 import math
 import sys
+import time
 from dataclasses import KW_ONLY, dataclass
 from datetime import datetime, timedelta, timezone
 from functools import cached_property
 from http import HTTPStatus
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, Protocol
 
 import requests
 import requests.exceptions
@@ -37,7 +38,7 @@ else:
     from typing_extensions import TypedDict
 
 if TYPE_CHECKING:
-    from collections.abc import Generator, Iterable, Sequence
+    from collections.abc import Callable, Generator, Iterable, Sequence
     from datetime import date
 
     from singer_sdk.helpers.types import Context, Record
@@ -113,11 +114,89 @@ class _Report:
         )
 
 
+class _ResponseFetcher(Protocol):
+    def __call__(self, url: str) -> requests.Response: ...
+
+
+class _ResponseValidator(Protocol):
+    def __call__(self, response: requests.Response) -> None: ...
+
+
+@dataclass
+class ReportPoller:
+    """Polls a long-running report data query until it completes.
+
+    Decoupled from `CustomReports`/`requests_session` so the polling loop can be
+    unit-tested with plain stand-in callables instead of mocked `requests.Response`
+    and `Tap` objects.
+    """
+
+    _: KW_ONLY
+
+    fetch: _ResponseFetcher
+    validate: _ResponseValidator
+    sleep: Callable[[float], None] = time.sleep
+
+    poll_interval_seconds: float = 5.0
+    max_wait_seconds: float = 900.0
+
+    def poll(self, url: str) -> dict[str, Any]:
+        """Poll `url` until it stops returning `202 Accepted`.
+
+        Args:
+            url: The poll endpoint to request repeatedly.
+
+        Returns:
+            The decoded JSON body of the first non-`202` response.
+
+        Raises:
+            RetriableAPIError: If the query does not complete within `max_wait_seconds`.
+        """
+        waited = 0.0
+        while waited <= self.max_wait_seconds:
+            response = self.fetch(url)
+            self.validate(response)
+            if response.status_code != HTTPStatus.ACCEPTED:
+                return response.json()  # type: ignore[no-any-return]
+
+            self.sleep(self.poll_interval_seconds)
+            waited += self.poll_interval_seconds
+
+        msg = f"Report data query did not complete within {self.max_wait_seconds}s"
+        raise RetriableAPIError(msg)
+
+    @staticmethod
+    def records_from_payload(payload: dict[str, Any]) -> Iterable[dict[str, str]]:
+        """Turn a `ReportDataResponse` payload into field-name -> string-value records.
+
+        Despite the OpenAPI spec's example showing lowercase keys, `/data/query` and
+        `/data-queries/{token}` actually respond with PascalCase keys (`Fields`/`Data`,
+        with `Name` per field).
+
+        Args:
+            payload: The decoded `ReportDataResponse` body (from either an inline
+                response or a completed poll).
+
+        Yields:
+            Each row as a dict of field name to string value.
+        """
+        field_names = [field["Name"] for field in payload["Fields"]]
+        for record in payload["Data"]:
+            # TODO(maintainers): Use proper types once the API is fixed https://github.com/archdotdev/tap-service-titan/issues/67
+            string_record = [str(val) if val is not None else "" for val in record]
+            yield dict(zip(field_names, string_record, strict=False))
+
+
 class CustomReports(ServiceTitanStream, api_prefix="/reporting/v2"):
     """Define reviews stream."""
 
     http_method = HTTPMethod.POST
     is_sorted = True
+
+    # How long to wait between polls of a long-running report data query, and the
+    # total wall-clock budget before giving up and failing the sync run.
+    _poll_interval_seconds: float = 5.0
+    _poll_max_wait_seconds: float = 900.0
 
     extra_retry_statuses: Sequence[int] = [
         HTTPStatus.CONFLICT,
@@ -135,7 +214,7 @@ class CustomReports(ServiceTitanStream, api_prefix="/reporting/v2"):
         super().__init__(
             tap=tap,
             name=f"custom_report_{self._report.name}",
-            path=f"/report-category/{self._report.category}/reports/{self._report.id}/data",
+            path=f"/report-category/{self._report.category}/reports/{self._report.id}/data/query",
         )
 
         if report.backfill is not None:
@@ -284,24 +363,55 @@ class CustomReports(ServiceTitanStream, api_prefix="/reporting/v2"):
     def parse_response(self, response: requests.Response) -> Iterable[Record]:
         """Parse the response and return an iterator of result records.
 
+        The report-data-query endpoint is asynchronous: a `202` means the report is
+        still running and must be polled for via its token until it completes.
+
         Args:
             response: The HTTP ``requests.Response`` object.
 
         Yields:
             Each record from the source.
         """
-        resp = response.json()
-        field_names = [field["name"] for field in resp["fields"]]
-        for record in resp["data"]:
-            # TODO(maintainers): Use proper types once the API is fixed https://github.com/archdotdev/tap-service-titan/issues/67
-            string_record = [str(val) if val is not None else "" for val in record]
-            data = dict(zip(field_names, string_record, strict=False))
+        payload = (
+            self._await_report_data(response.json()["token"])
+            if response.status_code == HTTPStatus.ACCEPTED
+            else response.json()
+        )
+        for record in ReportPoller.records_from_payload(payload):
             # Add the backfill date to the record if configured
             if self._report.backfill is not None and self._curr_backfill_date is not None:
-                data[self._report.backfill.name] = (
+                record[self._report.backfill.name] = (
                     self._curr_backfill_date.strftime("%Y-%m-%d") + "T00:00:00-00:00"
                 )
-            yield data
+            yield record
+
+    @cached_property
+    def _report_poller(self) -> ReportPoller:
+        return ReportPoller(
+            fetch=lambda url: self.requests_session.get(
+                url,
+                headers=self.http_headers,
+                auth=self.authenticator,
+                timeout=self.timeout,
+            ),
+            validate=self.validate_response,
+            poll_interval_seconds=self._poll_interval_seconds,
+            max_wait_seconds=self._poll_max_wait_seconds,
+        )
+
+    def _await_report_data(self, token: str) -> dict[str, Any]:
+        """Poll `/data-queries/{token}` until the long-running report query completes.
+
+        Args:
+            token: The token returned by the `202` response from the initial query.
+
+        Returns:
+            The decoded `ReportDataResponse` body once the query has completed.
+
+        Raises:
+            RetriableAPIError: If the query does not complete within the poll budget.
+        """
+        return self._report_poller.poll(f"{self.url_base}/data-queries/{token}")
 
     @override
     def get_records(self, context: Context | None) -> Iterable[dict[str, Any]]:
