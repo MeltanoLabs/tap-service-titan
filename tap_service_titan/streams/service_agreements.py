@@ -5,7 +5,7 @@ from __future__ import annotations
 import sys
 from typing import TYPE_CHECKING
 
-from tap_service_titan.client import ServiceTitanExportStream
+from tap_service_titan.client import ServiceTitanExportStream, ServiceTitanStream
 from tap_service_titan.openapi_specs import SERVICE_AGREEMENTS, ServiceTitanSchema
 
 if sys.version_info >= (3, 12):
@@ -17,11 +17,18 @@ if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context, Record
 
 
-class _BaseServiceAgreementsStream(ServiceTitanExportStream, api_prefix="/service-agreements/v2"):
+class _BaseServiceAgreementsStream(ServiceTitanStream, api_prefix="/service-agreements/v2"):
     pass
 
 
-class ServiceAgreementsStream(_BaseServiceAgreementsStream):
+class _BaseServiceAgreementsExportStream(
+    ServiceTitanExportStream,
+    api_prefix="/service-agreements/v2",
+):
+    pass
+
+
+class ServiceAgreementsStream(_BaseServiceAgreementsExportStream):
     """Define service agreements stream."""
 
     name = "service_agreements"
@@ -41,3 +48,19 @@ class ServiceAgreementsStream(_BaseServiceAgreementsStream):
         if end_date := row.get("endDate"):
             row["endDate"] = end_date.split("T")[0]
         return row
+
+
+class ServiceAgreementsCustomFieldsStream(_BaseServiceAgreementsStream):
+    """Define service agreements custom field types stream.
+
+    https://developer.servicetitan.io/api-details/#api=tenant-service-agreements-v2&operation=ServiceAgreements_GetCustomFieldTypes
+    """
+
+    name = "service_agreements_custom_fields"
+    path = "/service-agreements/custom-fields"
+    primary_keys = ("id",)
+    replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(
+        SERVICE_AGREEMENTS,
+        key="ServiceAgreements.V2.CustomFieldTypeResponse",
+    )
