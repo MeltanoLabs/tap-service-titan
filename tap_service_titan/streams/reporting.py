@@ -43,16 +43,16 @@ if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context, Record
 
 
-class _ParameterDict(TypedDict, closed=True):  # type: ignore[call-arg]
+class _ParameterDict(TypedDict, closed=True):
     name: str
     value: str
 
 
-class _Payload(TypedDict, closed=True):  # type: ignore[call-arg]
+class _Payload(TypedDict, closed=True):
     parameters: list[_ParameterDict]
 
 
-class _ReportConfig(TypedDict, closed=True):  # type: ignore[call-arg]
+class _ReportConfig(TypedDict, closed=True):
     report_name: str
     report_id: str
     report_category: str
