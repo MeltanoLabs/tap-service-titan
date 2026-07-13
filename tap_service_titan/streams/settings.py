@@ -34,14 +34,19 @@ class BusinessUnitsStream(_BaseSettingsExportStream):
     schema = ServiceTitanSchema(SETTINGS, key="TenantSettings.V2.ExportBusinessUnitResponse")
 
 
-class TechniciansStream(_BaseSettingsExportStream):
-    """Define technicians stream."""
+class TechniciansStream(_BaseSettingsStream, active_any=True):
+    """Define technicians stream.
+
+    Uses the paginated list endpoint rather than /export/technicians: the export
+    feed always returns an empty ``zoneIds`` array, while the list endpoint
+    populates it. Field sets are otherwise identical.
+    """
 
     name = "technicians"
-    path = "/export/technicians"
+    path = "/technicians"
     primary_keys = ("id",)
     replication_key: str = "modifiedOn"
-    schema = ServiceTitanSchema(SETTINGS, key="TenantSettings.V2.ExportTechnicianResponse")
+    schema = ServiceTitanSchema(SETTINGS, key="TenantSettings.V2.TechnicianResponse")
 
 
 class TagTypesStream(_BaseSettingsStream, active_any=True):
