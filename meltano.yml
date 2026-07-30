@@ -31,9 +31,27 @@ plugins:
     - name: tenant_id
       kind: string
     - name: api_url
-      kind: string
+      kind: options
+      value: https://api.servicetitan.io
+      description: The URL for the ServiceTitan API
+      options:
+      - label: Production
+        value: https://api.servicetitan.io
+      - label: Integration
+        value: https://api-integration.servicetitan.io
     - name: auth_url
-      kind: string
+      kind: options
+      value: https://auth.servicetitan.io/connect/token
+      description: The URL for the ServiceTitan OAuth API
+      options:
+      - label: Production
+        value: https://auth.servicetitan.io/connect/token
+      - label: Integration
+        value: https://auth-integration.servicetitan.io/connect/token
+    - name: start_date
+      kind: date_iso8601
+      description: The start date-time for incremental streams
+      value: 2026-01-01T00:00:00Z
     config:
       api_url: https://api-integration.servicetitan.io
       auth_url: https://auth-integration.servicetitan.io/connect/token
