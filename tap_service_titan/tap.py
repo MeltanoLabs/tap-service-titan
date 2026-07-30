@@ -58,21 +58,29 @@ class TapServiceTitan(Tap):
         th.Property(
             "api_url",
             th.StringType,
-            default="https://api-integration.servicetitan.io",
-            description="The url for the ServiceTitan API",
+            default="https://api.servicetitan.io",
+            description="The URL for the ServiceTitan API",
+            allowed_values=[
+                "https://api.servicetitan.io",
+                "https://api-integration.servicetitan.io",
+            ],
         ),
         th.Property(
             "auth_url",
             th.StringType,
-            default="https://auth-integration.servicetitan.io/connect/token",
-            description="The url for the ServiceTitan OAuth API",
+            default="https://auth.servicetitan.io/connect/token",
+            description="The URL for the ServiceTitan OAuth API",
             nullable=False,
+            allowed_values=[
+                "https://auth.servicetitan.io/connect/token",
+                "https://auth-integration.servicetitan.io/connect/token",
+            ],
         ),
         th.Property(
             "start_date",
             th.DateTimeType,
             default="2026-01-01T00:00:00Z",
-            description="The start date for the records to pull.",
+            description="The start date-time for incremental streams.",
         ),
         th.Property(
             "custom_reports",
