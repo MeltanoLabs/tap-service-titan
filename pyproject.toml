@@ -21,7 +21,7 @@ dependencies = [
     "backports-httpmethod~=0.2.1 ; python_version < '3.11'",
     "singer-sdk[faker]~=0.54.5",
     "requests~=2.34.0",
-    "typing-extensions==4.15.0",
+    "typing-extensions==4.16.0",
 ]
 
 [project.optional-dependencies]
