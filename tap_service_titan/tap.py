@@ -83,6 +83,17 @@ class TapServiceTitan(Tap):
             description="The start date-time for incremental streams.",
         ),
         th.Property(
+            "capacities_lookahead_days",
+            th.IntegerType,
+            default=14,
+            description=(
+                "Number of days ahead of the current date to pull availability for "
+                "the `capacities` stream. The stream issues one request per day in the "
+                "window `[today, today + capacities_lookahead_days]`, so larger values "
+                "increase the number of API calls (and runtime) per sync."
+            ),
+        ),
+        th.Property(
             "custom_reports",
             th.ArrayType(
                 th.ObjectType(
