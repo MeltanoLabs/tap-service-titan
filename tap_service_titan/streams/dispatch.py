@@ -111,21 +111,20 @@ class CapacitiesStream(_BaseDispatchStream[datetime]):
                 yield availability_dict
 
     @override
-    def get_new_paginator(self) -> CapacitiesPaginator | None:
-        """Get the paginator."""
-        if start_date := self.get_starting_timestamp(self.context):
-            start_date = min(start_date, now())
-            # Set the time to the start of the day to capture late updates
-            return CapacitiesPaginator(
-                start_date.replace(
-                    hour=0,
-                    minute=0,
-                    second=0,
-                    microsecond=0,
-                )
-            )
+    def get_new_paginator(self) -> CapacitiesPaginator:
+        """Get the paginator.
 
-        return None
+        Availability is inherently forward-looking, so the window always starts at
+        the current day regardless of the configured ``start_date`` or any stored
+        replication bookmark. Every sync (incremental or full refresh) is therefore
+        bounded to ``[today, today + capacities_lookahead_days]`` rather than walking
+        forward from ``start_date``, which keeps the request count proportional to the
+        lookahead window instead of the tenant's history.
+        """
+        lookahead_days = self.config.get("capacities_lookahead_days", 14)
+        # Set the time to the start of the day to capture late updates.
+        start_of_today = now().replace(hour=0, minute=0, second=0, microsecond=0)
+        return CapacitiesPaginator(start_of_today, lookahead_days=lookahead_days)
 
     @override
     def prepare_request_payload(
