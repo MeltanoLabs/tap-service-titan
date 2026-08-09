@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import sys
+import typing as t
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from functools import cached_property
+from http import HTTPStatus
 from typing import TYPE_CHECKING, Any
 
 import requests
@@ -30,6 +32,14 @@ if TYPE_CHECKING:
 
 
 DEFAULT_PAGE_SIZE = 5000
+
+
+class StreamNotEntitledError(Exception):
+    """Raised when the tenant is not licensed for the endpoint backing a stream.
+
+    Internal control-flow signal, caught in
+    :meth:`ServiceTitanBaseStream.request_records`. It must not escape the tap.
+    """
 
 
 @dataclass
@@ -198,6 +208,53 @@ class ServiceTitanBaseStream(RESTStream[_TToken]):
                 # This helps debug unexpected responses (e.g., HTML error pages)
                 return f"{default}. Response body: {response.text}"
         return default
+
+    @override
+    def validate_response(self, response: requests.Response) -> None:
+        """Validate the response, translating 403s into a skip when configured.
+
+        ServiceTitan returns 403 when the tenant has not licensed the module
+        backing an endpoint (e.g. Marketing Pro, WBS budget codes). That is a
+        property of the tenant's subscription, not a transient failure, so
+        retrying cannot help. Opting in lets one stream selection be shared
+        across tenants instead of maintaining a bespoke list per tenant.
+
+        Args:
+            response: A :class:`requests.Response` object.
+
+        Raises:
+            StreamNotEntitledError: If the tenant is not entitled to the endpoint
+                and ``skip_unentitled_streams`` is enabled.
+        """
+        if response.status_code == HTTPStatus.FORBIDDEN and self.config.get(
+            "skip_unentitled_streams", False
+        ):
+            raise StreamNotEntitledError(self.response_error_message(response))
+        super().validate_response(response)
+
+    @override
+    def request_records(self, context: Context | None) -> t.Iterable[dict]:
+        """Request records, yielding nothing if the tenant lacks entitlement.
+
+        Ending the generator leaves the stream's bookmark untouched, so a tenant
+        that later licenses the module resumes from where it left off rather
+        than re-syncing from the start date.
+
+        Args:
+            context: Stream partition or context dictionary.
+
+        Yields:
+            Records from the endpoint, or nothing if it returned 403.
+        """
+        try:
+            yield from super().request_records(context)
+        except StreamNotEntitledError as exc:
+            self.logger.warning(
+                "Skipping stream '%s' for tenant %s: not entitled to this endpoint. %s",
+                self.name,
+                self.config.get("tenant_id"),
+                exc,
+            )
 
 
 class ServiceTitanExportStream(ServiceTitanBaseStream):
