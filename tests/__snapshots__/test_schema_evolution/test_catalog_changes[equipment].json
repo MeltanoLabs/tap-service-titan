@@ -644,6 +644,15 @@
     {
       "breadcrumb": [
         "properties",
+        "excludeEstimatedCostFromInvoice"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "isPriceLocked"
       ],
       "metadata": {
@@ -936,6 +945,13 @@
         },
         "type": [
           "array",
+          "null"
+        ]
+      },
+      "excludeEstimatedCostFromInvoice": {
+        "description": "Whether the estimated cost is excluded from the invoice when carried over from an estimate",
+        "type": [
+          "boolean",
           "null"
         ]
       },

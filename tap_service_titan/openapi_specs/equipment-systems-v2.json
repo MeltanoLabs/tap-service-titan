@@ -315,6 +315,9 @@
                                     "modifiedBy": 0,
                                     "equipmentIds": [
                                         0
+                                    ],
+                                    "directChildEquipmentIds": [
+                                        0
                                     ]
                                 }
                             }
@@ -452,6 +455,9 @@
                                     "modifiedOn": "string",
                                     "modifiedBy": 0,
                                     "equipmentIds": [
+                                        0
+                                    ],
+                                    "directChildEquipmentIds": [
                                         0
                                     ]
                                 }
@@ -614,6 +620,9 @@
                                     "modifiedOn": "string",
                                     "modifiedBy": 0,
                                     "equipmentIds": [
+                                        0
+                                    ],
+                                    "directChildEquipmentIds": [
                                         0
                                     ]
                                 }
@@ -862,6 +871,9 @@
                                     "modifiedBy": 0,
                                     "equipmentIds": [
                                         0
+                                    ],
+                                    "directChildEquipmentIds": [
+                                        0
                                     ]
                                 }
                             }
@@ -1011,6 +1023,9 @@
                                     "modifiedOn": "string",
                                     "modifiedBy": 0,
                                     "equipmentIds": [
+                                        0
+                                    ],
+                                    "directChildEquipmentIds": [
                                         0
                                     ]
                                 }
@@ -3507,7 +3522,18 @@
                             "type": "integer",
                             "format": "int64"
                         },
-                        "description": "The unique identifiers for the equipment records associated with the equipment system."
+                        "description": "All equipment IDs in the system hierarchy, including direct children and nested sub-equipment.\nFor example, if equipment A is on the system and equipment B is a child of A, both IDs appear here."
+                    },
+                    "directChildEquipmentIds": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Equipment IDs whose parent is this system (direct children only).\nFor example, if equipment A is on the system and equipment B is a child of A, only A appears here.\nUse this list to determine which equipment can be removed directly from the system;\nsub-equipment must be removed via its parent equipment."
                     }
                 },
                 "additionalProperties": false,

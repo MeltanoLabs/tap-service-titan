@@ -91,6 +91,7 @@
                                             "total": 0,
                                             "unitCost": 0,
                                             "totalCost": 0,
+                                            "vendorTaxCost": 0,
                                             "itemGroupName": "string",
                                             "itemGroupRootId": 0,
                                             "createdOn": "string",
@@ -111,6 +112,7 @@
                                     ],
                                     "subtotal": 0,
                                     "tax": 0,
+                                    "vendorTaxCost": 0,
                                     "businessUnitId": 0,
                                     "businessUnitName": "string",
                                     "isRecommended": true,
@@ -275,6 +277,7 @@
                                             "total": 0,
                                             "unitCost": 0,
                                             "totalCost": 0,
+                                            "vendorTaxCost": 0,
                                             "itemGroupName": "string",
                                             "itemGroupRootId": 0,
                                             "createdOn": "string",
@@ -295,6 +298,7 @@
                                     ],
                                     "subtotal": 0,
                                     "tax": 0,
+                                    "vendorTaxCost": 0,
                                     "businessUnitId": 0,
                                     "businessUnitName": "string",
                                     "isRecommended": true,
@@ -601,6 +605,7 @@
                                                     "total": 0,
                                                     "unitCost": 0,
                                                     "totalCost": 0,
+                                                    "vendorTaxCost": 0,
                                                     "itemGroupName": "string",
                                                     "itemGroupRootId": 0,
                                                     "createdOn": "string",
@@ -621,6 +626,7 @@
                                             ],
                                             "subtotal": 0,
                                             "tax": 0,
+                                            "vendorTaxCost": 0,
                                             "businessUnitId": 0,
                                             "businessUnitName": "string",
                                             "isRecommended": true,
@@ -781,6 +787,7 @@
                                             "total": 0,
                                             "unitCost": 0,
                                             "totalCost": 0,
+                                            "vendorTaxCost": 0,
                                             "itemGroupName": "string",
                                             "itemGroupRootId": 0,
                                             "createdOn": "string",
@@ -801,6 +808,7 @@
                                     ],
                                     "subtotal": 0,
                                     "tax": 0,
+                                    "vendorTaxCost": 0,
                                     "businessUnitId": 0,
                                     "businessUnitName": "string",
                                     "isRecommended": true,
@@ -994,6 +1002,7 @@
                                             "total": 0,
                                             "unitCost": 0,
                                             "totalCost": 0,
+                                            "vendorTaxCost": 0,
                                             "itemGroupName": "string",
                                             "itemGroupRootId": 0,
                                             "createdOn": "string",
@@ -1126,6 +1135,7 @@
                                             "total": 0,
                                             "unitCost": 0,
                                             "totalCost": 0,
+                                            "vendorTaxCost": 0,
                                             "itemGroupName": "string",
                                             "itemGroupRootId": 0,
                                             "createdOn": "string",
@@ -1146,6 +1156,7 @@
                                     ],
                                     "subtotal": 0,
                                     "tax": 0,
+                                    "vendorTaxCost": 0,
                                     "businessUnitId": 0,
                                     "businessUnitName": "string",
                                     "isRecommended": true,
@@ -1390,6 +1401,7 @@
                                     "total": 0,
                                     "unitCost": 0,
                                     "totalCost": 0,
+                                    "vendorTaxCost": 0,
                                     "itemGroupName": "string",
                                     "itemGroupRootId": 0,
                                     "createdOn": "string",
@@ -1590,6 +1602,7 @@
                                                     "total": 0,
                                                     "unitCost": 0,
                                                     "totalCost": 0,
+                                                    "vendorTaxCost": 0,
                                                     "itemGroupName": "string",
                                                     "itemGroupRootId": 0,
                                                     "createdOn": "string",
@@ -1610,6 +1623,7 @@
                                             ],
                                             "subtotal": 0,
                                             "tax": 0,
+                                            "vendorTaxCost": 0,
                                             "businessUnitId": 0,
                                             "businessUnitName": "string",
                                             "isRecommended": true,
@@ -1741,6 +1755,7 @@
                                                     "total": 0,
                                                     "unitCost": 0,
                                                     "totalCost": 0,
+                                                    "vendorTaxCost": 0,
                                                     "itemGroupName": "string",
                                                     "itemGroupRootId": 0,
                                                     "createdOn": "string",
@@ -1761,6 +1776,7 @@
                                             ],
                                             "subtotal": 0,
                                             "tax": 0,
+                                            "vendorTaxCost": 0,
                                             "businessUnitId": 0,
                                             "businessUnitName": "string",
                                             "isRecommended": true,
@@ -3107,6 +3123,7 @@
                     "active",
                     "subtotal",
                     "tax",
+                    "vendorTaxCost",
                     "isRecommended",
                     "isChangeOrder"
                 ],
@@ -3226,6 +3243,10 @@
                         "type": "number",
                         "format": "decimal"
                     },
+                    "vendorTaxCost": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
                     "businessUnitId": {
                         "type": [
                             "integer",
@@ -3325,6 +3346,7 @@
                     "total",
                     "unitCost",
                     "totalCost",
+                    "vendorTaxCost",
                     "itemGroupName",
                     "createdOn",
                     "modifiedOn"
@@ -3369,6 +3391,10 @@
                         "format": "decimal"
                     },
                     "totalCost": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "vendorTaxCost": {
                         "type": "number",
                         "format": "decimal"
                     },
@@ -4070,6 +4096,7 @@
                     "total",
                     "unitCost",
                     "totalCost",
+                    "vendorTaxCost",
                     "itemGroupName",
                     "createdOn",
                     "modifiedOn",
@@ -4115,6 +4142,10 @@
                         "format": "decimal"
                     },
                     "totalCost": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "vendorTaxCost": {
                         "type": "number",
                         "format": "decimal"
                     },
@@ -4226,6 +4257,7 @@
                     "active",
                     "subtotal",
                     "tax",
+                    "vendorTaxCost",
                     "isRecommended",
                     "isChangeOrder"
                 ],
@@ -4342,6 +4374,10 @@
                         "format": "decimal"
                     },
                     "tax": {
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    "vendorTaxCost": {
                         "type": "number",
                         "format": "decimal"
                     },

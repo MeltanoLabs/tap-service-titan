@@ -1974,7 +1974,8 @@
                                             "active": true,
                                             "name": "string",
                                             "createdOn": "string",
-                                            "employeeType": "Employee"
+                                            "employeeType": "Employee",
+                                            "roleSource": "ServiceTitan"
                                         }
                                     ]
                                 }
@@ -2117,6 +2118,14 @@
                         "schema": {
                             "type": "string",
                             "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, Name, CreatedOn, ModifiedOn.",
+                        "schema": {
+                            "type": "string"
                         }
                     },
                     {
@@ -2828,6 +2837,7 @@
                     {
                         "name": "sort",
                         "in": "query",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, Name, ModifiedOn, CreatedOn.",
                         "schema": {
                             "type": "string"
                         }
@@ -5833,7 +5843,8 @@
                     "active",
                     "name",
                     "createdOn",
-                    "employeeType"
+                    "employeeType",
+                    "roleSource"
                 ],
                 "type": "object",
                 "properties": {
@@ -5853,6 +5864,9 @@
                     },
                     "employeeType": {
                         "$ref": "#/components/schemas/TenantSettings.V2.EmployeeType"
+                    },
+                    "roleSource": {
+                        "$ref": "#/components/schemas/TenantSettings.V2.RoleSource"
                     }
                 },
                 "additionalProperties": false
@@ -5867,6 +5881,20 @@
                 "x-enumNames": [
                     "Employee",
                     "Technician"
+                ]
+            },
+            "TenantSettings.V2.RoleSource": {
+                "enum": [
+                    "ServiceTitan",
+                    "EnterpriseHub",
+                    "Gum"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "ServiceTitan",
+                    "EnterpriseHub",
+                    "Gum"
                 ]
             },
             "TenantSettings.V2.RequestedEmployeeTypeArg": {

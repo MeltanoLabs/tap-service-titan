@@ -366,6 +366,102 @@
                         ]
                     }
                 ]
+            },
+            "post": {
+                "tags": [
+                    "Adjustments"
+                ],
+                "summary": "Create a new adjustment",
+                "operationId": "Adjustments_Create",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Create Adjustment Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Inventory.V2.CreateInventoryAdjustmentRequest"
+                            },
+                            "example": {
+                                "locationId": 0,
+                                "type": {},
+                                "date": "string",
+                                "businessUnitId": 0,
+                                "referenceNumber": "string",
+                                "memo": "string",
+                                "externalData": {
+                                    "applicationGuid": "string",
+                                    "externalData": [
+                                        {
+                                            "key": "string",
+                                            "value": "string"
+                                        }
+                                    ]
+                                },
+                                "items": [
+                                    {
+                                        "skuId": 0,
+                                        "quantity": 0,
+                                        "unitOfMeasureId": 0,
+                                        "description": "string",
+                                        "budgetCodeId": 0
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Id of the created Adjustment",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModificationResponse"
+                                },
+                                "example": {
+                                    "id": 0
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.inv.adjustments:w"
+                        ]
+                    }
+                ]
             }
         },
         "/tenant/{tenant}/adjustments/{id}": {
@@ -405,6 +501,22 @@
                                 "$ref": "#/components/schemas/Inventory.V2.UpdateAdjustmentRequest"
                             },
                             "example": {
+                                "locationId": 0,
+                                "type": {},
+                                "date": "string",
+                                "businessUnitId": 0,
+                                "referenceNumber": "string",
+                                "memo": "string",
+                                "items": [
+                                    {
+                                        "id": 0,
+                                        "skuId": 0,
+                                        "quantity": 0,
+                                        "unitOfMeasureId": 0,
+                                        "description": "string",
+                                        "budgetCodeId": 0
+                                    }
+                                ],
                                 "externalData": {
                                     "patchMode": {},
                                     "applicationGuid": "string",
@@ -5853,6 +5965,24 @@
                                 "$ref": "#/components/schemas/Inventory.V2.UpdateTransferRequest"
                             },
                             "example": {
+                                "transferFromId": 0,
+                                "transferToId": 0,
+                                "typeId": 0,
+                                "date": "string",
+                                "referenceNumber": "string",
+                                "memo": "string",
+                                "jobId": 0,
+                                "dateRequired": "string",
+                                "items": [
+                                    {
+                                        "id": 0,
+                                        "skuId": 0,
+                                        "quantity": 0,
+                                        "description": "string",
+                                        "unitOfMeasureId": 0,
+                                        "budgetCodeId": 0
+                                    }
+                                ],
                                 "externalData": {
                                     "patchMode": {},
                                     "applicationGuid": "string",
@@ -6479,6 +6609,14 @@
                                 "type": "integer",
                                 "format": "int64"
                             }
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Returns vendors whose name contains the supplied value (partial, case-insensitive match).",
+                        "schema": {
+                            "type": "string"
                         }
                     },
                     {
@@ -8072,9 +8210,219 @@
                 "additionalProperties": false,
                 "description": "Default response when creating object with a new ID, or updating object by specified ID."
             },
+            "Inventory.V2.CreateInventoryAdjustmentRequest": {
+                "required": [
+                    "locationId",
+                    "type",
+                    "businessUnitId"
+                ],
+                "type": "object",
+                "properties": {
+                    "locationId": {
+                        "type": "integer",
+                        "description": "Inventory location Id the adjustment posts against",
+                        "format": "int64"
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/InventoryUnsafe.InventoryAdjustmentType"
+                            }
+                        ],
+                        "description": "Adjustment type. Only manually-creatable types are accepted (Adjustment, BeginningBalance, Consignment)"
+                    },
+                    "date": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Adjustment date. Defaults to today (tenant time) when omitted",
+                        "format": "date-time"
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "description": "Business unit Id",
+                        "format": "int64"
+                    },
+                    "referenceNumber": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Reference number"
+                    },
+                    "memo": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Memo"
+                    },
+                    "externalData": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Inventory.V2.ExternalDataCreateRequest"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "External data to attach to the created adjustment"
+                    },
+                    "items": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/Inventory.V2.CreateInventoryAdjustmentItemRequest"
+                        },
+                        "description": "Adjustment line items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents a request to create an inventory adjustment"
+            },
+            "InventoryUnsafe.InventoryAdjustmentType": {
+                "enum": [
+                    "Adjustment",
+                    "BeginningBalance",
+                    "InventoryReturn",
+                    "InventoryCount",
+                    "AutoConsume",
+                    "ReturnToWarehouse",
+                    "Consignment",
+                    "ConsignmentInventoryCount",
+                    "ReturnToVendor",
+                    "IntracompanyTransferIncoming",
+                    "IntracompanyTransferOutgoing"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Adjustment",
+                    "BeginningBalance",
+                    "InventoryReturn",
+                    "InventoryCount",
+                    "AutoConsume",
+                    "ReturnToWarehouse",
+                    "Consignment",
+                    "ConsignmentInventoryCount",
+                    "ReturnToVendor",
+                    "IntracompanyTransferIncoming",
+                    "IntracompanyTransferOutgoing"
+                ]
+            },
+            "Inventory.V2.ExternalDataCreateRequest": {
+                "required": [
+                    "applicationGuid",
+                    "externalData"
+                ],
+                "type": "object",
+                "properties": {
+                    "applicationGuid": {
+                        "type": "string",
+                        "description": "Items that are created with a specific guid, could be fetched/updated/removed\nonly when the same application guid is provided.",
+                        "format": "guid"
+                    },
+                    "externalData": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Inventory.V2.ExternalDataModel"
+                        },
+                        "description": "External data list."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Inventory.V2.CreateInventoryAdjustmentItemRequest": {
+                "required": [
+                    "skuId",
+                    "quantity"
+                ],
+                "type": "object",
+                "properties": {
+                    "skuId": {
+                        "type": "integer",
+                        "description": "Sku Id",
+                        "format": "int64"
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "description": "Change in quantity. Negative values are allowed",
+                        "format": "decimal"
+                    },
+                    "unitOfMeasureId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Unit of measure Id",
+                        "format": "int64"
+                    },
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Line description override"
+                    },
+                    "budgetCodeId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Budget code Id",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents a single line item on a create adjustment request"
+            },
             "Inventory.V2.UpdateAdjustmentRequest": {
                 "type": "object",
                 "properties": {
+                    "locationId": {
+                        "type": "integer",
+                        "description": "Inventory location Id the adjustment posts against",
+                        "format": "int64"
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/InventoryUnsafe.InventoryAdjustmentType"
+                            }
+                        ],
+                        "description": "Adjustment type. Only manually-creatable types are accepted (Adjustment, BeginningBalance, Consignment)"
+                    },
+                    "date": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Adjustment date",
+                        "format": "date-time"
+                    },
+                    "businessUnitId": {
+                        "type": "integer",
+                        "description": "Business unit Id",
+                        "format": "int64"
+                    },
+                    "referenceNumber": {
+                        "type": "string",
+                        "description": "Reference number"
+                    },
+                    "memo": {
+                        "type": "string",
+                        "description": "Memo"
+                    },
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Inventory.V2.UpdateAdjustmentItemRequest"
+                        },
+                        "description": "Full replacement of the adjustment line items when provided. Lines with an id are updated,\nlines without an id are added, and existing lines absent from the list are removed."
+                    },
                     "externalData": {
                         "oneOf": [
                             {
@@ -8086,6 +8434,58 @@
                 },
                 "additionalProperties": false,
                 "description": "Represents request to update adjustment"
+            },
+            "Inventory.V2.UpdateAdjustmentItemRequest": {
+                "required": [
+                    "skuId",
+                    "quantity"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Id of an existing line to update; omit to add a new line",
+                        "format": "int64"
+                    },
+                    "skuId": {
+                        "type": "integer",
+                        "description": "Sku Id",
+                        "format": "int64"
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "description": "Change in quantity. Negative values are allowed",
+                        "format": "decimal"
+                    },
+                    "unitOfMeasureId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Unit of measure Id",
+                        "format": "int64"
+                    },
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Line description override"
+                    },
+                    "budgetCodeId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Budget code Id",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents a single line item on an update adjustment request"
             },
             "Inventory.V2.ExternalDataUpdateRequest": {
                 "required": [
@@ -10826,6 +11226,7 @@
             "Inventory.V2.PurchaseOrderCancellationReason": {
                 "enum": [
                     "NotRequired",
+                    "NotRequired",
                     "Duplicate",
                     "Accidental",
                     "VendorIssue",
@@ -10835,6 +11236,7 @@
                 "type": "string",
                 "description": "",
                 "x-enumNames": [
+                    "Default",
                     "NotRequired",
                     "Duplicate",
                     "Accidental",
@@ -11942,6 +12344,7 @@
             "Inventory.V2.ReceiptCancellationReason": {
                 "enum": [
                     "NotRequired",
+                    "NotRequired",
                     "Duplicate",
                     "Accidental",
                     "VendorIssue",
@@ -11951,6 +12354,7 @@
                 "type": "string",
                 "description": "",
                 "x-enumNames": [
+                    "Default",
                     "NotRequired",
                     "Duplicate",
                     "Accidental",
@@ -12393,6 +12797,7 @@
             "Inventory.V2.ReturnCancellationReason": {
                 "enum": [
                     "NotRequired",
+                    "NotRequired",
                     "Duplicate",
                     "Accidental",
                     "VendorIssue",
@@ -12402,6 +12807,7 @@
                 "type": "string",
                 "description": "",
                 "x-enumNames": [
+                    "Default",
                     "NotRequired",
                     "Duplicate",
                     "Accidental",
@@ -12995,6 +13401,60 @@
             "Inventory.V2.UpdateTransferRequest": {
                 "type": "object",
                 "properties": {
+                    "transferFromId": {
+                        "type": "integer",
+                        "description": "Source inventory location Id (editable only while Pending)",
+                        "format": "int64"
+                    },
+                    "transferToId": {
+                        "type": "integer",
+                        "description": "Destination inventory location Id (editable while Pending, or pre-received for job transfers)",
+                        "format": "int64"
+                    },
+                    "typeId": {
+                        "type": "integer",
+                        "description": "Transfer type Id (editable only while Pending)",
+                        "format": "int64"
+                    },
+                    "date": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Transfer date (editable only while Pending)",
+                        "format": "date-time"
+                    },
+                    "referenceNumber": {
+                        "type": "string",
+                        "description": "Reference number"
+                    },
+                    "memo": {
+                        "type": "string",
+                        "description": "Memo"
+                    },
+                    "jobId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Job Id",
+                        "format": "int64"
+                    },
+                    "dateRequired": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Required-by date",
+                        "format": "date-time"
+                    },
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Inventory.V2.UpdateTransferItemRequest"
+                        },
+                        "description": "Full replacement of the transfer line items when provided. Lines with an id are updated,\nlines without an id are added, and active lines absent from the list are removed."
+                    },
                     "externalData": {
                         "oneOf": [
                             {
@@ -13006,6 +13466,58 @@
                 },
                 "additionalProperties": false,
                 "description": "Represents request to update transfer"
+            },
+            "Inventory.V2.UpdateTransferItemRequest": {
+                "required": [
+                    "skuId",
+                    "quantity"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Id of an existing line to update; omit to add a new line",
+                        "format": "int64"
+                    },
+                    "skuId": {
+                        "type": "integer",
+                        "description": "Sku Id",
+                        "format": "int64"
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "description": "Quantity to transfer. Must be positive",
+                        "format": "decimal"
+                    },
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Line description override"
+                    },
+                    "unitOfMeasureId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Unit of measure Id",
+                        "format": "int64"
+                    },
+                    "budgetCodeId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Budget code Id",
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents a single line item on an update transfer request"
             },
             "PaginatedResponse_Of_Inventory.V2.TruckResponse": {
                 "required": [
@@ -13182,28 +13694,6 @@
                 },
                 "additionalProperties": false,
                 "description": "Represents a request to create a new truck"
-            },
-            "Inventory.V2.ExternalDataCreateRequest": {
-                "required": [
-                    "applicationGuid",
-                    "externalData"
-                ],
-                "type": "object",
-                "properties": {
-                    "applicationGuid": {
-                        "type": "string",
-                        "description": "Items that are created with a specific guid, could be fetched/updated/removed\nonly when the same application guid is provided.",
-                        "format": "guid"
-                    },
-                    "externalData": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Inventory.V2.ExternalDataModel"
-                        },
-                        "description": "External data list."
-                    }
-                },
-                "additionalProperties": false
             },
             "Inventory.V2.UpdateTruckRequest": {
                 "type": "object",

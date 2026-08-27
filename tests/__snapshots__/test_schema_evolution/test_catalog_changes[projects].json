@@ -150,6 +150,15 @@
     {
       "breadcrumb": [
         "properties",
+        "contractStartDate"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "modifiedOn"
       ],
       "metadata": {
@@ -244,6 +253,14 @@
         },
         "type": [
           "array",
+          "null"
+        ]
+      },
+      "contractStartDate": {
+        "description": "Date the project's contract starts",
+        "format": "date-time",
+        "type": [
+          "string",
           "null"
         ]
       },

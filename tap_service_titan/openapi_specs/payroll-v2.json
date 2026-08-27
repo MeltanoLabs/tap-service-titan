@@ -746,6 +746,7 @@
                                 "date": "string",
                                 "invoiceId": 0,
                                 "budgetCodeId": 0,
+                                "businessUnitId": 0,
                                 "memo": "string"
                             }
                         }
@@ -1091,6 +1092,7 @@
                                 "date": "string",
                                 "invoiceId": 0,
                                 "budgetCodeId": 0,
+                                "businessUnitId": 0,
                                 "memo": "string"
                             }
                         }
@@ -6077,6 +6079,14 @@
                         "description": "The budget code ID",
                         "format": "int64"
                     },
+                    "businessUnitId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "The business unit ID to use as the payout business unit. If not provided, existing default\nbehavior applies (employee/technician business unit if no invoice; invoice business unit if an invoice is set).",
+                        "format": "int64"
+                    },
                     "memo": {
                         "type": [
                             "string",
@@ -6130,6 +6140,14 @@
                             "null"
                         ],
                         "description": "The budget code ID",
+                        "format": "int64"
+                    },
+                    "businessUnitId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "The business unit ID to use as the payout business unit. If not provided, existing default\nbehavior applies (employee/technician business unit if no invoice; invoice business unit if an invoice is set).",
                         "format": "int64"
                     },
                     "memo": {
