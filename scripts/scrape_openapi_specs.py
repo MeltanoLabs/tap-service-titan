@@ -24,7 +24,7 @@ async def get_soup_from_url(playwright: Playwright, url: str) -> BeautifulSoup:
     rich.print(f"Getting soup from {url}")
     browser = await playwright.chromium.launch()
     page = await browser.new_page()
-    page.set_default_timeout(100000)
+    page.set_default_timeout(250000)
     await page.goto(url, wait_until="networkidle")
     await page.wait_for_selector('a[href*="/docs/apis/"]', timeout=60000)
     html = await page.content()
