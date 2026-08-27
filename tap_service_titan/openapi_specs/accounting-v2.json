@@ -2,7 +2,7 @@
     "openapi": "3.1.0",
     "info": {
         "title": "Accounting",
-        "description": "AP bills, AP credits, AP payments, bank deposits, credit memos, GL accounts, inventory bills, invoices, journal entries, payments, payment terms, payment types, remittance vendors, tax zones",
+        "description": "AP bills, AP credits, AP payments, bank deposits, credit memos, expense transactions, GL accounts, inventory bills, invoices, journal entries, payments, payment terms, payment types, remittance vendors, tax zones",
         "version": "1.0"
     },
     "servers": [
@@ -1231,6 +1231,68 @@
                                                     "name": "string",
                                                     "value": "string"
                                                 }
+                                            ],
+                                            "items": [
+                                                {
+                                                    "id": 0,
+                                                    "skuId": 0,
+                                                    "skuCode": "string",
+                                                    "skuType": "string",
+                                                    "name": "string",
+                                                    "description": "string",
+                                                    "quantity": "string",
+                                                    "cost": "string",
+                                                    "total": "string",
+                                                    "generalLedgerAccount": {
+                                                        "id": 0,
+                                                        "name": "string",
+                                                        "number": "string",
+                                                        "type": "string",
+                                                        "detailType": "string"
+                                                    },
+                                                    "costOfSaleAccount": {
+                                                        "id": 0,
+                                                        "name": "string",
+                                                        "number": "string",
+                                                        "type": "string",
+                                                        "detailType": "string"
+                                                    },
+                                                    "assetAccount": {
+                                                        "id": 0,
+                                                        "name": "string",
+                                                        "number": "string",
+                                                        "type": "string",
+                                                        "detailType": "string"
+                                                    },
+                                                    "projectLabelIds": [
+                                                        0
+                                                    ]
+                                                }
+                                            ],
+                                            "expenseItems": [
+                                                {
+                                                    "id": 0,
+                                                    "amount": "string",
+                                                    "description": "string",
+                                                    "generalLedgerAccount": {
+                                                        "id": 0,
+                                                        "name": "string",
+                                                        "number": "string",
+                                                        "type": "string",
+                                                        "detailType": "string"
+                                                    },
+                                                    "job": {
+                                                        "id": 0,
+                                                        "name": "string"
+                                                    },
+                                                    "businessUnit": {
+                                                        "id": 0,
+                                                        "name": "string"
+                                                    },
+                                                    "projectLabelIds": [
+                                                        0
+                                                    ]
+                                                }
                                             ]
                                         }
                                     ]
@@ -2248,6 +2310,17 @@
                         "in": "query",
                         "schema": {
                             "type": "string"
+                        }
+                    },
+                    {
+                        "name": "statuses",
+                        "in": "query",
+                        "description": "Transaction status, which can be one of: Pending, Posted, Exported.\nBy default, all transaction statuses are included.  If you want to filter by more\nthan one status, add a new \"statuses\" query parameter for each status you want to include.\nFor example: &statuses=Pending&statuses=Posted",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Accounting.V2.TransactionStatus"
+                            }
                         }
                     },
                     {
@@ -3921,6 +3994,7 @@
                                             "membershipId": 0,
                                             "paidOn": "string",
                                             "invoiceConfiguration": "JobInvoice",
+                                            "rateSheetId": 0,
                                             "id": 0,
                                             "syncStatus": "string",
                                             "budgetCodeId": 0,
@@ -4712,6 +4786,7 @@
                                             "isIntacctBankAccount": true,
                                             "source": "Undefined",
                                             "defaultAccountType": {},
+                                            "isIntacctGlGroup": true,
                                             "createdOn": "string",
                                             "modifiedOn": "string"
                                         }
@@ -4803,6 +4878,7 @@
                                     "isIntacctBankAccount": true,
                                     "source": "Undefined",
                                     "defaultAccountType": {},
+                                    "isIntacctGlGroup": true,
                                     "createdOn": "string",
                                     "modifiedOn": "string"
                                 }
@@ -4969,6 +5045,7 @@
                                     "isIntacctBankAccount": true,
                                     "source": "Undefined",
                                     "defaultAccountType": {},
+                                    "isIntacctGlGroup": true,
                                     "createdOn": "string",
                                     "modifiedOn": "string"
                                 }
@@ -5089,6 +5166,7 @@
                                     "isIntacctBankAccount": true,
                                     "source": "Undefined",
                                     "defaultAccountType": {},
+                                    "isIntacctGlGroup": true,
                                     "createdOn": "string",
                                     "modifiedOn": "string"
                                 }
@@ -6929,7 +7007,8 @@
                                             "materialSkuId": 0,
                                             "membershipId": 0,
                                             "paidOn": "string",
-                                            "invoiceConfiguration": "JobInvoice"
+                                            "invoiceConfiguration": "JobInvoice",
+                                            "rateSheetId": 0
                                         }
                                     ]
                                 }
@@ -7024,7 +7103,8 @@
                                         "inventoryLocationId": 0,
                                         "durationBillingId": 0,
                                         "budgetCodeId": 0,
-                                        "id": 0
+                                        "id": 0,
+                                        "serviceDate": "string"
                                     }
                                 ],
                                 "adjustmentToId": 0
@@ -7362,7 +7442,8 @@
                                         "inventoryLocationId": 0,
                                         "durationBillingId": 0,
                                         "budgetCodeId": 0,
-                                        "id": 0
+                                        "id": 0,
+                                        "serviceDate": "string"
                                     }
                                 ],
                                 "dueDate": "string",
@@ -7372,7 +7453,8 @@
                                         "settlementStatus": {},
                                         "settlementDate": "string"
                                     }
-                                ]
+                                ],
+                                "rateSheetId": 0
                             }
                         }
                     }
@@ -7463,7 +7545,8 @@
                                 "inventoryLocationId": 0,
                                 "durationBillingId": 0,
                                 "budgetCodeId": 0,
-                                "id": 0
+                                "id": 0,
+                                "serviceDate": "string"
                             }
                         }
                     }
@@ -12313,6 +12396,26 @@
                         "items": {
                             "$ref": "#/components/schemas/Accounting.V2.CustomFieldResponse"
                         }
+                    },
+                    "items": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.ApCreditItemResponse"
+                        },
+                        "description": "List of line items on the credit (materials and equipment)"
+                    },
+                    "expenseItems": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.ApCreditExpenseItemResponse"
+                        },
+                        "description": "List of expense items on the credit"
                     }
                 },
                 "additionalProperties": false
@@ -12403,6 +12506,193 @@
                     }
                 },
                 "additionalProperties": false
+            },
+            "Accounting.V2.ApCreditItemResponse": {
+                "required": [
+                    "id",
+                    "skuId"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Unique identifier for the credit item",
+                        "format": "int64"
+                    },
+                    "skuId": {
+                        "type": "integer",
+                        "description": "SKU (Stock Keeping Unit) identifier",
+                        "format": "int64"
+                    },
+                    "skuCode": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "SKU code identifier"
+                    },
+                    "skuType": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Type of SKU (e.g., Material, Equipment)"
+                    },
+                    "name": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Display name of the item (material or equipment)"
+                    },
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Description of the item"
+                    },
+                    "quantity": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Quantity of the item as a formatted string"
+                    },
+                    "cost": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Cost per unit as a formatted string"
+                    },
+                    "total": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Total cost of the line item as a formatted string"
+                    },
+                    "generalLedgerAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.GLAccountResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "General ledger account information for accounting purposes"
+                    },
+                    "costOfSaleAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.GLAccountResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Cost of sale account information for accounting purposes"
+                    },
+                    "assetAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.GLAccountResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Asset account information for accounting purposes"
+                    },
+                    "projectLabelIds": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "List of project label IDs associated with the item"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents a line item on an AP credit, containing material or equipment details"
+            },
+            "Accounting.V2.ApCreditExpenseItemResponse": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Unique identifier for the expense item",
+                        "format": "int64"
+                    },
+                    "amount": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Amount of the expense as a formatted string"
+                    },
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Description of the expense item"
+                    },
+                    "generalLedgerAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.GLAccountResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "General ledger account information for the expense"
+                    },
+                    "job": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Job associated with the expense, if applicable"
+                    },
+                    "businessUnit": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Business unit associated with the expense"
+                    },
+                    "projectLabelIds": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "List of project label IDs associated with the expense"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents an expense item on an AP credit for non-inventory costs"
             },
             "Accounting.V2.InventoryBillSyncStatus": {
                 "enum": [
@@ -13057,6 +13347,20 @@
                     "True",
                     "Any",
                     "False"
+                ]
+            },
+            "Accounting.V2.TransactionStatus": {
+                "enum": [
+                    "Pending",
+                    "Posted",
+                    "Exported"
+                ],
+                "type": "string",
+                "description": "Indicates a transaction's status.",
+                "x-enumNames": [
+                    "Pending",
+                    "Posted",
+                    "Exported"
                 ]
             },
             "Accounting.V2.Shared.AmountComparisonOperator": {
@@ -14278,6 +14582,14 @@
                     },
                     "invoiceConfiguration": {
                         "$ref": "#/components/schemas/Accounting.V2.InvoiceConfiguration"
+                    },
+                    "rateSheetId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "The rate sheet currently applied to the invoice; null when no rate sheet is applied.",
+                        "format": "int64"
                     },
                     "id": {
                         "type": "integer",
@@ -15870,6 +16182,7 @@
                     "isIntacctGroup",
                     "isIntacctBankAccount",
                     "source",
+                    "isIntacctGlGroup",
                     "createdOn",
                     "modifiedOn"
                 ],
@@ -15938,6 +16251,9 @@
                             }
                         ]
                     },
+                    "isIntacctGlGroup": {
+                        "type": "boolean"
+                    },
                     "createdOn": {
                         "type": "string",
                         "format": "date-time"
@@ -15995,6 +16311,7 @@
                     "CostOfGoodsSoldLabor",
                     "PayrollLiability",
                     "PayrollClearing",
+                    "BillPriceVariance",
                     "CommittedCosts",
                     "GoodsReceivedNotInvoiced",
                     "VendorDiscount",
@@ -16036,6 +16353,7 @@
                     "CostOfGoodsSoldLabor",
                     "PayrollLiability",
                     "PayrollClearing",
+                    "BillPriceVariance",
                     "CommittedCosts",
                     "GoodsReceivedNotInvoiced",
                     "VendorDiscount",
@@ -16927,6 +17245,14 @@
                     },
                     "invoiceConfiguration": {
                         "$ref": "#/components/schemas/Accounting.V2.InvoiceConfiguration"
+                    },
+                    "rateSheetId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "The rate sheet currently applied to the invoice; null when no rate sheet is applied.",
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -16943,20 +17269,6 @@
                     "ActiveOnly",
                     "InactiveOnly",
                     "All"
-                ]
-            },
-            "Accounting.V2.TransactionStatus": {
-                "enum": [
-                    "Pending",
-                    "Posted",
-                    "Exported"
-                ],
-                "type": "string",
-                "description": "Indicates a transaction's status.",
-                "x-enumNames": [
-                    "Pending",
-                    "Posted",
-                    "Exported"
                 ]
             },
             "Accounting.V2.BalanceComparer": {
@@ -17245,6 +17557,14 @@
                             "null"
                         ],
                         "format": "int64"
+                    },
+                    "serviceDate": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Service Date (Item Consumption date, stored as InvoiceItem.DateCreated).\nOptional \u2014 when omitted the item's Service Date is left as-is. Must not fall in a closed accounting period.",
+                        "format": "date-time"
                     }
                 },
                 "additionalProperties": false
@@ -17384,6 +17704,14 @@
                         "items": {
                             "$ref": "#/components/schemas/Accounting.V2.PaymentSettlementUpdateRequest"
                         }
+                    },
+                    "rateSheetId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Rate sheet ID to assign to the invoice; send null to clear it (\"no rate sheet\").\nOmit the field entirely to leave the invoice's rate sheet unchanged.",
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false

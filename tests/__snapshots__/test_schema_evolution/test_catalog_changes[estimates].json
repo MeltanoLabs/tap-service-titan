@@ -199,6 +199,15 @@
     {
       "breadcrumb": [
         "properties",
+        "vendorTaxCost"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "businessUnitId"
       ],
       "metadata": {
@@ -605,6 +614,13 @@
                 "number",
                 "null"
               ]
+            },
+            "vendorTaxCost": {
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
             }
           },
           "required": [
@@ -617,6 +633,7 @@
             "total",
             "unitCost",
             "totalCost",
+            "vendorTaxCost",
             "itemGroupName",
             "createdOn",
             "modifiedOn"
@@ -749,6 +766,13 @@
           "number",
           "null"
         ]
+      },
+      "vendorTaxCost": {
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
       }
     },
     "required": [
@@ -759,6 +783,7 @@
       "active",
       "subtotal",
       "tax",
+      "vendorTaxCost",
       "isRecommended",
       "isChangeOrder"
     ],

@@ -857,6 +857,42 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "pricebookSelections"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "estimateId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "estimateTotal"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "invoiceId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -1176,6 +1212,22 @@
           "null"
         ]
       },
+      "estimateId": {
+        "description": "ServiceTitan estimate ID created from pricebook apply",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "estimateTotal": {
+        "description": "Estimate total from pricebook apply",
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
       "externalId": {
         "description": "External ID",
         "type": [
@@ -1193,6 +1245,14 @@
       "id": {
         "description": "Session ID",
         "type": "string"
+      },
+      "invoiceId": {
+        "description": "ServiceTitan invoice ID associated with the pricebook apply",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
       },
       "isLocationTakeover": {
         "description": "Is Location Takeover",
@@ -1294,6 +1354,67 @@
         "description": "Previous Session ID",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "pricebookSelections": {
+        "description": "Pricebook cart selections for reporting (failures intentionally omitted)",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "displayName": {
+              "description": "Display name of the selected service",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "memberUnitPrice": {
+              "description": "Member unit price when membership pricing applies",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "quantity": {
+              "description": "Quantity selected",
+              "format": "int32",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "serviceId": {
+              "description": "ServiceTitan pricebook service ID",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "unitPrice": {
+              "description": "Unit price",
+              "format": "decimal",
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "displayName",
+            "serviceId",
+            "quantity",
+            "unitPrice"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
           "null"
         ]
       },

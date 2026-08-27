@@ -76,6 +76,7 @@
                                             "id": 0,
                                             "name": "string",
                                             "active": true,
+                                            "createdOn": "string",
                                             "excludedTaskResolutionIds": [
                                                 0
                                             ]
@@ -1072,6 +1073,7 @@
                     "id",
                     "name",
                     "active",
+                    "createdOn",
                     "excludedTaskResolutionIds"
                 ],
                 "type": "object",
@@ -1085,6 +1087,10 @@
                     },
                     "active": {
                         "type": "boolean"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
                     },
                     "excludedTaskResolutionIds": {
                         "type": "array",

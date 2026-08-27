@@ -3104,6 +3104,7 @@
                                             "startDate": "string",
                                             "targetCompletionDate": "string",
                                             "actualCompletionDate": "string",
+                                            "contractStartDate": "string",
                                             "modifiedOn": "string",
                                             "createdOn": "string",
                                             "customFields": [
@@ -4572,7 +4573,8 @@
                                 "soldById": 0,
                                 "isAutoDispatched": true,
                                 "summaryOfWork": "string",
-                                "noCharge": true
+                                "noCharge": true,
+                                "recallForId": 0
                             }
                         }
                     }
@@ -4771,7 +4773,8 @@
                                 "leadId": 0,
                                 "bookingId": 0,
                                 "serviceAgreementVisitId": 0,
-                                "noCharge": true
+                                "noCharge": true,
+                                "recallForId": 0
                             }
                         }
                     }
@@ -7093,6 +7096,7 @@
                                     "startDate": "string",
                                     "targetCompletionDate": "string",
                                     "actualCompletionDate": "string",
+                                    "contractStartDate": "string",
                                     "modifiedOn": "string",
                                     "createdOn": "string",
                                     "customFields": [
@@ -7263,6 +7267,7 @@
                                     "startDate": "string",
                                     "targetCompletionDate": "string",
                                     "actualCompletionDate": "string",
+                                    "contractStartDate": "string",
                                     "modifiedOn": "string",
                                     "createdOn": "string",
                                     "customFields": [
@@ -7518,6 +7523,24 @@
                         }
                     },
                     {
+                        "name": "contractStartDateBefore",
+                        "in": "query",
+                        "description": "Return projects whose contract start date is before date",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "contractStartDateOnOrAfter",
+                        "in": "query",
+                        "description": "Return projects whose contract start date is on or after date",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
                         "name": "modifiedBefore",
                         "in": "query",
                         "description": "Return projects whose last modification date is before date",
@@ -7638,6 +7661,7 @@
                                             "startDate": "string",
                                             "targetCompletionDate": "string",
                                             "actualCompletionDate": "string",
+                                            "contractStartDate": "string",
                                             "modifiedOn": "string",
                                             "createdOn": "string",
                                             "customFields": [
@@ -7780,6 +7804,7 @@
                                     "startDate": "string",
                                     "targetCompletionDate": "string",
                                     "actualCompletionDate": "string",
+                                    "contractStartDate": "string",
                                     "modifiedOn": "string",
                                     "createdOn": "string",
                                     "customFields": [
@@ -10454,6 +10479,14 @@
                         "description": "Actual completion date of the project",
                         "format": "date-time"
                     },
+                    "contractStartDate": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Date the project's contract starts",
+                        "format": "date-time"
+                    },
                     "modifiedOn": {
                         "type": [
                             "string",
@@ -11645,6 +11678,14 @@
                             "null"
                         ],
                         "description": "Whether the job is a no-charge job."
+                    },
+                    "recallForId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ID of the job that this job is a recall for",
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -11857,6 +11898,14 @@
                     "noCharge": {
                         "type": "boolean",
                         "description": "Whether the job is a no-charge job."
+                    },
+                    "recallForId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ID of the job that this job is a recall for. Set to null to clear.",
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -13185,6 +13234,14 @@
                             "null"
                         ],
                         "description": "Actual completion date of the project",
+                        "format": "date-time"
+                    },
+                    "contractStartDate": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Date the project's contract starts",
                         "format": "date-time"
                     },
                     "modifiedOn": {

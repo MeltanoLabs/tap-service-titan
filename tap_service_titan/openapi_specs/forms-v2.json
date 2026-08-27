@@ -490,7 +490,9 @@
                                     "$ref": "#/components/schemas/Forms.V2.AttachmentResponse"
                                 },
                                 "example": {
-                                    "fileName": "string"
+                                    "id": 0,
+                                    "fileName": "string",
+                                    "createdOn": "string"
                                 }
                             }
                         }
@@ -1593,13 +1595,25 @@
             },
             "Forms.V2.AttachmentResponse": {
                 "required": [
-                    "fileName"
+                    "id",
+                    "fileName",
+                    "createdOn"
                 ],
                 "type": "object",
                 "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Identifier of the created attachment.",
+                        "format": "int64"
+                    },
                     "fileName": {
                         "type": "string",
                         "description": "Original filename"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "UTC timestamp the attachment was created.",
+                        "format": "date-time"
                     }
                 },
                 "additionalProperties": false

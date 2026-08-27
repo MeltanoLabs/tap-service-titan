@@ -110,6 +110,24 @@
                         }
                     },
                     {
+                        "name": "jobId",
+                        "in": "query",
+                        "description": "Filters results to activities associated with the specified job.",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "projectId",
+                        "in": "query",
+                        "description": "Filters results to activities associated with the specified project.",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
                         "name": "sort",
                         "in": "query",
                         "description": "Applies sorting by specified fields",
@@ -145,6 +163,7 @@
                                             "projectLabel": "string",
                                             "laborTypeId": 0,
                                             "budgetCodeId": 0,
+                                            "milesDriven": 0,
                                             "memo": "string",
                                             "tagTypes": [
                                                 0
@@ -372,6 +391,7 @@
                                     "projectLabel": "string",
                                     "laborTypeId": 0,
                                     "budgetCodeId": 0,
+                                    "milesDriven": 0,
                                     "memo": "string",
                                     "tagTypes": [
                                         0
@@ -1482,6 +1502,7 @@
                                             "projectLabel": "string",
                                             "laborTypeId": 0,
                                             "budgetCodeId": 0,
+                                            "milesDriven": 0,
                                             "memo": "string",
                                             "tagTypes": [
                                                 0
@@ -1674,6 +1695,14 @@
                         ],
                         "description": "ID of the budget code associated with the activity.",
                         "format": "int64"
+                    },
+                    "milesDriven": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Miles driven captured for the activity via GPS mileage tracking. Null when not captured, or when GPS\nmileage tracking is not enabled for the tenant.",
+                        "format": "double"
                     },
                     "memo": {
                         "type": [
@@ -1926,6 +1955,14 @@
                         ],
                         "description": "ID of the budget code associated with the activity.",
                         "format": "int64"
+                    },
+                    "milesDriven": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Miles driven captured for the activity via GPS mileage tracking. Null when not captured, or when GPS\nmileage tracking is not enabled for the tenant.",
+                        "format": "double"
                     },
                     "memo": {
                         "type": [
@@ -3342,6 +3379,14 @@
                         ],
                         "description": "ID of the budget code associated with the activity.",
                         "format": "int64"
+                    },
+                    "milesDriven": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Miles driven captured for the activity via GPS mileage tracking. Null when not captured, or when GPS\nmileage tracking is not enabled for the tenant.",
+                        "format": "double"
                     },
                     "memo": {
                         "type": [

@@ -78,6 +78,15 @@
     {
       "breadcrumb": [
         "properties",
+        "isCustomerPortalScheduler"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "mode"
       ],
       "metadata": {
@@ -140,6 +149,13 @@
         "description": "Scheduler ID",
         "type": "string"
       },
+      "isCustomerPortalScheduler": {
+        "description": "Denotes if this scheduler is designated as the Customer Portal scheduler",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
       "isDefault": {
         "description": "Denotes if this is the default scheduler",
         "type": [
@@ -194,6 +210,7 @@
       "createdOn",
       "modifiedOn",
       "isDefault",
+      "isCustomerPortalScheduler",
       "quickLaunchLink"
     ],
     "type": "object"
