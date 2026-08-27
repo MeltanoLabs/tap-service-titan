@@ -99,6 +99,7 @@ ignore = [
     "ISC001", # single-line-implicit-string-concatenation
     "FIX",  # allow TODO comments
     "ERA",  # allow commented-out code
+    "CPY",  # copyright notices
 ]
 select = [ "ALL" ]
 

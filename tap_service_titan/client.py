@@ -108,7 +108,7 @@ class ServiceTitanBaseStream(RESTStream[_TToken]):
     _api_prefix: str = ""
 
     def __init_subclass__(
-        cls,
+        cls: type[ServiceTitanBaseStream[Any]],
         *,
         active_any: bool = False,
         sort_by: str | None = None,
