@@ -155,6 +155,18 @@ class TapServiceTitan(Tap):
             ),
             description="Custom reports to extract.",
         ),
+        th.Property(
+            "skip_unentitled_streams",
+            th.BooleanType,
+            default=False,
+            description=(
+                "When true, a stream whose endpoint the tenant is not entitled to "
+                "(HTTP 403) is logged and skipped instead of failing the run. Lets a "
+                "single stream selection be shared across tenants with differing "
+                "ServiceTitan module subscriptions. Off by default: silently skipping "
+                "streams will also mask a genuine loss of OAuth scope."
+            ),
+        ),
     ).to_dict()
 
     @override
