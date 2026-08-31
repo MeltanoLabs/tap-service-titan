@@ -40,7 +40,7 @@ scrapping = [
     "anyio>=4.14.0",
     "beautifulsoup4>=4.15.0",
     "jsonref>=1.1.0,<2",
-    "playwright~=1.61.0",
+    "playwright>=1.61,<1.63",
     "rich>=15.0.0",
     "typer>=0.27.0",
 ]
@@ -70,7 +70,7 @@ source = "vcs"
 
 [build-system]
 requires = [
-    "hatchling==1.31.0",
+    "hatchling==1.32.0",
     "hatch-vcs==0.5",
 ]
 build-backend = "hatchling.build"
