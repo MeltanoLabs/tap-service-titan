@@ -54,7 +54,7 @@ plugins:
       value: 2026-01-01T00:00:00Z
     - name: capacities_business_unit_ids
       kind: array
-      description: Business unit IDs to request availability for in the `capacities` stream. When omitted, the tap auto-discovers all active business unit IDs.
+      description: Business unit IDs to request availability for in the `capacities` stream. When omitted, availabilities for standalone business units may be missing.
     - name: capacities_lookahead_days
       kind: integer
       description: The number of days to look ahead for capacity availability.
