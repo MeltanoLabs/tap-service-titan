@@ -6,7 +6,6 @@ import sys
 from datetime import datetime, timedelta
 from typing import TYPE_CHECKING, Any, Generic
 
-from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.pagination import BaseAPIPaginator
 
 from tap_service_titan._common import now
@@ -29,10 +28,8 @@ else:
     from typing_extensions import TypeVar
 
 if TYPE_CHECKING:
-    from collections.abc import Iterable
-
     import requests
-    from singer_sdk.helpers.types import Context, Record
+    from singer_sdk.helpers.types import Context
     from singer_sdk.streams.rest import HTTPRequest, PageContext
 
 _TToken = TypeVar("_TToken", default=int)
@@ -104,39 +101,6 @@ class CapacitiesStream(_BaseDispatchStream[datetime]):
         super().__init__(*args, **kwargs)
         self._business_unit_ids: list[int] = self.config.get("capacities_business_unit_ids", [])
         self._lookahead_days = self.config.get("capacities_lookahead_days", 14)
-
-    @override
-    def get_records(self, context: Context | None) -> Iterable[Record]:
-        """Fetch capacity records, warning if there are no business units to query.
-
-        Args:
-            context: Stream partition or context dictionary.
-
-        Yields:
-            One record per availability slot.
-        """
-        if not self._business_unit_ids:
-            self.logger.warning(
-                "No business unit IDs found for the capacities stream; "
-                "no availability will be extracted.",
-            )
-            return
-
-        yield from super().get_records(context)
-
-    @override
-    def parse_response(self, response: requests.Response) -> Iterable[Record]:
-        """Parse the response and return an iterator of result records.
-
-        Args:
-            response: The HTTP ``requests.Response`` object.
-
-        Yields:
-            Each record from the source.
-        """
-        for availability_dict in extract_jsonpath(self.records_jsonpath, input=response.json()):
-            if availability_dict.get("technicians", []):
-                yield availability_dict
 
     @override
     def get_new_paginator(self) -> CapacitiesPaginator:
