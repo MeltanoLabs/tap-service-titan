@@ -52,6 +52,13 @@ plugins:
       kind: date_iso8601
       description: The start date-time for incremental streams
       value: 2026-01-01T00:00:00Z
+    - name: capacities_business_unit_ids
+      kind: array
+      description: Business unit IDs to request availability for in the `capacities` stream. When omitted, the tap auto-discovers all active business unit IDs.
+    - name: capacities_lookahead_days
+      kind: integer
+      description: The number of days to look ahead for capacity availability.
+      value: 14
     config:
       api_url: https://api-integration.servicetitan.io
       auth_url: https://auth-integration.servicetitan.io/connect/token

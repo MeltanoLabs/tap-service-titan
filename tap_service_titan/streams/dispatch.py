@@ -29,10 +29,11 @@ else:
     from typing_extensions import TypeVar
 
 if TYPE_CHECKING:
-    from collections.abc import Iterable, Mapping
+    from collections.abc import Iterable
 
     import requests
     from singer_sdk.helpers.types import Context, Record
+    from singer_sdk.streams.rest import HTTPRequest, PageContext
 
 _TToken = TypeVar("_TToken", default=int)
 
@@ -96,6 +97,33 @@ class CapacitiesStream(_BaseDispatchStream[datetime]):
         key="Dispatch.V2.CapacityResponseAvailability",
     )
 
+    _business_unit_ids: list[int] | None = None
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """Initialize the capacities stream."""
+        super().__init__(*args, **kwargs)
+        self._business_unit_ids: list[int] = self.config.get("capacities_business_unit_ids", [])
+        self._lookahead_days = self.config.get("capacities_lookahead_days", 14)
+
+    @override
+    def get_records(self, context: Context | None) -> Iterable[Record]:
+        """Fetch capacity records, warning if there are no business units to query.
+
+        Args:
+            context: Stream partition or context dictionary.
+
+        Yields:
+            One record per availability slot.
+        """
+        if not self._business_unit_ids:
+            self.logger.warning(
+                "No business unit IDs found for the capacities stream; "
+                "no availability will be extracted.",
+            )
+            return
+
+        yield from super().get_records(context)
+
     @override
     def parse_response(self, response: requests.Response) -> Iterable[Record]:
         """Parse the response and return an iterator of result records.
@@ -121,40 +149,26 @@ class CapacitiesStream(_BaseDispatchStream[datetime]):
         forward from ``start_date``, which keeps the request count proportional to the
         lookahead window instead of the tenant's history.
         """
-        lookahead_days = self.config.get("capacities_lookahead_days", 14)
         # Set the time to the start of the day to capture late updates.
         start_of_today = now().replace(hour=0, minute=0, second=0, microsecond=0)
-        return CapacitiesPaginator(start_of_today, lookahead_days=lookahead_days)
+        return CapacitiesPaginator(start_of_today, lookahead_days=self._lookahead_days)
 
     @override
-    def prepare_request_payload(
-        self,
-        context: Context | None,
-        next_page_token: datetime | None,
-    ) -> (
-        Iterable[bytes]
-        | str
-        | bytes
-        | list[tuple[Any, Any]]
-        | tuple[tuple[Any, Any]]
-        | Mapping[str, Any]
-        | None
-    ):
-        """Prepare the request payload."""
-        payload = {"skillBasedAvailability": "false"}
-        if next_page_token:
-            payload["startsOnOrAfter"] = next_page_token.isoformat()
-            payload["endsOnOrBefore"] = (next_page_token + timedelta(days=1)).isoformat()
+    def get_http_request(self, *, page: PageContext[datetime]) -> HTTPRequest:
+        """Return the HTTP request for the current page."""
+        request = super().get_http_request(page=page)
+        # request.headers["Content-Type"] = "application/json"
+        payload: dict[str, Any] = {"skillBasedAvailability": "false"}
+        if page.next_page_token:
+            payload["startsOnOrAfter"] = page.next_page_token.isoformat()
+            payload["endsOnOrBefore"] = (page.next_page_token + timedelta(days=1)).isoformat()
 
-        return payload
+        if bu_ids := self._business_unit_ids:
+            payload["businessUnitIds"] = bu_ids
 
-    @override
-    def get_url_params(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
-        """Return an empty dictionary of URL parameters.
-
-        This endpoint does not accept any URL parameters.
-        """
-        return {}
+        request.params = {}  # This endpoint does not accept any URL parameters.
+        request.data = payload
+        return request
 
 
 class ArrivalWindowsStream(_BaseDispatchStream, active_any=True):
