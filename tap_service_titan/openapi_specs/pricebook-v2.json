@@ -931,6 +931,7 @@
                                             "amountType": {},
                                             "amount": 0,
                                             "limit": 0,
+                                            "allowCustomAmount": true,
                                             "taxable": true,
                                             "categories": [
                                                 0
@@ -1028,6 +1029,7 @@
                                 "amountType": {},
                                 "amount": 0,
                                 "limit": 0,
+                                "allowCustomAmount": true,
                                 "taxable": true,
                                 "categories": [
                                     0
@@ -1081,6 +1083,7 @@
                                     "amountType": {},
                                     "amount": 0,
                                     "limit": 0,
+                                    "allowCustomAmount": true,
                                     "taxable": true,
                                     "categories": [
                                         0
@@ -1200,6 +1203,7 @@
                                     "amountType": {},
                                     "amount": 0,
                                     "limit": 0,
+                                    "allowCustomAmount": true,
                                     "taxable": true,
                                     "categories": [
                                         0
@@ -1324,6 +1328,7 @@
                                 "amount": 0,
                                 "intacctGlGroupAccount": "string",
                                 "limit": 0,
+                                "allowCustomAmount": true,
                                 "taxable": true,
                                 "categories": [
                                     0
@@ -1377,6 +1382,7 @@
                                     "amountType": {},
                                     "amount": 0,
                                     "limit": 0,
+                                    "allowCustomAmount": true,
                                     "taxable": true,
                                     "categories": [
                                         0
@@ -5588,6 +5594,7 @@
                                         "amountType": {},
                                         "amount": 0,
                                         "limit": 0,
+                                        "allowCustomAmount": true,
                                         "taxable": true,
                                         "categories": [
                                             0
@@ -6013,6 +6020,7 @@
                                         "amount": 0,
                                         "intacctGlGroupAccount": "string",
                                         "limit": 0,
+                                        "allowCustomAmount": true,
                                         "taxable": true,
                                         "categories": [
                                             0
@@ -7751,6 +7759,7 @@
                     "amountType",
                     "amount",
                     "limit",
+                    "allowCustomAmount",
                     "taxable",
                     "hours",
                     "active",
@@ -7809,6 +7818,10 @@
                         "type": "number",
                         "description": "The maximum amount that can be applied for this item",
                         "format": "decimal"
+                    },
+                    "allowCustomAmount": {
+                        "type": "boolean",
+                        "description": "Allows users to enter a custom discount amount when applying this item."
                     },
                     "taxable": {
                         "type": "boolean",
@@ -8069,6 +8082,13 @@
                         "description": "The maximum amount that can be applied for this item",
                         "format": "decimal"
                     },
+                    "allowCustomAmount": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Allows users to enter a custom discount amount when applying this item."
+                    },
                     "taxable": {
                         "type": [
                             "boolean",
@@ -8294,6 +8314,10 @@
                         "type": "number",
                         "description": "The maximum amount that can be applied for this item",
                         "format": "decimal"
+                    },
+                    "allowCustomAmount": {
+                        "type": "boolean",
+                        "description": "Allows users to enter a custom discount amount when applying this item."
                     },
                     "taxable": {
                         "type": "boolean",
@@ -13196,6 +13220,13 @@
                         "description": "The maximum amount that can be applied for this item",
                         "format": "decimal"
                     },
+                    "allowCustomAmount": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Allows users to enter a custom discount amount when applying this item."
+                    },
                     "taxable": {
                         "type": [
                             "boolean",
@@ -14076,6 +14107,7 @@
                     "amount",
                     "intacctGlGroupAccount",
                     "limit",
+                    "allowCustomAmount",
                     "taxable",
                     "categories",
                     "hours",
@@ -14135,6 +14167,10 @@
                         "type": "number",
                         "description": "The maximum amount that can be applied for this item",
                         "format": "decimal"
+                    },
+                    "allowCustomAmount": {
+                        "type": "boolean",
+                        "description": "Allows users to enter a custom discount amount when applying this item."
                     },
                     "taxable": {
                         "type": "boolean",

@@ -3023,7 +3023,8 @@
                                 "importance": {},
                                 "isConversionOpportunity": true,
                                 "allowToUseOnTimesheetActivity": true,
-                                "isVisibleOnDispatchBoard": true
+                                "isVisibleOnDispatchBoard": true,
+                                "active": true
                             }
                         }
                     }
@@ -6981,6 +6982,10 @@
                     "isVisibleOnDispatchBoard": {
                         "type": "boolean",
                         "description": "Gets or sets a value indicating whether tags of this type are visible on dispatch board."
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether the tag type is active"
                     }
                 },
                 "additionalProperties": false

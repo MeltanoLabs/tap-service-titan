@@ -78,6 +78,15 @@
     {
       "breadcrumb": [
         "properties",
+        "allowCustomAmount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "taxable"
       ],
       "metadata": {
@@ -249,6 +258,13 @@
       },
       "active": {
         "description": "Active shows if this item is currently active",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "allowCustomAmount": {
+        "description": "Allows users to enter a custom discount amount when applying this item.",
         "type": [
           "boolean",
           "null"
@@ -503,6 +519,7 @@
       "amountType",
       "amount",
       "limit",
+      "allowCustomAmount",
       "taxable",
       "hours",
       "active",

@@ -1668,6 +1668,14 @@
                                                     "code": "string"
                                                 }
                                             ],
+                                            "customFields": [
+                                                {
+                                                    "id": 0,
+                                                    "typeId": 0,
+                                                    "name": "string",
+                                                    "value": "string"
+                                                }
+                                            ],
                                             "actualReplacementDate": "string",
                                             "manufacturedOn": "string",
                                             "predictedReplacementMonths": 0,
@@ -1962,10 +1970,6 @@
                                                     "code": "string"
                                                 }
                                             ],
-                                            "actualReplacementDate": "string",
-                                            "manufacturedOn": "string",
-                                            "predictedReplacementMonths": 0,
-                                            "predictedReplacementDate": "string",
                                             "customFields": [
                                                 {
                                                     "id": 0,
@@ -1974,6 +1978,10 @@
                                                     "value": "string"
                                                 }
                                             ],
+                                            "actualReplacementDate": "string",
+                                            "manufacturedOn": "string",
+                                            "predictedReplacementMonths": 0,
+                                            "predictedReplacementDate": "string",
                                             "attachments": [
                                                 {
                                                     "alias": "string",
@@ -2243,6 +2251,14 @@
                                                     "code": "string"
                                                 }
                                             ],
+                                            "customFields": [
+                                                {
+                                                    "id": 0,
+                                                    "typeId": 0,
+                                                    "name": "string",
+                                                    "value": "string"
+                                                }
+                                            ],
                                             "actualReplacementDate": "string",
                                             "manufacturedOn": "string",
                                             "predictedReplacementMonths": 0,
@@ -2399,10 +2415,6 @@
                                             "code": "string"
                                         }
                                     ],
-                                    "actualReplacementDate": "string",
-                                    "manufacturedOn": "string",
-                                    "predictedReplacementMonths": 0,
-                                    "predictedReplacementDate": "string",
                                     "customFields": [
                                         {
                                             "id": 0,
@@ -2411,6 +2423,10 @@
                                             "value": "string"
                                         }
                                     ],
+                                    "actualReplacementDate": "string",
+                                    "manufacturedOn": "string",
+                                    "predictedReplacementMonths": 0,
+                                    "predictedReplacementDate": "string",
                                     "attachments": [
                                         {
                                             "alias": "string",
@@ -2566,10 +2582,6 @@
                                             "code": "string"
                                         }
                                     ],
-                                    "actualReplacementDate": "string",
-                                    "manufacturedOn": "string",
-                                    "predictedReplacementMonths": 0,
-                                    "predictedReplacementDate": "string",
                                     "customFields": [
                                         {
                                             "id": 0,
@@ -2578,6 +2590,10 @@
                                             "value": "string"
                                         }
                                     ],
+                                    "actualReplacementDate": "string",
+                                    "manufacturedOn": "string",
+                                    "predictedReplacementMonths": 0,
+                                    "predictedReplacementDate": "string",
                                     "attachments": [
                                         {
                                             "alias": "string",
@@ -2763,10 +2779,6 @@
                                             "code": "string"
                                         }
                                     ],
-                                    "actualReplacementDate": "string",
-                                    "manufacturedOn": "string",
-                                    "predictedReplacementMonths": 0,
-                                    "predictedReplacementDate": "string",
                                     "customFields": [
                                         {
                                             "id": 0,
@@ -2775,6 +2787,10 @@
                                             "value": "string"
                                         }
                                     ],
+                                    "actualReplacementDate": "string",
+                                    "manufacturedOn": "string",
+                                    "predictedReplacementMonths": 0,
+                                    "predictedReplacementDate": "string",
                                     "attachments": [
                                         {
                                             "alias": "string",
@@ -3992,6 +4008,15 @@
                             "$ref": "#/components/schemas/EquipmentSystems.V2.TagResponseModel"
                         }
                     },
+                    "customFields": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/EquipmentSystems.V2.CustomFieldResponseModel"
+                        }
+                    },
                     "actualReplacementDate": {
                         "type": [
                             "string",
@@ -4286,6 +4311,15 @@
                             "$ref": "#/components/schemas/EquipmentSystems.V2.TagResponseModel"
                         }
                     },
+                    "customFields": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/EquipmentSystems.V2.CustomFieldResponseModel"
+                        }
+                    },
                     "actualReplacementDate": {
                         "type": [
                             "string",
@@ -4313,15 +4347,6 @@
                             "null"
                         ],
                         "format": "date"
-                    },
-                    "customFields": {
-                        "type": [
-                            "array",
-                            "null"
-                        ],
-                        "items": {
-                            "$ref": "#/components/schemas/EquipmentSystems.V2.CustomFieldResponseModel"
-                        }
                     },
                     "attachments": {
                         "type": [

@@ -2893,6 +2893,733 @@
                 ]
             }
         },
+        "/tenant/{tenant}/projects/{projectId}/daily-logs/{id}": {
+            "get": {
+                "tags": [
+                    "DailyLogs"
+                ],
+                "summary": "Gets a daily log by ID",
+                "operationId": "DailyLogs_Get",
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The daily log ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Jpm.V2.DailyLogResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "projectId": 0,
+                                    "date": "string",
+                                    "health": {},
+                                    "status": {},
+                                    "inputs": {
+                                        "equipment": "string",
+                                        "issues": "string",
+                                        "materials": "string",
+                                        "notes": "string",
+                                        "safety": "string",
+                                        "weather": "string"
+                                    },
+                                    "summaries": {
+                                        "equipment": "string",
+                                        "issues": "string",
+                                        "materials": "string",
+                                        "notes": "string",
+                                        "safety": "string",
+                                        "weather": "string"
+                                    },
+                                    "overallSummary": "string",
+                                    "attachments": [
+                                        {
+                                            "id": 0,
+                                            "fileName": "string",
+                                            "kind": {},
+                                            "timestamp": "string"
+                                        }
+                                    ],
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.jpm.projects:r"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/projects/{projectId}/daily-logs/{id}/attachments/{attachmentId}": {
+            "get": {
+                "tags": [
+                    "DailyLogs"
+                ],
+                "summary": "Gets the content of a daily log attachment",
+                "operationId": "DailyLogs_GetAttachment",
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The daily log ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "attachmentId",
+                        "in": "path",
+                        "description": "The attachment ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.jpm.projects:r"
+                        ]
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "DailyLogs"
+                ],
+                "summary": "Removes an attachment from a daily log",
+                "operationId": "DailyLogs_RemoveAttachment",
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The daily log ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "attachmentId",
+                        "in": "path",
+                        "description": "The attachment ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Daily log or attachment not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.jpm.projects:w"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/projects/{projectId}/daily-logs/{id}/attachments": {
+            "post": {
+                "tags": [
+                    "DailyLogs"
+                ],
+                "summary": "Attaches a file (photo, audio, video, or document) to a daily log",
+                "operationId": "DailyLogs_Attach",
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The daily log ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "file": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "201": {
+                        "description": "The entity has been created"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Daily log not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.jpm.projects:w"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/projects/{projectId}/daily-logs": {
+            "get": {
+                "tags": [
+                    "DailyLogs"
+                ],
+                "summary": "Gets a list of daily logs for the specified project",
+                "operationId": "DailyLogs_GetList",
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "dateFrom",
+                        "in": "query",
+                        "description": "Only return daily logs on or after this date",
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "name": "dateTo",
+                        "in": "query",
+                        "description": "Only return daily logs on or before this date",
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Jpm.V2.DailyLogSummaryResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "projectId": 0,
+                                            "date": "string",
+                                            "health": {},
+                                            "status": {},
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.jpm.projects:r"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/projects/{projectId}/daily-logs/{date}": {
+            "patch": {
+                "tags": [
+                    "DailyLogs"
+                ],
+                "summary": "Creates or updates a daily log for the specified project/date, applying whichever fields\nare present in the request body. Sections not included are left untouched.",
+                "operationId": "DailyLogs_Patch",
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "date",
+                        "in": "path",
+                        "description": "The daily log date, in yyyy-MM-dd format",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The patch request details",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Jpm.V2.DailyLogPatchRequest"
+                            },
+                            "example": {
+                                "health": {},
+                                "inputs": {
+                                    "equipment": "string",
+                                    "issues": "string",
+                                    "materials": "string",
+                                    "notes": "string",
+                                    "safety": "string",
+                                    "weather": "string"
+                                },
+                                "summaries": {
+                                    "equipment": "string",
+                                    "issues": "string",
+                                    "materials": "string",
+                                    "notes": "string",
+                                    "safety": "string",
+                                    "weather": "string"
+                                },
+                                "overallSummary": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Jpm.V2.DailyLogResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "projectId": 0,
+                                    "date": "string",
+                                    "health": {},
+                                    "status": {},
+                                    "inputs": {
+                                        "equipment": "string",
+                                        "issues": "string",
+                                        "materials": "string",
+                                        "notes": "string",
+                                        "safety": "string",
+                                        "weather": "string"
+                                    },
+                                    "summaries": {
+                                        "equipment": "string",
+                                        "issues": "string",
+                                        "materials": "string",
+                                        "notes": "string",
+                                        "safety": "string",
+                                        "weather": "string"
+                                    },
+                                    "overallSummary": "string",
+                                    "attachments": [
+                                        {
+                                            "id": 0,
+                                            "fileName": "string",
+                                            "kind": {},
+                                            "timestamp": "string"
+                                        }
+                                    ],
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid date format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Project not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.jpm.projects:w"
+                        ]
+                    }
+                ]
+            }
+        },
         "/tenant/{tenant}/export/jobs": {
             "get": {
                 "tags": [
@@ -9948,6 +10675,404 @@
                 },
                 "additionalProperties": false
             },
+            "Jpm.V2.DailyLogResponse": {
+                "required": [
+                    "id",
+                    "projectId",
+                    "date",
+                    "status",
+                    "inputs",
+                    "summaries",
+                    "attachments"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the daily log",
+                        "format": "int64"
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "description": "ID of the project this daily log belongs to",
+                        "format": "int64"
+                    },
+                    "date": {
+                        "type": "string",
+                        "description": "Date of the daily log",
+                        "format": "date"
+                    },
+                    "health": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Jpm.V2.DailyLogHealthStatus"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Overall health status of the project as of this daily log"
+                    },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Jpm.V2.DailyLogStatus"
+                            }
+                        ],
+                        "description": "Status of the daily log"
+                    },
+                    "inputs": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Jpm.V2.DailyLogSectionContents"
+                            }
+                        ],
+                        "description": "Raw section content entered by the user"
+                    },
+                    "summaries": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Jpm.V2.DailyLogSectionContents"
+                            }
+                        ],
+                        "description": "Generated/AI-summarized version of each section"
+                    },
+                    "overallSummary": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Generated executive summary of the daily log. Read-only."
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Jpm.V2.DailyLogAttachmentResponse"
+                        },
+                        "description": "Files attached to the daily log (photos, audio, video, documents)"
+                    },
+                    "modifiedOn": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Date/time (in UTC) the daily log was last modified",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Jpm.V2.DailyLogHealthStatus": {
+                "enum": [
+                    "None",
+                    "OnTrack",
+                    "AtRisk",
+                    "OffTrack"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "None",
+                    "OnTrack",
+                    "AtRisk",
+                    "OffTrack"
+                ]
+            },
+            "Jpm.V2.DailyLogStatus": {
+                "enum": [
+                    "None",
+                    "Incomplete",
+                    "Draft",
+                    "Approved"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "None",
+                    "Incomplete",
+                    "Draft",
+                    "Approved"
+                ]
+            },
+            "Jpm.V2.DailyLogSectionContents": {
+                "type": "object",
+                "properties": {
+                    "equipment": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Equipment notes section"
+                    },
+                    "issues": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Issues notes section"
+                    },
+                    "materials": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Materials notes section"
+                    },
+                    "notes": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "General notes section"
+                    },
+                    "safety": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Safety notes section"
+                    },
+                    "weather": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Weather notes section (free text; not structured weather measurements)"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Jpm.V2.DailyLogAttachmentResponse": {
+                "required": [
+                    "id",
+                    "kind",
+                    "timestamp"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the attachment. Fetch its content via GET on this project/daily log's attachments/{id} route.",
+                        "format": "int64"
+                    },
+                    "fileName": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Name of the file as originally uploaded"
+                    },
+                    "kind": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Jpm.V2.DailyLogAttachmentKind"
+                            }
+                        ],
+                        "description": "Kind of file this attachment is (photo, audio, video, document)"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "Date/time (in UTC) the attachment was added",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Jpm.V2.DailyLogAttachmentKind": {
+                "enum": [
+                    "None",
+                    "Photo",
+                    "Audio",
+                    "Video",
+                    "Document"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "None",
+                    "Photo",
+                    "Audio",
+                    "Video",
+                    "Document"
+                ]
+            },
+            "PaginatedResponse_Of_Jpm.V2.DailyLogSummaryResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Jpm.V2.DailyLogSummaryResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Jpm.V2.DailyLogSummaryResponse": {
+                "required": [
+                    "id",
+                    "projectId",
+                    "date",
+                    "status"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the daily log",
+                        "format": "int64"
+                    },
+                    "projectId": {
+                        "type": "integer",
+                        "description": "ID of the project this daily log belongs to",
+                        "format": "int64"
+                    },
+                    "date": {
+                        "type": "string",
+                        "description": "Date of the daily log",
+                        "format": "date"
+                    },
+                    "health": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Jpm.V2.DailyLogHealthStatus"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Overall health status of the project as of this daily log"
+                    },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Jpm.V2.DailyLogStatus"
+                            }
+                        ],
+                        "description": "Status of the daily log"
+                    },
+                    "modifiedOn": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Date/time (in UTC) the daily log was last modified",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Jpm.V2.DailyLogPatchRequest": {
+                "type": "object",
+                "properties": {
+                    "health": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Jpm.V2.DailyLogHealthStatus"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Overall health status of the project as of this daily log"
+                    },
+                    "inputs": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Jpm.V2.DailyLogSectionPatch"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Raw section content entered by the user. Omit entirely to leave every section untouched;\nomit an individual property within to leave just that section untouched."
+                    },
+                    "summaries": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Jpm.V2.DailyLogSectionPatch"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Generated/AI-summarized version of each section, independently overwritable from the raw\ncontent in Inputs. Omit entirely to leave every section's summary untouched."
+                    },
+                    "overallSummary": {
+                        "type": "string",
+                        "description": "Generated executive summary of the whole daily log. Unlike the sections in\nSummaries, there's no corresponding raw-content field for this -- it's\noverwritable directly."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Jpm.V2.DailyLogSectionPatch": {
+                "required": [
+                    "equipment",
+                    "issues",
+                    "materials",
+                    "notes",
+                    "safety",
+                    "weather"
+                ],
+                "type": "object",
+                "properties": {
+                    "equipment": {
+                        "type": "string",
+                        "description": "Equipment notes section"
+                    },
+                    "issues": {
+                        "type": "string",
+                        "description": "Issues notes section"
+                    },
+                    "materials": {
+                        "type": "string",
+                        "description": "Materials notes section"
+                    },
+                    "notes": {
+                        "type": "string",
+                        "description": "General notes section"
+                    },
+                    "safety": {
+                        "type": "string",
+                        "description": "Safety notes section"
+                    },
+                    "weather": {
+                        "type": "string",
+                        "description": "Weather notes section (free text; not structured weather measurements)"
+                    }
+                },
+                "additionalProperties": false
+            },
             "ExportResponse_Of_Jpm.V2.ExportJobsResponse": {
                 "required": [
                     "hasMore",
@@ -13831,8 +14956,9 @@
                             "tn.jpm.segments:r": "Job Planning and Management \u2192 Budget Code Segments (Read)",
                             "tn.jpm.budgetcodes:r": "Job Planning and Management \u2192 Budget Codes (Read)",
                             "tn.jpm.budgetcodes:w": "Job Planning and Management \u2192 Budget Codes (Write)",
-                            "tn.jpm.jobs:r": "Job Planning and Management \u2192 Jobs (Read)",
                             "tn.jpm.projects:r": "Job Planning and Management \u2192 Projects (Read)",
+                            "tn.jpm.projects:w": "Job Planning and Management \u2192 Projects (Write)",
+                            "tn.jpm.jobs:r": "Job Planning and Management \u2192 Jobs (Read)",
                             "tn.jpm.jobcanceledlogs:r": "Job Planning and Management \u2192 Job Canceled Logs (Read)",
                             "tn.jpm.jobnotes:r": "Job Planning and Management \u2192 Job Notes (Read)",
                             "tn.jpm.projectnotes:r": "Job Planning and Management \u2192 Project Notes (Read)",
@@ -13842,7 +14968,6 @@
                             "tn.jpm.jobholdreasons:r": "Job Planning and Management \u2192 Job Hold Reasons (Read)",
                             "tn.jpm.jobtypes:r": "Job Planning and Management \u2192 Job Types (Read)",
                             "tn.jpm.jobtypes:w": "Job Planning and Management \u2192 Job Types (Write)",
-                            "tn.jpm.projects:w": "Job Planning and Management \u2192 Projects (Write)",
                             "tn.jpm.projectstatuses:r": "Job Planning and Management \u2192 Project Statuses (Read)",
                             "tn.jpm.projectsubstatuses:r": "Job Planning and Management \u2192 Project Sub-Statuses (Read)",
                             "tn.jpm.projecttypes:r": "Job Planning and Management \u2192 Project Types (Read)"
