@@ -140,7 +140,8 @@
                             "type": "array",
                             "items": {
                                 "type": "integer",
-                                "format": "int64"
+                                "format": "int64",
+                                "nullable": true
                             }
                         }
                     },
@@ -182,7 +183,8 @@
                             "type": "array",
                             "items": {
                                 "type": "integer",
-                                "format": "int64"
+                                "format": "int64",
+                                "nullable": true
                             }
                         }
                     },
@@ -241,7 +243,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Success",
+                        "description": "OK",
                         "content": {
                             "text/plain": {
                                 "schema": {
@@ -634,5 +636,10 @@
                 }
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "Reviews"
+        }
+    ]
 }

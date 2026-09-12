@@ -896,6 +896,7 @@
                                             "discount": 0,
                                             "durationBilling": [
                                                 {
+                                                    "id": 0,
                                                     "duration": 0,
                                                     "billingFrequency": {},
                                                     "salePrice": 0,
@@ -905,12 +906,14 @@
                                             ],
                                             "discounts": [
                                                 {
+                                                    "id": 0,
                                                     "targetId": 0,
                                                     "discount": 0
                                                 }
                                             ],
                                             "recurringServices": [
                                                 {
+                                                    "id": 0,
                                                     "membershipTypeId": 0,
                                                     "recurringServiceTypeId": 0,
                                                     "offset": 0,
@@ -2152,11 +2155,9 @@
                     {
                         "name": "sort",
                         "in": "query",
+                        "description": "Applies sorting by specified fields",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/components/schemas/OrderByItem_Of_Memberships.V2.DefaultSortingFields"
-                            }
+                            "type": "string"
                         }
                     }
                 ],
@@ -3123,6 +3124,7 @@
                                             "discount": 0,
                                             "durationBilling": [
                                                 {
+                                                    "id": 0,
                                                     "duration": 0,
                                                     "billingFrequency": {},
                                                     "salePrice": 0,
@@ -3132,12 +3134,14 @@
                                             ],
                                             "discounts": [
                                                 {
+                                                    "id": 0,
                                                     "targetId": 0,
                                                     "discount": 0
                                                 }
                                             ],
                                             "recurringServices": [
                                                 {
+                                                    "id": 0,
                                                     "membershipTypeId": 0,
                                                     "recurringServiceTypeId": 0,
                                                     "offset": 0,
@@ -3239,6 +3243,7 @@
                                     "discount": 0,
                                     "durationBilling": [
                                         {
+                                            "id": 0,
                                             "duration": 0,
                                             "billingFrequency": {},
                                             "salePrice": 0,
@@ -3248,12 +3253,14 @@
                                     ],
                                     "discounts": [
                                         {
+                                            "id": 0,
                                             "targetId": 0,
                                             "discount": 0
                                         }
                                     ],
                                     "recurringServices": [
                                         {
+                                            "id": 0,
                                             "membershipTypeId": 0,
                                             "recurringServiceTypeId": 0,
                                             "offset": 0,
@@ -3357,12 +3364,12 @@
                                 },
                                 "example": [
                                     {
+                                        "id": 0,
                                         "membershipTypeId": 0,
                                         "recurringServiceTypeId": 0,
                                         "offset": 0,
                                         "offsetType": {},
                                         "allocation": 0,
-                                        "id": 0,
                                         "importId": "string",
                                         "createdOn": "string",
                                         "createdById": 0
@@ -3460,9 +3467,9 @@
                                 },
                                 "example": [
                                     {
+                                        "id": 0,
                                         "targetId": 0,
                                         "discount": 0,
-                                        "id": 0,
                                         "createdOn": "string",
                                         "createdById": 0
                                     }
@@ -3572,12 +3579,12 @@
                                 },
                                 "example": [
                                     {
+                                        "id": 0,
                                         "duration": 0,
                                         "billingFrequency": {},
                                         "salePrice": 0,
                                         "billingPrice": 0,
                                         "renewalPrice": 0,
-                                        "id": 0,
                                         "importId": "string",
                                         "active": true,
                                         "createdOn": "string",
@@ -5012,6 +5019,7 @@
             },
             "Memberships.V2.MembershipTypeDurationBillingEntry": {
                 "required": [
+                    "id",
                     "billingFrequency",
                     "salePrice",
                     "billingPrice",
@@ -5019,6 +5027,11 @@
                 ],
                 "type": "object",
                 "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the duration/billing option",
+                        "format": "int64"
+                    },
                     "duration": {
                         "type": [
                             "integer",
@@ -5055,11 +5068,17 @@
             },
             "Memberships.V2.MembershipTypeDiscountEntry": {
                 "required": [
+                    "id",
                     "targetId",
                     "discount"
                 ],
                 "type": "object",
                 "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the discount item",
+                        "format": "int64"
+                    },
                     "targetId": {
                         "type": "integer",
                         "description": "ID of the discount's target, which can be either a business unit or pricebook category",
@@ -5075,6 +5094,7 @@
             },
             "Memberships.V2.MembershipTypeRecurringServiceEntry": {
                 "required": [
+                    "id",
                     "membershipTypeId",
                     "recurringServiceTypeId",
                     "offset",
@@ -5083,6 +5103,11 @@
                 ],
                 "type": "object",
                 "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the recurring service item",
+                        "format": "int64"
+                    },
                     "membershipTypeId": {
                         "type": "integer",
                         "description": "Membership type ID associated with the item",
@@ -6896,36 +6921,6 @@
                 },
                 "additionalProperties": false
             },
-            "OrderByItem_Of_Memberships.V2.DefaultSortingFields": {
-                "required": [
-                    "field",
-                    "isDescending"
-                ],
-                "type": "object",
-                "properties": {
-                    "field": {
-                        "$ref": "#/components/schemas/Memberships.V2.DefaultSortingFields"
-                    },
-                    "isDescending": {
-                        "type": "boolean"
-                    }
-                },
-                "additionalProperties": false
-            },
-            "Memberships.V2.DefaultSortingFields": {
-                "enum": [
-                    "Id",
-                    "CreatedOn",
-                    "ModifiedOn"
-                ],
-                "type": "string",
-                "description": "Common sorting fields, which most of the entities would allow to use",
-                "x-enumNames": [
-                    "Id",
-                    "CreatedOn",
-                    "ModifiedOn"
-                ]
-            },
             "Memberships.V2.MarkEventCompletedStatusUpdateRequest": {
                 "required": [
                     "jobId"
@@ -7623,16 +7618,21 @@
             },
             "Memberships.V2.MembershipTypeRecurringServiceItemResponse": {
                 "required": [
+                    "id",
                     "membershipTypeId",
                     "recurringServiceTypeId",
                     "offset",
                     "offsetType",
                     "allocation",
-                    "id",
                     "createdOn"
                 ],
                 "type": "object",
                 "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the recurring service item",
+                        "format": "int64"
+                    },
                     "membershipTypeId": {
                         "type": "integer",
                         "description": "Membership type ID associated with the item",
@@ -7661,11 +7661,6 @@
                         "description": "The percentage of deferred revenue allocated to the recurring service item",
                         "format": "decimal"
                     },
-                    "id": {
-                        "type": "integer",
-                        "description": "ID of the recurring service item",
-                        "format": "int64"
-                    },
                     "importId": {
                         "type": [
                             "string",
@@ -7691,13 +7686,18 @@
             },
             "Memberships.V2.MembershipTypeDiscountItemResponse": {
                 "required": [
+                    "id",
                     "targetId",
                     "discount",
-                    "id",
                     "createdOn"
                 ],
                 "type": "object",
                 "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the discount item",
+                        "format": "int64"
+                    },
                     "targetId": {
                         "type": "integer",
                         "description": "ID of the discount's target, which can be either a business unit or pricebook category",
@@ -7707,11 +7707,6 @@
                         "type": "number",
                         "description": "Percentage discount (0 to 100)",
                         "format": "decimal"
-                    },
-                    "id": {
-                        "type": "integer",
-                        "description": "ID of the discount item",
-                        "format": "int64"
                     },
                     "createdOn": {
                         "type": "string",
@@ -7731,16 +7726,21 @@
             },
             "Memberships.V2.MembershipTypeDurationBillingItemResponse": {
                 "required": [
+                    "id",
                     "billingFrequency",
                     "salePrice",
                     "billingPrice",
                     "renewalPrice",
-                    "id",
                     "active",
                     "createdOn"
                 ],
                 "type": "object",
                 "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the duration/billing option",
+                        "format": "int64"
+                    },
                     "duration": {
                         "type": [
                             "integer",
@@ -7771,11 +7771,6 @@
                         "type": "number",
                         "description": "Renewal price of the entry",
                         "format": "decimal"
-                    },
-                    "id": {
-                        "type": "integer",
-                        "description": "ID of the duration/billing option",
-                        "format": "int64"
                     },
                     "importId": {
                         "type": [

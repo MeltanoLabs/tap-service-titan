@@ -494,7 +494,7 @@
                     {
                         "name": "orderBy",
                         "in": "query",
-                        "description": "Deprecated: Use Sort parameter instead. Field to sort by (Id, CreatedOn, ModifiedOn).",
+                        "description": "Deprecated: Use Sort parameter instead. Field to sort by (Id, CreatedOn, ModifiedOn, SoldOn).",
                         "schema": {
                             "type": "string"
                         }

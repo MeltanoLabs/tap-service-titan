@@ -1,0 +1,752 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Fleet Pro",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://api.servicetitan.io/fleetpro/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://api-integration.servicetitan.io/fleetpro/v2",
+            "description": "Integration"
+        }
+    ],
+    "paths": {
+        "/tenant/{tenant}/events": {
+            "post": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Retrieves paginated Event data specifically for historical records older than 7 days.",
+                "description": "This endpoint filters Event messages based on a time window (maximum 24 hours) and a specific list of Vehicle Identification Numbers (VINs).\n            \n**Constraints:**\n* **Data Age:** Only Event data **older than 7 days** is accessible. Data newer than 7 days are not accessible via API.\n* **Time Window:** The range between StartTime and EndTime must not exceed **24 hours (1 day)**.\n* **Vehicle Count:** The number of VINs provided in the filter is limited to a maximum of **50**.\n* **Record Cap:** The total result set (**TotalItems**) for the query is capped at **10,000 records**.",
+                "operationId": "Events_GetEvent",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The filtering criteria, including time window (StartTime/EndTime), VINs, and pagination details (Page/PageSize).",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Fleet.V2.Requests.EventRequestFilter"
+                            },
+                            "example": {
+                                "startTime": "string",
+                                "endTime": "string",
+                                "vins": [
+                                    "string"
+                                ],
+                                "pagination": {
+                                    "pageNumber": 0,
+                                    "pageSize": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Returns the requested Event data, wrapped in a PaginatedData model. The reported total item count is capped at 10,000 records.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Fleet.V2.EventResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": "string",
+                                            "vin": "string",
+                                            "vehicleName": "string",
+                                            "location": {
+                                                "location": {
+                                                    "latitude": 0,
+                                                    "longitude": 0
+                                                },
+                                                "timestamp": "string",
+                                                "address": "string"
+                                            },
+                                            "speedInMph": 0,
+                                            "eventName": "string",
+                                            "eventType": "string",
+                                            "driverName": "string",
+                                            "geofenceName": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "If the input  is invalid (e.g., VINs is empty, the time window exceeds 24 hours, etc.).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.flt.events:w"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/gps": {
+            "post": {
+                "tags": [
+                    "Gps"
+                ],
+                "summary": "Retrieves paginated GPS data specifically for historical records older than 7 days.",
+                "description": "This endpoint filters GPS messages based on a time window (maximum 24 hours) and a specific list of Vehicle Identification Numbers (VINs).\n            \n**Constraints:**\n* **Data Age:** Only GPS data **older than 7 days** is accessible. Data newer than 7 days are not accessible via API.\n* **Time Window:** The range between StartTime and EndTime must not exceed **24 hours (1 day)**.\n* **Vehicle Count:** The number of VINs provided in the filter is limited to a maximum of **50**.\n* **Record Cap:** The total result set (**TotalItems**) for the query is capped at **10,000 records**.",
+                "operationId": "Gps_GetGps",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The filtering criteria, including time window (StartTime/EndTime), VINs, and pagination details (Page/PageSize).",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Fleet.V2.Requests.GpsRequestFilter"
+                            },
+                            "example": {
+                                "startTime": "string",
+                                "endTime": "string",
+                                "vins": [
+                                    "string"
+                                ],
+                                "pagination": {
+                                    "pageNumber": 0,
+                                    "pageSize": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Returns the requested GPS data, wrapped in a PaginatedData model. The reported total item count is capped at 10,000 records.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Fleet.V2.GpsResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": "string",
+                                            "vin": "string",
+                                            "vehicleName": "string",
+                                            "location": {
+                                                "location": {
+                                                    "latitude": 0,
+                                                    "longitude": 0
+                                                },
+                                                "timestamp": "string",
+                                                "address": "string"
+                                            },
+                                            "speedInMph": 0,
+                                            "odometerInMiles": 0,
+                                            "driverName": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "If the input  is invalid (e.g., VINs is empty, the time window exceeds 24 hours, etc.).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.flt.gps:w"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/vehicles": {
+            "get": {
+                "tags": [
+                    "Vehicles"
+                ],
+                "summary": "Retrieves a list of all FleetPro vehicles for the current tenant.",
+                "description": "This endpoint fetches comprehensive information (such as VINs, Names, and metadata) for all FleetPro vehicles.\nThe returned data is typically used by the client to construct valid filtering criteria for subsequent GPS and Event data requests.",
+                "operationId": "Vehicles_GetVehicles",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns an array of vehicles for the current tenant.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Fleet.V2.VehicleResponse"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "vin": "string",
+                                        "name": "string",
+                                        "driverName": "string"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.flt.vehicles:r"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ApiErrorResponse": {
+                "required": [
+                    "type",
+                    "title",
+                    "status",
+                    "traceId",
+                    "errors",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "A URI reference that identifies the problem type"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "A short, human-readable summary of the problem type"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "description": "The HTTP status code generated by server",
+                        "format": "int32"
+                    },
+                    "traceId": {
+                        "type": "string",
+                        "description": "Internal trace ID for advanced diagnostics"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Provides more details about errors occurred, which can potentially be used for visual display"
+                    },
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {},
+                        "description": "Provides additional data, intended for programmatical usage"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807)."
+            },
+            "PaginatedResponse_Of_Fleet.V2.EventResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Fleet.V2.EventResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Fleet.V2.EventResponse": {
+                "required": [
+                    "id",
+                    "vin",
+                    "vehicleName",
+                    "location"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The unique identifier for the event record."
+                    },
+                    "vin": {
+                        "type": "string",
+                        "description": "The VIN of the vehicle associated with this event."
+                    },
+                    "vehicleName": {
+                        "type": "string",
+                        "description": "The name of the vehicle associated with the event."
+                    },
+                    "location": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Fleet.V2.Common.TimedLocation"
+                            }
+                        ],
+                        "description": "The precise geographic location TimedLocation and timestamp where the event occurred."
+                    },
+                    "speedInMph": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "The speed of the vehicle in Mph at the moment the event was recorded.",
+                        "format": "int32"
+                    },
+                    "eventName": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The human-readable name of the event (e.g., \"Hard Braking\", \"Low Fuel\")."
+                    },
+                    "eventType": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The broad category or type of the event (e.g., \"Vehicle Diagnostic\", \"Driver Infraction\")."
+                    },
+                    "driverName": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The name of the driver associated with the vehicle."
+                    },
+                    "geofenceName": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The name of the geofence associated with the event, if the event is geofence-related."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Fleet.V2.Common.TimedLocation": {
+                "required": [
+                    "timestamp"
+                ],
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Fleet.V2.Common.Coordinates"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "The geographic coordinates of the location."
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "The time when the location data was recorded or observed.",
+                        "format": "date-time"
+                    },
+                    "address": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The human-readable address string corresponding to the coordinates."
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents a geographical location recorded at a specific point in time,\noptionally including a human-readable address."
+            },
+            "Fleet.V2.Common.Coordinates": {
+                "required": [
+                    "latitude",
+                    "longitude"
+                ],
+                "type": "object",
+                "properties": {
+                    "latitude": {
+                        "type": "number",
+                        "description": "The latitude, representing the North-South position.",
+                        "format": "double"
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "description": "The longitude, representing the East-West position.",
+                        "format": "double"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents a geographical point on the Earth defined by its latitude and longitude."
+            },
+            "Fleet.V2.Requests.EventRequestFilter": {
+                "required": [
+                    "startTime",
+                    "endTime",
+                    "vins",
+                    "pagination"
+                ],
+                "type": "object",
+                "properties": {
+                    "startTime": {
+                        "type": "string",
+                        "description": "The start time of the time window.",
+                        "format": "date-time"
+                    },
+                    "endTime": {
+                        "type": "string",
+                        "description": "The end time of the time window.",
+                        "format": "date-time"
+                    },
+                    "vins": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The associated Vehicle Identification Numbers (VINs) to filter by."
+                    },
+                    "pagination": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Fleet.V2.Requests.PaginationFilter"
+                            }
+                        ],
+                        "description": "The pagination filter parameters."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Fleet.V2.Requests.PaginationFilter": {
+                "required": [
+                    "pageNumber",
+                    "pageSize"
+                ],
+                "type": "object",
+                "properties": {
+                    "pageNumber": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PaginatedResponse_Of_Fleet.V2.GpsResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Fleet.V2.GpsResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Fleet.V2.GpsResponse": {
+                "required": [
+                    "id",
+                    "vin",
+                    "vehicleName",
+                    "location"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The unique identifier for this specific GPS record."
+                    },
+                    "vin": {
+                        "type": "string",
+                        "description": "The VIN of the vehicle associated with this event."
+                    },
+                    "vehicleName": {
+                        "type": "string",
+                        "description": "The name of the vehicle associated with the event."
+                    },
+                    "location": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Fleet.V2.Common.TimedLocation"
+                            }
+                        ],
+                        "description": "The precise geographic location TimedLocation and timestamp where the GPS point was recorded."
+                    },
+                    "speedInMph": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "The speed of the vehicle in Mph at the moment the GPS point was recorded.",
+                        "format": "int32"
+                    },
+                    "odometerInMiles": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "The odometer reading in miles at the time the GPS point was recorded.",
+                        "format": "int32"
+                    },
+                    "driverName": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The name of the driver associated with the vehicle."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Fleet.V2.Requests.GpsRequestFilter": {
+                "required": [
+                    "startTime",
+                    "endTime",
+                    "vins",
+                    "pagination"
+                ],
+                "type": "object",
+                "properties": {
+                    "startTime": {
+                        "type": "string",
+                        "description": "The start time of the time window.",
+                        "format": "date-time"
+                    },
+                    "endTime": {
+                        "type": "string",
+                        "description": "The end time of the time window.",
+                        "format": "date-time"
+                    },
+                    "vins": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The associated Vehicle Identification Numbers (VINs) to filter by."
+                    },
+                    "pagination": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Fleet.V2.Requests.PaginationFilter"
+                            }
+                        ],
+                        "description": "The pagination filter parameters."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Fleet.V2.VehicleResponse": {
+                "required": [
+                    "vin",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "vin": {
+                        "type": "string",
+                        "description": "The unique identifier of the vehicle (VIN)."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the vehicle."
+                    },
+                    "driverName": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The name of the driver currently assigned to the vehicle."
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "ST-App-Key",
+                "in": "header",
+                "description": "ServiceTitan App Key Header"
+            },
+            "oauth": {
+                "type": "oauth2",
+                "description": "OAuth 2.0 Client Credentials Flow",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://auth.servicetitan.io/connect/token",
+                        "scopes": {
+                            "tn.flt.events:w": "Fleet Pro \u2192 Events (Write)",
+                            "tn.flt.gps:w": "Fleet Pro \u2192 GPS (Write)",
+                            "tn.flt.vehicles:r": "Fleet Pro \u2192 Vehicles (Read)"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
