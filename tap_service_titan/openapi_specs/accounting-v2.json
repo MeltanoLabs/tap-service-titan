@@ -3865,6 +3865,917 @@
                 ]
             }
         },
+        "/tenant/{tenant}/expense-transactions": {
+            "get": {
+                "tags": [
+                    "ExpenseTransactions"
+                ],
+                "summary": "Returns a paginated list of expense transactions matching the filter criteria.",
+                "operationId": "ExpenseTransactions_GetListPaginated",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "description": "Comma-separated list of specific expense transaction IDs to retrieve.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "batchId",
+                        "in": "query",
+                        "description": "Filter by specific batch ID.",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "batchNumber",
+                        "in": "query",
+                        "description": "Filter by batch number.",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "query",
+                        "description": "Filter by expense transaction number (partial match).",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "jobNumber",
+                        "in": "query",
+                        "description": "Filter by job number (partial match).",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "vendorName",
+                        "in": "query",
+                        "description": "Filter by vendor name (partial match) \u2014 e.g. to check whether a vendor already exists in an external system.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "businessUnitIds",
+                        "in": "query",
+                        "description": "Comma-separated list of business unit IDs to filter by.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "externalSources",
+                        "in": "query",
+                        "description": "Comma-separated list of originating systems to filter by (e.g. Ramp, Manual).",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "employeeId",
+                        "in": "query",
+                        "description": "Filter by the employee associated with the expense.",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "syncStatuses",
+                        "in": "query",
+                        "description": "Filter by sync status values.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Accounting.V2.ExpenseSyncStatus"
+                            }
+                        }
+                    },
+                    {
+                        "name": "expenseStatuses",
+                        "in": "query",
+                        "description": "Filter by expense status values. Passing NotSet returns HTTP 400 \u2014\nNotSet is an internal sentinel, not a filterable value.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Accounting.V2.ExpenseStatusResponse"
+                            }
+                        }
+                    },
+                    {
+                        "name": "dateFrom",
+                        "in": "query",
+                        "description": "Filter expenses with transaction date on or after this date.",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "dateTo",
+                        "in": "query",
+                        "description": "Filter expenses with transaction date before this date.",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "minCost",
+                        "in": "query",
+                        "description": "Filter expenses with total cost greater than or equal to this value.",
+                        "schema": {
+                            "type": "number",
+                            "format": "decimal"
+                        }
+                    },
+                    {
+                        "name": "maxCost",
+                        "in": "query",
+                        "description": "Filter expenses with total cost less than or equal to this value.",
+                        "schema": {
+                            "type": "number",
+                            "format": "decimal"
+                        }
+                    },
+                    {
+                        "name": "customField.Fields",
+                        "in": "query",
+                        "description": "Dictionary of name-value pairs",
+                        "schema": {
+                            "maxProperties": 50,
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "customField.Operator",
+                        "in": "query",
+                        "description": "Operator to be used between the name-value pairs. Can be \"Or\" or \"And\", default is \"And\".\\\nValues: [And, Or]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Accounting.V2.LogicalOperator"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the paginated list.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Accounting.V2.ExpenseTransactionResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "expenseTransactionId": "string",
+                                            "number": "string",
+                                            "date": "string",
+                                            "total": "string",
+                                            "tax": "string",
+                                            "shipping": "string",
+                                            "summary": "string",
+                                            "createdOn": "string",
+                                            "modifiedOn": "string",
+                                            "syncStatus": "string",
+                                            "expenseStatus": "string",
+                                            "needsReview": true,
+                                            "providerRequirementsMet": true,
+                                            "vendor": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "businessUnit": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "job": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "project": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "batch": {
+                                                "id": 0,
+                                                "number": "string",
+                                                "name": "string"
+                                            },
+                                            "debitAccount": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "number": "string",
+                                                "type": "string",
+                                                "detailType": "string"
+                                            },
+                                            "creditCardAccount": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "number": "string",
+                                                "type": "string",
+                                                "detailType": "string"
+                                            },
+                                            "isRefund": true,
+                                            "reversesExpenseTransactionId": "string",
+                                            "cardNumberLast4": "string",
+                                            "externalSource": "string",
+                                            "externalId": "string",
+                                            "employeeId": 0,
+                                            "merchantCategory": "string",
+                                            "receiptStatus": "string",
+                                            "lineItems": [
+                                                {
+                                                    "id": 0,
+                                                    "description": "string",
+                                                    "amount": "string",
+                                                    "quantity": "string",
+                                                    "unitPrice": "string",
+                                                    "glAccount": {
+                                                        "id": 0,
+                                                        "name": "string",
+                                                        "number": "string",
+                                                        "type": "string",
+                                                        "detailType": "string"
+                                                    },
+                                                    "businessUnit": {
+                                                        "id": 0,
+                                                        "name": "string"
+                                                    },
+                                                    "job": {
+                                                        "id": 0,
+                                                        "name": "string"
+                                                    },
+                                                    "project": {
+                                                        "id": 0,
+                                                        "name": "string"
+                                                    },
+                                                    "projectLabelIds": [
+                                                        0
+                                                    ]
+                                                }
+                                            ],
+                                            "accountingFields": [
+                                                {
+                                                    "erpFieldId": "string",
+                                                    "erpFieldName": "string",
+                                                    "fieldCategory": "string",
+                                                    "fieldDestination": "string",
+                                                    "dataType": "string",
+                                                    "optionName": "string",
+                                                    "erpOptionCode": "string",
+                                                    "freeFormValue": "string"
+                                                }
+                                            ],
+                                            "customFields": [
+                                                {
+                                                    "name": "string",
+                                                    "value": "string"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid filter (e.g., ExpenseStatuses=NotSet is not allowed).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.acc.expensetransactions:r"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/expense-transactions/{expenseId}": {
+            "get": {
+                "tags": [
+                    "ExpenseTransactions"
+                ],
+                "summary": "Returns a single expense transaction by its unique identifier.",
+                "operationId": "ExpenseTransactions_GetById",
+                "parameters": [
+                    {
+                        "name": "expenseId",
+                        "in": "path",
+                        "description": "The unique identifier of the expense transaction.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the expense transaction.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Accounting.V2.ExpenseTransactionResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "expenseTransactionId": "string",
+                                    "number": "string",
+                                    "date": "string",
+                                    "total": "string",
+                                    "tax": "string",
+                                    "shipping": "string",
+                                    "summary": "string",
+                                    "createdOn": "string",
+                                    "modifiedOn": "string",
+                                    "syncStatus": "string",
+                                    "expenseStatus": "string",
+                                    "needsReview": true,
+                                    "providerRequirementsMet": true,
+                                    "vendor": {
+                                        "id": 0,
+                                        "name": "string"
+                                    },
+                                    "businessUnit": {
+                                        "id": 0,
+                                        "name": "string"
+                                    },
+                                    "job": {
+                                        "id": 0,
+                                        "name": "string"
+                                    },
+                                    "project": {
+                                        "id": 0,
+                                        "name": "string"
+                                    },
+                                    "batch": {
+                                        "id": 0,
+                                        "number": "string",
+                                        "name": "string"
+                                    },
+                                    "debitAccount": {
+                                        "id": 0,
+                                        "name": "string",
+                                        "number": "string",
+                                        "type": "string",
+                                        "detailType": "string"
+                                    },
+                                    "creditCardAccount": {
+                                        "id": 0,
+                                        "name": "string",
+                                        "number": "string",
+                                        "type": "string",
+                                        "detailType": "string"
+                                    },
+                                    "isRefund": true,
+                                    "reversesExpenseTransactionId": "string",
+                                    "cardNumberLast4": "string",
+                                    "externalSource": "string",
+                                    "externalId": "string",
+                                    "employeeId": 0,
+                                    "merchantCategory": "string",
+                                    "receiptStatus": "string",
+                                    "lineItems": [
+                                        {
+                                            "id": 0,
+                                            "description": "string",
+                                            "amount": "string",
+                                            "quantity": "string",
+                                            "unitPrice": "string",
+                                            "glAccount": {
+                                                "id": 0,
+                                                "name": "string",
+                                                "number": "string",
+                                                "type": "string",
+                                                "detailType": "string"
+                                            },
+                                            "businessUnit": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "job": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "project": {
+                                                "id": 0,
+                                                "name": "string"
+                                            },
+                                            "projectLabelIds": [
+                                                0
+                                            ]
+                                        }
+                                    ],
+                                    "accountingFields": [
+                                        {
+                                            "erpFieldId": "string",
+                                            "erpFieldName": "string",
+                                            "fieldCategory": "string",
+                                            "fieldDestination": "string",
+                                            "dataType": "string",
+                                            "optionName": "string",
+                                            "erpOptionCode": "string",
+                                            "freeFormValue": "string"
+                                        }
+                                    ],
+                                    "customFields": [
+                                        {
+                                            "name": "string",
+                                            "value": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Expense transaction with the specified ID was not found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.acc.expensetransactions:r"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/expense-transactions/custom-fields": {
+            "get": {
+                "tags": [
+                    "ExpenseTransactions"
+                ],
+                "summary": "Returns a paginated list of custom-field type definitions available for expense transactions.\nScoped to CustomFieldOwnerType.Expense \u2014 definitions for other owner types (e.g. Bill)\nare excluded. Read access is gateway-enforced via ViewExpenseTransactions.",
+                "operationId": "ExpenseTransactions_GetCustomFieldTypes",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the custom-field types.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Accounting.V2.CustomFieldTypeResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "dataType": "Text",
+                                            "dataTypeOptions": [
+                                                "string"
+                                            ],
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.acc.expensetransactions:r"
+                        ]
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "ExpenseTransactions"
+                ],
+                "summary": "Updates custom-field values on one or more expense transactions. All-or-nothing: the whole\nrequest runs inside a single transaction, so either every update persists or none does. A\nnon-existent custom field, or a non-existent or cross-tenant expense id, leaves the data\nunchanged and surfaces as 422 ",
+                "operationId": "ExpenseTransactions_UpdateCustomFields",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The custom-field update request containing expense ids and field values.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Accounting.V2.CustomFieldUpdateRequest"
+                            },
+                            "example": {
+                                "operations": [
+                                    {
+                                        "objectId": 0,
+                                        "customFields": [
+                                            {
+                                                "name": "string",
+                                                "value": "string"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated custom fields on the specified expenses."
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "A referenced custom field or expense id was invalid (or a not-yet-Posted expense was marked exported) \u2014 nothing was persisted.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.acc.expensetransactions:w"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/expense-transactions/markasexported": {
+            "post": {
+                "tags": [
+                    "ExpenseTransactions"
+                ],
+                "summary": "Marks one or more expense transactions as exported. Each ID is evaluated independently:\nan eligible (Posted) expense transitions to Exported; an expense that is not found or not\nin the Posted state returns a failure row. Mixed requests do not throw.",
+                "operationId": "ExpenseTransactions_MarkAsExported",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The request containing expense transaction IDs to mark as exported.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Accounting.V2.MarkExpensesAsExportedRequest"
+                            },
+                            "example": {
+                                "expenseIds": [
+                                    0
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully processed the request for all expense IDs.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Accounting.V2.MarkExpenseAsExportedResponse"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "expenseId": 0,
+                                        "success": true,
+                                        "errorMessage": "string"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request data.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.acc.expensetransactions:w"
+                        ]
+                    }
+                ]
+            }
+        },
         "/tenant/{tenant}/export/invoices": {
             "get": {
                 "tags": [
@@ -14474,6 +15385,555 @@
                 },
                 "additionalProperties": false
             },
+            "PaginatedResponse_Of_Accounting.V2.ExpenseTransactionResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.ExpenseTransactionResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Accounting.V2.ExpenseTransactionResponse": {
+                "required": [
+                    "id",
+                    "expenseTransactionId",
+                    "isRefund"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Unique identifier for the expense transaction.",
+                        "format": "int64"
+                    },
+                    "expenseTransactionId": {
+                        "type": "string",
+                        "description": "Shared MOS expense GUID (stable identifier across ServiceTitan and moneyout-service).",
+                        "format": "guid"
+                    },
+                    "number": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "User-visible expense transaction number (e.g., \"EXP-00001\")."
+                    },
+                    "date": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Date the transaction occurred (from card statement).",
+                        "format": "date-time"
+                    },
+                    "total": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Total amount of the expense."
+                    },
+                    "tax": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Tax amount on the expense."
+                    },
+                    "shipping": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Shipping amount on the expense."
+                    },
+                    "summary": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Brief summary or description of the expense."
+                    },
+                    "createdOn": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Date and time when the expense was created.",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Date and time when the expense was last modified.",
+                        "format": "date-time"
+                    },
+                    "syncStatus": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Accounting export lifecycle status: Pending / Posted / Exported.\nControlled by the monolith batch/export workflow."
+                    },
+                    "expenseStatus": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "MOS-computed export-readiness headline: Pending / ReadyForExport / Exported.\nNull when MOS has not yet produced a verdict (internal NotSet sentinel).\nDistinct from SyncStatus."
+                    },
+                    "needsReview": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the expense has been flagged for review by MOS rules.\nNull until MOS emits the value (null \u2260 false \u2014 no verdict yet)."
+                    },
+                    "providerRequirementsMet": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the expense provider has confirmed all its requirements are met.\nNull until the provider signal arrives (null \u2260 false \u2014 three-state preserved)."
+                    },
+                    "vendor": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Vendor where the expense was incurred."
+                    },
+                    "businessUnit": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Business unit associated with the expense."
+                    },
+                    "job": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Job associated with the expense, if applicable."
+                    },
+                    "project": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Project associated with the expense, if applicable."
+                    },
+                    "batch": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.BatchResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Accounting batch this expense belongs to, if applicable."
+                    },
+                    "debitAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.GLAccountResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Debit-side GL account (the expense account charged for this transaction)."
+                    },
+                    "creditCardAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.GLAccountResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Credit-side GL account (Liability: Credit Card) this expense was charged to."
+                    },
+                    "isRefund": {
+                        "type": "boolean",
+                        "description": "True when this transaction is a refund/reversal rather than a charge."
+                    },
+                    "reversesExpenseTransactionId": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "When IsRefund is true, the MOS ExpenseId of the original charge this reverses.",
+                        "format": "guid"
+                    },
+                    "cardNumberLast4": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Last 4 digits of the credit card number (display convenience)."
+                    },
+                    "externalSource": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Originating system (e.g., \"Ramp\", \"Manual\")."
+                    },
+                    "externalId": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Provider-side external identifier for this expense (from the originating system)."
+                    },
+                    "employeeId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Employee associated with the expense, if any.",
+                        "format": "int64"
+                    },
+                    "merchantCategory": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Merchant Category Code (MCC) classifying the merchant type."
+                    },
+                    "receiptStatus": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Receipt attachment status."
+                    },
+                    "lineItems": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.ExpenseLineItemResponse"
+                        },
+                        "description": "Line items on the expense, each with optional per-line GL/BU/Job/Project overrides."
+                    },
+                    "accountingFields": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.ExpenseAccountingFieldResponse"
+                        },
+                        "description": "ERP accounting dimension fields (budget codes, cost centers, etc.) forwarded from the expense provider.\nAll FieldDestination values are included. Budget codes live here \u2014 no scalar field is synthesized."
+                    },
+                    "customFields": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/Accounting.V2.CustomFieldResponse"
+                        },
+                        "description": "ST-defined custom-field values (name/value) attached to this expense via the custom-field\nframework. Distinct from AccountingFields (provider-sourced ERP dimensions)."
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Full projection of an expense transaction returned by the public V2 API.\nStatus axes (SyncStatus, ExpenseStatus, NeedsReview,\nProviderRequirementsMet) are exposed as distinct fields.\nBudget codes and ERP accounting dimensions live in AccountingFields;\nno scalar BudgetCodeId is synthesized."
+            },
+            "Accounting.V2.ExpenseLineItemResponse": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Unique identifier for the line item.",
+                        "format": "int64"
+                    },
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Description of the line item."
+                    },
+                    "amount": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Total amount for the line item."
+                    },
+                    "quantity": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Quantity."
+                    },
+                    "unitPrice": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Unit price."
+                    },
+                    "glAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.GLAccountResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Optional debit-side GL account override (falls back to header DebitAccount when null)."
+                    },
+                    "businessUnit": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Optional business unit override at the line level."
+                    },
+                    "job": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Optional job override at the line level."
+                    },
+                    "project": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Accounting.V2.NamedFieldResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Optional project override at the line level."
+                    },
+                    "projectLabelIds": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "Project label IDs associated with this line item."
+                    }
+                },
+                "additionalProperties": false,
+                "description": "A single line item on an expense transaction, with optional per-line overrides\nfor GL account, business unit, job, and project."
+            },
+            "Accounting.V2.ExpenseAccountingFieldResponse": {
+                "type": "object",
+                "properties": {
+                    "erpFieldId": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "ERP/external key for the field (provider category_info.external_id). This is the primary identifier integrators use to correlate fields."
+                    },
+                    "erpFieldName": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Human-readable name of the ERP accounting field (e.g., \"Department\"). Null when not provided by the expense provider."
+                    },
+                    "fieldCategory": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Verbatim provider category token (e.g., \"COST_CENTER\"). Informational only \u2014 use FieldDestination for routing."
+                    },
+                    "fieldDestination": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Normalized sync-intent signal (Erp / ServiceTitanOnly / Unspecified)."
+                    },
+                    "dataType": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Value data type (Boolean / Date / FreeFormText / SingleChoice). Null when unknown."
+                    },
+                    "optionName": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Human-readable option label when DataType is SingleChoice."
+                    },
+                    "erpOptionCode": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "ERP-side option code when DataType is SingleChoice."
+                    },
+                    "freeFormValue": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Free-form text value when DataType is FreeFormText."
+                    }
+                },
+                "additionalProperties": false,
+                "description": "A single ERP accounting dimension field on an expense transaction.\nEach row represents one dimension (e.g., Department, Cost Center) from the expense provider."
+            },
+            "Accounting.V2.ExpenseSyncStatus": {
+                "enum": [
+                    "Pending",
+                    "Posted",
+                    "Exported"
+                ],
+                "type": "string",
+                "description": "Synchronization status of an expense transaction with the accounting system.\nValues: Pending (0), Posted (1), Exported (2)",
+                "x-enumNames": [
+                    "Pending",
+                    "Posted",
+                    "Exported"
+                ]
+            },
+            "Accounting.V2.ExpenseStatusResponse": {
+                "enum": [
+                    "NotSet",
+                    "Pending",
+                    "ReadyForExport",
+                    "Exported"
+                ],
+                "type": "string",
+                "description": "MOS-computed export-readiness status.\nNotSet is an internal sentinel \u2014 it is not a valid filter value and\nprojects as null on the API response.\nValues: Pending (1), ReadyForExport (2), Exported (3)",
+                "x-enumNames": [
+                    "NotSet",
+                    "Pending",
+                    "ReadyForExport",
+                    "Exported"
+                ]
+            },
+            "Accounting.V2.MarkExpenseAsExportedResponse": {
+                "required": [
+                    "expenseId",
+                    "success"
+                ],
+                "type": "object",
+                "properties": {
+                    "expenseId": {
+                        "type": "integer",
+                        "description": "The ID of the expense transaction that was processed.",
+                        "format": "int64"
+                    },
+                    "success": {
+                        "type": "boolean",
+                        "description": "Whether the expense was eligible and transitioned to Exported."
+                    },
+                    "errorMessage": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Reason the expense was not exported (not found, or not in Posted state); null on success."
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Per-ID result of a mark-as-exported request. Mirrors MarkApBillAsExportedUpdateResponse."
+            },
+            "Accounting.V2.MarkExpensesAsExportedRequest": {
+                "required": [
+                    "expenseIds"
+                ],
+                "type": "object",
+                "properties": {
+                    "expenseIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "description": "List of expense transaction IDs to mark as exported."
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Request model for marking one or more expense transactions as exported.\nMirrors MarkApBillAsExportedUpdateRequest."
+            },
             "ExportResponse_Of_Accounting.V2.ExportInvoiceResponse": {
                 "required": [
                     "hasMore",
@@ -18287,7 +19747,8 @@
                     "External",
                     "CreditMemo",
                     "CreditMemoApplication",
-                    "ExpenseTransaction"
+                    "ExpenseTransaction",
+                    "ServiceAgreementVisit"
                 ],
                 "type": "string",
                 "description": "",
@@ -18314,7 +19775,8 @@
                     "External",
                     "CreditMemo",
                     "CreditMemoApplication",
-                    "ExpenseTransaction"
+                    "ExpenseTransaction",
+                    "ServiceAgreementVisit"
                 ]
             },
             "Accounting.V2.EmptyJeHandling": {
@@ -20470,6 +21932,8 @@
                             "tn.acc.creditmemos:w": "Accounting \u2192 Credit Memos (Write)",
                             "tn.acc.bankdeposits:r": "Accounting \u2192 Bank Deposits (Read)",
                             "tn.acc.bankdeposits:w": "Accounting \u2192 Bank Deposits (Write)",
+                            "tn.acc.expensetransactions:r": "Accounting \u2192 Expense Transactions (Read)",
+                            "tn.acc.expensetransactions:w": "Accounting \u2192 Expense Transactions (Write)",
                             "tn.acc.invoices:r": "Accounting \u2192 Invoices (Read)",
                             "tn.acc.invoiceitems:r": "Accounting \u2192 Invoice Items (Read)",
                             "tn.acc.payments:r": "Accounting \u2192 Payments (Read)",

@@ -2757,6 +2757,80 @@
                 ]
             }
         },
+        "/tenant/{tenant}/purchase-orders/custom-fields": {
+            "patch": {
+                "tags": [
+                    "PurchaseOrders"
+                ],
+                "summary": "Update custom fields on purchase orders",
+                "operationId": "PurchaseOrders_UpdateCustomFields",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Inventory.V2.CustomFieldUpdateRequest"
+                            },
+                            "example": {
+                                "operations": [
+                                    {
+                                        "objectId": 0,
+                                        "customFields": [
+                                            {
+                                                "name": "string",
+                                                "value": "string"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.inv.purchaseorders:w"
+                        ]
+                    }
+                ]
+            }
+        },
         "/tenant/{tenant}/purchase-order-markups": {
             "get": {
                 "tags": [

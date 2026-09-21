@@ -331,6 +331,7 @@
                                             "internalNotes": "string",
                                             "installedEquipmentId": 0,
                                             "urgencyLevel": {},
+                                            "captureMode": {},
                                             "sourceJobId": 0,
                                             "archived": true,
                                             "active": true,
@@ -433,6 +434,7 @@
                                     "internalNotes": "string",
                                     "installedEquipmentId": 0,
                                     "urgencyLevel": {},
+                                    "captureMode": {},
                                     "sourceJobId": 0,
                                     "archived": true,
                                     "active": true,
@@ -533,6 +535,7 @@
                                     "internalNotes": "string",
                                     "installedEquipmentId": 0,
                                     "urgencyLevel": {},
+                                    "captureMode": {},
                                     "sourceJobId": 0,
                                     "archived": true,
                                     "active": true,
@@ -667,6 +670,7 @@
                                     "internalNotes": "string",
                                     "installedEquipmentId": 0,
                                     "urgencyLevel": {},
+                                    "captureMode": {},
                                     "sourceJobId": 0,
                                     "archived": true,
                                     "active": true,
@@ -1433,6 +1437,7 @@
                     "id",
                     "locationId",
                     "urgencyLevel",
+                    "captureMode",
                     "archived",
                     "active",
                     "createdBy",
@@ -1496,6 +1501,14 @@
                         ],
                         "description": "Priority level indicating how urgently the finding should be addressed"
                     },
+                    "captureMode": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.FindingCaptureMode"
+                            }
+                        ],
+                        "description": "How the finding was originally captured"
+                    },
                     "sourceJobId": {
                         "type": [
                             "integer",
@@ -1554,6 +1567,20 @@
                     "Critical"
                 ]
             },
+            "EquipmentSystems.V2.FindingCaptureMode": {
+                "enum": [
+                    "Unknown",
+                    "Manual",
+                    "AtlasLive"
+                ],
+                "type": "string",
+                "description": "How a finding was originally captured.",
+                "x-enumNames": [
+                    "Unknown",
+                    "Manual",
+                    "AtlasLive"
+                ]
+            },
             "ActiveRequestArg": {
                 "enum": [
                     "True",
@@ -1573,6 +1600,7 @@
                     "id",
                     "locationId",
                     "urgencyLevel",
+                    "captureMode",
                     "archived",
                     "active",
                     "createdBy",
@@ -1636,6 +1664,14 @@
                             }
                         ],
                         "description": "Priority level indicating how urgently the finding should be addressed"
+                    },
+                    "captureMode": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EquipmentSystems.V2.FindingCaptureMode"
+                            }
+                        ],
+                        "description": "How the finding was originally captured"
                     },
                     "sourceJobId": {
                         "type": [

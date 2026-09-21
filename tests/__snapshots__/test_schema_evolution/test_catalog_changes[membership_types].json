@@ -270,6 +270,14 @@
                 "null"
               ]
             },
+            "id": {
+              "description": "ID of the discount item",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
             "targetId": {
               "description": "ID of the discount's target, which can be either a business unit or pricebook category",
               "format": "int64",
@@ -280,6 +288,7 @@
             }
           },
           "required": [
+            "id",
             "targetId",
             "discount"
           ],
@@ -328,6 +337,14 @@
                 "null"
               ]
             },
+            "id": {
+              "description": "ID of the duration/billing option",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
             "renewalPrice": {
               "description": "Renewal price of the entry",
               "format": "decimal",
@@ -346,6 +363,7 @@
             }
           },
           "required": [
+            "id",
             "billingFrequency",
             "salePrice",
             "billingPrice",
@@ -408,6 +426,14 @@
                 "null"
               ]
             },
+            "id": {
+              "description": "ID of the recurring service item",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
             "membershipTypeId": {
               "description": "Membership type ID associated with the item",
               "format": "int64",
@@ -441,6 +467,7 @@
             }
           },
           "required": [
+            "id",
             "membershipTypeId",
             "recurringServiceTypeId",
             "offset",
