@@ -246,12 +246,20 @@ class ServiceTitanBaseStream(RESTStream[_TToken]):
         try:
             yield from super().request_records(context)
         except StreamNotEntitledError as exc:
-            self.logger.warning(
-                "Skipping stream '%s' for tenant %s: not entitled to this endpoint. %s",
-                self.name,
-                self.config.get("tenant_id"),
-                exc,
-            )
+            self._warn_not_entitled(exc)
+
+    def _warn_not_entitled(self, exc: StreamNotEntitledError) -> None:
+        """Log that a stream is being skipped due to a lack of entitlement.
+
+        Args:
+            exc: The error raised by :meth:`validate_response`.
+        """
+        self.logger.warning(
+            "Skipping stream '%s' for tenant %s: not entitled to this endpoint. %s",
+            self.name,
+            self.config.get("tenant_id"),
+            exc,
+        )
 
 
 class ServiceTitanExportStream(ServiceTitanBaseStream):
