@@ -178,6 +178,8 @@ class TapServiceTitan(Tap):
             streams.accounting.BankDepositTransactionsStream(self),
             streams.accounting.BankDepositsStream(self),
             streams.accounting.CreditMemosStream(self),
+            streams.accounting.ExpenseTransactionsCustomFieldsStream(self),
+            streams.accounting.ExpenseTransactionsStream(self),
             streams.accounting.GLAccountTypesStream(self),
             streams.accounting.GLAccountsStream(self),
             streams.accounting.InventoryBillsCustomFieldsStream(self),

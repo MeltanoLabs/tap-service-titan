@@ -1,0 +1,1229 @@
+{
+  "key_properties": [
+    "id"
+  ],
+  "metadata": [
+    {
+      "breadcrumb": [
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "expenseTransactionId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "date"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "total"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "tax"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "shipping"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "summary"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "createdOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
+        "inclusion": "automatic"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "syncStatus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "expenseStatus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "needsReview"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "providerRequirementsMet"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "vendor"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "vendor",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "vendor",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnit"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnit",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "businessUnit",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "job"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "job",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "job",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "project"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "project",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "project",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batch"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batch",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batch",
+        "properties",
+        "number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "batch",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "debitAccount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "debitAccount",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "debitAccount",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "debitAccount",
+        "properties",
+        "number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "debitAccount",
+        "properties",
+        "type"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "debitAccount",
+        "properties",
+        "detailType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "creditCardAccount"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "creditCardAccount",
+        "properties",
+        "id"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "creditCardAccount",
+        "properties",
+        "name"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "creditCardAccount",
+        "properties",
+        "number"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "creditCardAccount",
+        "properties",
+        "type"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "creditCardAccount",
+        "properties",
+        "detailType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "isRefund"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "reversesExpenseTransactionId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "cardNumberLast4"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalSource"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "externalId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "employeeId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "merchantCategory"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "receiptStatus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "lineItems"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "accountingFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "customFields"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [],
+      "metadata": {
+        "inclusion": "available",
+        "replication-key": "modifiedOn",
+        "selected": true,
+        "selected-by-default": true,
+        "table-key-properties": [
+          "id"
+        ],
+        "valid-replication-keys": [
+          "modifiedOn"
+        ]
+      }
+    }
+  ],
+  "replication_key": "modifiedOn",
+  "replication_method": "INCREMENTAL",
+  "schema": {
+    "additionalProperties": false,
+    "description": "Full projection of an expense transaction returned by the public V2 API.\nStatus axes (SyncStatus, ExpenseStatus, NeedsReview,\nProviderRequirementsMet) are exposed as distinct fields.\nBudget codes and ERP accounting dimensions live in AccountingFields;\nno scalar BudgetCodeId is synthesized.",
+    "properties": {
+      "accountingFields": {
+        "description": "ERP accounting dimension fields (budget codes, cost centers, etc.) forwarded from the expense provider.\nAll FieldDestination values are included. Budget codes live here — no scalar field is synthesized.",
+        "items": {
+          "additionalProperties": false,
+          "description": "A single ERP accounting dimension field on an expense transaction.\nEach row represents one dimension (e.g., Department, Cost Center) from the expense provider.",
+          "properties": {
+            "dataType": {
+              "description": "Value data type (Boolean / Date / FreeFormText / SingleChoice). Null when unknown.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "erpFieldId": {
+              "description": "ERP/external key for the field (provider category_info.external_id). This is the primary identifier integrators use to correlate fields.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "erpFieldName": {
+              "description": "Human-readable name of the ERP accounting field (e.g., \"Department\"). Null when not provided by the expense provider.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "erpOptionCode": {
+              "description": "ERP-side option code when DataType is SingleChoice.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "fieldCategory": {
+              "description": "Verbatim provider category token (e.g., \"COST_CENTER\"). Informational only — use FieldDestination for routing.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "fieldDestination": {
+              "description": "Normalized sync-intent signal (Erp / ServiceTitanOnly / Unspecified).",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "freeFormValue": {
+              "description": "Free-form text value when DataType is FreeFormText.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "optionName": {
+              "description": "Human-readable option label when DataType is SingleChoice.",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "batch": {
+        "additionalProperties": false,
+        "description": "Accounting batch this expense belongs to, if applicable.",
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "number": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "businessUnit": {
+        "additionalProperties": false,
+        "description": "Business unit associated with the expense.",
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "cardNumberLast4": {
+        "description": "Last 4 digits of the credit card number (display convenience).",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "createdOn": {
+        "description": "Date and time when the expense was created.",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "creditCardAccount": {
+        "additionalProperties": false,
+        "description": "Credit-side GL account (Liability: Credit Card) this expense was charged to.",
+        "properties": {
+          "detailType": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "number": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "customFields": {
+        "description": "ST-defined custom-field values (name/value) attached to this expense via the custom-field\nframework. Distinct from AccountingFields (provider-sourced ERP dimensions).",
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "value": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "date": {
+        "description": "Date the transaction occurred (from card statement).",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "debitAccount": {
+        "additionalProperties": false,
+        "description": "Debit-side GL account (the expense account charged for this transaction).",
+        "properties": {
+          "detailType": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "number": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "employeeId": {
+        "description": "Employee associated with the expense, if any.",
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "expenseStatus": {
+        "description": "MOS-computed export-readiness headline: Pending / ReadyForExport / Exported.\nNull when MOS has not yet produced a verdict (internal NotSet sentinel).\nDistinct from SyncStatus.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "expenseTransactionId": {
+        "description": "Shared MOS expense GUID (stable identifier across ServiceTitan and moneyout-service).",
+        "format": "guid",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "externalId": {
+        "description": "Provider-side external identifier for this expense (from the originating system).",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "externalSource": {
+        "description": "Originating system (e.g., \"Ramp\", \"Manual\").",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "Unique identifier for the expense transaction.",
+        "format": "int64",
+        "type": "integer"
+      },
+      "isRefund": {
+        "description": "True when this transaction is a refund/reversal rather than a charge.",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "job": {
+        "additionalProperties": false,
+        "description": "Job associated with the expense, if applicable.",
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "lineItems": {
+        "description": "Line items on the expense, each with optional per-line GL/BU/Job/Project overrides.",
+        "items": {
+          "additionalProperties": false,
+          "description": "A single line item on an expense transaction, with optional per-line overrides\nfor GL account, business unit, job, and project.",
+          "properties": {
+            "amount": {
+              "description": "Total amount for the line item.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "businessUnit": {
+              "additionalProperties": false,
+              "description": "Optional business unit override at the line level.",
+              "properties": {
+                "id": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "description": {
+              "description": "Description of the line item.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "glAccount": {
+              "additionalProperties": false,
+              "description": "Optional debit-side GL account override (falls back to header DebitAccount when null).",
+              "properties": {
+                "detailType": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "id": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "id": {
+              "description": "Unique identifier for the line item.",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "job": {
+              "additionalProperties": false,
+              "description": "Optional job override at the line level.",
+              "properties": {
+                "id": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "project": {
+              "additionalProperties": false,
+              "description": "Optional project override at the line level.",
+              "properties": {
+                "id": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "projectLabelIds": {
+              "description": "Project label IDs associated with this line item.",
+              "items": {
+                "format": "int64",
+                "type": "integer"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "quantity": {
+              "description": "Quantity.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "unitPrice": {
+              "description": "Unit price.",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "merchantCategory": {
+        "description": "Merchant Category Code (MCC) classifying the merchant type.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "modifiedOn": {
+        "description": "Date and time when the expense was last modified.",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "needsReview": {
+        "description": "Whether the expense has been flagged for review by MOS rules.\nNull until MOS emits the value (null ≠ false — no verdict yet).",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "number": {
+        "description": "User-visible expense transaction number (e.g., \"EXP-00001\").",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "project": {
+        "additionalProperties": false,
+        "description": "Project associated with the expense, if applicable.",
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "providerRequirementsMet": {
+        "description": "Whether the expense provider has confirmed all its requirements are met.\nNull until the provider signal arrives (null ≠ false — three-state preserved).",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "receiptStatus": {
+        "description": "Receipt attachment status.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "reversesExpenseTransactionId": {
+        "description": "When IsRefund is true, the MOS ExpenseId of the original charge this reverses.",
+        "format": "guid",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "shipping": {
+        "description": "Shipping amount on the expense.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "summary": {
+        "description": "Brief summary or description of the expense.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "syncStatus": {
+        "description": "Accounting export lifecycle status: Pending / Posted / Exported.\nControlled by the monolith batch/export workflow.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "tax": {
+        "description": "Tax amount on the expense.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "total": {
+        "description": "Total amount of the expense.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "vendor": {
+        "additionalProperties": false,
+        "description": "Vendor where the expense was incurred.",
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "expenseTransactionId",
+      "isRefund"
+    ],
+    "type": "object"
+  },
+  "stream": "expense_transactions",
+  "tap_stream_id": "expense_transactions"
+}
