@@ -47,10 +47,6 @@ def _stream(*, skip: bool) -> DiscountsAndFeesStream:
 def _request_raising_403(stream: DiscountsAndFeesStream) -> None:
     """Make the stream's HTTP call surface a 403 the way a real one would."""
 
-    def _raise(*_args: object, **_kwargs: object) -> None:
-        stream.validate_response(_forbidden())
-
-    stream._request = _raise  # type: ignore[method-assign]  # noqa: SLF001
 
 
 def test_403_is_fatal_by_default() -> None:

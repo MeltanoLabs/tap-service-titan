@@ -225,9 +225,7 @@ class ServiceTitanBaseStream(RESTStream[_TToken]):
             StreamNotEntitledError: If the tenant is not entitled to the endpoint
                 and ``skip_unentitled_streams`` is enabled.
         """
-        if response.status_code == HTTPStatus.FORBIDDEN and self.config.get(
-            "skip_unentitled_streams", False
-        ):
+        if response.status_code == HTTPStatus.FORBIDDEN and self.config["skip_unentitled_streams"]:
             raise StreamNotEntitledError(self.response_error_message(response))
         super().validate_response(response)
 
