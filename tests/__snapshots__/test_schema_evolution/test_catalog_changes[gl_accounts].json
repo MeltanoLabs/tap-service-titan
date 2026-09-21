@@ -114,6 +114,15 @@
     {
       "breadcrumb": [
         "properties",
+        "isIntacctGlGroup"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "createdOn"
       ],
       "metadata": {
@@ -193,6 +202,12 @@
           "null"
         ]
       },
+      "isIntacctGlGroup": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
       "isIntacctGroup": {
         "type": [
           "boolean",
@@ -244,6 +259,7 @@
       "isIntacctGroup",
       "isIntacctBankAccount",
       "source",
+      "isIntacctGlGroup",
       "createdOn",
       "modifiedOn"
     ],

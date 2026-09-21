@@ -931,6 +931,7 @@
                                             "amountType": {},
                                             "amount": 0,
                                             "limit": 0,
+                                            "allowCustomAmount": true,
                                             "taxable": true,
                                             "categories": [
                                                 0
@@ -1028,6 +1029,7 @@
                                 "amountType": {},
                                 "amount": 0,
                                 "limit": 0,
+                                "allowCustomAmount": true,
                                 "taxable": true,
                                 "categories": [
                                     0
@@ -1081,6 +1083,7 @@
                                     "amountType": {},
                                     "amount": 0,
                                     "limit": 0,
+                                    "allowCustomAmount": true,
                                     "taxable": true,
                                     "categories": [
                                         0
@@ -1200,6 +1203,7 @@
                                     "amountType": {},
                                     "amount": 0,
                                     "limit": 0,
+                                    "allowCustomAmount": true,
                                     "taxable": true,
                                     "categories": [
                                         0
@@ -1324,6 +1328,7 @@
                                 "amount": 0,
                                 "intacctGlGroupAccount": "string",
                                 "limit": 0,
+                                "allowCustomAmount": true,
                                 "taxable": true,
                                 "categories": [
                                     0
@@ -1377,6 +1382,7 @@
                                     "amountType": {},
                                     "amount": 0,
                                     "limit": 0,
+                                    "allowCustomAmount": true,
                                     "taxable": true,
                                     "categories": [
                                         0
@@ -1835,6 +1841,7 @@
                                             "budgetCostCode": "string",
                                             "budgetCostType": "string",
                                             "isCostLocked": true,
+                                            "excludeEstimatedCostFromInvoice": true,
                                             "isPriceLocked": true
                                         }
                                     ]
@@ -2009,6 +2016,7 @@
                                     "depth": 0
                                 },
                                 "isCostLocked": true,
+                                "excludeEstimatedCostFromInvoice": true,
                                 "isPriceLocked": true
                             }
                         }
@@ -2151,6 +2159,7 @@
                                     "budgetCostCode": "string",
                                     "budgetCostType": "string",
                                     "isCostLocked": true,
+                                    "excludeEstimatedCostFromInvoice": true,
                                     "isPriceLocked": true
                                 }
                             }
@@ -2360,6 +2369,7 @@
                                     "budgetCostCode": "string",
                                     "budgetCostType": "string",
                                     "isCostLocked": true,
+                                    "excludeEstimatedCostFromInvoice": true,
                                     "isPriceLocked": true
                                 }
                             }
@@ -2561,6 +2571,7 @@
                                 "budgetCostCode": "string",
                                 "budgetCostType": "string",
                                 "isCostLocked": true,
+                                "excludeEstimatedCostFromInvoice": true,
                                 "isPriceLocked": true
                             }
                         }
@@ -2703,6 +2714,7 @@
                                     "budgetCostCode": "string",
                                     "budgetCostType": "string",
                                     "isCostLocked": true,
+                                    "excludeEstimatedCostFromInvoice": true,
                                     "isPriceLocked": true
                                 }
                             }
@@ -3084,6 +3096,7 @@
                                             "budgetCostCode": "string",
                                             "budgetCostType": "string",
                                             "isCostLocked": true,
+                                            "excludeEstimatedCostFromInvoice": true,
                                             "isPriceLocked": true
                                         }
                                     ]
@@ -3431,6 +3444,7 @@
                                             "budgetCostCode": "string",
                                             "budgetCostType": "string",
                                             "isCostLocked": true,
+                                            "excludeEstimatedCostFromInvoice": true,
                                             "isPriceLocked": true,
                                             "isChemical": true,
                                             "epaNumber": "string",
@@ -3914,6 +3928,7 @@
                                             "budgetCostCode": "string",
                                             "budgetCostType": "string",
                                             "isCostLocked": true,
+                                            "excludeEstimatedCostFromInvoice": true,
                                             "isPriceLocked": true,
                                             "isChemical": true,
                                             "epaNumber": "string",
@@ -4064,6 +4079,7 @@
                                 "budgetCostCode": "string",
                                 "budgetCostType": "string",
                                 "isCostLocked": true,
+                                "excludeEstimatedCostFromInvoice": true,
                                 "isPriceLocked": true,
                                 "isChemical": true,
                                 "epaNumber": "string",
@@ -4183,6 +4199,7 @@
                                     "budgetCostCode": "string",
                                     "budgetCostType": "string",
                                     "isCostLocked": true,
+                                    "excludeEstimatedCostFromInvoice": true,
                                     "isPriceLocked": true,
                                     "isChemical": true,
                                     "epaNumber": "string",
@@ -4369,6 +4386,7 @@
                                     "budgetCostCode": "string",
                                     "budgetCostType": "string",
                                     "isCostLocked": true,
+                                    "excludeEstimatedCostFromInvoice": true,
                                     "isPriceLocked": true,
                                     "isChemical": true,
                                     "epaNumber": "string",
@@ -4545,6 +4563,7 @@
                                 "budgetCostCode": "string",
                                 "budgetCostType": "string",
                                 "isCostLocked": true,
+                                "excludeEstimatedCostFromInvoice": true,
                                 "isPriceLocked": true,
                                 "isChemical": true,
                                 "epaNumber": "string",
@@ -4664,6 +4683,7 @@
                                     "budgetCostCode": "string",
                                     "budgetCostType": "string",
                                     "isCostLocked": true,
+                                    "excludeEstimatedCostFromInvoice": true,
                                     "isPriceLocked": true,
                                     "isChemical": true,
                                     "epaNumber": "string",
@@ -5463,6 +5483,7 @@
                                             "depth": 0
                                         },
                                         "isCostLocked": true,
+                                        "excludeEstimatedCostFromInvoice": true,
                                         "isPriceLocked": true,
                                         "customId": "string"
                                     }
@@ -5556,6 +5577,7 @@
                                         "budgetCostCode": "string",
                                         "budgetCostType": "string",
                                         "isCostLocked": true,
+                                        "excludeEstimatedCostFromInvoice": true,
                                         "isPriceLocked": true,
                                         "isChemical": true,
                                         "epaNumber": "string",
@@ -5572,6 +5594,7 @@
                                         "amountType": {},
                                         "amount": 0,
                                         "limit": 0,
+                                        "allowCustomAmount": true,
                                         "taxable": true,
                                         "categories": [
                                             0
@@ -5885,6 +5908,7 @@
                                         "budgetCostCode": "string",
                                         "budgetCostType": "string",
                                         "isCostLocked": true,
+                                        "excludeEstimatedCostFromInvoice": true,
                                         "isPriceLocked": true,
                                         "id": 0
                                     }
@@ -5978,6 +6002,7 @@
                                         "budgetCostCode": "string",
                                         "budgetCostType": "string",
                                         "isCostLocked": true,
+                                        "excludeEstimatedCostFromInvoice": true,
                                         "isPriceLocked": true,
                                         "isChemical": true,
                                         "epaNumber": "string",
@@ -5995,6 +6020,7 @@
                                         "amount": 0,
                                         "intacctGlGroupAccount": "string",
                                         "limit": 0,
+                                        "allowCustomAmount": true,
                                         "taxable": true,
                                         "categories": [
                                             0
@@ -7733,6 +7759,7 @@
                     "amountType",
                     "amount",
                     "limit",
+                    "allowCustomAmount",
                     "taxable",
                     "hours",
                     "active",
@@ -7791,6 +7818,10 @@
                         "type": "number",
                         "description": "The maximum amount that can be applied for this item",
                         "format": "decimal"
+                    },
+                    "allowCustomAmount": {
+                        "type": "boolean",
+                        "description": "Allows users to enter a custom discount amount when applying this item."
                     },
                     "taxable": {
                         "type": "boolean",
@@ -8051,6 +8082,13 @@
                         "description": "The maximum amount that can be applied for this item",
                         "format": "decimal"
                     },
+                    "allowCustomAmount": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Allows users to enter a custom discount amount when applying this item."
+                    },
                     "taxable": {
                         "type": [
                             "boolean",
@@ -8276,6 +8314,10 @@
                         "type": "number",
                         "description": "The maximum amount that can be applied for this item",
                         "format": "decimal"
+                    },
+                    "allowCustomAmount": {
+                        "type": "boolean",
+                        "description": "Allows users to enter a custom discount amount when applying this item."
                     },
                     "taxable": {
                         "type": "boolean",
@@ -8796,6 +8838,13 @@
                             "null"
                         ],
                         "description": "Whether the cost is locked from editing"
+                    },
+                    "excludeEstimatedCostFromInvoice": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the estimated cost is excluded from the invoice when carried over from an estimate"
                     },
                     "isPriceLocked": {
                         "type": [
@@ -9322,6 +9371,13 @@
                         ],
                         "description": "Whether the cost is locked from editing"
                     },
+                    "excludeEstimatedCostFromInvoice": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the estimated cost is excluded from the invoice when carried over from an estimate"
+                    },
                     "isPriceLocked": {
                         "type": [
                             "boolean",
@@ -9702,6 +9758,10 @@
                     "isCostLocked": {
                         "type": "boolean",
                         "description": "Whether the cost is locked from editing"
+                    },
+                    "excludeEstimatedCostFromInvoice": {
+                        "type": "boolean",
+                        "description": "Whether the estimated cost is excluded from the invoice when carried over from an estimate"
                     },
                     "isPriceLocked": {
                         "type": "boolean",
@@ -10233,6 +10293,13 @@
                             "null"
                         ],
                         "description": "Whether the cost is locked from editing"
+                    },
+                    "excludeEstimatedCostFromInvoice": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the estimated cost is excluded from the invoice when carried over from an estimate"
                     },
                     "isPriceLocked": {
                         "type": [
@@ -10898,6 +10965,13 @@
                         ],
                         "description": "Whether the cost is locked from editing"
                     },
+                    "excludeEstimatedCostFromInvoice": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the estimated cost is excluded from the invoice when carried over from an estimate"
+                    },
                     "isPriceLocked": {
                         "type": [
                             "boolean",
@@ -11277,6 +11351,13 @@
                         ],
                         "description": "Whether the cost is locked from editing"
                     },
+                    "excludeEstimatedCostFromInvoice": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the estimated cost is excluded from the invoice when carried over from an estimate"
+                    },
                     "isPriceLocked": {
                         "type": [
                             "boolean",
@@ -11577,6 +11658,13 @@
                         ],
                         "description": "Whether the cost is locked from editing"
                     },
+                    "excludeEstimatedCostFromInvoice": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the estimated cost is excluded from the invoice when carried over from an estimate"
+                    },
                     "isPriceLocked": {
                         "type": [
                             "boolean",
@@ -11780,6 +11868,10 @@
                     "isCostLocked": {
                         "type": "boolean",
                         "description": "Whether the cost is locked from editing"
+                    },
+                    "excludeEstimatedCostFromInvoice": {
+                        "type": "boolean",
+                        "description": "Whether the estimated cost is excluded from the invoice when carried over from an estimate"
                     },
                     "isPriceLocked": {
                         "type": "boolean",
@@ -12708,6 +12800,13 @@
                         ],
                         "description": "Whether the cost is locked from editing"
                     },
+                    "excludeEstimatedCostFromInvoice": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the estimated cost is excluded from the invoice when carried over from an estimate"
+                    },
                     "isPriceLocked": {
                         "type": [
                             "boolean",
@@ -13020,6 +13119,13 @@
                         ],
                         "description": "Whether the cost is locked from editing"
                     },
+                    "excludeEstimatedCostFromInvoice": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the estimated cost is excluded from the invoice when carried over from an estimate"
+                    },
                     "isPriceLocked": {
                         "type": [
                             "boolean",
@@ -13113,6 +13219,13 @@
                         ],
                         "description": "The maximum amount that can be applied for this item",
                         "format": "decimal"
+                    },
+                    "allowCustomAmount": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Allows users to enter a custom discount amount when applying this item."
                     },
                     "taxable": {
                         "type": [
@@ -13516,6 +13629,7 @@
                     "budgetCostCode",
                     "budgetCostType",
                     "isCostLocked",
+                    "excludeEstimatedCostFromInvoice",
                     "isPriceLocked",
                     "id"
                 ],
@@ -13731,6 +13845,10 @@
                         "type": "boolean",
                         "description": "Whether the cost is locked from editing"
                     },
+                    "excludeEstimatedCostFromInvoice": {
+                        "type": "boolean",
+                        "description": "Whether the estimated cost is excluded from the invoice when carried over from an estimate"
+                    },
                     "isPriceLocked": {
                         "type": "boolean",
                         "description": "Whether the price is locked from editing"
@@ -13775,6 +13893,7 @@
                     "budgetCostCode",
                     "budgetCostType",
                     "isCostLocked",
+                    "excludeEstimatedCostFromInvoice",
                     "isPriceLocked",
                     "isChemical",
                     "epaNumber",
@@ -13951,6 +14070,10 @@
                         "type": "boolean",
                         "description": "Whether the cost is locked from editing"
                     },
+                    "excludeEstimatedCostFromInvoice": {
+                        "type": "boolean",
+                        "description": "Whether the estimated cost is excluded from the invoice when carried over from an estimate"
+                    },
                     "isPriceLocked": {
                         "type": "boolean",
                         "description": "Whether the price is locked from editing"
@@ -13984,6 +14107,7 @@
                     "amount",
                     "intacctGlGroupAccount",
                     "limit",
+                    "allowCustomAmount",
                     "taxable",
                     "categories",
                     "hours",
@@ -14043,6 +14167,10 @@
                         "type": "number",
                         "description": "The maximum amount that can be applied for this item",
                         "format": "decimal"
+                    },
+                    "allowCustomAmount": {
+                        "type": "boolean",
+                        "description": "Allows users to enter a custom discount amount when applying this item."
                     },
                     "taxable": {
                         "type": "boolean",

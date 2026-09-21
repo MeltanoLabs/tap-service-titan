@@ -207,7 +207,19 @@
                                             "campaignName": "string",
                                             "linearNavigationEnabled": true,
                                             "aiModeEnabled": true,
-                                            "previousSessionId": "string"
+                                            "previousSessionId": "string",
+                                            "pricebookSelections": [
+                                                {
+                                                    "serviceId": 0,
+                                                    "quantity": 0,
+                                                    "unitPrice": 0,
+                                                    "memberUnitPrice": 0,
+                                                    "displayName": "string"
+                                                }
+                                            ],
+                                            "estimateId": 0,
+                                            "estimateTotal": 0,
+                                            "invoiceId": 0
                                         }
                                     ]
                                 }
@@ -481,6 +493,7 @@
                                             "schedulerStatus": "string",
                                             "dataApiKey": "string",
                                             "isDefault": true,
+                                            "isCustomerPortalScheduler": true,
                                             "mode": {},
                                             "quickLaunchLink": "string"
                                         }
@@ -727,7 +740,19 @@
                                             "campaignName": "string",
                                             "linearNavigationEnabled": true,
                                             "aiModeEnabled": true,
-                                            "previousSessionId": "string"
+                                            "previousSessionId": "string",
+                                            "pricebookSelections": [
+                                                {
+                                                    "serviceId": 0,
+                                                    "quantity": 0,
+                                                    "unitPrice": 0,
+                                                    "memberUnitPrice": 0,
+                                                    "displayName": "string"
+                                                }
+                                            ],
+                                            "estimateId": 0,
+                                            "estimateTotal": 0,
+                                            "invoiceId": 0
                                         }
                                     ]
                                 }
@@ -1278,6 +1303,40 @@
                             "null"
                         ],
                         "description": "Previous Session ID"
+                    },
+                    "pricebookSelections": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/SchedulingPro.V2.PricebookSelectionResponse"
+                        },
+                        "description": "Pricebook cart selections for reporting (failures intentionally omitted)"
+                    },
+                    "estimateId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ServiceTitan estimate ID created from pricebook apply",
+                        "format": "int64"
+                    },
+                    "estimateTotal": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Estimate total from pricebook apply",
+                        "format": "decimal"
+                    },
+                    "invoiceId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ServiceTitan invoice ID associated with the pricebook apply",
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -1631,6 +1690,45 @@
                 },
                 "additionalProperties": false
             },
+            "SchedulingPro.V2.PricebookSelectionResponse": {
+                "required": [
+                    "displayName",
+                    "serviceId",
+                    "quantity",
+                    "unitPrice"
+                ],
+                "type": "object",
+                "properties": {
+                    "serviceId": {
+                        "type": "integer",
+                        "description": "ServiceTitan pricebook service ID",
+                        "format": "int64"
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "description": "Quantity selected",
+                        "format": "int32"
+                    },
+                    "unitPrice": {
+                        "type": "number",
+                        "description": "Unit price",
+                        "format": "decimal"
+                    },
+                    "memberUnitPrice": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Member unit price when membership pricing applies",
+                        "format": "decimal"
+                    },
+                    "displayName": {
+                        "type": "string",
+                        "description": "Display name of the selected service"
+                    }
+                },
+                "additionalProperties": false
+            },
             "SchedulingPro.V2.RouterPerformanceResponse": {
                 "required": [
                     "id",
@@ -1738,6 +1836,7 @@
                     "createdOn",
                     "modifiedOn",
                     "isDefault",
+                    "isCustomerPortalScheduler",
                     "quickLaunchLink"
                 ],
                 "type": "object",
@@ -1775,6 +1874,10 @@
                     "isDefault": {
                         "type": "boolean",
                         "description": "Denotes if this is the default scheduler"
+                    },
+                    "isCustomerPortalScheduler": {
+                        "type": "boolean",
+                        "description": "Denotes if this scheduler is designated as the Customer Portal scheduler"
                     },
                     "mode": {
                         "oneOf": [
@@ -2112,6 +2215,40 @@
                             "null"
                         ],
                         "description": "Previous Session ID"
+                    },
+                    "pricebookSelections": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/SchedulingPro.V2.PricebookSelectionResponse"
+                        },
+                        "description": "Pricebook cart selections for reporting (failures intentionally omitted)"
+                    },
+                    "estimateId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ServiceTitan estimate ID created from pricebook apply",
+                        "format": "int64"
+                    },
+                    "estimateTotal": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Estimate total from pricebook apply",
+                        "format": "decimal"
+                    },
+                    "invoiceId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ServiceTitan invoice ID associated with the pricebook apply",
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false

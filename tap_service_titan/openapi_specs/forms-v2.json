@@ -490,10 +490,84 @@
                                     "$ref": "#/components/schemas/Forms.V2.AttachmentResponse"
                                 },
                                 "example": {
-                                    "fileName": "string"
+                                    "id": 0,
+                                    "fileName": "string",
+                                    "createdOn": "string"
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.frm.jobs:w"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/jobs/{id}/attachments/{attachmentId}": {
+            "delete": {
+                "tags": [
+                    "Jobs"
+                ],
+                "summary": "Deletes a specified job attachment.",
+                "operationId": "Jobs_DeleteAttachment",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Job Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "attachmentId",
+                        "in": "path",
+                        "description": "The id of the job attachment to delete, as returned by the create-attachment endpoint.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded"
                     },
                     "400": {
                         "description": "The request cannot be processed, check validation errors or request format",
@@ -1593,13 +1667,25 @@
             },
             "Forms.V2.AttachmentResponse": {
                 "required": [
-                    "fileName"
+                    "id",
+                    "fileName",
+                    "createdOn"
                 ],
                 "type": "object",
                 "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Identifier of the created attachment.",
+                        "format": "int64"
+                    },
                     "fileName": {
                         "type": "string",
                         "description": "Original filename"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "UTC timestamp the attachment was created.",
+                        "format": "date-time"
                     }
                 },
                 "additionalProperties": false

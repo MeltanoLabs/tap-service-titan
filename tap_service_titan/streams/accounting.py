@@ -166,6 +166,30 @@ class InventoryBillsCustomFieldsStream(_BaseAccountingStream):
     schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.CustomFieldTypeResponse")
 
 
+class ExpenseTransactionsStream(_BaseAccountingStream):
+    """Define expense transactions stream."""
+
+    name = "expense_transactions"
+    path = "/expense-transactions"
+    primary_keys = ("id",)
+    replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.ExpenseTransactionResponse")
+
+
+class ExpenseTransactionsCustomFieldsStream(_BaseAccountingStream):
+    """Define expense transactions custom fields stream."""
+
+    name = "expense_transactions_custom_fields"
+    path = "/expense-transactions/custom-fields"
+    primary_keys = ("id",)
+    replication_key: str = "modifiedOn"
+    schema = ServiceTitanSchema(ACCOUNTING, key="Accounting.V2.CustomFieldTypeResponse")
+
+    # def validate_response(self, response):
+    #     breakpoint()
+    #     super().validate_response(response)
+
+
 class GLAccountsStream(_BaseAccountingStream, active_any=True):
     """Define GL accounts stream."""
 

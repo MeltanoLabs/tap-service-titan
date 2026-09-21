@@ -76,6 +76,7 @@
                                             "id": 0,
                                             "name": "string",
                                             "active": true,
+                                            "createdOn": "string",
                                             "excludedTaskResolutionIds": [
                                                 0
                                             ]
@@ -220,6 +221,24 @@
                         "name": "modifiedOnOrAfter",
                         "in": "query",
                         "description": "Modified date on or after",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "descriptionModifiedBefore",
+                        "in": "query",
+                        "description": "Description modified date before",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "descriptionModifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Description modified date on or after",
                         "schema": {
                             "type": "string",
                             "format": "date-time"
@@ -1072,6 +1091,7 @@
                     "id",
                     "name",
                     "active",
+                    "createdOn",
                     "excludedTaskResolutionIds"
                 ],
                 "type": "object",
@@ -1085,6 +1105,10 @@
                     },
                     "active": {
                         "type": "boolean"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
                     },
                     "excludedTaskResolutionIds": {
                         "type": "array",

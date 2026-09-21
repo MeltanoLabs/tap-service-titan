@@ -31,6 +31,7 @@ If the target API module doesn't have a matching base class yet, add one:
 class _BaseMyApiStream(ServiceTitanStream, api_prefix="/myapi/v2"):
     pass
 
+
 class _BaseMyApiExportStream(ServiceTitanExportStream, api_prefix="/myapi/v2"):
     pass
 ```
@@ -61,6 +62,5 @@ Pass these as keyword arguments on the class definition line:
 Example combining several:
 
 ```python
-class MyStream(_BaseMyApiStream, active_any=True, sort_by="ModifiedOn", page_size=500):
-    ...
+class MyStream(_BaseMyApiStream, active_any=True, sort_by="ModifiedOn", page_size=500): ...
 ```

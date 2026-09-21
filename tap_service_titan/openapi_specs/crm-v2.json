@@ -12538,6 +12538,7 @@
             "Crm.V2.ContactType": {
                 "enum": [
                     "Phone",
+                    "Phone",
                     "Email",
                     "Fax",
                     "MobilePhone"
@@ -12546,6 +12547,7 @@
                 "description": "",
                 "x-enumNames": [
                     "Phone",
+                    "LandlinePhone",
                     "Email",
                     "Fax",
                     "MobilePhone"

@@ -184,6 +184,15 @@
     {
       "breadcrumb": [
         "properties",
+        "vendorTaxCost"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "itemGroupName"
       ],
       "metadata": {
@@ -504,6 +513,13 @@
           "number",
           "null"
         ]
+      },
+      "vendorTaxCost": {
+        "format": "decimal",
+        "type": [
+          "number",
+          "null"
+        ]
       }
     },
     "required": [
@@ -516,6 +532,7 @@
       "total",
       "unitCost",
       "totalCost",
+      "vendorTaxCost",
       "itemGroupName",
       "createdOn",
       "modifiedOn"

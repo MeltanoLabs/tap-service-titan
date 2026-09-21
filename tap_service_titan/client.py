@@ -67,7 +67,6 @@ class DateRange:
 class DateRangePaginator(BaseAPIPaginator[DateRange]):
     """Paginator that uses date ranges for pagination."""
 
-    @override
     def __init__(
         self,
         start_date: datetime,
@@ -118,7 +117,7 @@ class ServiceTitanBaseStream(RESTStream[_TToken]):
     _api_prefix: str = ""
 
     def __init_subclass__(
-        cls,
+        cls: type[ServiceTitanBaseStream[Any]],
         *,
         active_any: bool = False,
         sort_by: str | None = None,

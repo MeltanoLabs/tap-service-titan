@@ -746,6 +746,7 @@
                                 "date": "string",
                                 "invoiceId": 0,
                                 "budgetCodeId": 0,
+                                "businessUnitId": 0,
                                 "memo": "string"
                             }
                         }
@@ -1091,6 +1092,7 @@
                                 "date": "string",
                                 "invoiceId": 0,
                                 "budgetCodeId": 0,
+                                "businessUnitId": 0,
                                 "memo": "string"
                             }
                         }
@@ -1580,6 +1582,477 @@
                         "apiKeyHeader": [],
                         "oauth": [
                             "tn.prl.jobs:r"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/labor-types": {
+            "get": {
+                "tags": [
+                    "LaborTypes"
+                ],
+                "summary": "Gets a list of payroll labor types",
+                "operationId": "LaborTypes_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The logical number of page to return, starting from 1",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "How many records to return (50 by default)",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "includeTotal",
+                        "in": "query",
+                        "description": "Whether total count should be returned",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "createdBefore",
+                        "in": "query",
+                        "description": "Return items created before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "createdOnOrAfter",
+                        "in": "query",
+                        "description": "Return items created on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "modifiedBefore",
+                        "in": "query",
+                        "description": "Return items modified before certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "modifiedOnOrAfter",
+                        "in": "query",
+                        "description": "Return items modified on or after certain date/time (in UTC)",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "active",
+                        "in": "query",
+                        "description": "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]",
+                        "schema": {
+                            "type": "string",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/ActiveRequestArg"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Applies sorting by specified fields",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedResponse_Of_Payroll.V2.LaborTypes.LaborTypeResponse"
+                                },
+                                "example": {
+                                    "page": 0,
+                                    "pageSize": 0,
+                                    "hasMore": true,
+                                    "totalCount": 0,
+                                    "data": [
+                                        {
+                                            "id": 0,
+                                            "name": "string",
+                                            "code": "string",
+                                            "serviceCodeId": 0,
+                                            "active": true,
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Payroll Labor Types are not enabled",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.labortypes:r"
+                        ]
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "LaborTypes"
+                ],
+                "summary": "Creates a payroll labor type",
+                "operationId": "LaborTypes_Create",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The labor type fields to create",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Payroll.V2.LaborTypes.LaborTypeCreateRequest"
+                            },
+                            "example": {
+                                "name": "string",
+                                "code": "string",
+                                "serviceCodeId": 0,
+                                "active": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModificationResponse"
+                                },
+                                "example": {
+                                    "id": 0
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Payroll Labor Types are not enabled, or a required field (name, code) is missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "The code or name is already in use, or serviceCodeId does not reference a valid labor service",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.labortypes:w"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/tenant/{tenant}/labor-types/{id}": {
+            "get": {
+                "tags": [
+                    "LaborTypes"
+                ],
+                "summary": "Gets payroll labor type specified by ID",
+                "operationId": "LaborTypes_Get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the payroll labor type",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Payroll.V2.LaborTypes.LaborTypeResponse"
+                                },
+                                "example": {
+                                    "id": 0,
+                                    "name": "string",
+                                    "code": "string",
+                                    "serviceCodeId": 0,
+                                    "active": true,
+                                    "createdOn": "string",
+                                    "modifiedOn": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Payroll Labor Types are not enabled",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Payroll labor type was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.labortypes:r"
+                        ]
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "LaborTypes"
+                ],
+                "summary": "Replaces the payroll labor type specified by ID. This is a full update: the request body must carry\nthe complete desired state. All fields are required except serviceCodeId, which is the only field\nyou may omit \u2014 omitting it clears the labor type's service code.",
+                "operationId": "LaborTypes_Update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the payroll labor type",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The labor type fields to apply",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Payroll.V2.LaborTypes.LaborTypeUpdateRequest"
+                            },
+                            "example": {
+                                "name": "string",
+                                "code": "string",
+                                "serviceCodeId": 0,
+                                "active": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModificationResponse"
+                                },
+                                "example": {
+                                    "id": 0
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Payroll Labor Types are not enabled, or a required field (name, code, active) is missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Payroll labor type was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "The code or name is already in use, serviceCodeId does not reference a valid labor service, or the labor type is an active technician's default and cannot be deactivated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.prl.labortypes:w"
                         ]
                     }
                 ]
@@ -6077,6 +6550,14 @@
                         "description": "The budget code ID",
                         "format": "int64"
                     },
+                    "businessUnitId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "The business unit ID to use as the payout business unit. If not provided, existing default\nbehavior applies (employee/technician business unit if no invoice; invoice business unit if an invoice is set).",
+                        "format": "int64"
+                    },
                     "memo": {
                         "type": [
                             "string",
@@ -6130,6 +6611,14 @@
                             "null"
                         ],
                         "description": "The budget code ID",
+                        "format": "int64"
+                    },
+                    "businessUnitId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "The business unit ID to use as the payout business unit. If not provided, existing default\nbehavior applies (employee/technician business unit if no invoice; invoice business unit if an invoice is set).",
                         "format": "int64"
                     },
                     "memo": {
@@ -6604,6 +7093,167 @@
                     "Any",
                     "False"
                 ]
+            },
+            "PaginatedResponse_Of_Payroll.V2.LaborTypes.LaborTypeResponse": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "From which page this output has started",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "Page size for this query (i.e. how many records were requested to return)",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "True if there are more records in the query than returned in this result"
+                    },
+                    "totalCount": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Total count of records for this query (can optionally be populated)",
+                        "format": "int32"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Payroll.V2.LaborTypes.LaborTypeResponse"
+                        },
+                        "description": "The collection of result items, will never have more than PageSize items"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Represents paginated API response."
+            },
+            "Payroll.V2.LaborTypes.LaborTypeResponse": {
+                "required": [
+                    "id",
+                    "active",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID of the payroll labor type",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Name of the payroll labor type"
+                    },
+                    "code": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Code for the payroll labor type"
+                    },
+                    "serviceCodeId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ID of the labor SKU (Service) this labor type maps to; null if none",
+                        "format": "int64"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Indicates whether the payroll labor type is active"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "description": "Date/time (on UTC) when the payroll labor type was created",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "description": "Date/time (on UTC) when the payroll labor type was last modified",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Payroll.V2.LaborTypes.LaborTypeCreateRequest": {
+                "required": [
+                    "name",
+                    "code",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Name of the payroll labor type"
+                    },
+                    "code": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Code for the payroll labor type"
+                    },
+                    "serviceCodeId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ID of the labor SKU (Service) to map this labor type to; optional",
+                        "format": "int64"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether the payroll labor type is active (defaults to true)"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Payroll.V2.LaborTypes.LaborTypeUpdateRequest": {
+                "required": [
+                    "name",
+                    "code",
+                    "active"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Name of the payroll labor type"
+                    },
+                    "code": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Code for the payroll labor type"
+                    },
+                    "serviceCodeId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "ID of the labor SKU (Service) to map this labor type to; null clears it.\nThis is the only optional field \u2014 every other field is required (full replacement).",
+                        "format": "int64"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether the payroll labor type is active. Required \u2014 omitting it would otherwise reset the labor type to inactive."
+                    }
+                },
+                "additionalProperties": false
             },
             "PaginatedResponse_Of_Payroll.V2.LocationLaborTypes.LocationLaborTypeResponse": {
                 "required": [
@@ -7955,6 +8605,8 @@
                             "tn.prl.grosspayitems:r": "Payroll \u2192 Gross Pay Items (Read)",
                             "tn.prl.payrollsettings:r": "Payroll \u2192 Payroll Settings (Read)",
                             "tn.prl.grosspayitems:w": "Payroll \u2192 Gross Pay Items (Write)",
+                            "tn.prl.labortypes:r": "Payroll \u2192 Labor Types (Read)",
+                            "tn.prl.labortypes:w": "Payroll \u2192 Labor Types (Write)",
                             "tn.prl.locations:r": "Payroll \u2192 Payroll Locations (Read)",
                             "tn.prl.payrolladjustments:w": "Payroll \u2192 Payroll Adjustments (Write)",
                             "tn.prl.payrolls:r": "Payroll \u2192 Payrolls (Read)",

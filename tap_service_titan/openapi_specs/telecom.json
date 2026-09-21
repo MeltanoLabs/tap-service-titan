@@ -334,6 +334,237 @@
                 ]
             }
         },
+        "/v3/tenant/{tenant}/optinouts/optouts": {
+            "get": {
+                "tags": [
+                    "OptInOut"
+                ],
+                "summary": "Returns all opt-outs for the tenant",
+                "description": "Numbers are returned in E.164 format.",
+                "operationId": "OptInOut_GetAllOptOuts",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Telecom.V3.OptOutListResponse"
+                                },
+                                "example": {
+                                    "data": [
+                                        {
+                                            "contactNumber": "string",
+                                            "optOutType": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tlc.optinout:r"
+                        ]
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "OptInOut"
+                ],
+                "summary": "Adds opt-outs for the specified phone numbers",
+                "description": "Has to have at least one phone number in the request (use the dedicated endpoint if you need to get all the opt-outs).\nAll numbers in the request must be valid, otherwise the request will fail.\nIf a number is opted-out globally, you can't opt it out for marketing.",
+                "operationId": "OptInOut_CreateOptOutList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Telecom.V3.CreateOptOutListRequest"
+                            },
+                            "example": {
+                                "optOutType": {},
+                                "contactNumbers": [
+                                    "string"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Telecom.V3.CreateOptOutListResponse"
+                                },
+                                "example": {
+                                    "data": [
+                                        {
+                                            "contactNumber": "string",
+                                            "status": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "At least one number in the request couldn't be parsed, or there were no numbers in the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tlc.optinout:w"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/v3/tenant/{tenant}/optinouts/optouts/getlist": {
+            "post": {
+                "tags": [
+                    "OptInOut"
+                ],
+                "summary": "For each phone number in the request, returns the opt-out status, if it exists",
+                "description": "Has to have at least one phone number in the request (use the dedicated endpoint if you need to get all the opt-outs).\nIf there's no opt-out info for a phone number, it won't be included in the response.\nAll numbers in the request must be valid (E.164 format is preferred, but not required), otherwise the request will fail.\nThe numbers in the response will be in E.164 format.",
+                "operationId": "OptInOut_GetOptOutList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Telecom.V3.GetOptOutListRequest"
+                            },
+                            "example": {
+                                "contactNumbers": [
+                                    "string"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Telecom.V3.OptOutListResponse"
+                                },
+                                "example": {
+                                    "data": [
+                                        {
+                                            "contactNumber": "string",
+                                            "optOutType": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "At least one number in the request couldn't be parsed, or there were no numbers in the request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.tlc.optinout:w"
+                        ]
+                    }
+                ]
+            }
+        },
         "/v2/tenant/{tenant}/calls/{id}": {
             "get": {
                 "tags": [
@@ -1838,6 +2069,159 @@
                     "Any",
                     "False"
                 ]
+            },
+            "Telecom.V3.OptOutListResponse": {
+                "required": [
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Telecom.V3.OptOutResponse"
+                        },
+                        "description": "The list of opt-out responses."
+                    }
+                },
+                "additionalProperties": false,
+                "description": "List of opt-outs"
+            },
+            "Telecom.V3.OptOutResponse": {
+                "required": [
+                    "contactNumber",
+                    "optOutType"
+                ],
+                "type": "object",
+                "properties": {
+                    "contactNumber": {
+                        "type": "string",
+                        "description": "Contact number in E.164 format"
+                    },
+                    "optOutType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V3.OptOutType"
+                            }
+                        ],
+                        "description": "Opt-out type"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Single contact number opt-out status"
+            },
+            "Telecom.V3.OptOutType": {
+                "enum": [
+                    "Unknown",
+                    "Global",
+                    "Marketing",
+                    "Other"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Unknown",
+                    "Global",
+                    "Marketing",
+                    "Other"
+                ]
+            },
+            "Telecom.V3.GetOptOutListRequest": {
+                "required": [
+                    "contactNumbers"
+                ],
+                "type": "object",
+                "properties": {
+                    "contactNumbers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Contact numbers (must be valid parseable phone numbers, E.164 format is recommended)"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "List of phone numbers to get opt-out status for"
+            },
+            "Telecom.V3.CreateOptOutListResponse": {
+                "required": [
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Telecom.V3.CreateOptOutResponse"
+                        },
+                        "description": "Individual results for each number"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Result of creating the opt-outs"
+            },
+            "Telecom.V3.CreateOptOutResponse": {
+                "required": [
+                    "contactNumber",
+                    "status"
+                ],
+                "type": "object",
+                "properties": {
+                    "contactNumber": {
+                        "type": "string",
+                        "description": "Contact number in E.164 format"
+                    },
+                    "status": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V3.CreateOptOutStatus"
+                            }
+                        ],
+                        "description": "Result of opt-out creation"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Result of creating a single opt-out"
+            },
+            "Telecom.V3.CreateOptOutStatus": {
+                "enum": [
+                    "Ok",
+                    "RetryableError",
+                    "LogicalError"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Ok",
+                    "RetryableError",
+                    "LogicalError"
+                ]
+            },
+            "Telecom.V3.CreateOptOutListRequest": {
+                "required": [
+                    "optOutType",
+                    "contactNumbers"
+                ],
+                "type": "object",
+                "properties": {
+                    "optOutType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Telecom.V3.OptOutType"
+                            }
+                        ],
+                        "description": "Type of opt-out to create"
+                    },
+                    "contactNumbers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Contact numbers (must be valid parseable phone numbers, E.164 format is recommended)"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "List of phone numbers to create the opt-out status for"
             },
             "Module.Telecom.Shared.DetailedBundleCallModel": {
                 "required": [
@@ -3354,6 +3738,8 @@
                         "tokenUrl": "https://auth.servicetitan.io/connect/token",
                         "scopes": {
                             "tn.tlc.calls:r": "Telecom \u2192 Calls (Read)",
+                            "tn.tlc.optinout:r": "Telecom \u2192 Opt Out (Read)",
+                            "tn.tlc.optinout:w": "Telecom \u2192 Opt Out (Write)",
                             "tn.tlc.calls:w": "Telecom \u2192 Calls (Write)"
                         }
                     }

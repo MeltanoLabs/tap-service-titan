@@ -105,6 +105,15 @@
     {
       "breadcrumb": [
         "properties",
+        "rateSheetId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "id"
       ],
       "metadata": {
@@ -1722,6 +1731,14 @@
         ]
       },
       "projectId": {
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "rateSheetId": {
+        "description": "The rate sheet currently applied to the invoice; null when no rate sheet is applied.",
         "format": "int64",
         "type": [
           "integer",

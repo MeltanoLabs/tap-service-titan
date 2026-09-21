@@ -310,6 +310,24 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "items"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "expenseItems"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -461,6 +479,155 @@
           "null"
         ]
       },
+      "expenseItems": {
+        "description": "List of expense items on the credit",
+        "items": {
+          "additionalProperties": false,
+          "description": "Represents an expense item on an AP credit for non-inventory costs",
+          "properties": {
+            "amount": {
+              "description": "Amount of the expense as a formatted string",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "businessUnit": {
+              "additionalProperties": false,
+              "description": "Business unit associated with the expense",
+              "properties": {
+                "id": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "description": {
+              "description": "Description of the expense item",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "generalLedgerAccount": {
+              "additionalProperties": false,
+              "description": "General ledger account information for the expense",
+              "properties": {
+                "detailType": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "id": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "id": {
+              "description": "Unique identifier for the expense item",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "job": {
+              "additionalProperties": false,
+              "description": "Job associated with the expense, if applicable",
+              "properties": {
+                "id": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "projectLabelIds": {
+              "description": "List of project label IDs associated with the expense",
+              "items": {
+                "format": "int64",
+                "type": "integer"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
+          "null"
+        ]
+      },
       "id": {
         "format": "int64",
         "type": "integer"
@@ -469,6 +636,235 @@
         "format": "int64",
         "type": [
           "integer",
+          "null"
+        ]
+      },
+      "items": {
+        "description": "List of line items on the credit (materials and equipment)",
+        "items": {
+          "additionalProperties": false,
+          "description": "Represents a line item on an AP credit, containing material or equipment details",
+          "properties": {
+            "assetAccount": {
+              "additionalProperties": false,
+              "description": "Asset account information for accounting purposes",
+              "properties": {
+                "detailType": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "id": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "cost": {
+              "description": "Cost per unit as a formatted string",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "costOfSaleAccount": {
+              "additionalProperties": false,
+              "description": "Cost of sale account information for accounting purposes",
+              "properties": {
+                "detailType": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "id": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "description": {
+              "description": "Description of the item",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "generalLedgerAccount": {
+              "additionalProperties": false,
+              "description": "General ledger account information for accounting purposes",
+              "properties": {
+                "detailType": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "id": {
+                  "format": "int64",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "id": {
+              "description": "Unique identifier for the credit item",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "name": {
+              "description": "Display name of the item (material or equipment)",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "projectLabelIds": {
+              "description": "List of project label IDs associated with the item",
+              "items": {
+                "format": "int64",
+                "type": "integer"
+              },
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "quantity": {
+              "description": "Quantity of the item as a formatted string",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "skuCode": {
+              "description": "SKU code identifier",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "skuId": {
+              "description": "SKU (Stock Keeping Unit) identifier",
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "skuType": {
+              "description": "Type of SKU (e.g., Material, Equipment)",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "total": {
+              "description": "Total cost of the line item as a formatted string",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "skuId"
+          ],
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "type": [
+          "array",
           "null"
         ]
       },

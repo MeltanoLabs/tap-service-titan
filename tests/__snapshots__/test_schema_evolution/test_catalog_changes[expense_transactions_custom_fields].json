@@ -15,7 +15,7 @@
     {
       "breadcrumb": [
         "properties",
-        "active"
+        "name"
       ],
       "metadata": {
         "inclusion": "available"
@@ -24,7 +24,16 @@
     {
       "breadcrumb": [
         "properties",
-        "name"
+        "dataType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "dataTypeOptions"
       ],
       "metadata": {
         "inclusion": "available"
@@ -36,54 +45,39 @@
         "createdOn"
       ],
       "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "modifiedOn"
+      ],
+      "metadata": {
         "inclusion": "automatic"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "employeeType"
-      ],
-      "metadata": {
-        "inclusion": "available"
-      }
-    },
-    {
-      "breadcrumb": [
-        "properties",
-        "roleSource"
-      ],
-      "metadata": {
-        "inclusion": "available"
       }
     },
     {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
-        "replication-key": "createdOn",
+        "replication-key": "modifiedOn",
         "selected": true,
         "selected-by-default": true,
         "table-key-properties": [
           "id"
         ],
         "valid-replication-keys": [
-          "createdOn"
+          "modifiedOn"
         ]
       }
     }
   ],
-  "replication_key": "createdOn",
+  "replication_key": "modifiedOn",
   "replication_method": "INCREMENTAL",
   "schema": {
     "additionalProperties": false,
     "properties": {
-      "active": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
       "createdOn": {
         "format": "date-time",
         "type": [
@@ -91,10 +85,19 @@
           "null"
         ]
       },
-      "employeeType": {
+      "dataType": {
         "description": "",
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "dataTypeOptions": {
+        "items": {
+          "type": "string"
+        },
+        "type": [
+          "array",
           "null"
         ]
       },
@@ -102,14 +105,14 @@
         "format": "int64",
         "type": "integer"
       },
-      "name": {
+      "modifiedOn": {
+        "format": "date-time",
         "type": [
           "string",
           "null"
         ]
       },
-      "roleSource": {
-        "description": "",
+      "name": {
         "type": [
           "string",
           "null"
@@ -118,14 +121,13 @@
     },
     "required": [
       "id",
-      "active",
       "name",
+      "dataType",
       "createdOn",
-      "employeeType",
-      "roleSource"
+      "modifiedOn"
     ],
     "type": "object"
   },
-  "stream": "user_roles",
-  "tap_stream_id": "user_roles"
+  "stream": "expense_transactions_custom_fields",
+  "tap_stream_id": "expense_transactions_custom_fields"
 }

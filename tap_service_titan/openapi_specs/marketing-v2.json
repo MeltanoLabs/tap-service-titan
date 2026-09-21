@@ -1548,6 +1548,90 @@
                     }
                 ]
             }
+        },
+        "/tenant/{tenant}/sms/optin/import": {
+            "post": {
+                "tags": [
+                    "Sms"
+                ],
+                "summary": "Allows the creation of externally obtained SMS Opt-ins",
+                "operationId": "Sms_ImportOptIn",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Marketing.V2.ImportOptInRequest"
+                            },
+                            "example": {
+                                "phoneNumbers": [
+                                    "string"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Marketing.V2.ImportOptInResult"
+                                },
+                                "example": {
+                                    "successfulPhoneNumbers": [
+                                        "string"
+                                    ],
+                                    "invalidPhoneNumbers": [
+                                        "string"
+                                    ],
+                                    "unsuccessfulPhoneNumbers": [
+                                        "string"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.mrk.sms:w"
+                        ]
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -2125,6 +2209,51 @@
                     }
                 },
                 "additionalProperties": false
+            },
+            "Marketing.V2.ImportOptInResult": {
+                "required": [
+                    "successfulPhoneNumbers",
+                    "invalidPhoneNumbers",
+                    "unsuccessfulPhoneNumbers"
+                ],
+                "type": "object",
+                "properties": {
+                    "successfulPhoneNumbers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "invalidPhoneNumbers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "unsuccessfulPhoneNumbers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Marketing.V2.ImportOptInRequest": {
+                "required": [
+                    "phoneNumbers"
+                ],
+                "type": "object",
+                "properties": {
+                    "phoneNumbers": {
+                        "minItems": 1,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "additionalProperties": false
             }
         },
         "securitySchemes": {
@@ -2148,7 +2277,8 @@
                             "tn.mrk.campaigncostsummary:r": "Marketing \u2192 Campaign Cost Summary (Read)",
                             "tn.mrk.campaigns:r": "Marketing \u2192 Campaigns (Read)",
                             "tn.mrk.campaigns:w": "Marketing \u2192 Campaigns (Write)",
-                            "tn.mrk.emailchannelcost:r": "Marketing \u2192 Email Channel Cost (Read)"
+                            "tn.mrk.emailchannelcost:r": "Marketing \u2192 Email Channel Cost (Read)",
+                            "tn.mrk.sms:w": "Marketing \u2192 SMS (Write)"
                         }
                     }
                 }

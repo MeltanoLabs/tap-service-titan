@@ -94,6 +94,18 @@ class TapServiceTitan(Tap):
             ),
         ),
         th.Property(
+            "capacities_business_unit_ids",
+            th.ArrayType(th.IntegerType),
+            description=(
+                "Business unit IDs to request availability for in the `capacities` "
+                "stream. When omitted, the tap auto-discovers all active business unit "
+                "IDs via the `/settings/v2/.../export/business-units` endpoint. "
+                "Explicit IDs (auto-discovered or configured) are always sent to the "
+                "capacity endpoint; an unfiltered query can silently omit business "
+                "units that aren't part of a capacity group."
+            ),
+        ),
+        th.Property(
             "custom_reports",
             th.ArrayType(
                 th.ObjectType(
@@ -178,6 +190,8 @@ class TapServiceTitan(Tap):
             streams.accounting.BankDepositTransactionsStream(self),
             streams.accounting.BankDepositsStream(self),
             streams.accounting.CreditMemosStream(self),
+            streams.accounting.ExpenseTransactionsCustomFieldsStream(self),
+            streams.accounting.ExpenseTransactionsStream(self),
             streams.accounting.GLAccountTypesStream(self),
             streams.accounting.GLAccountsStream(self),
             streams.accounting.InventoryBillsCustomFieldsStream(self),
