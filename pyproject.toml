@@ -16,6 +16,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
 ]
 dependencies = [
     "backports-httpmethod~=0.2.1 ; python_version < '3.11'",
@@ -25,7 +26,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-s3 = [ "s3fs>=2026.6,<2026.8" ]
+s3 = [ "s3fs>=2026.6" ]
 
 [project.scripts]
 tap-service-titan = "tap_service_titan.tap:TapServiceTitan.cli"
