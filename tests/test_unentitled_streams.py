@@ -48,7 +48,6 @@ def _request_raising_403(stream: DiscountsAndFeesStream) -> None:
     """Make the stream's HTTP call surface a 403 the way a real one would."""
 
 
-
 def test_403_is_fatal_by_default() -> None:
     """Without the flag, a 403 still fails the run loudly."""
     with pytest.raises(FatalAPIError):
