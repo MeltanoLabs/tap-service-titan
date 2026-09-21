@@ -57,7 +57,6 @@ class DateRange:
 class DateRangePaginator(BaseAPIPaginator[DateRange]):
     """Paginator that uses date ranges for pagination."""
 
-    @override
     def __init__(
         self,
         start_date: datetime,

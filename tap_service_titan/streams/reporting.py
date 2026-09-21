@@ -124,7 +124,6 @@ class CustomReports(ServiceTitanStream, api_prefix="/reporting/v2"):
         HTTPStatus.TOO_MANY_REQUESTS,
     ]
 
-    @override
     def __init__(
         self,
         tap: Tap,
