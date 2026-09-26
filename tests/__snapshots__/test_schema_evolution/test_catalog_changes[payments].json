@@ -295,6 +295,24 @@
     {
       "breadcrumb": [
         "properties",
+        "userMemo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "systemMemo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "modifiedOn"
       ],
       "metadata": {
@@ -323,6 +341,48 @@
       "breadcrumb": [
         "properties",
         "syncStatus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "exportSubstatus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "exportSubstatus",
+        "properties",
+        "type"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "exportSubstatus",
+        "properties",
+        "setOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "exportSubstatus",
+        "properties",
+        "setByUserId"
       ],
       "metadata": {
         "inclusion": "available"
@@ -618,6 +678,42 @@
           "null"
         ]
       },
+      "exportSubstatus": {
+        "additionalProperties": false,
+        "description": "Bypass details when a transaction was marked Exported without a normal ERP sync.",
+        "properties": {
+          "setByUserId": {
+            "description": "User who set the substatus. Null when no user was recorded.",
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "setOn": {
+            "description": "UTC timestamp when the substatus was set.",
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "description": "Reason an exported transaction bypassed ERP sync.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": [
+          "object",
+          "null"
+        ]
+      },
       "generalLedgerAccount": {
         "additionalProperties": false,
         "properties": {
@@ -666,6 +762,7 @@
         "type": "integer"
       },
       "memo": {
+        "description": "The full memo: the custom free-text message combined with system processing notes.",
         "type": [
           "string",
           "null"
@@ -697,6 +794,13 @@
           "null"
         ]
       },
+      "systemMemo": {
+        "description": "System-generated processing notes for the payment. May be null, in which case refer to Memo.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "total": {
         "type": [
           "string",
@@ -716,6 +820,13 @@
         ]
       },
       "unappliedAmount": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "userMemo": {
+        "description": "Custom free-text message stored with the payment. May be null, in which case refer to Memo.",
         "type": [
           "string",
           "null"

@@ -5964,7 +5964,8 @@
                                             ]
                                         },
                                         "coordinatesSource": {},
-                                        "coordinatesVerificationStatus": {}
+                                        "coordinatesVerificationStatus": {},
+                                        "taxZoneId": 0
                                     }
                                 ],
                                 "address": {
@@ -7483,6 +7484,14 @@
                         }
                     },
                     {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filters records by name (case-insensitive \"contains\" operation)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "createdBefore",
                         "in": "query",
                         "description": "Return items created before certain date/time (in UTC)",
@@ -8166,7 +8175,7 @@
                 "tags": [
                     "Export"
                 ],
-                "summary": "Provides export feed for appointments",
+                "summary": "Provides export feed for locations",
                 "operationId": "ExportLocations_Locations",
                 "parameters": [
                     {
@@ -9867,6 +9876,7 @@
                                 },
                                 "coordinatesSource": {},
                                 "coordinatesVerificationStatus": {},
+                                "taxZoneId": 0,
                                 "customerId": 0
                             }
                         }
@@ -11588,6 +11598,14 @@
                         "description": "Whether total count should be returned",
                         "schema": {
                             "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filters records by name (case-insensitive \"contains\" operation)",
+                        "schema": {
+                            "type": "string"
                         }
                     },
                     {
@@ -14337,6 +14355,14 @@
                             }
                         ],
                         "description": "Gets or sets the verification status of the coordinates."
+                    },
+                    "taxZoneId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Optional tax zone id to use for the location. When provided, this tax zone is used instead of being\nautomatically resolved from the location\u2019s address.",
+                        "format": "int64"
                     }
                 },
                 "additionalProperties": false
@@ -17069,6 +17095,14 @@
                             }
                         ],
                         "description": "Gets or sets the verification status of the coordinates."
+                    },
+                    "taxZoneId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Optional tax zone id to use for the location. When provided, this tax zone is used instead of being\nautomatically resolved from the location\u2019s address.",
+                        "format": "int64"
                     },
                     "customerId": {
                         "type": "integer",

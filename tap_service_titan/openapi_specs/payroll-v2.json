@@ -671,6 +671,7 @@
                                             "createdOn": "string",
                                             "modifiedOn": "string",
                                             "active": true,
+                                            "payType": {},
                                             "customFields": [
                                                 {
                                                     "typeId": 0,
@@ -3925,6 +3926,7 @@
                                             "createdOn": "string",
                                             "modifiedOn": "string",
                                             "active": true,
+                                            "payType": {},
                                             "customFields": [
                                                 {
                                                     "typeId": 0,
@@ -4034,6 +4036,7 @@
                                     "createdOn": "string",
                                     "modifiedOn": "string",
                                     "active": true,
+                                    "payType": {},
                                     "customFields": [
                                         {
                                             "typeId": 0,
@@ -4133,6 +4136,7 @@
                                 "payrollBusinessUnitId": 0,
                                 "hireDate": "string",
                                 "isIncludedInPayroll": true,
+                                "payType": {},
                                 "customFields": [
                                     {
                                         "typeId": 0,
@@ -4253,6 +4257,7 @@
                                     "createdOn": "string",
                                     "modifiedOn": "string",
                                     "active": true,
+                                    "payType": {},
                                     "customFields": [
                                         {
                                             "typeId": 0,
@@ -4352,6 +4357,7 @@
                                 "payrollBusinessUnitId": 0,
                                 "hireDate": "string",
                                 "isIncludedInPayroll": true,
+                                "payType": {},
                                 "customFields": [
                                     {
                                         "typeId": 0,
@@ -6449,6 +6455,17 @@
                         "type": "boolean",
                         "description": "The active status of the record"
                     },
+                    "payType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Payroll.V2.TechnicianPayTypeModel"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "The pay type (technician only)."
+                    },
                     "customFields": {
                         "type": [
                             "array",
@@ -6461,6 +6478,20 @@
                     }
                 },
                 "additionalProperties": false
+            },
+            "Payroll.V2.TechnicianPayTypeModel": {
+                "enum": [
+                    "Both",
+                    "Commission",
+                    "Timesheet"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Both",
+                    "Commission",
+                    "Timesheet"
+                ]
             },
             "Payroll.V2.PayrollSettings.PayrollCustomFieldResponse": {
                 "required": [
@@ -8038,6 +8069,17 @@
                         "type": "boolean",
                         "description": "The active status of the record"
                     },
+                    "payType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Payroll.V2.TechnicianPayTypeModel"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "The pay type (technician only)."
+                    },
                     "customFields": {
                         "type": [
                             "array",
@@ -8130,6 +8172,17 @@
                         "type": "boolean",
                         "description": "The active status of the record"
                     },
+                    "payType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Payroll.V2.TechnicianPayTypeModel"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "The pay type (technician only)."
+                    },
                     "customFields": {
                         "type": [
                             "array",
@@ -8205,6 +8258,17 @@
                             "null"
                         ],
                         "description": "Indicates if the employee should be included in payroll processing"
+                    },
+                    "payType": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Payroll.V2.TechnicianPayTypeModel"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "The pay type (technician only). Omit to leave the current value unchanged."
                     },
                     "customFields": {
                         "type": [
