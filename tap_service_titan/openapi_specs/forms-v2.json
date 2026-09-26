@@ -1098,7 +1098,7 @@
                 "type": "object",
                 "properties": {
                     "type": {
-                        "$ref": "#/components/schemas/Forms.Client.Contracts.OwnerType"
+                        "$ref": "#/components/schemas/Forms2.OwnerType"
                     },
                     "id": {
                         "type": "integer",
@@ -1107,7 +1107,7 @@
                 },
                 "additionalProperties": false
             },
-            "Forms.Client.Contracts.OwnerType": {
+            "Forms2.OwnerType": {
                 "enum": [
                     "Job",
                     "Call",
@@ -1229,13 +1229,13 @@
                     "attachments": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                            "$ref": "#/components/schemas/Forms2.FormAttachment"
                         }
                     }
                 },
                 "additionalProperties": false
             },
-            "Forms.Client.Contracts.FormAttachment": {
+            "Forms2.FormAttachment": {
                 "required": [
                     "fileName",
                     "createdFrom",
@@ -1280,7 +1280,7 @@
                     "attachments": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                            "$ref": "#/components/schemas/Forms2.FormAttachment"
                         }
                     },
                     "id": {
@@ -1317,7 +1317,7 @@
                     "attachments": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                            "$ref": "#/components/schemas/Forms2.FormAttachment"
                         }
                     },
                     "id": {
@@ -1356,7 +1356,7 @@
                     "attachments": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                            "$ref": "#/components/schemas/Forms2.FormAttachment"
                         }
                     },
                     "id": {
@@ -1392,7 +1392,7 @@
                     "attachments": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                            "$ref": "#/components/schemas/Forms2.FormAttachment"
                         }
                     },
                     "id": {
@@ -1432,7 +1432,7 @@
                     "attachments": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                            "$ref": "#/components/schemas/Forms2.FormAttachment"
                         }
                     },
                     "id": {
@@ -1470,7 +1470,7 @@
                     "attachments": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                            "$ref": "#/components/schemas/Forms2.FormAttachment"
                         }
                     },
                     "id": {
@@ -1503,7 +1503,7 @@
                     "attachments": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                            "$ref": "#/components/schemas/Forms2.FormAttachment"
                         }
                     },
                     "id": {
@@ -1543,7 +1543,7 @@
                     "attachments": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                            "$ref": "#/components/schemas/Forms2.FormAttachment"
                         }
                     },
                     "id": {
@@ -1583,7 +1583,7 @@
                     "attachments": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Forms.Client.Contracts.FormAttachment"
+                            "$ref": "#/components/schemas/Forms2.FormAttachment"
                         }
                     },
                     "id": {
@@ -1595,7 +1595,7 @@
                     "value": {
                         "oneOf": [
                             {
-                                "$ref": "#/components/schemas/Forms.Client.Contracts.StoplightValue"
+                                "$ref": "#/components/schemas/Forms2.StoplightValue"
                             },
                             {
                                 "type": "null"
@@ -1605,7 +1605,7 @@
                 },
                 "additionalProperties": false
             },
-            "Forms.Client.Contracts.StoplightValue": {
+            "Forms2.StoplightValue": {
                 "enum": [
                     "Red",
                     "Yellow",

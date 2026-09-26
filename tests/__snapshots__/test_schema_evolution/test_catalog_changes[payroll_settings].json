@@ -105,6 +105,15 @@
     {
       "breadcrumb": [
         "properties",
+        "payType"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "customFields"
       ],
       "metadata": {
@@ -241,6 +250,13 @@
       "modifiedOn": {
         "description": "The date the record was last modified",
         "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "payType": {
+        "description": "",
         "type": [
           "string",
           "null"

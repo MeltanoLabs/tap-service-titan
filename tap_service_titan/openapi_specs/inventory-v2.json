@@ -140,7 +140,7 @@
                     {
                         "name": "syncStatuses",
                         "in": "query",
-                        "description": "Filter by a collection of sync statues",
+                        "description": "Filter by a collection of sync statuses",
                         "schema": {
                             "type": "string"
                         }
@@ -1628,7 +1628,7 @@
                     {
                         "name": "number",
                         "in": "query",
-                        "description": "Filters by PO number ",
+                        "description": "Filters by PO number",
                         "schema": {
                             "type": "string"
                         }
@@ -1741,6 +1741,32 @@
                         }
                     },
                     {
+                        "name": "requiredOnOnOrAfter",
+                        "in": "query",
+                        "description": "Return POs with required on date on or after certain date/time",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "requiredOnBefore",
+                        "in": "query",
+                        "description": "Return POs with required on date before certain date/time",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "inventoryLocationIds",
+                        "in": "query",
+                        "description": "Filters by inventory location ids associated with the PO",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "page",
                         "in": "query",
                         "description": "The logical number of page to return, starting from 1",
@@ -1769,7 +1795,7 @@
                     {
                         "name": "sort",
                         "in": "query",
-                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn.",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn, Date, RequiredOn.",
                         "schema": {
                             "type": "string"
                         }
@@ -1919,7 +1945,7 @@
                     {
                         "name": "requestStatus",
                         "in": "query",
-                        "description": "Filters by PO request status\nAvailable values are: PendingApproval, Rejected\\\nValues: [PendingApproval, Approved, Rejected]",
+                        "description": "Filters by PO request status. Available values are: PendingApproval, Rejected\\\nValues: [PendingApproval, Approved, Rejected]",
                         "schema": {
                             "type": "string",
                             "oneOf": [
@@ -1932,7 +1958,7 @@
                     {
                         "name": "requestNumber",
                         "in": "query",
-                        "description": "Filters by PO request number ",
+                        "description": "Filters by PO request number",
                         "schema": {
                             "type": "string"
                         }
@@ -4047,7 +4073,13 @@
                                                     "allocatedShipping": 0,
                                                     "allocatedTax": 0,
                                                     "allocatedOtherCosts": 0,
-                                                    "fullyLandedUnitCost": 0
+                                                    "fullyLandedUnitCost": 0,
+                                                    "serialNumbers": [
+                                                        {
+                                                            "id": 0,
+                                                            "number": "string"
+                                                        }
+                                                    ]
                                                 }
                                             ],
                                             "customFields": [
@@ -5660,7 +5692,15 @@
                     {
                         "name": "toLocationIds",
                         "in": "query",
-                        "description": "Filter by a collection of To field locations ",
+                        "description": "Filter by a collection of To field locations",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "jobIds",
+                        "in": "query",
+                        "description": "Filters by JobIds associated with the transfer",
                         "schema": {
                             "type": "string"
                         }
@@ -5780,7 +5820,7 @@
                     {
                         "name": "sort",
                         "in": "query",
-                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn.",
+                        "description": "Applies sorting by the specified field:\\\n\"?sort=+FieldName\" for ascending order,\\\n\"?sort=-FieldName\" for descending order.\\\n\\\nAvailable fields are: Id, ModifiedOn, CreatedOn, Date.",
                         "schema": {
                             "type": "string"
                         }
@@ -7252,6 +7292,14 @@
                         "description": "Whether total count should be returned",
                         "schema": {
                             "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filters records by name (case-insensitive \"contains\" operation)",
+                        "schema": {
+                            "type": "string"
                         }
                     },
                     {
@@ -9732,6 +9780,155 @@
                 "additionalProperties": false,
                 "description": "Represents GL account response"
             },
+            "Inventory.V2.LandedCostMethod": {
+                "enum": [
+                    "None",
+                    "ByValue"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "None",
+                    "ByValue"
+                ]
+            },
+            "Inventory.V2.InventoryReceiptItemResponse": {
+                "required": [
+                    "id",
+                    "skuId",
+                    "name",
+                    "code",
+                    "description",
+                    "quantity",
+                    "cost",
+                    "purchaseOrderItemId"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Item Id",
+                        "format": "int64"
+                    },
+                    "skuId": {
+                        "type": "integer",
+                        "description": "Sku Id",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Item Name"
+                    },
+                    "code": {
+                        "type": "string",
+                        "description": "Item Code"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Item Description",
+                        "format": "html"
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "description": "Receipt quantity",
+                        "format": "decimal"
+                    },
+                    "cost": {
+                        "type": "number",
+                        "description": "Item cost",
+                        "format": "decimal"
+                    },
+                    "generalLedgerAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Inventory.V2.GLAccountResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "General ledge account information"
+                    },
+                    "costOfSaleAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Inventory.V2.GLAccountResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Cost of sale account information"
+                    },
+                    "assetAccount": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Inventory.V2.GLAccountResponse"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Asset account information"
+                    },
+                    "purchaseOrderItemId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "budgetCodeId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Id of the budget code",
+                        "format": "int64"
+                    },
+                    "allocatedShipping": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Allocated shipping cost for this item (fully landed cost). Null when LandedCostMethod is None.",
+                        "format": "decimal"
+                    },
+                    "allocatedTax": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Allocated tax for this item (fully landed cost). Null when LandedCostMethod is None.",
+                        "format": "decimal"
+                    },
+                    "allocatedOtherCosts": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Allocated other costs for this item (fully landed cost). Null when LandedCostMethod is None.",
+                        "format": "decimal"
+                    },
+                    "fullyLandedUnitCost": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Fully landed unit cost for this item. Null when LandedCostMethod is None.",
+                        "format": "decimal"
+                    },
+                    "serialNumbers": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/Inventory.V2.SerialNumberResponse"
+                        },
+                        "description": "List of serial numbers"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Inventory receipt item response"
+            },
             "ExportResponse_Of_Inventory.V2.ExportTransfersResponse": {
                 "required": [
                     "hasMore",
@@ -11598,18 +11795,6 @@
                 "additionalProperties": false,
                 "description": "Request model to create Purchase Order Types\n            "
             },
-            "Inventory.V2.LandedCostMethod": {
-                "enum": [
-                    "None",
-                    "ByValue"
-                ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "None",
-                    "ByValue"
-                ]
-            },
             "Inventory.PoTypeAlertSettings": {
                 "required": [
                     "sendEmailToTechnicianWhenPoMovedToSend",
@@ -12145,133 +12330,6 @@
                 },
                 "additionalProperties": false,
                 "description": "Inventory receipt response"
-            },
-            "Inventory.V2.InventoryReceiptItemResponse": {
-                "required": [
-                    "id",
-                    "skuId",
-                    "name",
-                    "code",
-                    "description",
-                    "quantity",
-                    "cost",
-                    "purchaseOrderItemId"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "description": "Item Id",
-                        "format": "int64"
-                    },
-                    "skuId": {
-                        "type": "integer",
-                        "description": "Sku Id",
-                        "format": "int64"
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "Item Name"
-                    },
-                    "code": {
-                        "type": "string",
-                        "description": "Item Code"
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": "Item Description",
-                        "format": "html"
-                    },
-                    "quantity": {
-                        "type": "number",
-                        "description": "Receipt quantity",
-                        "format": "decimal"
-                    },
-                    "cost": {
-                        "type": "number",
-                        "description": "Item cost",
-                        "format": "decimal"
-                    },
-                    "generalLedgerAccount": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Inventory.V2.GLAccountResponse"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "description": "General ledge account information"
-                    },
-                    "costOfSaleAccount": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Inventory.V2.GLAccountResponse"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "description": "Cost of sale account information"
-                    },
-                    "assetAccount": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/Inventory.V2.GLAccountResponse"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "description": "Asset account information"
-                    },
-                    "purchaseOrderItemId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "budgetCodeId": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
-                        "description": "Id of the budget code",
-                        "format": "int64"
-                    },
-                    "allocatedShipping": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
-                        "description": "Allocated shipping cost for this item (fully landed cost). Null when LandedCostMethod is None.",
-                        "format": "decimal"
-                    },
-                    "allocatedTax": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
-                        "description": "Allocated tax for this item (fully landed cost). Null when LandedCostMethod is None.",
-                        "format": "decimal"
-                    },
-                    "allocatedOtherCosts": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
-                        "description": "Allocated other costs for this item (fully landed cost). Null when LandedCostMethod is None.",
-                        "format": "decimal"
-                    },
-                    "fullyLandedUnitCost": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
-                        "description": "Fully landed unit cost for this item. Null when LandedCostMethod is None.",
-                        "format": "decimal"
-                    }
-                },
-                "additionalProperties": false,
-                "description": "Inventory receipt item response"
             },
             "Inventory.V2.ReceivePurchaseOrderRequest": {
                 "required": [

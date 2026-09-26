@@ -87,6 +87,24 @@
     {
       "breadcrumb": [
         "properties",
+        "userMemo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "systemMemo"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "customer"
       ],
       "metadata": {
@@ -665,6 +683,7 @@
         "type": "integer"
       },
       "memo": {
+        "description": "The full memo: the custom free-text message combined with system processing notes.",
         "type": [
           "string",
           "null"
@@ -689,6 +708,13 @@
           "null"
         ]
       },
+      "systemMemo": {
+        "description": "System-generated processing notes for the payment. May be null, in which case refer to Memo.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "total": {
         "type": [
           "string",
@@ -708,6 +734,13 @@
         ]
       },
       "unappliedAmount": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "userMemo": {
+        "description": "Custom free-text message stored with the payment. May be null, in which case refer to Memo.",
         "type": [
           "string",
           "null"

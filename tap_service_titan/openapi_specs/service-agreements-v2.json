@@ -635,6 +635,14 @@
                         }
                     },
                     {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filters records by name (case-insensitive \"contains\" operation)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "createdBefore",
                         "in": "query",
                         "description": "Return items created before certain date/time (in UTC)",
