@@ -141,6 +141,48 @@
     {
       "breadcrumb": [
         "properties",
+        "exportSubstatus"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "exportSubstatus",
+        "properties",
+        "type"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "exportSubstatus",
+        "properties",
+        "setOn"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "exportSubstatus",
+        "properties",
+        "setByUserId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "batch"
       ],
       "metadata": {
@@ -625,6 +667,42 @@
         },
         "type": [
           "array",
+          "null"
+        ]
+      },
+      "exportSubstatus": {
+        "additionalProperties": false,
+        "description": "Bypass details when a transaction was marked Exported without a normal ERP sync.",
+        "properties": {
+          "setByUserId": {
+            "description": "User who set the substatus. Null when no user was recorded.",
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "setOn": {
+            "description": "UTC timestamp when the substatus was set.",
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "description": "Reason an exported transaction bypassed ERP sync.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": [
+          "object",
           "null"
         ]
       },

@@ -167,6 +167,32 @@
                         }
                     },
                     {
+                        "name": "technicianIds",
+                        "in": "query",
+                        "description": "Return appointment assignments for one or more technicians. Comma-separated list of technician IDs. Request URIs longer than 2048 characters are rejected by the API gateway.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "appointmentStartsOnOrAfter",
+                        "in": "query",
+                        "description": "Return appointment assignments whose appointment starts on or after the specified date/time, interpreted as UTC. Inclusive boundary.",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "appointmentStartsBefore",
+                        "in": "query",
+                        "description": "Return appointment assignments whose appointment starts before the specified date/time, interpreted as UTC. Exclusive boundary.",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
                         "name": "createdBefore",
                         "in": "query",
                         "description": "Return items created before certain date/time (in UTC)",

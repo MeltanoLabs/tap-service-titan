@@ -157,6 +157,24 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "originalStart"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "originalEnd"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -334,6 +352,22 @@
       },
       "modifiedOn": {
         "description": "When the appointment was modified (in UTC)",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "originalEnd": {
+        "description": "Best-effort planned end date/time matching the dispatch-board popover (in UTC). Each boundary uses its\nrecorded original value, reconstructs from previous duration, or uses its recorded persisted fallback in that\norder; omitted when either gate is inactive, no recognized head exists,\nno recognized adjustment recorded an original boundary (sold-hours-only history, or history written\nbefore the original columns existed), or the chain exceeds 100 rows.\nRead-time enrichment: this value does not advance modifiedOn, so one full export without\nfrom is required to pick up values for rows already behind your cursor. May itself be a\npost-adjustment value from a prior generation. Consumers must implement\noriginalEnd ?? end fallback. Each boundary follows its own fallback ladder, so the pair may combine\nvalues from different rungs, including reconstruction from the recorded previous duration, and must not be used to\nderive planned duration.\nPrivate preview: available for specific accounts only.",
+        "format": "date-time",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "originalStart": {
+        "description": "Best-effort planned start date/time matching the dispatch-board popover (in UTC). Each boundary uses its\nrecorded original value, reconstructs from previous duration, or uses its recorded persisted fallback in that\norder; omitted when either gate is inactive, no recognized head exists,\nno recognized adjustment recorded an original boundary (sold-hours-only history, or history written\nbefore the original columns existed), or the chain exceeds 100 rows.\nRead-time enrichment: this value does not advance modifiedOn, so one full export without\nfrom is required to pick up values for rows already behind your cursor. May itself be a\npost-adjustment value from a prior generation. Consumers must implement\noriginalStart ?? start fallback. Each boundary follows its own fallback ladder, so the pair may combine\nvalues from different rungs, including reconstruction from the recorded previous duration, and must not be used to\nderive planned duration.\nPrivate preview: available for specific accounts only.",
         "format": "date-time",
         "type": [
           "string",

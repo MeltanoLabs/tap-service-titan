@@ -1051,7 +1051,8 @@
                                                 "coordinatesUpdatedOn": "string"
                                             },
                                             "bio": "string",
-                                            "memo": "string"
+                                            "memo": "string",
+                                            "allowMobileAccess": true
                                         }
                                     ]
                                 }
@@ -1303,7 +1304,8 @@
                                                 "coordinatesUpdatedOn": "string"
                                             },
                                             "bio": "string",
-                                            "memo": "string"
+                                            "memo": "string",
+                                            "allowMobileAccess": true
                                         }
                                     ]
                                 }
@@ -1573,7 +1575,8 @@
                                         "coordinatesUpdatedOn": "string"
                                     },
                                     "bio": "string",
-                                    "memo": "string"
+                                    "memo": "string",
+                                    "allowMobileAccess": true
                                 }
                             }
                         }
@@ -4261,7 +4264,8 @@
                     "commissionRate",
                     "hourlyRate",
                     "soldByRate",
-                    "status"
+                    "status",
+                    "allowMobileAccess"
                 ],
                 "type": "object",
                 "properties": {
@@ -4613,6 +4617,10 @@
                         ],
                         "description": "Memo",
                         "format": "html"
+                    },
+                    "allowMobileAccess": {
+                        "type": "boolean",
+                        "description": "Whether the technician is allowed to access the mobile app"
                     }
                 },
                 "additionalProperties": false
@@ -4811,7 +4819,9 @@
                     "ServiceManager",
                     "SalesManager",
                     "PartRunner",
-                    "DummyTech"
+                    "DummyTech",
+                    "CommercialSalesAe",
+                    "PoolSpaMaintenanceTechnician"
                 ],
                 "type": "string",
                 "description": "",
@@ -4825,7 +4835,9 @@
                     "ServiceManager",
                     "SalesManager",
                     "PartRunner",
-                    "DummyTech"
+                    "DummyTech",
+                    "CommercialSalesAe",
+                    "PoolSpaMaintenanceTechnician"
                 ]
             },
             "TenantSettings.V2.TechnicianLocationResponse": {
@@ -4914,7 +4926,8 @@
                     "commissionRate",
                     "hourlyRate",
                     "soldByRate",
-                    "status"
+                    "status",
+                    "allowMobileAccess"
                 ],
                 "type": "object",
                 "properties": {
@@ -5266,6 +5279,10 @@
                         ],
                         "description": "Memo",
                         "format": "html"
+                    },
+                    "allowMobileAccess": {
+                        "type": "boolean",
+                        "description": "Whether the technician is allowed to access the mobile app"
                     }
                 },
                 "additionalProperties": false

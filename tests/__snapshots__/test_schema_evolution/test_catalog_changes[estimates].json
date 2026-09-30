@@ -154,6 +154,15 @@
     {
       "breadcrumb": [
         "properties",
+        "createdById"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "active"
       ],
       "metadata": {
@@ -330,6 +339,13 @@
       "businessUnitName": {
         "type": [
           "string",
+          "null"
+        ]
+      },
+      "createdById": {
+        "format": "int64",
+        "type": [
+          "integer",
           "null"
         ]
       },

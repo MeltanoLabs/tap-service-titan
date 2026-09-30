@@ -550,6 +550,15 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "allowMobileAccess"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -586,6 +595,13 @@
       },
       "active": {
         "description": "Whether the technician is active",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "allowMobileAccess": {
+        "description": "Whether the technician is allowed to access the mobile app",
         "type": [
           "boolean",
           "null"
@@ -1110,7 +1126,8 @@
       "commissionRate",
       "hourlyRate",
       "soldByRate",
-      "status"
+      "status",
+      "allowMobileAccess"
     ],
     "type": "object"
   },
