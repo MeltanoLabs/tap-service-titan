@@ -154,6 +154,7 @@
                                             "id": 0,
                                             "employeeId": 0,
                                             "activityTypeId": 0,
+                                            "activityTypeVersionId": 0,
                                             "employeeType": {},
                                             "startTime": "string",
                                             "endTime": "string",
@@ -383,6 +384,7 @@
                                     "employeeId": 0,
                                     "employeeType": {},
                                     "activityTypeId": 0,
+                                    "activityTypeVersionId": 0,
                                     "startTime": "string",
                                     "endTime": "string",
                                     "jobId": 0,
@@ -1494,6 +1496,7 @@
                                             "employeeId": 0,
                                             "employeeType": {},
                                             "activityTypeId": 0,
+                                            "activityTypeVersionId": 0,
                                             "startTime": "string",
                                             "endTime": "string",
                                             "jobId": 0,
@@ -1626,6 +1629,14 @@
                     "activityTypeId": {
                         "type": "integer",
                         "description": "ID of the activity type.",
+                        "format": "int64"
+                    },
+                    "activityTypeVersionId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "The activity-type settings version this entry is validated against. Null means the entry predates the activity\ntype's first edit, so its original settings (version 0) govern it rather than the current ones.",
                         "format": "int64"
                     },
                     "employeeType": {
@@ -1894,6 +1905,14 @@
                     "activityTypeId": {
                         "type": "integer",
                         "description": "ID of the activity type.",
+                        "format": "int64"
+                    },
+                    "activityTypeVersionId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "The activity-type settings version this entry is validated against. Null means the entry predates the activity\ntype's first edit, so its original settings (version 0) govern it rather than the current ones.",
                         "format": "int64"
                     },
                     "startTime": {
@@ -3318,6 +3337,14 @@
                     "activityTypeId": {
                         "type": "integer",
                         "description": "ID of the activity type.",
+                        "format": "int64"
+                    },
+                    "activityTypeVersionId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "The activity-type settings version this entry is validated against. Null means the entry predates the activity\ntype's first edit, so its original settings (version 0) govern it rather than the current ones.",
                         "format": "int64"
                     },
                     "startTime": {

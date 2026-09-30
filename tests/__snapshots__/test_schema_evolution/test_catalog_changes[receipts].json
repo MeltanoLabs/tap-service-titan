@@ -668,6 +668,42 @@
                 "null"
               ]
             },
+            "serialNumbers": {
+              "description": "List of serial numbers",
+              "items": {
+                "additionalProperties": false,
+                "description": "Represents serial number response",
+                "properties": {
+                  "id": {
+                    "description": "Id of this serial number",
+                    "format": "int64",
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "number": {
+                    "description": "Serial number value",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "number"
+                ],
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "type": [
+                "array",
+                "null"
+              ]
+            },
             "skuId": {
               "description": "Sku Id",
               "format": "int64",
