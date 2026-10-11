@@ -15,9 +15,10 @@ import requests.exceptions
 from singer_sdk import Tap
 from singer_sdk import typing as th
 from singer_sdk.exceptions import RetriableAPIError
+from singer_sdk.streams import RESTStream
 
 from tap_service_titan._common import now
-from tap_service_titan.client import ServiceTitanStream
+from tap_service_titan.client import ServiceTitanStream, StreamNotEntitledError
 
 if sys.version_info >= (3, 11):
     from http import HTTPMethod
@@ -198,14 +199,13 @@ class CustomReports(ServiceTitanStream, api_prefix="/reporting/v2"):
         # return mapping.get(string_type, th.StringType())
 
     def _get_report_metadata(self) -> dict[str, Any]:
-        self.requests_session.auth = self.authenticator
-        resp = self.requests_session.get(
-            f"{self.url_base}/report-category/{self._report.category}/reports/{self._report.id}",
+        request = self.build_prepared_request(
+            method="GET",
+            url=f"{self.url_base}/report-category/{self._report.category}/reports/{self._report.id}",
             headers=self.http_headers,
-            timeout=self.timeout,
         )
-        resp.raise_for_status()
-        return resp.json()  # type: ignore[no-any-return]
+        response = self._request(request, context=None)
+        return response.json()  # type: ignore[no-any-return]
 
     @override
     @cached_property
@@ -215,7 +215,11 @@ class CustomReports(ServiceTitanStream, api_prefix="/reporting/v2"):
         Returns:
             JSON Schema dictionary for this stream.
         """
-        metadata = self._get_report_metadata()
+        try:
+            metadata = self._get_report_metadata()
+        except StreamNotEntitledError as exc:
+            self._warn_not_entitled(exc)
+            return th.PropertiesList().to_dict()
         msg = f"Available parameters for custom report `{self._report.name}`: {metadata['parameters']}"  # noqa: E501
         self.logger.info(msg)
         properties: list[th.Property[Any]] = [
@@ -324,7 +328,14 @@ class CustomReports(ServiceTitanStream, api_prefix="/reporting/v2"):
 
         today = now().date()
         while self._curr_backfill_date <= today:
-            yield from super().get_records(context)
+            # Bypasses ServiceTitanBaseStream.request_records, which would otherwise
+            # swallow StreamNotEntitledError after the first day and leave this loop
+            # retrying a doomed request once per remaining day.
+            try:
+                yield from RESTStream.request_records(self, context)
+            except StreamNotEntitledError as exc:
+                self._warn_not_entitled(exc)
+                return
             self._curr_backfill_date += timedelta(days=1)
 
     @override
