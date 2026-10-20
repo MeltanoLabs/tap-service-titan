@@ -274,6 +274,7 @@
                                             "reviewType": 0,
                                             "reviewResponse": "string",
                                             "publishDate": "string",
+                                            "lastUpdated": "string",
                                             "rating": 0,
                                             "recommendationStatus": 0,
                                             "verificationStatus": true,
@@ -317,6 +318,7 @@
                                             "reviewType": 0,
                                             "reviewResponse": "string",
                                             "publishDate": "string",
+                                            "lastUpdated": "string",
                                             "rating": 0,
                                             "recommendationStatus": 0,
                                             "verificationStatus": true,
@@ -475,6 +477,13 @@
                     },
                     "publishDate": {
                         "type": "string",
+                        "format": "date-time"
+                    },
+                    "lastUpdated": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "date-time"
                     },
                     "rating": {
