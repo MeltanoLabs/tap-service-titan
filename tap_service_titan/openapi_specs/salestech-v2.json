@@ -16,6 +16,83 @@
         }
     ],
     "paths": {
+        "/tenant/{tenant}/contracts": {
+            "get": {
+                "tags": [
+                    "Contracts"
+                ],
+                "summary": "Gets contracts owned by a job with their current statuses.",
+                "operationId": "Contracts_GetList",
+                "parameters": [
+                    {
+                        "name": "tenant",
+                        "in": "path",
+                        "description": "Tenant ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "jobId",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Estimates.V2.ContractProposalSummaryResponse"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "id": 0,
+                                        "status": "Draft",
+                                        "subStatus": {}
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request cannot be processed, check validation errors or request format",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKeyHeader": [],
+                        "oauth": [
+                            "tn.sal.contracts:r"
+                        ]
+                    }
+                ]
+            }
+        },
         "/tenant/{tenant}/estimates/{id}": {
             "get": {
                 "tags": [
@@ -3121,6 +3198,71 @@
     },
     "components": {
         "schemas": {
+            "Estimates.V2.ContractProposalSummaryResponse": {
+                "required": [
+                    "id",
+                    "status"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/Estimates.V2.ContractStatus"
+                    },
+                    "subStatus": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Estimates.V2.ContractSubStatus"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Estimates.V2.ContractStatus": {
+                "enum": [
+                    "Draft",
+                    "Sent",
+                    "Accepted",
+                    "Dismissed",
+                    "Expired",
+                    "Failed"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Draft",
+                    "Sent",
+                    "Accepted",
+                    "Dismissed",
+                    "Expired",
+                    "Failed"
+                ]
+            },
+            "Estimates.V2.ContractSubStatus": {
+                "enum": [
+                    "PendingESign",
+                    "ESigned",
+                    "ReadyForCountersign",
+                    "AwaitingCustomerSignature",
+                    "Declined"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "PendingESign",
+                    "ESigned",
+                    "ReadyForCountersign",
+                    "AwaitingCustomerSignature",
+                    "Declined"
+                ]
+            },
             "ApiErrorResponse": {
                 "required": [
                     "type",
@@ -5389,6 +5531,7 @@
                     "clientCredentials": {
                         "tokenUrl": "https://auth.servicetitan.io/connect/token",
                         "scopes": {
+                            "tn.sal.contracts:r": "Sales & Estimates \u2192 Contracts (Read)",
                             "tn.sal.estimates:r": "Sales & Estimates \u2192 Estimates (Read)",
                             "tn.sal.estimates:w": "Sales & Estimates \u2192 Estimates (Write)",
                             "tn.sal.estimatetemplates:r": "Sales & Estimates \u2192 Estimate Templates (Read)",
