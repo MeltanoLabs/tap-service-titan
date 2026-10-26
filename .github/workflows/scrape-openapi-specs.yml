@@ -55,5 +55,7 @@ jobs:
         commit-message: 'fix: Update catalog from fresh OpenAPI specs'
         body: |
           Updates the tap catalog by downloading fresh OpenAPI specs.
+
+          Release notes: https://developer.servicetitan.io/docs/release-notes.
         signoff: true
         branch: fix/update-catalog
