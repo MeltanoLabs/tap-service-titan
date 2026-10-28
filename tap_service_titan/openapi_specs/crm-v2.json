@@ -8952,9 +8952,7 @@
                 "security": [
                     {
                         "apiKeyHeader": [],
-                        "oauth": [
-                            "tn.crm.leads:w"
-                        ]
+                        "oauth": []
                     }
                 ]
             }
@@ -17711,8 +17709,8 @@
                             "tn.crm.customers:r": "CRM \u2192 Customers (Read)",
                             "tn.crm.customers:w": "CRM \u2192 Customers (Write)",
                             "tn.crm.locations:r": "CRM \u2192 Locations (Read)",
-                            "tn.crm.leads:r": "CRM \u2192 Leads (Read)",
-                            "tn.crm.leads:w": "CRM \u2192 Leads (Write)",
+                            "tn.crm.leads:r": "CRM \u2192 Leads (Follow Up) (Read)",
+                            "tn.crm.leads:w": "CRM \u2192 Leads (Follow Up) (Write)",
                             "tn.crm.locations:w": "CRM \u2192 Locations (Write)"
                         }
                     }
