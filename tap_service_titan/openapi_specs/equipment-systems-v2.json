@@ -3139,7 +3139,9 @@
                                             "dataType": "Text",
                                             "dataTypeOptions": [
                                                 "string"
-                                            ]
+                                            ],
+                                            "createdOn": "string",
+                                            "modifiedOn": "string"
                                         }
                                     ],
                                     "totalCount": 0
@@ -3447,6 +3449,100 @@
                     "True",
                     "Any",
                     "False"
+                ]
+            },
+            "LocationEquipment.Repositories.Types.RepositoryPageResult_Of_LocationEquipment.CustomFieldTypeModel": {
+                "required": [
+                    "page",
+                    "pageSize",
+                    "hasMore",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "Page number, starting from 1.",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "The number of items per page.",
+                        "format": "int32"
+                    },
+                    "hasMore": {
+                        "type": "boolean",
+                        "description": "Indicates whether there are more items available beyond the current page."
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/LocationEquipment.CustomFieldTypeModel"
+                        },
+                        "description": "The list of items on the current page."
+                    },
+                    "totalCount": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Optional total count of items across all pages.",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Implementation of a paginated result for repository queries."
+            },
+            "LocationEquipment.CustomFieldTypeModel": {
+                "required": [
+                    "id",
+                    "name",
+                    "dataType",
+                    "dataTypeOptions",
+                    "createdOn",
+                    "modifiedOn"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "dataType": {
+                        "$ref": "#/components/schemas/CustomFieldDataType"
+                    },
+                    "dataTypeOptions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "modifiedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CustomFieldDataType": {
+                "enum": [
+                    "Text",
+                    "Dropdown",
+                    "Numeric"
+                ],
+                "type": "string",
+                "description": "",
+                "x-enumNames": [
+                    "Text",
+                    "Dropdown",
+                    "Numeric"
                 ]
             },
             "EquipmentSystems.V2.EquipmentSystemDetailedResponse": {
@@ -4800,90 +4896,6 @@
                 },
                 "additionalProperties": false,
                 "description": "Result of an attachment file upload operation"
-            },
-            "LocationEquipment.Repositories.Types.RepositoryPageResult_Of_LocationEquipment.CustomFieldTypeModel": {
-                "required": [
-                    "page",
-                    "pageSize",
-                    "hasMore",
-                    "data"
-                ],
-                "type": "object",
-                "properties": {
-                    "page": {
-                        "type": "integer",
-                        "description": "Page number, starting from 1.",
-                        "format": "int32"
-                    },
-                    "pageSize": {
-                        "type": "integer",
-                        "description": "The number of items per page.",
-                        "format": "int32"
-                    },
-                    "hasMore": {
-                        "type": "boolean",
-                        "description": "Indicates whether there are more items available beyond the current page."
-                    },
-                    "data": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/LocationEquipment.CustomFieldTypeModel"
-                        },
-                        "description": "The list of items on the current page."
-                    },
-                    "totalCount": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
-                        "description": "Optional total count of items across all pages.",
-                        "format": "int32"
-                    }
-                },
-                "additionalProperties": false,
-                "description": "Implementation of a paginated result for repository queries."
-            },
-            "LocationEquipment.CustomFieldTypeModel": {
-                "required": [
-                    "id",
-                    "name",
-                    "dataType",
-                    "dataTypeOptions"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "dataType": {
-                        "$ref": "#/components/schemas/CustomFieldDataType"
-                    },
-                    "dataTypeOptions": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "additionalProperties": false
-            },
-            "CustomFieldDataType": {
-                "enum": [
-                    "Text",
-                    "Dropdown",
-                    "Numeric"
-                ],
-                "type": "string",
-                "description": "",
-                "x-enumNames": [
-                    "Text",
-                    "Dropdown",
-                    "Numeric"
-                ]
             }
         },
         "securitySchemes": {

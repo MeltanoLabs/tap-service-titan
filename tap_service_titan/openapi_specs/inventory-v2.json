@@ -4972,7 +4972,7 @@
                 "tags": [
                     "Returns"
                 ],
-                "summary": "Create a Return",
+                "summary": "Create a Return.\nRequisition and Return to Warehouse type returns cannot be created through the API.",
                 "operationId": "Returns_CreateReturn",
                 "parameters": [
                     {
@@ -5491,7 +5491,7 @@
                 "tags": [
                     "ReturnTypes"
                 ],
-                "summary": "Returns the list of Return Types",
+                "summary": "Returns the list of Return Types.\nRequisition and Return to Warehouse return types are listed, but returns of those types cannot be created through the API.",
                 "operationId": "ReturnTypes_GetList",
                 "parameters": [
                     {
@@ -13380,7 +13380,7 @@
                     },
                     "returnTypeId": {
                         "type": "integer",
-                        "description": "Return type Id",
+                        "description": "Return type Id. Requisition and Return to Warehouse return types are not supported.",
                         "format": "int64"
                     },
                     "businessUnitId": {

@@ -359,6 +359,24 @@
       }
     },
     {
+      "breadcrumb": [
+        "properties",
+        "allowDiscounts"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
+        "allowMembershipDiscounts"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
       "breadcrumb": [],
       "metadata": {
         "inclusion": "available",
@@ -406,6 +424,20 @@
         "format": "decimal",
         "type": [
           "number",
+          "null"
+        ]
+      },
+      "allowDiscounts": {
+        "description": "Whether the service allows discounts to be applied to it.",
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "allowMembershipDiscounts": {
+        "description": "Whether the service allows membership discounts to be applied to it.",
+        "type": [
+          "boolean",
           "null"
         ]
       },
@@ -902,7 +934,9 @@
       "cost",
       "createdOn",
       "soldByCommission",
-      "tags"
+      "tags",
+      "allowDiscounts",
+      "allowMembershipDiscounts"
     ],
     "type": "object"
   },

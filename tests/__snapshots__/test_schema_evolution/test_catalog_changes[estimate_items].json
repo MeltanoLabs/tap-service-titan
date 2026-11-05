@@ -15,6 +15,15 @@
     {
       "breadcrumb": [
         "properties",
+        "estimateId"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "sku"
       ],
       "metadata": {
@@ -337,6 +346,13 @@
           "null"
         ]
       },
+      "estimateId": {
+        "format": "int64",
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
       "estimate_id": {
         "format": "int64",
         "type": "integer"
@@ -524,6 +540,7 @@
     },
     "required": [
       "id",
+      "estimateId",
       "sku",
       "skuAccount",
       "description",

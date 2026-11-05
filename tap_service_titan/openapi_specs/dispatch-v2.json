@@ -2994,6 +2994,7 @@
                     "TechnicianShifts"
                 ],
                 "summary": "Updates Technician Shift",
+                "description": "Only the specified shift is updated. Optional expected start/end values reject stale updates with HTTP 409.",
                 "operationId": "TechnicianShifts_Update",
                 "parameters": [
                     {
@@ -3027,6 +3028,8 @@
                                 "title": "string",
                                 "start": "string",
                                 "end": "string",
+                                "expectedStart": "string",
+                                "expectedEnd": "string",
                                 "note": "string",
                                 "timesheetCodeId": 0
                             }
@@ -3081,6 +3084,24 @@
                     },
                     "404": {
                         "description": "The requested entity was not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorResponse"
+                                },
+                                "example": {
+                                    "type": "string",
+                                    "title": "string",
+                                    "status": 0,
+                                    "traceId": "string",
+                                    "errors": {},
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Some conflict occurred while executing the request",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -6678,6 +6699,22 @@
                     "end": {
                         "type": "string",
                         "description": "When the shift ends",
+                        "format": "date-time"
+                    },
+                    "expectedStart": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Optional expected current start in UTC. A mismatch rejects the update with HTTP 409.",
+                        "format": "date-time"
+                    },
+                    "expectedEnd": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Optional expected current end in UTC. A mismatch rejects the update with HTTP 409.",
                         "format": "date-time"
                     },
                     "note": {

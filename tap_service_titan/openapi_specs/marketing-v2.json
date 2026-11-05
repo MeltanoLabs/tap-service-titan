@@ -2136,19 +2136,21 @@
                 ]
             },
             "Marketing.V2.CampaignUpsertRequest": {
-                "required": [
-                    "name",
-                    "businessUnitId",
-                    "categoryId",
-                    "active"
-                ],
                 "type": "object",
                 "properties": {
                     "name": {
-                        "type": "string"
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Campaign name. Required when creating. On update, if omitted or null, the current name is kept."
                     },
                     "businessUnitId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Business unit ID. On update, if omitted or null, the current business unit is kept; 0 removes it.",
                         "format": "int64"
                     },
                     "dnis": {
@@ -2158,11 +2160,19 @@
                         ]
                     },
                     "categoryId": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Campaign category ID. On update, if omitted or null, the current category is kept; 0 removes it.",
                         "format": "int64"
                     },
                     "active": {
-                        "type": "boolean"
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Campaign active status. On update, if omitted or null, the current status is kept."
                     },
                     "isDefaultCampaign": {
                         "type": [

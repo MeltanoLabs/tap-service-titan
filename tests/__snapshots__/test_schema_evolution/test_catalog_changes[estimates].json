@@ -455,6 +455,13 @@
                 "null"
               ]
             },
+            "estimateId": {
+              "format": "int64",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
             "id": {
               "format": "int64",
               "type": [
@@ -641,6 +648,7 @@
           },
           "required": [
             "id",
+            "estimateId",
             "sku",
             "skuAccount",
             "description",

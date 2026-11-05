@@ -3258,7 +3258,9 @@
                                                     "id": 0,
                                                     "name": "string"
                                                 }
-                                            ]
+                                            ],
+                                            "allowDiscounts": true,
+                                            "allowMembershipDiscounts": true
                                         }
                                     ]
                                 }
@@ -5359,6 +5361,8 @@
                                         "budgetCostCode": "string",
                                         "budgetCostType": "string",
                                         "isPriceLocked": true,
+                                        "allowDiscounts": true,
+                                        "allowMembershipDiscounts": true,
                                         "customId": "string"
                                     }
                                 ],
@@ -5788,6 +5792,8 @@
                                         "budgetCostCode": "string",
                                         "budgetCostType": "string",
                                         "isPriceLocked": true,
+                                        "allowDiscounts": true,
+                                        "allowMembershipDiscounts": true,
                                         "id": 0
                                     }
                                 ],
@@ -6349,6 +6355,8 @@
                                                     "name": "string"
                                                 }
                                             ],
+                                            "allowDiscounts": true,
+                                            "allowMembershipDiscounts": true,
                                             "calculatedPrice": 0,
                                             "useStaticPrices": true
                                         }
@@ -6471,7 +6479,9 @@
                                 },
                                 "budgetCostCode": "string",
                                 "budgetCostType": "string",
-                                "isPriceLocked": true
+                                "isPriceLocked": true,
+                                "allowDiscounts": true,
+                                "allowMembershipDiscounts": true
                             }
                         }
                     }
@@ -6562,7 +6572,9 @@
                                             "id": 0,
                                             "name": "string"
                                         }
-                                    ]
+                                    ],
+                                    "allowDiscounts": true,
+                                    "allowMembershipDiscounts": true
                                 }
                             }
                         }
@@ -6730,6 +6742,8 @@
                                             "name": "string"
                                         }
                                     ],
+                                    "allowDiscounts": true,
+                                    "allowMembershipDiscounts": true,
                                     "calculatedPrice": 0,
                                     "useStaticPrices": true
                                 }
@@ -6879,7 +6893,9 @@
                                 },
                                 "budgetCostCode": "string",
                                 "budgetCostType": "string",
-                                "isPriceLocked": true
+                                "isPriceLocked": true,
+                                "allowDiscounts": true,
+                                "allowMembershipDiscounts": true
                             }
                         }
                     }
@@ -6970,7 +6986,9 @@
                                             "id": 0,
                                             "name": "string"
                                         }
-                                    ]
+                                    ],
+                                    "allowDiscounts": true,
+                                    "allowMembershipDiscounts": true
                                 }
                             }
                         }
@@ -10363,7 +10381,9 @@
                     "cost",
                     "createdOn",
                     "soldByCommission",
-                    "tags"
+                    "tags",
+                    "allowDiscounts",
+                    "allowMembershipDiscounts"
                 ],
                 "type": "object",
                 "properties": {
@@ -10597,6 +10617,14 @@
                             "$ref": "#/components/schemas/Pricebook.V2.ServiceTagResponse"
                         },
                         "description": "Conversion opportunity tags on this service (from tag types with conversion opportunity enabled).\nEmpty when the service has none."
+                    },
+                    "allowDiscounts": {
+                        "type": "boolean",
+                        "description": "Whether the service allows discounts to be applied to it."
+                    },
+                    "allowMembershipDiscounts": {
+                        "type": "boolean",
+                        "description": "Whether the service allows membership discounts to be applied to it."
                     }
                 },
                 "additionalProperties": false
@@ -12396,6 +12424,20 @@
                         ],
                         "description": "Whether the price is locked from editing"
                     },
+                    "allowDiscounts": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the service allows discounts to be applied to it."
+                    },
+                    "allowMembershipDiscounts": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the service allows membership discounts to be applied to it."
+                    },
                     "customId": {
                         "type": [
                             "string",
@@ -13426,6 +13468,8 @@
                     "budgetCostCode",
                     "budgetCostType",
                     "isPriceLocked",
+                    "allowDiscounts",
+                    "allowMembershipDiscounts",
                     "id"
                 ],
                 "type": "object",
@@ -13581,6 +13625,14 @@
                     "isPriceLocked": {
                         "type": "boolean",
                         "description": "Whether the price is locked from editing"
+                    },
+                    "allowDiscounts": {
+                        "type": "boolean",
+                        "description": "Whether the service allows discounts to be applied to it."
+                    },
+                    "allowMembershipDiscounts": {
+                        "type": "boolean",
+                        "description": "Whether the service allows membership discounts to be applied to it."
                     },
                     "id": {
                         "type": "integer",
@@ -14319,7 +14371,9 @@
                     "cost",
                     "createdOn",
                     "soldByCommission",
-                    "tags"
+                    "tags",
+                    "allowDiscounts",
+                    "allowMembershipDiscounts"
                 ],
                 "type": "object",
                 "properties": {
@@ -14553,6 +14607,14 @@
                             "$ref": "#/components/schemas/Pricebook.V2.ServiceTagResponse"
                         },
                         "description": "Conversion opportunity tags on this service (from tag types with conversion opportunity enabled).\nEmpty when the service has none."
+                    },
+                    "allowDiscounts": {
+                        "type": "boolean",
+                        "description": "Whether the service allows discounts to be applied to it."
+                    },
+                    "allowMembershipDiscounts": {
+                        "type": "boolean",
+                        "description": "Whether the service allows membership discounts to be applied to it."
                     },
                     "calculatedPrice": {
                         "type": [
@@ -14597,7 +14659,9 @@
                     "cost",
                     "createdOn",
                     "soldByCommission",
-                    "tags"
+                    "tags",
+                    "allowDiscounts",
+                    "allowMembershipDiscounts"
                 ],
                 "type": "object",
                 "properties": {
@@ -14831,6 +14895,14 @@
                             "$ref": "#/components/schemas/Pricebook.V2.ServiceTagResponse"
                         },
                         "description": "Conversion opportunity tags on this service (from tag types with conversion opportunity enabled).\nEmpty when the service has none."
+                    },
+                    "allowDiscounts": {
+                        "type": "boolean",
+                        "description": "Whether the service allows discounts to be applied to it."
+                    },
+                    "allowMembershipDiscounts": {
+                        "type": "boolean",
+                        "description": "Whether the service allows membership discounts to be applied to it."
                     }
                 },
                 "additionalProperties": false
@@ -15068,6 +15140,20 @@
                             "null"
                         ],
                         "description": "Whether the price is locked from editing"
+                    },
+                    "allowDiscounts": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the service allows discounts to be applied to it."
+                    },
+                    "allowMembershipDiscounts": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the service allows membership discounts to be applied to it."
                     }
                 },
                 "additionalProperties": false
@@ -15226,6 +15312,14 @@
                     "isPriceLocked": {
                         "type": "boolean",
                         "description": "Whether the price is locked from editing"
+                    },
+                    "allowDiscounts": {
+                        "type": "boolean",
+                        "description": "Whether the service allows discounts to be applied to it."
+                    },
+                    "allowMembershipDiscounts": {
+                        "type": "boolean",
+                        "description": "Whether the service allows membership discounts to be applied to it."
                     }
                 },
                 "additionalProperties": false
