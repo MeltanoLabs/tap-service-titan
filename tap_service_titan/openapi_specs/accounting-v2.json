@@ -18063,7 +18063,8 @@
                     "UseTaxLiability",
                     "CreditCardPayable",
                     "UncategorizedExpense",
-                    "OverheadApplied"
+                    "OverheadApplied",
+                    "Subcontractor"
                 ],
                 "type": "string",
                 "description": "",
@@ -18106,7 +18107,8 @@
                     "UseTaxLiability",
                     "CreditCardPayable",
                     "UncategorizedExpense",
-                    "OverheadApplied"
+                    "OverheadApplied",
+                    "Subcontractor"
                 ]
             },
             "Accounting.V2.WellKnownAccountsResponse": {
@@ -20061,7 +20063,8 @@
                     "ExpenseTransaction",
                     "ServiceAgreementVisit",
                     "ServiceAgreementBudget",
-                    "CostPoolAllocation"
+                    "CostPoolAllocation",
+                    "Subcontract"
                 ],
                 "type": "string",
                 "description": "",
@@ -20091,7 +20094,8 @@
                     "ExpenseTransaction",
                     "ServiceAgreementVisit",
                     "ServiceAgreementBudget",
-                    "CostPoolAllocation"
+                    "CostPoolAllocation",
+                    "Subcontract"
                 ]
             },
             "Accounting.V2.EmptyJeHandling": {

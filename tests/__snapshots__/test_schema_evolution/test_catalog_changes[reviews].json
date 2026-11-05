@@ -80,6 +80,15 @@
     {
       "breadcrumb": [
         "properties",
+        "lastUpdated"
+      ],
+      "metadata": {
+        "inclusion": "available"
+      }
+    },
+    {
+      "breadcrumb": [
+        "properties",
         "rating"
       ],
       "metadata": {
@@ -373,6 +382,13 @@
         ]
       },
       "jobTypeName": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "lastUpdated": {
+        "format": "date-time",
         "type": [
           "string",
           "null"

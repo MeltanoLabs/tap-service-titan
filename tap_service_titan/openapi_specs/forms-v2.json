@@ -380,6 +380,7 @@
                                                     "id": "string",
                                                     "name": "string",
                                                     "type": "string",
+                                                    "instanceId": "string",
                                                     "description": "string",
                                                     "units": [
                                                         {
@@ -1157,6 +1158,13 @@
                     },
                     "type": {
                         "type": "string"
+                    },
+                    "instanceId": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "guid"
                     },
                     "description": {
                         "type": "string"
